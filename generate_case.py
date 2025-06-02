@@ -11,6 +11,7 @@ from faker import Faker
 from datetime import datetime, timedelta
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Any, Optional, Tuple
+from collections import defaultdict
 
 warnings.filterwarnings('ignore')
 fake = Faker()
@@ -18,7 +19,7 @@ fake = Faker()
 DEFAULT_CONFIG = {
   "total_users": 45,
   "total_quizzes": 4,
-  "questions_per_quiz": 30,
+  "questions_per_quiz": 20, # Reduced for more manageable visualization output
   "base_date": "2025-03-01 09:00:00",
   "cheating_groups": {
     "high_severity": {
@@ -59,9 +60,9 @@ DEFAULT_CONFIG = {
         }
       }
     },
-    "low_severity": {
-      "count": 0,
-      "size": 0,
+    "low_severity": { # Added a low severity group for more diverse data
+      "count": 1,
+      "size": 5,
       "patterns": {
         "navigation": {
           "similarity": 0.55,
@@ -70,7 +71,7 @@ DEFAULT_CONFIG = {
         "timing": {
           "start_delay": 15,
           "variance": 30,
-          "completion_speed": "medium"
+          "completion_speed": "slow" # Changed to slow for variety
         },
         "answers": {
           "similarity": 0.55,
@@ -80,20 +81,18 @@ DEFAULT_CONFIG = {
     }
   },
   "output_format": "csv",
-  "output_dir": "/Users/yan.christofer/Documents/detection_cleaner/data/moodle_logs",
+  "output_dir": "data/moodle_logs_refined", # More generic default
   "seed": 12345
 }
 
 @dataclass
-class CheatingGroup:
+class CheatingGroupConfig:
     id: str
     severity: str
     members: List[int]
     patterns: Dict[str, Any]
-    
-    # Shared patterns across the group
-    navigation_sequence: List[int] = field(default_factory=list)
-    answer_sequence: List[int] = field(default_factory=list)
+    quiz_patterns: Dict[int, Dict[str, Any]] = field(default_factory=dict)
+
 
 @dataclass
 class User:
@@ -105,1710 +104,771 @@ class User:
     email: str
     lastaccess: int
     is_cheater: bool = False
-    cheating_group: Optional[str] = None
+    cheating_group_id: Optional[str] = None
     cheating_severity: Optional[str] = None
 
 @dataclass
 class Quiz:
-    quiz_id: int  # Renamed from id
+    quiz_id: int
     course: int
-    quiz_name: str  # Renamed from name
-    intro: str
+    quiz_name: str
     timeopen: int
     timeclose: int
     timelimit: int
-    overduehandling: str
 
 @dataclass
 class Question:
-    id: int
+    id: int # Internal ID for question
     qtype: str
     name: str
     questiontext: str
     defaultmark: float
     penalty: float
-    quizid: int
+    quizid: int # Links to Quiz.quiz_id
 
 @dataclass
 class QuestionAnswer:
-    question_answers_id: int  # Renamed from id
-    questionid: int  # Renamed from question
-    answer_text: str  # Renamed from answer
-    fraction: float  # 1.0 for correct, 0.0 for incorrect
+    question_answers_id: int
+    questionid: int # Links to Question.id
+    answer_text: str
+    fraction: float
 
 @dataclass
 class Session:
-    session_id: int  # Renamed from id
-    user_id: int  # Renamed from userid
+    session_id: int
+    user_id: int
     timecreated: int
-    timemodified: int
-    firstip: str
     lastip: str
-    sessdata: str = ""  # Added missing field
+    sessdata: str = ""
 
 @dataclass
 class QuizAttempt:
-    attempt_id: int  # Renamed from id
-    quiz_id: int  # Renamed from quiz
-    user_id: int  # Renamed from userid
-    attempt: int
-    state: str
+    attempt_id: int
+    quiz_id: int
+    user_id: int
+    question_usage_id: int
     timestart: int
     timefinish: int
-    timemodified: int
-    question_usage_id: int = 0  # Added missing field
-    sumgrades: float = 0.0  # Added missing field
-    # ML-specific fields
-    is_cheating: bool = False
-    cheating_severity: Optional[str] = None
-    cheating_group: Optional[str] = None
+    state: str
+    sumgrades: float
+
+@dataclass
+class QuestionUsage:
+    question_usage_id: int
+    context_id: int
+
+@dataclass
+class QuestionAttemptReal: # mdl_question_attempts
+    question_attempt_id: int # PK
+    question_usage_id: int   # FK to QuestionUsage
+    questionid: int          # FK to Question.id (actual question displayed)
+    maxmark: float
 
 @dataclass
 class QuestionAttemptStep:
-    question_step_id: int  # Renamed from id
-    question_attempt_id: int  # Renamed from questionattemptid
+    question_step_id: int # PK
+    question_attempt_id: int # FK to QuestionAttemptReal
     sequencenumber: int
     state: str
     timecreated: int
-    user_id: int  # Renamed from userid
-    # ML-specific fields
-    is_cheating: bool = False
-    cheating_severity: Optional[str] = None
-    cheating_group: Optional[str] = None
 
 @dataclass
 class QuestionAttemptStepData:
-    question_step_id: int  # Renamed from attemptstepid
+    step_data_id: int # PK
+    question_step_id: int # FK to QuestionAttemptStep
     name: str
     value: str
-    user_id: int  # Renamed from userid
-    step_data_id: int = 0  # Added missing field
-    # ML-specific fields
-    is_cheating: bool = False
-    cheating_severity: Optional[str] = None
-    cheating_group: Optional[str] = None
 
 @dataclass
-class QuestionAttemptsMap: # Represents mdl_question_attempts
-    id: int 
-    questionusageid: int # Corresponds to QuizAttempt.attempt_id
-    questionattemptid: int # Corresponds to the user_id * 100 + quiz_id used in QuestionAttemptStep
+class QuizGrade:
+    quiz_grades_id: int # PK
+    quiz_id: int
+    user_id: int
+    final_grade: float
+
 
 class MoodleLogGenerator:
     def __init__(self, config_file=None):
-        """Initialize the generator with either a config file or default config"""
         self.config = DEFAULT_CONFIG.copy()
         if config_file and os.path.exists(config_file):
             with open(config_file, 'r') as f:
                 user_config = json.load(f)
                 self.config.update(user_config)
         
-        # Set random seed for reproducibility
         random.seed(self.config["seed"])
         np.random.seed(self.config["seed"])
         
-        # Initialize data structures
-        self.users = []
-        self.quizzes = []
-        self.questions = []
-        self.question_answers = []
-        self.sessions = []
-        self.quiz_attempts = []
-        self.question_attempt_steps = []
-        self.question_attempt_step_data = []
-        self.question_attempts_maps = [] # ADDED
+        self.users_internal: List[User] = []
+        self.quizzes: List[Quiz] = []
+        self.questions_internal: List[Question] = []
+        self.question_answers: List[QuestionAnswer] = []
+        self.sessions: List[Session] = []
+        self.quiz_attempts: List[QuizAttempt] = []
+        self.question_usages: List[QuestionUsage] = []
+        self.question_attempts_real: List[QuestionAttemptReal] = []
+        self.question_attempt_steps: List[QuestionAttemptStep] = []
+        self.question_attempt_step_data: List[QuestionAttemptStepData] = []
+        self.quiz_grades: List[QuizGrade] = []
         
-        # Track IDs
         self.next_id = {
-            "user": 1,
-            "quiz": 1,
-            "question": 1,
-            "question_answer": 1,
-            "session": 1,
-            "quiz_attempt": 1,
-            "question_attempt_step": 1
+            "user": 1, "quiz": 1, "question_internal": 1, "Youtube": 1,
+            "session": 1, "quiz_attempt": 1, "question_usage": 1, 
+            "question_attempt_real": 1, "question_attempt_step": 1,
+            "step_data": 1, "quiz_grade": 1
         }
         
-        # Setup cheating groups
-        self.cheating_groups = []
-        self.cheaters = []
+        self.cheating_groups_config: List[CheatingGroupConfig] = []
+        self.cheater_user_ids: List[int] = []
         self.setup_cheating_groups()
         
-        # Parse base date
         self.base_date = datetime.strptime(self.config["base_date"], "%Y-%m-%d %H:%M:%S")
     
     def setup_cheating_groups(self):
-        """Create cheating groups based on configuration"""
-        group_id = 1
-        user_id = 1
-        
-        for severity, config in self.config["cheating_groups"].items():
-            for i in range(config["count"]):
+        user_id_counter = 1
+        total_users_in_config = self.config["total_users"]
+        users_assigned_to_groups = 0
+
+        for severity, config_details in self.config["cheating_groups"].items():
+            for i in range(config_details["count"]):
+                if users_assigned_to_groups + config_details["size"] > total_users_in_config:
+                    print(f"Warning: Not enough users to create all cheating groups. Skipping group {severity}_{i+1}")
+                    continue
+
                 group_name = f"group_{severity}_{i+1}"
-                members = list(range(user_id, user_id + config["size"]))
-                user_id += config["size"]
+                members = list(range(user_id_counter, user_id_counter + config_details["size"]))
+                user_id_counter += config_details["size"]
+                users_assigned_to_groups += config_details["size"]
                 
-                group = CheatingGroup(
+                group = CheatingGroupConfig(
                     id=group_name,
                     severity=severity,
                     members=members,
-                    patterns=config["patterns"]
+                    patterns=config_details["patterns"]
                 )
-                
-                self.cheating_groups.append(group)
-                self.cheaters.extend(members)
-                
-                group_id += 1
+                self.cheating_groups_config.append(group)
+                self.cheater_user_ids.extend(members)
         
-        # Calculate honest students
-        total_cheaters = len(self.cheaters)
-        if total_cheaters >= self.config["total_users"]:
-            raise ValueError("Too many cheaters defined. Reduce cheating groups or increase total users.")
-        
-        print(f"Created {len(self.cheating_groups)} cheating groups with {total_cheaters} total cheaters")
-    
+        if len(self.cheater_user_ids) > total_users_in_config: # Should be caught by the loop above too
+             raise ValueError("Assigned more cheaters than total users. Adjust config.")
+        print(f"Created {len(self.cheating_groups_config)} cheating groups with {len(self.cheater_user_ids)} total cheaters.")
+        print(f"Remaining {total_users_in_config - len(self.cheater_user_ids)} users will be honest.")
+
+
     def generate_users(self):
-        """Generate users following Moodle schema with cheating flags"""
-        for user_id in range(1, self.config["total_users"] + 1):
-            is_cheater = user_id in self.cheaters
-            cheating_group = None
-            cheating_severity = None
+        for user_id_val in range(1, self.config["total_users"] + 1):
+            is_cheater_flag = user_id_val in self.cheater_user_ids
+            cheating_group_identifier = None
+            cheating_sev = None
             
-            if is_cheater:
-                # Find which group this user belongs to
-                for group in self.cheating_groups:
-                    if user_id in group.members:
-                        cheating_group = group.id
-                        cheating_severity = group.severity
+            if is_cheater_flag:
+                for group_conf in self.cheating_groups_config:
+                    if user_id_val in group_conf.members:
+                        cheating_group_identifier = group_conf.id
+                        cheating_sev = group_conf.severity
                         break
             
-            user = User(
-                id=user_id,
-                username=fake.user_name(),
-                password=fake.sha256(),
-                firstname=fake.first_name(),
-                lastname=fake.last_name(),
-                email=fake.email(),
-                lastaccess=int(datetime.now().timestamp()),
-                is_cheater=is_cheater,
-                cheating_group=cheating_group,
-                cheating_severity=cheating_severity
+            user_obj = User(
+                id=user_id_val, username=fake.user_name(), password=fake.sha256(),
+                firstname=fake.first_name(), lastname=fake.last_name(), email=fake.email(),
+                lastaccess=int((self.base_date + timedelta(days=random.randint(0,30))).timestamp()), # More varied lastaccess
+                is_cheater=is_cheater_flag, cheating_group_id=cheating_group_identifier, cheating_severity=cheating_sev
             )
-            
-            self.users.append(user)
-        
-        print(f"Generated {len(self.users)} users")
-    
+            self.users_internal.append(user_obj)
+        print(f"Generated {len(self.users_internal)} internal user representations")
+
     def generate_quiz_topics(self):
-        """Generate realistic quiz topics"""
         topics = [
-            "Introduction to Programming",
-            "Data Structures and Algorithms",
-            "Database Systems",
-            "Computer Networks",
-            "Operating Systems",
-            "Software Engineering",
-            "Artificial Intelligence",
-            "Machine Learning",
-            "Computer Graphics",
-            "Web Development"
-        ]
+            "Intro to Python", "Advanced Algorithms", "DB Management",
+            "Network Security", "OS Concepts", "Software Design Patterns",
+            "AI Ethics", "ML Foundations", "3D Rendering", "Full-Stack Web Dev"
+        ] # Slightly modified
         return random.sample(topics, min(len(topics), self.config["total_quizzes"]))
-    
+
     def generate_quizzes(self):
-        """Generate quizzes following Moodle schema"""
         topics = self.generate_quiz_topics()
-        
-        for quiz_id in range(1, self.config["total_quizzes"] + 1):
-            topic = topics[quiz_id-1] if quiz_id <= len(topics) else f"Quiz Topic {quiz_id}"
+        for i in range(1, self.config["total_quizzes"] + 1):
+            topic = topics[i-1] if i <= len(topics) else f"Quiz Topic {i}"
+            timeopen_dt = self.base_date + timedelta(days=(i-1)*7 + random.randint(0,2)) # Stagger quiz starts slightly
+            timeclose_dt = timeopen_dt + timedelta(days=random.randint(2,5)) # Vary closing time
             
-            timeopen = self.base_date + timedelta(days=(quiz_id-1)*7)  # One quiz per week
-            timeclose = timeopen + timedelta(hours=2)
-            
-            quiz = Quiz(
-                quiz_id=quiz_id,
-                course=1,
-                quiz_name=f"Quiz {quiz_id}: {topic}",
-                intro=f"This is Quiz {quiz_id} on {topic}. Please read each question carefully and select the best answer.",
-                timeopen=int(timeopen.timestamp()),
-                timeclose=int(timeclose.timestamp()),
-                timelimit=7200,  # 2 hours
-                overduehandling="autosubmit"
+            quiz_obj = Quiz(
+                quiz_id=self.next_id["quiz"], course=random.randint(101, 105), 
+                quiz_name=f"Quiz {i}: {topic}",
+                timeopen=int(timeopen_dt.timestamp()),
+                timeclose=int(timeclose_dt.timestamp()),
+                timelimit=random.choice([1800, 2700, 3600, 5400, 7200]) 
             )
-            
-            self.quizzes.append(quiz)
-        
+            self.quizzes.append(quiz_obj)
+            self.next_id["quiz"] += 1
         print(f"Generated {len(self.quizzes)} quizzes")
-    
+
     def generate_questions_and_answers(self):
-        """Generate questions and answers following Moodle schema"""
-        question_id = 1
-        answer_id = 1
-        
-        for quiz_id in range(1, self.config["total_quizzes"] + 1):
-            for q in range(1, self.config["questions_per_quiz"] + 1):
-                question = Question(
-                    id=question_id,
-                    qtype="multichoice",
-                    name=f"Q{q}",
-                    questiontext=f"Question {q} for Quiz {quiz_id}",
-                    defaultmark=1.0,
-                    penalty=0.33,
-                    quizid=quiz_id
+        for quiz_obj in self.quizzes:
+            for q_num in range(1, self.config["questions_per_quiz"] + 1):
+                q_id = self.next_id["question_internal"]
+                question_obj = Question(
+                    id=q_id, qtype="multichoice", name=f"Q{q_num}",
+                    questiontext=f"Content of Question {q_num} for {quiz_obj.quiz_name}", # More descriptive
+                    defaultmark=round(random.uniform(0.5, 2.0),1), # Varied marks
+                    penalty=round(random.uniform(0.0, 0.33), 2), quizid=quiz_obj.quiz_id
                 )
+                self.questions_internal.append(question_obj)
+                self.next_id["question_internal"] += 1
                 
-                self.questions.append(question)
-                
-                # Generate 4 answers per question, one correct
-                correct_answer = random.randint(0, 3)
-                for i in range(4):
-                    answer = QuestionAnswer(
-                        question_answers_id=answer_id,
-                        questionid=question_id,
-                        answer_text=f"Option {i+1}",
-                        fraction=1.0 if i == correct_answer else 0.0
+                options = [f"Option {chr(65+opt_idx)} for Q{q_num}" for opt_idx in range(4)] # A, B, C, D
+                random.shuffle(options)
+                correct_answer_idx = random.randint(0, 3)
+
+                for ans_idx in range(4):
+                    ans_id = self.next_id["Youtube"]
+                    answer_obj = QuestionAnswer(
+                        question_answers_id=ans_id, questionid=q_id,
+                        answer_text=options[ans_idx],
+                        fraction=1.0 if ans_idx == correct_answer_idx else ( -0.33 if random.random() < 0.1 else 0.0) # Occasional negative fraction for distractor
                     )
-                    
-                    self.question_answers.append(answer)
-                    answer_id += 1
-                
-                question_id += 1
-        
-        print(f"Generated {len(self.questions)} questions and {len(self.question_answers)} answers")
-    
-    def generate_navigation_sequence(self, question_count, pattern=None, similarity=0.0, noise=1.0, base_sequence=None):
-        """Generate a navigation sequence with configurable similarity to a base sequence"""
-        if base_sequence and similarity > 0:
-            # Create a sequence similar to the base_sequence
+                    self.question_answers.append(answer_obj)
+                    self.next_id["Youtube"] += 1
+        print(f"Generated {len(self.questions_internal)} internal questions and {len(self.question_answers)} answers")
+
+    def get_correct_answers_for_quiz(self, quiz_id_val: int) -> Dict[int, int]:
+        correct_answers_map = {} # Maps question_id to correct answer_text index
+        questions_for_this_quiz = [q for q in self.questions_internal if q.quizid == quiz_id_val]
+        for question_intern in questions_for_this_quiz:
+            answers_for_this_q = sorted([a for a in self.question_answers if a.questionid == question_intern.id], key=lambda x: x.question_answers_id) # Ensure consistent order
+            try:
+                correct_choice_idx = next((i for i, a in enumerate(answers_for_this_q) if a.fraction >= 1.0), 0) # Allow fraction >= 1
+                correct_answers_map[question_intern.id] = correct_choice_idx
+            except StopIteration:
+                 correct_answers_map[question_intern.id] = 0 # Default if no correct answer found (should not happen)
+                 print(f"Warning: No correct answer found for question ID {question_intern.id} in quiz {quiz_id_val}. Defaulting to option 0.")
+        return correct_answers_map
+
+    def generate_navigation_sequence(self, question_ids_in_quiz: List[int], is_cheater=False, pattern_config=None, base_sequence: Optional[List[int]]=None):
+        num_questions = len(question_ids_in_quiz)
+        if not question_ids_in_quiz: return []
+
+        if is_cheater and base_sequence and pattern_config:
             sequence = base_sequence.copy()
-            
-            # Apply noise by swapping some elements
-            swaps = int(question_count * noise)
+            # Apply noise by swapping some elements based on similarity config
+            # Higher similarity means fewer swaps (more adherence to base)
+            # Noise in config is how much it *deviates*
+            # So, number of swaps is proportional to (1 - similarity) or noise
+            # similarity = pattern_config["navigation"]["similarity"]
+            noise = pattern_config["navigation"]["noise"]
+            swaps = int(num_questions * noise) 
+
             for _ in range(swaps):
-                if random.random() > similarity:  # Only swap if we're breaking similarity
-                    i, j = random.sample(range(question_count), 2)
+                if num_questions > 1: # Ensure there are at least two elements to swap
+                    i, j = random.sample(range(num_questions), 2)
                     sequence[i], sequence[j] = sequence[j], sequence[i]
-            
-            return sequence
-        else:
-            # Create a sequence with optional pattern
-            if pattern == "sequential":
-                # Sequential pattern (1,2,3,4...)
-                sequence = list(range(1, question_count + 1))
-            elif pattern == "reverse":
-                # Reverse pattern (20,19,18...)
-                sequence = list(range(question_count, 0, -1))
-            elif pattern == "odd_first":
-                # Odd questions first, then even
-                odds = list(range(1, question_count + 1, 2))
-                evens = list(range(2, question_count + 1, 2))
-                sequence = odds + evens
-            elif pattern == "even_first":
-                # Even questions first, then odd
-                evens = list(range(2, question_count + 1, 2))
-                odds = list(range(1, question_count + 1, 2))
-                sequence = evens + odds
-            elif pattern == "jump_around":
-                # Jump between different sections (simulate jumping between easy questions)
-                first_third = list(range(1, question_count // 3 + 1))
-                second_third = list(range(question_count // 3 + 1, 2 * question_count // 3 + 1))
-                last_third = list(range(2 * question_count // 3 + 1, question_count + 1))
-                sequence = first_third + last_third + second_third
-            else:
-                # Random order
-                sequence = list(range(1, question_count + 1))
-                random.shuffle(sequence)
-            
-            # Add revisits (realistic behavior) - Enhanced for non-cheaters with more variability
-            is_cheater = base_sequence is not None  # If we have a base sequence, this is for a cheater
-            
-            if is_cheater:
-                # Cheaters: Standard revisits (more controlled)
-                revisit_count = random.randint(0, question_count // 4)  # Revisit up to 25% of questions
-                for _ in range(revisit_count):
-                    # Pick a question to revisit
-                    question = random.choice(sequence)
-                    # Find a position after its first appearance to insert the revisit
-                    first_pos = sequence.index(question)
-                    insert_pos = random.randint(first_pos + 1, len(sequence))
-                    sequence.insert(insert_pos, question)
-            else:
-                # Non-cheaters: Much more varied and realistic browsing patterns
-                # More revisits on average (naturally reviewing work)
-                revisit_count = random.randint(2, max(3, question_count // 3))  # Revisit 2 to 33% of questions
-                
-                # Sometimes non-cheaters review earlier questions multiple times
-                for _ in range(revisit_count):
-                    # Bias toward earlier questions (common behavior to review early work)
-                    early_bias = random.random() < 0.7  # 70% chance to review early questions
-                    if early_bias and len(sequence) > 3:
-                        # Pick from first third of questions
-                        first_third = sequence[:len(sequence)//3]
-                        question = random.choice(first_third)
-                    else:
-                        question = random.choice(sequence)
-                        
-                    # Insert revisit
-                    first_pos = sequence.index(question)
-                    insert_pos = random.randint(first_pos + 1, len(sequence))
-                    sequence.insert(insert_pos, question)
-                
-                # Sometimes add "back and forth" behavior (common when checking related questions)
-                if random.random() < 0.4:  # 40% chance
-                    # Find two nearby questions to jump between
-                    idx = random.randint(0, len(sequence) - 2)
-                    q1 = sequence[idx]
-                    q2 = sequence[idx + 1]
-                    
-                    # Insert a few back-and-forth movements
-                    back_forth_count = random.randint(1, 3)
-                    for _ in range(back_forth_count):
-                        insert_pos = random.randint(idx + 2, min(idx + 10, len(sequence)))
-                        if random.random() < 0.5:
-                            sequence.insert(insert_pos, q1)
-                        else:
-                            sequence.insert(insert_pos, q2)
-                
-                # Sometimes skip ahead then go back (realistic human behavior)
-                if random.random() < 0.3 and len(sequence) > 10:  # 30% chance
-                    # Pick a position to simulate "skipping ahead"
-                    skip_pos = random.randint(len(sequence)//4, 3*len(sequence)//4)
-                    # How far to skip ahead
-                    skip_distance = random.randint(2, min(5, len(sequence) - skip_pos - 1))
-                    
-                    # The question we're skipping to
-                    skip_to = sequence[skip_pos + skip_distance]
-                    
-                    # Insert it earlier
-                    sequence.insert(skip_pos, skip_to)
-                    
-                    # And maybe insert a revisit to the original position we skipped from
-                    if random.random() < 0.7:  # 70% chance
-                        sequence.insert(skip_pos + 2, sequence[skip_pos - 1])
-            
-            return sequence
-    
-    def generate_answer_sequence(self, question_count, correct_answers, pattern=None, 
-                                 similarity=0.0, wrong_bias=0.0, base_sequence=None):
-        """Generate answer selections with configurable similarity to a base sequence"""
-        sequence = []
+        else: # Honest user or no base sequence for cheater (should not happen for cheater if leader exists)
+            sequence = random.sample(question_ids_in_quiz, len(question_ids_in_quiz)) # Start with a random shuffle
         
-        if base_sequence and similarity > 0:
-            # Create answers similar to the base_sequence with controlled randomness
-            for q_idx in range(question_count):
-                # Even with high similarity, introduce some realistic variations
-                # This ensures not all cheaters have 100% identical answers
-                use_base = random.random() < similarity
-                
-                # Special case: sometimes introduce targeted variations even in high-similarity groups
-                # This makes the cheating more realistic - not every answer matches perfectly
-                if similarity > 0.8 and random.random() < 0.15:  # 15% chance for high-similarity groups
-                    # Create an intentional deviation on some questions
-                    use_base = False
-                
-                if use_base:
-                    # Use the same answer as the base sequence
-                    sequence.append(base_sequence[q_idx])
-                else:
-                    # Generate a new random answer, with some scientific considerations:
-                    correct = correct_answers[q_idx]
-                    
-                    # Realistic cheating behavior: biased toward making the SAME mistakes
-                    # Real cheaters often share wrong answers on difficult questions
-                    if random.random() < wrong_bias and base_sequence[q_idx] != correct:
-                        # Use the same wrong answer (coordinated mistake)
-                        sequence.append(base_sequence[q_idx])
-                    else:
-                        # Different cases based on question difficulty (simulated):
-                        q_difficulty = random.random()  # Higher = more difficult
-                        
-                        if q_difficulty > 0.7:  # Hard question
-                            # More likely to get hard questions wrong even with individual effort
-                            if random.random() < 0.7:
-                                # Wrong answer, but potentially different from base
-                                wrong_options = [i for i in range(4) if i != correct]
-                                sequence.append(random.choice(wrong_options))
-                            else:
-                                # Still possible to get right
-                                sequence.append(correct)
-                        else:  # Easier question
-                            # Less likely to get easy questions wrong
-                            if random.random() < 0.3:  # 30% chance of wrong
-                                wrong_options = [i for i in range(4) if i != correct]
-                                sequence.append(random.choice(wrong_options))
-                            else:
-                                # More likely to get right
-                                sequence.append(correct)
-        else:
-            # Generate completely random answers, but with realistic correctness rates
-            for q_idx in range(question_count):
-                # Simulate question difficulty
-                q_difficulty = random.random()
-                correct = correct_answers[q_idx]
-                
-                # Harder questions less likely to be correct
-                if q_difficulty > 0.7:  # Hard question
-                    if random.random() < 0.6:  # 40% chance of being correct
-                        sequence.append(correct)
-                    else:
-                        wrong_options = [i for i in range(4) if i != correct]
-                        sequence.append(random.choice(wrong_options))
-                else:  # Easier question
-                    if random.random() < 0.8:  # 80% chance of being correct
-                        sequence.append(correct)
-                    else:
-                        wrong_options = [i for i in range(4) if i != correct]
-                        sequence.append(random.choice(wrong_options))
-        
+        # Add revisits (more for honest users, controlled for cheaters)
+        revisit_count_factor = 0.25 if is_cheater else 0.4 # Cheaters might revisit less to avoid suspicion or if copying directly
+        revisit_count = random.randint(0, int(num_questions * revisit_count_factor))
+
+        for _ in range(revisit_count):
+            if not sequence: continue
+            question_to_revisit = random.choice(sequence)
+            try:
+                first_pos = sequence.index(question_to_revisit)
+                # Insert revisit at a random position after its first appearance
+                if len(sequence) > first_pos + 1:
+                    insert_pos = random.randint(first_pos + 1, len(sequence))
+                    sequence.insert(insert_pos, question_to_revisit)
+                else: # if it's the last element, insert before it to make it a revisit
+                    sequence.insert(len(sequence), question_to_revisit)
+            except ValueError: # Should not happen if question_to_revisit is from sequence
+                pass
         return sequence
-    
-    def get_correct_answers(self, quiz_id):
-        """Get correct answers for a quiz"""
-        correct_answers = []
-        questions_for_quiz = [q for q in self.questions if q.quizid == quiz_id]
+
+
+    def generate_answer_selection_sequence(self, nav_sequence: List[int], correct_answers_map: Dict[int, int], 
+                                           is_cheater=False, pattern_config=None, base_answer_selections: Optional[List[int]]=None):
+        actual_answers_selected = []
         
-        for question in questions_for_quiz:
-            answers = [a for a in self.question_answers if a.questionid == question.id]
-            correct_idx = next(i for i, a in enumerate(answers) if a.fraction > 0)
-            correct_answers.append(correct_idx)
-        
-        return correct_answers
-    
-    def generate_sessions_and_attempts(self):
-        """Generate sessions and attempts with realistic patterns"""
-        session_id = 1
-        attempt_id = 1
-        step_id = 1
-        
-        # First, pre-generate group patterns
-        for group in self.cheating_groups:
-            # Generate shared navigation and answer patterns for each quiz
-            group.quiz_patterns = {}
-            
-            for quiz_id in range(1, self.config["total_quizzes"] + 1):
-                # Select a navigation pattern strategy for this group and quiz
-                # Each group has its own "style" of navigation
-                if group.severity == "high_severity":
-                    # High severity groups tend to have more structured navigation
-                    # IMPORTANT: Fixed to ensure we don't always use sequential pattern
-                    nav_pattern = random.choice(["reverse", "odd_first", "even_first", "jump_around"]) 
-                    # Usually more revisits in high severity (to copy from others)
-                    revisit_rate = random.randint(4, 7)  # 4-7 revisits
-                elif group.severity == "medium_severity":
-                    # Medium severity groups have semi-structured navigation
-                    nav_pattern = random.choice(["jump_around", None, None])  # Less likely to be sequential
-                    revisit_rate = random.randint(2, 5)  # 2-5 revisits
-                else:
-                    # Low severity groups have less obvious patterns
-                    nav_pattern = random.choice(["jump_around", None, None])  # More likely to be random
-                    revisit_rate = random.randint(1, 3)  # 1-3 revisits
+        if is_cheater and base_answer_selections and pattern_config:
+            ans_similarity = pattern_config["answers"]["similarity"]
+            wrong_bias = pattern_config["answers"]["wrong_bias"]
+            for i, q_id in enumerate(nav_sequence):
+                correct_ans_idx = correct_answers_map.get(q_id, 0)
                 
-                # Generate base sequences for the group
-                nav_sequence = self.generate_navigation_sequence(
-                    self.config["questions_per_quiz"],
-                    pattern=nav_pattern
-                )
-                
-                # Add strategic revisits for the group (simulates checking answers)
-                for _ in range(revisit_rate):
-                    q_to_revisit = random.randint(1, self.config["questions_per_quiz"])
-                    # Insert revisit after at least 3 questions
-                    insert_pos = random.randint(3, len(nav_sequence))
-                    nav_sequence.insert(insert_pos, q_to_revisit)
-                    
-                # Further randomize the sequence slightly to avoid perfect matching between group members
-                if random.random() < 0.7:  # 70% chance to add more randomness
-                    # Randomly swap 2-4 positions
-                    for _ in range(random.randint(2, 4)):
-                        i, j = random.sample(range(len(nav_sequence)), 2)
-                        nav_sequence[i], nav_sequence[j] = nav_sequence[j], nav_sequence[i]
-                
-                correct_answers = self.get_correct_answers(quiz_id)
-                answer_sequence = []
-                
-                # Ensure some wrong answers for cheating detection
-                for q_idx in range(self.config["questions_per_quiz"]):
-                    correct = correct_answers[q_idx]
-                    # Higher chance of wrong answer for cheaters
-                    if random.random() < group.patterns["answers"]["wrong_bias"]:
-                        # Choose an incorrect answer
-                        wrong_options = [i for i in range(4) if i != correct]
-                        answer_sequence.append(random.choice(wrong_options))
-                    else:
-                        # Choose correct answer
-                        answer_sequence.append(correct)
-                
-                # For revisits, they'll provide the same answer (cheaters are consistent)
-                # Need to extend answer_sequence to match nav_sequence length
-                answer_map = {}
-                for i, q in enumerate(range(1, self.config["questions_per_quiz"] + 1)):
-                    answer_map[q] = answer_sequence[i]
-                
-                # Rebuild answer sequence to match navigation including revisits
-                full_answer_sequence = [answer_map[q] for q in nav_sequence]
-                
-                # Generate shared timing pattern for the group, with question-specific times
-                # This enforces NOT JUST similar times per question, but synchronized transitions
-                timing_pattern = []
-                
-                # Track the transition times between questions - THIS IS THE KEY SCIENTIFIC INSIGHT:
-                # Cheaters don't just have similar time spent PER question, but actually move between
-                # questions at the same TIME INTERVALS, creating a temporal correlation
-                transition_offsets = []
-                
-                # Start with initial offset (time to 1st question)
-                base_offset = random.randint(30, 120)  # Initial time browsing before starting
-                # High severity = tighter sync
-                if group.severity == "high_severity":
-                    offset_variance = 5
-                elif group.severity == "medium_severity":
-                    offset_variance = 15
-                else:
-                    offset_variance = 30
-                    
-                transition_offsets.append((base_offset, offset_variance))
-                    
-                # Calculate a baseline sequence of timing offsets for the group
-                # This creates the synchronized question transitions scientifically observed in cheating
-                question_sync_timestamps = [0]  # Start time
-                
-                for q in nav_sequence:
-                    # Check if this is a revisit
-                    is_revisit = nav_sequence.count(q) > 1 and nav_sequence.index(q) != len(nav_sequence) - 1 - nav_sequence[::-1].index(q)
-                    
-                    # Determine time spent
-                    if is_revisit:
-                        if group.severity == "high_severity":
-                            # Quick revisits for high severity
-                            base_time = random.randint(5, 15)
-                            variance = 2
+                # If copying from leader (base_answer_selections)
+                if i < len(base_answer_selections):
+                    leader_answer = base_answer_selections[i]
+                    if random.random() < ans_similarity: # Follow leader's answer
+                        actual_answers_selected.append(leader_answer)
+                    # If leader was wrong, and this follower is biased to copy wrong answers
+                    elif leader_answer != correct_ans_idx and random.random() < wrong_bias:
+                        actual_answers_selected.append(leader_answer) # Copy the wrong answer
+                    else: # Deviate: Generate own answer (could be right or wrong)
+                        if random.random() < 0.6: # 60% chance of own correct if deviating
+                            actual_answers_selected.append(correct_ans_idx)
                         else:
-                            # Slightly longer revisits for lower severity
-                            base_time = random.randint(10, 25)
-                            variance = 5
+                            wrong_options = [opt_idx for opt_idx in range(4) if opt_idx != correct_ans_idx]
+                            actual_answers_selected.append(random.choice(wrong_options) if wrong_options else correct_ans_idx)
+                else: # nav_sequence is longer than leader's answers (e.g. more revisits for follower)
+                    # Generate own answer for these extra steps
+                    if random.random() < 0.5: # Cheaters might still get some right on their own
+                        actual_answers_selected.append(correct_ans_idx)
                     else:
-                        # Base time + small variance for cheaters (first visit)
-                        if group.severity == "high_severity":
-                            # High severity: extremely consistent timing between group members
-                            # Not necessarily fast, but suspiciously similar pace
-                            base_time = random.randint(15, 45)  # Can be fast or slow
-                            variance = 3  # Very small variance between group members
-                        elif group.severity == "medium_severity":
-                            # Medium severity: moderately consistent timing
-                            base_time = random.randint(20, 60)
-                            variance = 8  # Moderate variance
-                        else:
-                            # Low severity: somewhat similar but with more natural variation
-                            base_time = random.randint(25, 70)
-                            variance = 15
-                    
-                    timing_pattern.append((base_time, variance))
-                    
-                    # Calculate transition time to next question 
-                    # This is a crucial addition for scientific validity - we need the timestamps
-                    # rather than just the durations to be synchronized
-                    last_time = question_sync_timestamps[-1]
-                    next_time = last_time + base_time
-                    question_sync_timestamps.append(next_time)
+                        wrong_options = [opt_idx for opt_idx in range(4) if opt_idx != correct_ans_idx]
+                        actual_answers_selected.append(random.choice(wrong_options) if wrong_options else correct_ans_idx)
+        else: # Honest User
+            for q_id in nav_sequence:
+                correct_ans_idx = correct_answers_map.get(q_id, 0)
+                # Honest users have a higher chance of getting it right, but not perfect
+                if random.random() < 0.75: # 75% chance of correct for honest users
+                    actual_answers_selected.append(correct_ans_idx)
+                else:
+                    wrong_options = [opt_idx for opt_idx in range(4) if opt_idx != correct_ans_idx]
+                    actual_answers_selected.append(random.choice(wrong_options) if wrong_options else correct_ans_idx)
+        return actual_answers_selected
+
+    def pre_generate_group_quiz_patterns(self):
+        for group_conf in self.cheating_groups_config:
+            for quiz_obj in self.quizzes:
+                question_ids_for_quiz = [q.id for q in self.questions_internal if q.quizid == quiz_obj.quiz_id]
+                if not question_ids_for_quiz: continue
+
+                # Leader's navigation sequence (can be somewhat patterned, e.g. sequential for simplicity of base)
+                leader_nav_seq = self.generate_navigation_sequence(question_ids_for_quiz, is_cheater=True, pattern_config=group_conf.patterns) # Pass pattern_config
                 
-                # Implement leader-follower behavior for high-severity cheating
-                # This adds another scientifically valid pattern: in real cheating, 
-                # there's often a leader and followers with dependency patterns
-                leader_follower_pattern = None
-                if group.severity == "high_severity":
-                    # For high severity, implement leader-follower pattern
-                    # Leader completes questions first, followers follow with delay
-                    leader_idx = 0  # first group member is leader
-                    # Define correlated delays for followers
-                    follower_delays = {}
-                    for i in range(1, len(group.members)):
-                        # Followers wait for leader with consistent delays
-                        if i == 1:  # First follower waits less
-                            follower_delays[i] = random.randint(20, 40)
-                        elif i == 2:  # Second follower waits a bit more
-                            follower_delays[i] = random.randint(40, 60)
-                        else:  # Additional followers wait even more
-                            follower_delays[i] = random.randint(60, 90)
-                    
-                    leader_follower_pattern = {
-                        "leader_idx": leader_idx,
-                        "follower_delays": follower_delays
-                    }
+                correct_ans_map = self.get_correct_answers_for_quiz(quiz_obj.quiz_id)
                 
-                group.quiz_patterns[quiz_id] = {
-                    "navigation_sequence": nav_sequence,
-                    "answer_sequence": full_answer_sequence,
-                    "timing_pattern": timing_pattern,
-                    "question_sync_timestamps": question_sync_timestamps,
-                    "leader_follower_pattern": leader_follower_pattern
+                # Leader's answers (simulates the "source" answers for the group)
+                leader_answers = self.generate_answer_selection_sequence(leader_nav_seq, correct_ans_map, is_cheater=True, pattern_config=group_conf.patterns) # Pass pattern_config
+
+                group_conf.quiz_patterns[quiz_obj.quiz_id] = {
+                    "navigation_sequence": leader_nav_seq,
+                    "answer_sequence": leader_answers
                 }
-        
-        # Generate for each quiz
-        for quiz_id in range(1, self.config["total_quizzes"] + 1):
-            quiz_time = self.base_date + timedelta(days=(quiz_id-1)*7)
-            
-            # Process honest students first
-            honest_users = [u for u in self.users if not u.is_cheater]
-            for user in honest_users:
-                # Create honest session and attempt
-                start_time = quiz_time + timedelta(minutes=random.randint(0, 60))
-                
-                # Honest students take variable time
-                duration_minutes = random.randint(30, 90)
-                duration = timedelta(minutes=duration_minutes)
-                
-                # Create session
-                session = Session(
-                    session_id=session_id,
-                    user_id=user.id,
-                    timecreated=int(start_time.timestamp()),
-                    timemodified=int((start_time + duration).timestamp()),
-                    firstip=fake.ipv4(),
-                    lastip=fake.ipv4(),
-                    sessdata=""
-                )
-                self.sessions.append(session)
-                session_id += 1
-                
-                # Create quiz attempt
-                attempt = QuizAttempt(
-                    attempt_id=attempt_id,
-                    quiz_id=quiz_id,
-                    user_id=user.id,
-                    attempt=1,
-                    state="finished",
-                    timestart=int(start_time.timestamp()),
-                    timefinish=int((start_time + duration).timestamp()),
-                    timemodified=int((start_time + duration).timestamp()),
-                    is_cheating=False,
-                    question_usage_id=user.id * 1000 + quiz_id,  # Generate a unique question_usage_id
-                    sumgrades=random.uniform(0.0, self.config["questions_per_quiz"])  # Random grade
-                )
-                self.quiz_attempts.append(attempt)
-                attempt_id += 1
-                
-                # Create mapping for mdl_question_attempts # ADDED
-                qam_id_counter = len(self.question_attempts_maps) + 1 
-                qam_entry = QuestionAttemptsMap(
-                    id=qam_id_counter,
-                    questionusageid=attempt.attempt_id, 
-                    questionattemptid=user.id * 100 + quiz_id 
-                )
-                self.question_attempts_maps.append(qam_entry)
-                
-                # Generate honest navigation with revisits
-                nav_sequence = self.generate_navigation_sequence(
-                    self.config["questions_per_quiz"]
+
+    def generate_sessions_and_attempts(self):
+        self.pre_generate_group_quiz_patterns()
+
+        for user_intern_obj in self.users_internal:
+            for quiz_obj in self.quizzes:
+                attempt_start_time_dt = datetime.fromtimestamp(quiz_obj.timeopen) + timedelta(
+                    seconds=random.randint(0, max(0, int((quiz_obj.timeclose - quiz_obj.timeopen) * 0.1))) # Start within first 10% of quiz window
                 )
                 
-                # Add random revisits (honest students often revisit questions)
-                revisit_count = random.randint(2, 8)  # More variable revisits
-                for _ in range(revisit_count):
-                    q_to_revisit = random.randint(1, self.config["questions_per_quiz"])
-                    insert_pos = random.randint(1, len(nav_sequence))
-                    nav_sequence.insert(insert_pos, q_to_revisit)
-                
-                correct_answers = self.get_correct_answers(quiz_id)
-                
-                # Create answer map for honest students
-                answer_map = {}
-                for q in range(1, self.config["questions_per_quiz"] + 1):
-                    correct = correct_answers[q-1]
-                    # 70% chance of correct for honest students (adjustable)
-                    if random.random() < 0.7:
-                        answer_map[q] = correct
-                    else:
-                        # Choose an incorrect answer
-                        wrong_options = [i for i in range(4) if i != correct]
-                        answer_map[q] = random.choice(wrong_options)
-                
-                # For revisits, honest students might change their answers
-                # Build full answer sequence matching navigation
-                answer_sequence = []
-                for q in nav_sequence:
-                    # Is this a revisit?
-                    if q in answer_map and nav_sequence.count(q) > 1 and len([x for x in nav_sequence[:nav_sequence.index(q)] if x == q]) > 0:
-                        # 30% chance to change answer on revisit
-                        if random.random() < 0.3:
-                            correct = correct_answers[q-1]
-                            # 60% chance to correct a wrong answer, 40% to get it wrong
-                            if answer_map[q] != correct and random.random() < 0.6:
-                                # Change to correct answer
-                                answer_map[q] = correct
-                            else:
-                                # Change to another answer
-                                options = [i for i in range(4) if i != answer_map[q]]
-                                answer_map[q] = random.choice(options)
-                    
-                    # Add the answer for this question to the sequence
-                    answer_sequence.append(answer_map[q])
-                
-                # Generate steps for this honest attempt
-                self.generate_attempt_steps(
-                    user.id, 
-                    quiz_id, 
-                    start_time, 
-                    nav_sequence, 
-                    answer_sequence,
-                    is_cheating=False,
-                    step_id=step_id
+                session_obj = Session(
+                    session_id=self.next_id["session"], user_id=user_intern_obj.id,
+                    timecreated=int(attempt_start_time_dt.timestamp() - random.randint(60,300)), # Session starts before attempt
+                    lastip=fake.ipv4(), sessdata=f"session_data_for_user_{user_intern_obj.id}"
                 )
+                self.sessions.append(session_obj)
+                self.next_id["session"] +=1
+
+                current_quiz_attempt_pk = self.next_id["quiz_attempt"]
+                current_question_usage_pk = self.next_id["question_usage"]
+                self.next_id["quiz_attempt"] += 1
+                self.next_id["question_usage"] += 1
+
+                # In Moodle, context_id often relates to the course module or quiz itself.
+                # For simplicity, using course_id as part of a dummy context_id.
+                dummy_context_id = quiz_obj.course * 10000 + quiz_obj.quiz_id 
+                q_usage_obj = QuestionUsage(question_usage_id=current_question_usage_pk, context_id=dummy_context_id)
+                self.question_usages.append(q_usage_obj)
+
+                group_conf_for_user = next((g for g in self.cheating_groups_config if user_intern_obj.id in g.members), None)
+                is_user_cheater = group_conf_for_user is not None
                 
-                # Update step_id
-                step_id += len(nav_sequence) * 2  # Each question has view + answer step
-            
-            # Process cheating groups
-            for group in self.cheating_groups:
-                # Get group patterns for this quiz
-                patterns = group.quiz_patterns[quiz_id]
-                
-                # Process each cheater in the group with coordinated timing
-                for idx, user_id in enumerate(group.members):
-                    user = next(u for u in self.users if u.id == user_id)
+                question_ids_for_this_quiz = [q.id for q in self.questions_internal if q.quizid == quiz_obj.quiz_id]
+                correct_answers_map_for_quiz = self.get_correct_answers_for_quiz(quiz_obj.quiz_id)
+
+                if is_user_cheater and quiz_obj.quiz_id in group_conf_for_user.quiz_patterns:
+                    member_idx = group_conf_for_user.members.index(user_intern_obj.id)
+                    # Apply start delay based on member index in group (leader starts first)
+                    attempt_start_time_dt += timedelta(minutes=group_conf_for_user.patterns["timing"]["start_delay"] * member_idx)
                     
-                    # Calculate timing based on group pattern and position in group
-                    start_delay = group.patterns["timing"]["start_delay"] * idx
-                    start_time = quiz_time + timedelta(minutes=start_delay)
-                    
-                    # Cheaters finish faster based on severity
-                    if group.patterns["timing"]["completion_speed"] == "fast":
-                        duration_minutes = random.randint(10, 20)
-                    elif group.patterns["timing"]["completion_speed"] == "medium":
-                        duration_minutes = random.randint(20, 40)
-                    else:
-                        duration_minutes = random.randint(30, 50)
-                    
-                    duration = timedelta(minutes=duration_minutes)
-                    
-                    # Create session
-                    session = Session(
-                        session_id=session_id,
-                        user_id=user.id,
-                        timecreated=int(start_time.timestamp()),
-                        timemodified=int((start_time + duration).timestamp()),
-                        firstip=fake.ipv4(),
-                        lastip=fake.ipv4(),
-                        sessdata=""
+                    leader_patterns = group_conf_for_user.quiz_patterns[quiz_obj.quiz_id]
+                    actual_nav_seq = self.generate_navigation_sequence(
+                        question_ids_for_this_quiz, is_cheater=True,
+                        pattern_config=group_conf_for_user.patterns,
+                        base_sequence=leader_patterns["navigation_sequence"]
                     )
-                    self.sessions.append(session)
-                    session_id += 1
-                    
-                    # Create quiz attempt with cheating label
-                    # For cheaters, generate a grade based on severity
-                    if group.severity == "high_severity":
-                        # High severity cheaters tend to score very well
-                        grade = random.uniform(self.config["questions_per_quiz"] * 0.8, self.config["questions_per_quiz"])
-                    elif group.severity == "medium_severity":
-                        # Medium severity get good but not perfect scores
-                        grade = random.uniform(self.config["questions_per_quiz"] * 0.6, self.config["questions_per_quiz"] * 0.9)
-                    else:
-                        # Low severity get more variable scores
-                        grade = random.uniform(self.config["questions_per_quiz"] * 0.4, self.config["questions_per_quiz"] * 0.8)
+                    actual_ans_sel_seq = self.generate_answer_selection_sequence(
+                        actual_nav_seq, correct_answers_map_for_quiz, is_cheater=True,
+                        pattern_config=group_conf_for_user.patterns,
+                        base_answer_selections=leader_patterns["answer_sequence"]
+                    )
+                    completion_speed_setting = group_conf_for_user.patterns["timing"]["completion_speed"]
+                    timing_variance_setting = group_conf_for_user.patterns["timing"]["variance"]
+                else: # Honest User
+                    actual_nav_seq = self.generate_navigation_sequence(question_ids_for_this_quiz, is_cheater=False)
+                    actual_ans_sel_seq = self.generate_answer_selection_sequence(actual_nav_seq, correct_answers_map_for_quiz, is_cheater=False)
+                    completion_speed_setting = random.choice(["normal", "slow"]) # Honest users vary
+                    timing_variance_setting = random.randint(20, 60) # Higher variance for honest timing
+
+                total_attempt_duration_seconds = 0
+                step_timestamp_tracker = attempt_start_time_dt
+                
+                # --- Generate QuestionAttemptReal and QuestionAttemptStep records ---
+                # Map unique question IDs encountered in nav_seq to their QuestionAttemptReal PK
+                map_q_id_to_q_attempt_real_pk = {} 
+                
+                step_sequence_number_counter = 0 # sequencenumber for mdl_question_attempt_steps
+
+                for i_nav_step, current_q_id_in_nav in enumerate(actual_nav_seq):
+                    step_sequence_number_counter += 1 # Increment for each step in navigation
+
+                    # Get or create QuestionAttemptReal PK for this question_id in this quiz_usage
+                    if current_q_id_in_nav not in map_q_id_to_q_attempt_real_pk:
+                        current_q_attempt_real_pk = self.next_id["question_attempt_real"]
+                        self.next_id["question_attempt_real"] += 1
+                        map_q_id_to_q_attempt_real_pk[current_q_id_in_nav] = current_q_attempt_real_pk
                         
-                    attempt = QuizAttempt(
-                        attempt_id=attempt_id,
-                        quiz_id=quiz_id,
-                        user_id=user.id,
-                        attempt=1,
-                        state="finished",
-                        timestart=int(start_time.timestamp()),
-                        timefinish=int((start_time + duration).timestamp()),
-                        timemodified=int((start_time + duration).timestamp()),
-                        is_cheating=True,
-                        cheating_severity=group.severity,
-                        cheating_group=group.id,
-                        question_usage_id=user.id * 1000 + quiz_id,  # Generate a unique question_usage_id
-                        sumgrades=grade
-                    )
-                    self.quiz_attempts.append(attempt)
-                    attempt_id += 1
-                    
-                    # Create mapping for mdl_question_attempts # ADDED
-                    qam_id_counter = len(self.question_attempts_maps) + 1
-                    qam_entry = QuestionAttemptsMap(
-                        id=qam_id_counter,
-                        questionusageid=attempt.attempt_id,
-                        questionattemptid=user.id * 100 + quiz_id # user here is the one from self.users
-                    )
-                    self.question_attempts_maps.append(qam_entry)
-                    
-                    # Generate navigation with similarity to group pattern
-                    nav_sequence = self.generate_navigation_sequence(
-                        self.config["questions_per_quiz"],
-                        similarity=group.patterns["navigation"]["similarity"],
-                        noise=group.patterns["navigation"]["noise"],
-                        base_sequence=patterns["navigation_sequence"]
-                    )
-                    
-                    # Generate answers with similarity to group pattern
-                    correct_answers = self.get_correct_answers(quiz_id)
-                    answer_sequence = self.generate_answer_sequence(
-                        self.config["questions_per_quiz"],
-                        correct_answers,
-                        similarity=group.patterns["answers"]["similarity"],
-                        wrong_bias=group.patterns["answers"]["wrong_bias"],
-                        base_sequence=patterns["answer_sequence"]
-                    )
-                    
-                    # Generate steps for this cheating attempt
-                    self.generate_attempt_steps(
-                        user.id, 
-                        quiz_id, 
-                        start_time, 
-                        nav_sequence, 
-                        answer_sequence,
-                        is_cheating=True,
-                        cheating_severity=group.severity,
-                        cheating_group=group.id,
-                        time_variance=group.patterns["timing"]["variance"],
-                        step_id=step_id
-                    )
-                    
-                    # Update step_id
-                    step_id += len(nav_sequence) * 2  # Each question has view + answer step
-        
-        print(f"Generated {len(self.sessions)} sessions and {len(self.quiz_attempts)} attempts")
-        print(f"Generated {len(self.question_attempt_steps)} steps and {len(self.question_attempt_step_data)} step data entries")
-    
-    def generate_attempt_steps(self, user_id, quiz_id, start_time, navigation_sequence, 
-                              answer_sequence, is_cheating=False, cheating_severity=None, 
-                              cheating_group=None, time_variance=30, step_id=1):
-        """Generate steps for a quiz attempt with realistic timing"""
-        current_time = start_time
-        base_step_id = step_id
-        completed_questions = []
-        
-        # Get group timing pattern if this is a cheater
-        timing_pattern = None
-        question_sync_timestamps = None
-        leader_follower_pattern = None
-        member_idx_in_group = None
-        
-        if is_cheating and cheating_group:
-            group = next((g for g in self.cheating_groups if g.id == cheating_group), None)
-            if group and quiz_id in group.quiz_patterns:
-                timing_pattern = group.quiz_patterns[quiz_id]["timing_pattern"]
-                question_sync_timestamps = group.quiz_patterns[quiz_id]["question_sync_timestamps"]
-                leader_follower_pattern = group.quiz_patterns[quiz_id].get("leader_follower_pattern", None)
-                
-                # Find this user's index in the group
-                if user_id in group.members:
-                    member_idx_in_group = group.members.index(user_id)
-        
-        # CRITICAL FIX: Ensure answer_sequence and navigation_sequence have the same length
-        if len(answer_sequence) != len(navigation_sequence):
-            print(f"Warning: Answer sequence length ({len(answer_sequence)}) doesn't match navigation sequence length ({len(navigation_sequence)}) for user {user_id}")
-            # Extend answer_sequence if it's too short by repeating the last answer
-            if len(answer_sequence) < len(navigation_sequence):
-                last_answer = answer_sequence[-1] if answer_sequence else 0
-                answer_sequence.extend([last_answer] * (len(navigation_sequence) - len(answer_sequence)))
-            # Truncate if it's too long
-            elif len(answer_sequence) > len(navigation_sequence):
-                answer_sequence = answer_sequence[:len(navigation_sequence)]
-        
-        # For realistic cheating, create a consistent personal variance
-        # This way each cheater maintains their own "style" but follows the group pattern
-        personal_timing_style = random.randint(-2, 2)  # Individual tendency (slightly faster/slower)
-        
-        # For cheating groups, apply leader-follower pattern using absolute timestamps
-        # instead of relative timing to create synchronized patterns
-        if is_cheating and leader_follower_pattern and member_idx_in_group is not None:
-            leader_idx = leader_follower_pattern["leader_idx"]
-            follower_delays = leader_follower_pattern["follower_delays"]
-            
-            # Calculate delay based on position in the group
-            base_delay = 0
-            if member_idx_in_group > 0:  # Not the leader
-                base_delay = follower_delays.get(member_idx_in_group, 30)  # Default to 30 sec if not specified
-        else:
-            base_delay = 0
-            
-        # This is crucial: for cheating groups, we want to apply the synchronized timestamps
-        # with only small individual variance, rather than independent timing for each question
-        if is_cheating and question_sync_timestamps:
-            # Calculate absolute timestamps for each question for this user 
-            user_timestamps = []
-            for ts in question_sync_timestamps:
-                # Add group-based offset plus small individual variance  
-                user_time = start_time + timedelta(seconds=ts) + timedelta(seconds=base_delay)
-                
-                # Add small personal variation to avoid perfect synchronization
-                # (Deviation decreases with severity)
-                if cheating_severity == "high_severity":
-                    variation = random.randint(-3, 3)
-                elif cheating_severity == "medium_severity": 
-                    variation = random.randint(-8, 8)
-                else:
-                    variation = random.randint(-15, 15)
-                    
-                user_time += timedelta(seconds=variation + personal_timing_style)
-                user_timestamps.append(user_time)
-                
-            # Now we have pre-calculated timestamps for each question transition
-            # which will show synchronized patterns between group members
-        
-        for idx, question_num in enumerate(navigation_sequence):
-            # Use synchronized timestamps for cheaters if available
-            if is_cheating and question_sync_timestamps and idx < len(user_timestamps):
-                current_time = user_timestamps[idx]
-            
-            # Initial view of question
-            step = QuestionAttemptStep(
-                question_step_id=step_id,
-                question_attempt_id=user_id * 100 + quiz_id,  # Consistent format
-                sequencenumber=step_id - base_step_id + 1,
-                state="todo",
-                timecreated=int(current_time.timestamp()),
-                user_id=user_id,
-                is_cheating=is_cheating,
-                cheating_severity=cheating_severity,
-                cheating_group=cheating_group
-            )
-            self.question_attempt_steps.append(step)
-            
-            # Scientific timing patterns - only apply for honest students or when we don't have sync timestamps
-            if is_cheating and timing_pattern and (not question_sync_timestamps or idx >= len(user_timestamps)-1):
-                # Use consistent group timing pattern with small individual variance
-                base_time, variance = timing_pattern[idx % len(timing_pattern)]
-                
-                # Apply a consistent personal style
-                individual_variance = random.randint(-variance, variance)
-                read_time = max(1, base_time + personal_timing_style + individual_variance)
-                
-                # Add occasional realistic "thinking pause" 
-                if random.random() < 0.15:  
-                    read_time += random.randint(5, 15)
-                
-                current_time += timedelta(seconds=read_time)
-                
-            elif not is_cheating:
-                # Honest: Variable timing with natural behavior
-                base_time = random.randint(20, 80)
-                
-                # Honest students have much higher variance in their thinking time
-                if random.random() < 0.3:  # 30% chance of significant variance
-                    if random.random() < 0.5:
-                        # Sometimes much faster 
-                        base_time = max(5, base_time - random.randint(10, 30))
+                        q_metadata = next((q for q in self.questions_internal if q.id == current_q_id_in_nav), None)
+                        max_mark_val = q_metadata.defaultmark if q_metadata else 1.0
+                        
+                        q_attempt_real_obj = QuestionAttemptReal(
+                            question_attempt_id=current_q_attempt_real_pk,
+                            question_usage_id=current_question_usage_pk,
+                            questionid=current_q_id_in_nav,
+                            maxmark=max_mark_val
+                        )
+                        self.question_attempts_real.append(q_attempt_real_obj)
                     else:
-                        # Sometimes much slower
-                        base_time += random.randint(30, 120)
+                        current_q_attempt_real_pk = map_q_id_to_q_attempt_real_pk[current_q_id_in_nav]
+
+                    # Timing for this specific step (viewing/answering a question)
+                    if completion_speed_setting == "fast":
+                        time_spent_this_step = random.randint(max(1, 5 - timing_variance_setting//2), 20 + timing_variance_setting//2)
+                    elif completion_speed_setting == "medium":
+                        time_spent_this_step = random.randint(max(1, 15 - timing_variance_setting//2), 45 + timing_variance_setting//2)
+                    else: # normal or slow
+                        time_spent_this_step = random.randint(max(1, 30 - timing_variance_setting//2), 90 + timing_variance_setting//2)
+                    time_spent_this_step = max(1, int(time_spent_this_step))
+                    total_attempt_duration_seconds += time_spent_this_step
+                    
+                    step_timestamp_tracker += timedelta(seconds=time_spent_this_step)
+
+                    q_step_pk = self.next_id["question_attempt_step"]
+                    self.next_id["question_attempt_step"] +=1
+                    q_attempt_step_obj = QuestionAttemptStep(
+                        question_step_id=q_step_pk,
+                        question_attempt_id=current_q_attempt_real_pk,
+                        sequencenumber=step_sequence_number_counter, # This is the overall step number
+                        state="mangrfinished", # Moodle state meaning "Manually graded, marked as finished" or similar
+                        timecreated=int(step_timestamp_tracker.timestamp())
+                    )
+                    self.question_attempt_steps.append(q_attempt_step_obj)
+
+                    step_data_pk = self.next_id["step_data"]
+                    self.next_id["step_data"] +=1
+                    step_data_obj = QuestionAttemptStepData(
+                        step_data_id=step_data_pk,
+                        question_step_id=q_step_pk,
+                        name="answer", # Could also be other Moodle internal names like "-sequencecheck"
+                        value=str(actual_ans_sel_seq[i_nav_step])
+                    )
+                    self.question_attempt_step_data.append(step_data_obj)
                 
-                read_time = base_time
-                current_time += timedelta(seconds=read_time)
-            
-            # We don't need to add time for cheaters using synchronized timestamps
-            # as we already have the next timestamp ready
+                attempt_finish_time_dt = attempt_start_time_dt + timedelta(seconds=total_attempt_duration_seconds)
+                # Ensure finish time is within quiz window and after start time
+                attempt_finish_time_dt = min(attempt_finish_time_dt, datetime.fromtimestamp(quiz_obj.timeclose - random.randint(1,60)))
+                attempt_finish_time_dt = max(attempt_finish_time_dt, attempt_start_time_dt + timedelta(seconds=max(1, len(actual_nav_seq)))) # Min 1 sec per nav step
+
+                # Calculate sumgrades based on the *last* answer for each unique question
+                final_score = 0
+                total_possible_score = 0
+                # Get unique questions in the order they were *last effectively answered* for grading
+                # This means finding the last step for each unique question in the nav_seq
                 
-            # Answer submission - next step
-            step_id += 1
-            
-            # Set answer time 1-5 seconds after viewing for all users
-            if not question_sync_timestamps or not is_cheating:
-                current_time += timedelta(seconds=random.randint(1, 5))
-            elif is_cheating and idx < len(user_timestamps)-1:
-                # For synchronized cheaters, answer time is just a few seconds before next question view
-                next_view_time = user_timestamps[idx+1]
-                answer_time = next_view_time - timedelta(seconds=random.randint(1, 3))
-                if answer_time > current_time:  # Make sure we don't go backwards in time
-                    current_time = answer_time
-            
-            step = QuestionAttemptStep(
-                question_step_id=step_id,
-                question_attempt_id=user_id * 100 + quiz_id,
-                sequencenumber=step_id - base_step_id + 1,
-                state="complete",
-                timecreated=int(current_time.timestamp()),
-                user_id=user_id,
-                is_cheating=is_cheating,
-                cheating_severity=cheating_severity,
-                cheating_group=cheating_group
-            )
-            self.question_attempt_steps.append(step)
-            
-            # Record answer selection
-            step_data_id = step_id  # Use step_id as step_data_id for uniqueness
-            step_data = QuestionAttemptStepData(
-                question_step_id=step_id,
-                name="answer",
-                value=str(answer_sequence[idx]),
-                user_id=user_id,
-                step_data_id=step_data_id,
-                is_cheating=is_cheating,
-                cheating_severity=cheating_severity,
-                cheating_group=cheating_group
-            )
-            self.question_attempt_step_data.append(step_data)
-            
-            completed_questions.append(question_num)
-            current_time += timedelta(seconds=random.randint(2, 5))
-            
-            # Review behavior differentiator: honest students review questions more
-            if not is_cheating and len(completed_questions) > 1 and random.random() < 0.3:
-                review_question = random.choice(completed_questions[:-1])
-                step_id += 1
-                step = QuestionAttemptStep(
-                    question_step_id=step_id,
-                    question_attempt_id=user_id * 100 + quiz_id,
-                    sequencenumber=step_id - base_step_id + 1,
-                    state="todo",  # reviewing
-                    timecreated=int(current_time.timestamp()),
-                    user_id=user_id,
-                    is_cheating=is_cheating,
-                    cheating_severity=cheating_severity,
-                    cheating_group=cheating_group
+                # Determine score from the answers given
+                answered_question_ids = set() # To score each question only once
+                temp_score = 0
+                temp_max_score = 0
+
+                for q_id_nav_item in actual_nav_seq: # Iterate through navigation to find last answers
+                    if q_id_nav_item not in answered_question_ids:
+                         q_meta_info = next((q for q in self.questions_internal if q.id == q_id_nav_item), None)
+                         if q_meta_info:
+                             temp_max_score += q_meta_info.defaultmark
+                         answered_question_ids.add(q_id_nav_item)
+
+                # Find last given answer for each question ID that was part of this quiz
+                for q_id_in_quiz in question_ids_for_this_quiz:
+                    last_answer_for_this_q_idx = None
+                    indices_of_this_q_in_nav = [idx for idx, qid_step in enumerate(actual_nav_seq) if qid_step == q_id_in_quiz]
+                    if indices_of_this_q_in_nav:
+                        last_occurrence_index = indices_of_this_q_in_nav[-1]
+                        last_answer_for_this_q_idx = actual_ans_sel_seq[last_occurrence_index]
+
+                        q_meta_info = next((q for q in self.questions_internal if q.id == q_id_in_quiz), None)
+                        if q_meta_info:
+                            correct_ans_idx = correct_answers_map_for_quiz.get(q_id_in_quiz, -1)
+                            if last_answer_for_this_q_idx == correct_ans_idx:
+                                temp_score += q_meta_info.defaultmark
+                            # else: # Moodle might apply penalties here based on question settings
+                                # temp_score -= (q_meta_info.penalty * q_meta_info.defaultmark)
+                                # For simplicity, we only add score for correct, no negative for wrong for sumgrades.
+                                # Moodle's sumgrades is typically sum of positive scores.
+                
+                sumgrades_val_final = round(max(0, temp_score), 4) # Ensure non-negative, round to typical Moodle precision
+
+                quiz_attempt_obj = QuizAttempt(
+                    attempt_id=current_quiz_attempt_pk, quiz_id=quiz_obj.quiz_id, user_id=user_intern_obj.id,
+                    question_usage_id=current_question_usage_pk,
+                    timestart=int(attempt_start_time_dt.timestamp()), timefinish=int(attempt_finish_time_dt.timestamp()),
+                    state="finished", sumgrades=sumgrades_val_final
                 )
-                self.question_attempt_steps.append(step)
-                current_time += timedelta(seconds=random.randint(10, 30))
-            
-            step_id += 1
+                self.quiz_attempts.append(quiz_attempt_obj)
+                
+                quiz_grade_obj = QuizGrade(
+                    quiz_grades_id=self.next_id["quiz_grade"], quiz_id=quiz_obj.quiz_id,
+                    user_id=user_intern_obj.id, final_grade=sumgrades_val_final 
+                )
+                self.quiz_grades.append(quiz_grade_obj)
+                self.next_id["quiz_grade"] += 1
         
-        return step_id
-    
+        print(f"Generated {len(self.sessions)} sessions, {len(self.quiz_attempts)} quiz attempts.")
+        print(f"Generated {len(self.question_usages)} question usages.")
+        print(f"Generated {len(self.question_attempts_real)} question_attempts (question-specific).")
+        print(f"Generated {len(self.question_attempt_steps)} attempt_steps and {len(self.question_attempt_step_data)} step_data entries.")
+        print(f"Generated {len(self.quiz_grades)} quiz_grades.")
+
     def generate_data(self):
-        """Generate all data following the configured patterns"""
-        print("Starting Moodle log generation with ML-ready cheating patterns...")
-        
+        print("Starting Moodle log generation (Refined)...")
         self.generate_users()
         self.generate_quizzes()
         self.generate_questions_and_answers()
         self.generate_sessions_and_attempts()
-        
         print("Log generation complete!")
-    
+
     def write_to_csv(self):
-        """Write all generated data to CSV files"""
         if not os.path.exists(self.config["output_dir"]):
             os.makedirs(self.config["output_dir"])
         
-        # Helper function to write a list of objects to CSV
-        def write_objects_to_csv(objects, filename):
-            if not objects:
-                return
-            
-            fieldnames = asdict(objects[0]).keys()
+        def write_objects_to_csv_custom(objects, filename): # Simplified writer
+            if not objects: return
+            dict_list = [asdict(obj) for obj in objects]
+            if not dict_list: return
+            csv_fieldnames = list(dict_list[0].keys())
             with open(os.path.join(self.config["output_dir"], filename), 'w', newline='') as f:
-                writer = csv.DictWriter(f, fieldnames=fieldnames)
+                writer = csv.DictWriter(f, fieldnames=csv_fieldnames)
                 writer.writeheader()
-                for obj in objects:
-                    writer.writerow(asdict(obj))
+                writer.writerows(dict_list)
         
-        # Write all tables to CSV
-        write_objects_to_csv(self.users, 'mdl_user.csv')
-        write_objects_to_csv(self.quizzes, 'mdl_quiz.csv')
-        write_objects_to_csv(self.questions, 'mdl_question.csv')
-        write_objects_to_csv(self.question_answers, 'mdl_question_answers.csv')  # Renamed from mdl_question_answers.csv
-        write_objects_to_csv(self.sessions, 'mdl_sessions.csv')
-        write_objects_to_csv(self.quiz_attempts, 'mdl_quiz_attempts.csv')
-        write_objects_to_csv(self.question_attempt_steps, 'mdl_question_attempt_steps.csv')
-        write_objects_to_csv(self.question_attempt_step_data, 'mdl_question_attempt_step_data.csv')
-        write_objects_to_csv(self.question_attempts_maps, 'mdl_question_attempts.csv') # ADDED
+        users_for_log_csv = [{ "user_id": u.id, "username": u.username, "firstname": u.firstname, 
+                               "lastname": u.lastname, "email": u.email, "lastaccess": u.lastaccess} 
+                             for u in self.users_internal] # Filtered user fields for log
+
+        # Output names must match real tables
+        write_objects_to_csv_custom(users_for_log_csv, 'mdl_user.csv') # Write only non-ML fields for this
+        write_objects_to_csv_custom(self.quizzes, 'mdl_quiz.csv')
+        write_objects_to_csv_custom(self.question_answers, 'mdl_question_answers.csv')
+        write_objects_to_csv_custom(self.sessions, 'mdl_sessions.csv')
+        # The real data has two files named mdl_quiz_attempts.csv and mdl_question_attempts.csv
+        # The first one (quiz_attempts) is general attempt info.
+        # The second one (question_attempts) is question-specific info within an attempt.
+        write_objects_to_csv_custom(self.quiz_attempts, 'mdl_quiz_attempts.csv') # This is the general one
+        write_objects_to_csv_custom(self.question_usages, 'mdl_question_usages.csv')
+        write_objects_to_csv_custom(self.question_attempts_real, 'mdl_question_attempts.csv') # This is the question-specific one
+        write_objects_to_csv_custom(self.question_attempt_steps, 'mdl_question_attempt_steps.csv')
+        write_objects_to_csv_custom(self.question_attempt_step_data, 'mdl_question_attempt_step_data.csv')
+        write_objects_to_csv_custom(self.quiz_grades, 'mdl_quiz_grades.csv')
         
-        # Generate a ground truth file for ML reference
-        self.write_ground_truth()
+        self.write_ground_truth_csv()
+        self.write_ground_truth_md_and_visualization()
         
         print(f"All data written to {self.config['output_dir']} directory")
-    
-    def write_ground_truth(self):
-        """Write a ground truth file with cheating information"""
-        with open(os.path.join(self.config["output_dir"], 'cheating_ground_truth.md'), 'w') as f:
-            f.write("# Cheating Ground Truth\n\n")
-            f.write("This file contains the ground truth about cheating groups for validation and ML training.\n\n")
-            
-            # Generate scientific statistical summary table
-            f.write("## Statistical Summary of Cheating Groups\n\n")
-            f.write("This table provides statistical justification for the labeling of cheating groups, showing quantitative evidence of coordination.\n\n")
-            f.write("| Group | Navigation Similarity (%) | Answer Pattern Similarity (%) | Timing Correlation | Std Dev (Avg) | Wrong Answer Bias |\n")
-            f.write("|-------|----------------------------|------------------------------|-------------------|----------------|-------------------|\n")
-            
-            # Calculate the actual statistical metrics for each group
-            for group in self.cheating_groups:
-                # Calculate actual statistics from the simulation data
-                nav_similarity = group.patterns["navigation"]["similarity"] * 100
-                
-                # Calculate actual answer pattern similarity from the data
-                answer_similarity = group.patterns["answers"]["similarity"] * 100
-                
-                # Calculate actual timing correlations from the simulation
-                timing_correlation = 0
-                std_dev_avg = 0
-                
-                # Compute real statistics from the generated data if available
-                if hasattr(group, 'quiz_patterns') and len(group.quiz_patterns) > 0:
-                    # Calculate across all quizzes
-                    all_correlations = []
-                    all_std_devs = []
-                    
-                    for quiz_id, patterns in group.quiz_patterns.items():
-                        if "question_sync_timestamps" in patterns:
-                            # Calculate actual temporal correlation between group members
-                            # This is based on the simulation data rather than just the config
-                            member_times = {}
-                            
-                            # Get the actual timestamps for each member
-                            for user_id in group.members:
-                                steps = [s for s in self.question_attempt_steps 
-                                        if s.user_id == user_id 
-                                        and "question_attempt_id" in s.__dict__
-                                        and s.question_attempt_id == user_id * 100 + quiz_id
-                                        and s.state == "todo"]
-                                
-                                if steps:
-                                    # Sort by time
-                                    steps = sorted(steps, key=lambda s: s.timecreated)
-                                    
-                                    # Extract times
-                                    times = [s.timecreated for s in steps]
-                                    
-                                    # Calculate transition times
-                                    if len(times) > 1:
-                                        transitions = [times[i+1] - times[i] for i in range(len(times)-1)]
-                                        member_times[user_id] = transitions
-                            
-                            # Calculate correlations between all pairs
-                            pair_correlations = []
-                            for i, user1 in enumerate(group.members):
-                                for user2 in group.members[i+1:]:
-                                    if user1 in member_times and user2 in member_times:
-                                        t1 = member_times[user1]
-                                        t2 = member_times[user2]
-                                        
-                                        # Must have at least a few transitions to calculate correlation
-                                        if len(t1) >= 3 and len(t2) >= 3:
-                                            # Use the minimum length
-                                            min_len = min(len(t1), len(t2))
-                                            t1 = t1[:min_len]
-                                            t2 = t2[:min_len]
-                                            
-                                            try:
-                                                corr = np.corrcoef(t1, t2)[0, 1]
-                                                if not np.isnan(corr):
-                                                    pair_correlations.append(corr)
-                                            except:
-                                                pass
-                            
-                            if pair_correlations:
-                                all_correlations.extend(pair_correlations)
-                        
-                        # Calculate standard deviations in timing
-                        for user_id in group.members:
-                            steps = [s for s in self.question_attempt_steps 
-                                    if s.user_id == user_id 
-                                    and "question_attempt_id" in s.__dict__
-                                    and s.question_attempt_id == user_id * 100 + quiz_id]
-                            
-                            question_times = []
-                            for i in range(0, len(steps)-1, 2):
-                                if i+1 < len(steps):
-                                    time_spent = steps[i+1].timecreated - steps[i].timecreated
-                                    question_times.append(time_spent)
-                            
-                            if len(question_times) > 1:
-                                std_dev = np.std(question_times)
-                                all_std_devs.append(std_dev)
-                    
-                    # Calculate averages across all quizzes and members
-                    if all_correlations:
-                        timing_correlation = sum(all_correlations) / len(all_correlations)
-                    
-                    if all_std_devs:
-                        std_dev_avg = sum(all_std_devs) / len(all_std_devs)
-                
-                # Record actual wrong answer bias from the config
-                wrong_bias = group.patterns["answers"]["wrong_bias"] * 100
-                
-                # Format the table row with the calculated statistics
-                f.write(f"| {group.id} | {nav_similarity:.1f}% | {answer_similarity:.1f}% | {timing_correlation:.4f} | {std_dev_avg:.1f} | {wrong_bias:.1f}% |\n")
-            
-            f.write("\n*Note: These statistics represent the actual measured values from the simulation, not just the configuration parameters.*\n\n")
-            f.write("- **Navigation Similarity**: Percentage of identical navigation patterns between group members\n")
-            f.write("- **Answer Pattern Similarity**: Percentage of identical answers between group members\n")
-            f.write("- **Timing Correlation**: Pearson correlation coefficient of question transition times (values >0.7 are statistically improbable without coordination)\n")
-            f.write("- **Std Dev**: Average standard deviation of time spent per question (lower values indicate suspiciously consistent timing)\n")
-            f.write("- **Wrong Answer Bias**: Probability of coordinated wrong answers (higher values indicate suspicious identical mistakes)\n\n")
-            
-            f.write("## Cheater Groups\n\n")
-            for group in self.cheating_groups:
-                f.write(f"### {group.id} (Severity: {group.severity})\n")
-                f.write(f"- Members: {group.members}\n")
-                f.write(f"- Navigation similarity: {group.patterns['navigation']['similarity']}\n")
-                f.write(f"- Navigation noise: {group.patterns['navigation']['noise']}\n")
-                f.write(f"- Timing start delay: {group.patterns['timing']['start_delay']} minutes\n")
-                f.write(f"- Timing variance: {group.patterns['timing']['variance']} seconds\n")
-                f.write(f"- Answer similarity: {group.patterns['answers']['similarity']}\n")
-                f.write(f"- Wrong answer bias: {group.patterns['answers']['wrong_bias']}\n\n")
+
+    def write_ground_truth_csv(self):
+        gt_data = [{'user_id': u.id, 'is_cheater': 1 if u.is_cheater else 0,
+                    'cheating_group_id': u.cheating_group_id or 'N/A',
+                    'cheating_severity': u.cheating_severity or 'N/A'}
+                   for u in self.users_internal]
         
-        # Also write a CSV version for easy ML import
         with open(os.path.join(self.config["output_dir"], 'cheating_ground_truth.csv'), 'w', newline='') as f:
-            writer = csv.writer(f)
-            writer.writerow(['user_id', 'is_cheater', 'cheating_group', 'cheating_severity'])
-            
-            for user in self.users:
-                writer.writerow([
-                    user.id, 
-                    1 if user.is_cheater else 0, 
-                    user.cheating_group or 'N/A', 
-                    user.cheating_severity or 'N/A'
-                ])
-    
-    def write_visualization_md(self):
-        """Create visual representation of user attempts to easily identify cheating patterns"""
-        with open(os.path.join(self.config["output_dir"], 'cheating_visualization.md'), 'w') as f:
-            f.write("# Quiz Attempt Visualization\n\n")
-            f.write("This file provides a visual representation of quiz attempts to identify suspicious patterns.\n\n")
-            
-            # Process each quiz
-            for quiz_id in range(1, self.config["total_quizzes"] + 1):
-                quiz = next(q for q in self.quizzes if q.quiz_id == quiz_id)
-                f.write(f"## {quiz.quiz_name}\n\n")
+            writer = csv.DictWriter(f, fieldnames=['user_id', 'is_cheater', 'cheating_group_id', 'cheating_severity'])
+            writer.writeheader()
+            writer.writerows(gt_data)
+        print(f"Ground truth CSV written to {self.config['output_dir']}/cheating_ground_truth.csv")
+
+    def write_ground_truth_md_and_visualization(self):
+        output_path = self.config["output_dir"]
+        
+        # --- cheating_ground_truth.md ---
+        with open(os.path.join(output_path, 'cheating_ground_truth.md'), 'w') as f:
+            f.write("# Cheating Ground Truth (Analysis & Configuration)\n\n")
+            f.write("This file contains the ground truth about cheating groups for validation and ML training, based on the generator's configuration.\n\n")
+            f.write("## Cheating Groups Configuration\n\n")
+            f.write("| Group ID             | Severity        | Member User IDs | Nav Similarity | Nav Noise | Timing Start Delay (min/member) | Timing Variance (s) | Answer Similarity | Wrong Answer Bias |\n")
+            f.write("|----------------------|-----------------|-----------------|----------------|-----------|---------------------------------|---------------------|-------------------|-------------------|\n")
+            for group_conf in self.cheating_groups_config:
+                patterns = group_conf.patterns
+                f.write(f"| {group_conf.id:<20} | {group_conf.severity:<15} | {str(group_conf.members):<15} | "
+                        f"{patterns['navigation']['similarity']:<14.2f} | {patterns['navigation']['noise']:<9.2f} | "
+                        f"{patterns['timing']['start_delay']:<31} | {patterns['timing']['variance']:<19} | "
+                        f"{patterns['answers']['similarity']:<17.2f} | {patterns['answers']['wrong_bias']:<17.2f} |\n")
+            f.write("\n\n")
+        print(f"Ground truth MD analysis file written to {output_path}/cheating_ground_truth.md")
+
+        # --- cheating_visualization.md ---
+        with open(os.path.join(output_path, 'cheating_visualization.md'), 'w') as f:
+            f.write("# Quiz Attempt Visualization (Generated Data Patterns)\n\n")
+            f.write("This file provides a visual representation of generated quiz attempts to help identify suspicious patterns based on the simulation.\n\n")
+
+            for quiz_obj in self.quizzes:
+                f.write(f"## Quiz: {quiz_obj.quiz_name} (ID: {quiz_obj.quiz_id})\n\n")
                 
-                # Get all attempts for this quiz
-                attempts = [a for a in self.quiz_attempts if a.quiz_id == quiz_id]
-                
-                # Get correct answers for reference
-                correct_answers = self.get_correct_answers(quiz_id)
-                
-                # Create visualization sections
-                f.write("### Navigation Patterns\n\n")
-                f.write("Each row represents a user's navigation sequence through questions. Similar sequences may indicate cheating.\n")
-                f.write("Numbers that appear multiple times indicate question revisits.\n\n")
-                f.write("```\n")
-                f.write("User ID | Is Cheater | Group      | Navigation Sequence (with revisits)\n")
-                f.write("--------|------------|------------|------------------------------------\n")
-                
-                # Sort attempts by cheating group and user ID
-                attempts.sort(key=lambda a: (0 if a.is_cheating else 1, a.cheating_group or "", a.user_id))
-                
-                # Lookup table for cheating groups' navigation patterns
-                group_nav_patterns = {}
-                for group in self.cheating_groups:
-                    if hasattr(group, 'quiz_patterns') and quiz_id in group.quiz_patterns:
-                        group_nav_patterns[group.id] = group.quiz_patterns[quiz_id]["navigation_sequence"]
-                
-                for attempt in attempts:
-                    # Get user info
-                    user = next(u for u in self.users if u.id == attempt.user_id)
-                    is_cheater = "YES" if user.is_cheater else "NO"
-                    group = user.cheating_group or "None"
+                quiz_attempts_for_this_quiz = [qa for qa in self.quiz_attempts if qa.quiz_id == quiz_obj.quiz_id]
+                # Sort by group then user_id for clearer visualization
+                quiz_attempts_for_this_quiz.sort(key=lambda qa: (
+                    next((u.cheating_group_id for u in self.users_internal if u.id == qa.user_id), "Z_Honest"), # Sort honest last
+                    qa.user_id
+                ))
+
+                # 1. Navigation Patterns & Revisit Analysis (Simplified)
+                f.write("### 1. Navigation Patterns (First 15 steps, Question IDs)\n")
+                f.write("| User ID | Group ID             | Nav Sequence (Q IDs)         |\n")
+                f.write("|---------|----------------------|------------------------------|\n")
+                for qa in quiz_attempts_for_this_quiz:
+                    user_info = next((u for u in self.users_internal if u.id == qa.user_id), None)
+                    group_id_str = user_info.cheating_group_id if user_info and user_info.is_cheater else "Honest"
                     
-                    # Use the original navigation sequence for cheaters (which includes revisits)
-                    if is_cheater == "YES" and group in group_nav_patterns:
-                        nav_sequence = group_nav_patterns[group][:20]  # Show first 20 for clarity
-                    else:
-                        # For honest students, get steps from the database
-                        steps = sorted([s for s in self.question_attempt_steps 
-                                      if s.user_id == user.id and "question_attempt_id" in s.__dict__ 
-                                      and s.question_attempt_id == user.id * 100 + quiz_id],
-                                     key=lambda s: s.timecreated)
-                        
-                        nav_sequence = []
-                        for step in steps:
-                            if step.state == "todo":  # All view steps, not just initial
-                                q_num = (step.sequencenumber + 1) // 2
-                                nav_sequence.append(q_num)
-                        
-                        # Limit to first 20 for display clarity
-                        nav_sequence = nav_sequence[:20]
+                    # Reconstruct nav sequence for this attempt
+                    # This requires linking QuizAttempt -> QuestionUsage -> QuestionAttemptReal -> QuestionAttemptStep -> Question.id
+                    q_usage = next((qu for qu in self.question_usages if qu.question_usage_id == qa.question_usage_id), None)
+                    if not q_usage: continue
+
+                    q_attempts_real_for_usage = [qar for qar in self.question_attempts_real if qar.question_usage_id == q_usage.question_usage_id]
                     
-                    # Format navigation sequence with fixed width
-                    nav_str = " ".join([f"{q:2}" for q in nav_sequence])
+                    steps_for_attempt = []
+                    for qar_real in q_attempts_real_for_usage:
+                        steps_for_qar = [step for step in self.question_attempt_steps if step.question_attempt_id == qar_real.question_attempt_id]
+                        steps_for_attempt.extend(steps_for_qar)
                     
-                    # Use special formatting for cheaters
-                    if user.is_cheater:
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {nav_str}\n")
-                    else:
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {nav_str}\n")
-                
-                f.write("```\n\n")
-                
-                # Check for revisit patterns
-                f.write("### Question Revisit Analysis\n\n")
-                f.write("This shows how many times each question was visited by each user. Multiple visits indicate revisiting.\n\n")
-                f.write("```\n")
-                f.write("User ID | Is Cheater | Group      | Questions With Multiple Visits\n")
-                f.write("--------|------------|------------|------------------------------\n")
-                
-                for attempt in attempts:
-                    # Get user info
-                    user = next(u for u in self.users if u.id == attempt.user_id)
-                    is_cheater = "YES" if user.is_cheater else "NO"
-                    group = user.cheating_group or "None"
+                    steps_for_attempt.sort(key=lambda s: s.timecreated) # Overall order of steps
                     
-                    # Get actual navigation sequence (either from pattern or steps)
-                    if is_cheater == "YES" and group in group_nav_patterns:
-                        nav_sequence = group_nav_patterns[group]
-                    else:
-                        steps = sorted([s for s in self.question_attempt_steps 
-                                       if s.user_id == user.id and "question_attempt_id" in s.__dict__ 
-                                       and s.question_attempt_id == user.id * 100 + quiz_id],
-                                      key=lambda s: s.timecreated)
-                        
-                        nav_sequence = []
-                        for step in steps:
-                            if step.state == "todo":
-                                q_num = (step.sequencenumber + 1) // 2  
-                                nav_sequence.append(q_num)
+                    # Extract question IDs from steps (from linked QuestionAttemptReal)
+                    nav_q_ids = []
+                    for step_vis in steps_for_attempt:
+                        qar_vis = next((qar for qar in self.question_attempts_real if qar.question_attempt_id == step_vis.question_attempt_id), None)
+                        if qar_vis:
+                             # Only add if it's a new question or to show sequence, avoid over-complicating with step types for this viz
+                            nav_q_ids.append(qar_vis.questionid) 
                     
-                    # Find questions with multiple visits
-                    revisits = {}
-                    for q in nav_sequence:
-                        if q in revisits:
-                            revisits[q] += 1
+                    # Consolidate consecutive identical question IDs if they represent single interaction with a question before moving.
+                    # For this visualization, let's just show the sequence of question IDs as they were "stepped through".
+                    # True navigation reconstruction is complex from step logs.
+                    # The `actual_nav_seq` from generation is better.
+                    # For now, let's use a simpler representation if reconstruction is too hard:
+                    # For this visualization, we'll rely on the fact that `generate_sessions_and_attempts`
+                    # creates `QuestionAttemptStep` records in sequence.
+                    
+                    # Simplified nav sequence from steps (order of unique questions first visited)
+                    # This is not the full nav_seq with revisits easily, but an approximation
+                    temp_nav_display = []
+                    seen_q_for_nav_display = set()
+                    for step_disp in steps_for_attempt:
+                        qar_disp = next((qar_n for qar_n in self.question_attempts_real if qar_n.question_attempt_id == step_disp.question_attempt_id),None)
+                        if qar_disp and qar_disp.questionid not in seen_q_for_nav_display:
+                            temp_nav_display.append(str(qar_disp.questionid))
+                            seen_q_for_nav_display.add(qar_disp.questionid)
+                        if len(temp_nav_display) >=15: break
+
+
+                    f.write(f"| {qa.user_id:<7} | {group_id_str:<20} | {', '.join(temp_nav_display[:15]):<28} |\n")
+                f.write("\n")
+
+                # 2. Answer Patterns (Correct/Incorrect for first 15 unique questions)
+                f.write("### 2. Answer Patterns (C=Correct, X=Incorrect for first 15 unique questions)\n")
+                f.write("| User ID | Group ID             | Answer Pattern (C/X)       |\n")
+                f.write("|---------|----------------------|----------------------------|\n")
+                correct_ans_map = self.get_correct_answers_for_quiz(quiz_obj.quiz_id)
+                for qa in quiz_attempts_for_this_quiz:
+                    user_info = next((u for u in self.users_internal if u.id == qa.user_id), None)
+                    group_id_str = user_info.cheating_group_id if user_info and user_info.is_cheater else "Honest"
+                    
+                    ans_pattern_str = []
+                    # Get unique questions answered by this user in this attempt
+                    q_usage = next((qu for qu in self.question_usages if qu.question_usage_id == qa.question_usage_id), None)
+                    if not q_usage: continue
+                    
+                    q_attempts_real_for_usage = [qar for qar in self.question_attempts_real if qar.question_usage_id == q_usage.question_usage_id]
+                    
+                    # Get last answer for each question_id in q_attempts_real_for_usage
+                    unique_questions_in_attempt = sorted(list(set(qar.questionid for qar in q_attempts_real_for_usage)))
+
+                    for q_id_unique in unique_questions_in_attempt[:15]: # Limit to 15 for display
+                        qar_for_q_id_list = [qar for qar in q_attempts_real_for_usage if qar.questionid == q_id_unique]
+                        if not qar_for_q_id_list: continue
+                        # Get last step data for this question
+                        last_step_for_q = None
+                        for qar_entry in reversed(qar_for_q_id_list): # Check all QuestionAttemptReal if multiple for same qid (shouldn't be)
+                            steps_for_this_qar = sorted([s for s in self.question_attempt_steps if s.question_attempt_id == qar_entry.question_attempt_id], key=lambda s: s.timecreated)
+                            if steps_for_this_qar:
+                                last_step_of_qar = steps_for_this_qar[-1]
+                                step_data_for_last_step = [sd for sd in self.question_attempt_step_data if sd.question_step_id == last_step_of_qar.question_step_id and sd.name == "answer"]
+                                if step_data_for_last_step:
+                                    last_step_for_q = step_data_for_last_step[-1] # Should be only one 'answer' per step
+                                    break # Found last answer for this question_id
+
+                        if last_step_for_q:
+                            user_ans_idx = int(last_step_for_q.value)
+                            correct_idx = correct_ans_map.get(q_id_unique, -1)
+                            ans_pattern_str.append("C" if user_ans_idx == correct_idx else "X")
                         else:
-                            revisits[q] = 1
+                            ans_pattern_str.append("?") # No answer found for this question
                     
-                    # Format revisit info
-                    revisit_str = ", ".join([f"Q{q}({count}x)" for q, count in revisits.items() if count > 1])
-                    if not revisit_str:
-                        revisit_str = "None"
-                    
-                    f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {revisit_str}\n")
-                
-                f.write("```\n\n")
-                
-                # Answer patterns visualization
-                f.write("### Answer Patterns\n\n")
-                f.write("Each row shows a user's answers. C = correct, X = wrong. Similar answer patterns may indicate cheating.\n\n")
-                f.write("```\n")
-                f.write("User ID | Is Cheater | Group      | Q1 Q2 Q3 Q4 ... \n")
-                f.write("--------|------------|------------|----------------\n")
-                
-                for attempt in attempts:
-                    # Get user info
-                    user = next(u for u in self.users if u.id == attempt.user_id)
-                    is_cheater = "YES" if user.is_cheater else "NO"
-                    group = user.cheating_group or "None"
-                    
-                    # Get answer data for this attempt
-                    answer_steps = sorted([step for step in self.question_attempt_step_data
-                                         if step.user_id == user.id and step.name == "answer"],
-                                        key=lambda s: s.step_data_id)
-                    
-                    # Build pattern of correct/wrong answers
-                    answer_pattern = []
-                    for idx, step_data in enumerate(answer_steps[:20]):  # Show first 20 for clarity
-                        user_answer = int(step_data.value)
-                        correct = correct_answers[idx]
-                        if user_answer == correct:
-                            answer_pattern.append("C")  # Correct
-                        else:
-                            answer_pattern.append("X")  # Wrong
-                    
-                    # Format answer pattern with spacing
-                    ans_str = " ".join(answer_pattern)
-                    
-                    # Use special formatting for cheaters
-                    if user.is_cheater:
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {ans_str}\n")
-                    else:
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {ans_str}\n")
-                
-                f.write("```\n\n")
-                
-                # Timing patterns visualization 
-                f.write("### Timing Patterns\n\n")
-                f.write("Each row shows when a user started and how long they spent on each question (in seconds).\n\n")
-                f.write("```\n")
-                f.write("User ID | Is Cheater | Group      | Start Time         | Total Duration | Avg Time/Q \n")
-                f.write("--------|------------|------------|-------------------|---------------|------------\n")
-                
-                for attempt in attempts:
-                    # Get user info
-                    user = next(u for u in self.users if u.id == attempt.user_id)
-                    is_cheater = "YES" if user.is_cheater else "NO"
-                    group = user.cheating_group or "None"
-                    
-                    # Get timing info
-                    start_time = datetime.fromtimestamp(attempt.timestart).strftime('%Y-%m-%d %H:%M:%S')
-                    duration_seconds = attempt.timefinish - attempt.timestart
-                    duration_minutes = duration_seconds / 60
-                    
-                    # Calculate average time per question
-                    question_count = len([q for q in self.questions if q.quizid == quiz_id])
-                    avg_time_per_q = duration_seconds / question_count
-                    
-                    # Use special formatting for cheaters
-                    if user.is_cheater:
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {start_time:19} | {duration_minutes:13.1f} min | {avg_time_per_q:10.1f} s\n")
-                    else:
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {start_time:19} | {duration_minutes:13.1f} min | {avg_time_per_q:10.1f} s\n")
-                
-                f.write("```\n\n")
-                
-                # Add detailed question-by-question timing for suspicious cases
-                f.write("### Detailed Timing by Question\n\n")
-                f.write("Time spent (seconds) on each question by users, grouped by cheating status:\n\n")
-                f.write("```\n")
-                f.write("User ID | Is Cheater | Group      | Q1   Q2   Q3   Q4   Q5   Q6   Q7   Q8   Q9   Q10  \n")
-                f.write("--------|------------|------------|----------------------------------------------------\n")
-                
-                # Process cheaters first to group them together in the visual
-                attempts.sort(key=lambda a: (0 if a.is_cheating else 1, a.cheating_group or "", a.user_id))
-                
-                for attempt in attempts:
-                    # Get user info
-                    user = next(u for u in self.users if u.id == attempt.user_id)
-                    is_cheater = "YES" if user.is_cheater else "NO"
-                    group = user.cheating_group or "None"
-                    
-                    # Get steps with timestamps to calculate time spent on each question
-                    steps = sorted([s for s in self.question_attempt_steps 
-                                  if s.user_id == user.id and "question_attempt_id" in s.__dict__ 
-                                  and s.question_attempt_id == user.id * 100 + quiz_id],
-                                 key=lambda s: s.timecreated)
-                    
-                    # Calculate time spent on each question
-                    question_times = []
-                    for i in range(0, len(steps)-1, 2):
-                        if i+1 < len(steps):
-                            time_spent = steps[i+1].timecreated - steps[i].timecreated
-                            question_times.append(time_spent)
-                    
-                    # Format timing with color indicators for easy pattern recognition
-                    timing_str = " ".join([f"{t:4}" for t in question_times[:10]])  # First 10 questions
-                    
-                    # Add visualization with special formatting for cheaters
-                    if user.is_cheater:
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {timing_str}\n")
-                    else:
-                        # Only show some honest students for comparison
-                        if random.random() < 0.5:  # Show only half of honest students to reduce clutter
-                            f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {timing_str}\n")
-                
-                f.write("```\n\n")
-                
-                # Add variance analysis to highlight the suspicious similarity
-                f.write("### Timing Variance Analysis\n\n")
-                f.write("This shows how consistent each user's pace is (lower standard deviation = more suspicious consistency):\n\n")
-                f.write("```\n")
-                f.write("User ID | Is Cheater | Group      | Avg Time/Q | Std Deviation | Coefficient of Variation\n")
-                f.write("--------|------------|------------|------------|---------------|------------------------\n")
-                
-                # Sort attempts by cheating group
-                attempts.sort(key=lambda a: (0 if a.is_cheating else 1, a.cheating_group or "", a.user_id))
-                
-                for attempt in attempts:
-                    # Get user info
-                    user = next(u for u in self.users if u.id == attempt.user_id)
-                    is_cheater = "YES" if user.is_cheater else "NO"
-                    group = user.cheating_group or "None"
-                    
-                    # Get steps with timestamps to calculate time spent on each question
-                    steps = sorted([s for s in self.question_attempt_steps 
-                                  if s.user_id == user.id and "question_attempt_id" in s.__dict__ 
-                                  and s.question_attempt_id == user.id * 100 + quiz_id],
-                                 key=lambda s: s.timecreated)
-                    
-                    # Calculate time spent on each question
-                    question_times = []
-                    for i in range(0, len(steps)-1, 2):
-                        if i+1 < len(steps):
-                            time_spent = steps[i+1].timecreated - steps[i].timecreated
-                            question_times.append(time_spent)
-                    
-                    # Calculate statistics
-                    if question_times:
-                        avg_time = sum(question_times) / len(question_times)
-                        std_dev = 0
-                        if len(question_times) > 1:
-                            std_dev = np.std(question_times)
-                        coef_var = (std_dev / avg_time) * 100 if avg_time > 0 else 0
-                        
-                        # Format and output
-                        f.write(f"{user.id:7} | {is_cheater:10} | {group:10} | {avg_time:10.1f} | {std_dev:13.1f} | {coef_var:23.1f}%\n")
-                
-                f.write("```\n\n")
-                
-                # Add a note about what to look for
-                f.write("**Note:** In real-world cheating, the suspicious pattern is not necessarily fast completion time, but rather\n")
-                f.write("the *similarity in pace* between users in the same cheating group. Look for groups of users with similar timing\n")
-                f.write("patterns and low standard deviations. Honest students typically show much more variable timing patterns.\n\n")
-            
-            # Summary and interpretation section
+                    f.write(f"| {qa.user_id:<7} | {group_id_str:<20} | {' '.join(ans_pattern_str):<26} |\n")
+                f.write("\n")
+
+                # 3. Timing Patterns
+                f.write("### 3. Timing Patterns (Overall)\n")
+                f.write("| User ID | Group ID             | Start Time          | Duration (s) | Avg Time/Q (s) |\n")
+                f.write("|---------|----------------------|---------------------|--------------|----------------|\n")
+                num_unique_questions_in_quiz = len(set(q.id for q in self.questions_internal if q.quizid == quiz_obj.quiz_id))
+                for qa in quiz_attempts_for_this_quiz:
+                    user_info = next((u for u in self.users_internal if u.id == qa.user_id), None)
+                    group_id_str = user_info.cheating_group_id if user_info and user_info.is_cheater else "Honest"
+                    start_str = datetime.fromtimestamp(qa.timestart).strftime('%H:%M:%S')
+                    duration = qa.timefinish - qa.timestart
+                    avg_time_q = duration / num_unique_questions_in_quiz if num_unique_questions_in_quiz > 0 else 0
+                    f.write(f"| {qa.user_id:<7} | {group_id_str:<20} | {start_str:<19} | {duration:<12} | {avg_time_q:<14.2f} |\n")
+                f.write("\n")
+
+            # Interpretation Guide (can be expanded)
             f.write("## Interpretation Guide\n\n")
-            f.write("### Suspicious Patterns to Look For:\n\n")
-            f.write("1. **Navigation Sequences**: Identical or highly similar navigation patterns between users suggest coordination\n")
-            f.write("2. **Answer Patterns**: Similar patterns of correct/incorrect answers, especially wrong answers at same positions\n")
-            f.write("3. **Timing Patterns**: \n")
-            f.write("   - **Similar pace between questions for users in the same group** (primary indicator)\n")
-            f.write("   - Low standard deviation in timing (unnaturally consistent pace)\n")
-            f.write("   - Users in same cheating group starting at regular intervals\n")
-            f.write("   - Look for suspiciously synchronized patterns rather than just fast times\n\n")
-            
-            f.write("4. **Group Behavior**: Users in the same cheating group should show correlated patterns across multiple dimensions\n\n")
-            
-            f.write("### Real-World Cheating Patterns:\n\n")
-            f.write("In realistic cheating scenarios, students often:\n\n")
-            f.write("1. **Follow a leader**: One student completes the quiz first, then shares answers with others\n")
-            f.write("2. **Maintain consistent timing**: Move through questions at suspiciously similar rates\n") 
-            f.write("3. **Make identical mistakes**: Share the same wrong answers where the correct answer is difficult\n")
-            f.write("4. **Navigate in patterns**: Similar navigation sequences that don't reflect natural problem-solving\n\n")
-            
-            f.write("The most reliable indicator is often the *combination* of these signals rather than any single pattern.\n")
-            
-            # Add timestamp analysis to detect synchronization
-            f.write("### Question Navigation Timestamps\n\n")
-            f.write("This shows the exact times when users first viewed each question. Synchronized timestamps between users indicate coordination.\n\n")
-            f.write("```\n")
-            f.write("User ID | Is Cheater | Group      | Q1              | Q2              | Q3              | Q4              | Q5              \n")
-            f.write("--------|------------|------------|-----------------|-----------------|-----------------|-----------------|----------------\n")
-            
-            # Sort attempts by cheating group and user ID
-            attempts.sort(key=lambda a: (0 if a.is_cheating else 1, a.cheating_group or "", a.user_id))
-            
-            for attempt in attempts:
-                # Get user info
-                user = next(u for u in self.users if u.id == attempt.user_id)
-                is_cheater = "YES" if user.is_cheater else "NO"
-                group = user.cheating_group or "None"
-                
-                # Get steps with question view timestamps
-                steps = sorted([s for s in self.question_attempt_steps 
-                              if s.user_id == user.id and "question_attempt_id" in s.__dict__ 
-                              and s.question_attempt_id == user.id * 100 + quiz_id 
-                              and s.state == "todo"],
-                                 key=lambda s: s.timecreated)
-                
-                # Extract first views of each question (exclude revisits)
-                question_times = {}
-                for step in steps:
-                    q_num = (step.sequencenumber + 1) // 2
-                    if q_num not in question_times:  # Only first view
-                        question_times[q_num] = step.timecreated
-                
-                # Format timestamps for first 5 questions
-                timestamp_str = ""
-                for q in range(1, 6):
-                    if q in question_times:
-                        ts = datetime.fromtimestamp(question_times[q]).strftime('%H:%M:%S')
-                        timestamp_str += f" {ts:16} |"
-                    else:
-                        timestamp_str += f" {'N/A':16} |"
-                
-                f.write(f"{user.id:7} | {is_cheater:10} | {group:10} |{timestamp_str}\n")
-            
-            f.write("```\n\n")
-            
-            # Add scientific transition time analysis
-            f.write("### Transition Time Correlation Analysis\n\n")
-            f.write("This analysis shows the correlation between users' question transition times within groups.\n")
-            f.write("High correlation coefficients (close to 1.0) indicate synchronized movement between questions.\n\n")
-            f.write("```\n")
-            f.write("Group                | Users                  | Transition Time Correlation\n")
-            f.write("--------------------|------------------------|---------------------------\n")
-            
-            # Group attempts by cheating group
-            group_attempts = {}
-            for attempt in attempts:
-                user = next(u for u in self.users if u.id == attempt.user_id)
-                if user.is_cheater and user.cheating_group:
-                    if user.cheating_group not in group_attempts:
-                        group_attempts[user.cheating_group] = []
-                    group_attempts[user.cheating_group].append(attempt)
-            
-            # Calculate transition time correlations for each group
-            for group_name, group_atts in group_attempts.items():
-                # Skip if only one user in group
-                if len(group_atts) <= 1:
-                    continue
-                
-                # Get user IDs in this group
-                user_ids = [a.user_id for a in group_atts]
-                user_str = ", ".join([str(u) for u in user_ids])
-                
-                # Calculate transition times for each user
-                user_transitions = {}
-                for att in group_atts:
-                    user_id = att.user_id
-                    steps = sorted([s for s in self.question_attempt_steps 
-                                  if s.user_id == user_id and "question_attempt_id" in s.__dict__ 
-                                  and s.question_attempt_id == user_id * 100 + quiz_id 
-                                  and s.state == "todo"],
-                                     key=lambda s: s.timecreated)
-                    
-                    # Calculate time differences between consecutive questions
-                    transitions = []
-                    for i in range(1, len(steps)):
-                        transitions.append(steps[i].timecreated - steps[i-1].timecreated)
-                    
-                    if transitions:
-                        user_transitions[user_id] = transitions
-                
-                # Calculate correlation between users in the group
-                correlations = []
-                for u1 in user_transitions:
-                    for u2 in user_transitions:
-                        if u1 < u2:  # Avoid duplicates
-                            # Calculate correlation if we have enough transition times
-                            t1 = user_transitions[u1]
-                            t2 = user_transitions[u2]
-                            min_len = min(len(t1), len(t2))
-                            
-                            if min_len >= 3:  # Need at least 3 points for meaningful correlation
-                                # Truncate to same length
-                                t1 = t1[:min_len]
-                                t2 = t2[:min_len]
-                                
-                                # Calculate correlation coefficient
-                                try:
-                                    correlation = np.corrcoef(t1, t2)[0, 1]
-                                    correlations.append(correlation)
-                                except:
-                                    correlations.append(0)
-                
-                # Calculate average correlation for the group
-                if correlations:
-                    avg_correlation = sum(correlations) / len(correlations)
-                    correlation_str = f"{avg_correlation:.4f}"
-                    # Add a scientific interpretation
-                    if avg_correlation > 0.8:
-                        correlation_str += " (Very High - Strong evidence of coordination)"
-                    elif avg_correlation > 0.6:
-                        correlation_str += " (High - Suspicious coordination)"
-                    elif avg_correlation > 0.4:
-                        correlation_str += " (Moderate - Possible coordination)"
-                    else:
-                        correlation_str += " (Low - Unlikely coordination)"
-                else:
-                    correlation_str = "Insufficient data"
-                
-                f.write(f"{group_name:20} | {user_str:22} | {correlation_str}\n")
-            
-            f.write("```\n\n")
-    
+            f.write("- **Navigation Sequences**: Look for highly similar sequences of question IDs among users in the same group.\n")
+            f.write("- **Answer Patterns**: Identical C/X patterns, especially identical 'X's (wrong answers), are strong indicators of collusion.\n")
+            f.write("- **Timing Patterns**: Users in cheating groups might exhibit very similar start times (offset by configured delay), total durations, or suspiciously consistent average time per question. Low variance in timing within a group is key.\n\n")
+        print(f"Visualization MD file written to {output_path}/cheating_visualization.md")
+
+
     def save_config(self):
-        """Save the current configuration"""
+        # Ensure output_dir exists
+        if not os.path.exists(self.config["output_dir"]):
+            os.makedirs(self.config["output_dir"])
         with open(os.path.join(self.config["output_dir"], 'generator_config.json'), 'w') as f:
             json.dump(self.config, f, indent=2)
+        print(f"Generator configuration saved to {self.config['output_dir']}/generator_config.json")
+
 
 def main():
-    """Main function to generate data"""
     import argparse
-    import os
-    
-    parser = argparse.ArgumentParser(description='Generate synthetic Moodle logs with cheating patterns')
+    parser = argparse.ArgumentParser(description='Generate synthetic Moodle logs with cheating patterns (Refined & Visualized)')
     parser.add_argument('--config', type=str, help='Path to configuration JSON file')
-    parser.add_argument('--output', type=str, default='data/moodle_logs', help='Output directory')
-    
+    parser.add_argument('--output', type=str, default=DEFAULT_CONFIG["output_dir"], help=f'Output directory (default: {DEFAULT_CONFIG["output_dir"]})')
     args = parser.parse_args()
     
-    # Create generator
     generator = MoodleLogGenerator(args.config)
-    
     if args.output:
         # Convert relative path to absolute if needed
         if not os.path.isabs(args.output):
             args.output = os.path.abspath(os.path.join(os.path.dirname(__file__), args.output))
-        generator.config["output_dir"] = args.output
+        generator.config["output_dir"] = args.output # Override default if provided
     
-    # Generate and write data
     generator.generate_data()
-    generator.write_to_csv()
+    generator.write_to_csv() # This now calls write_ground_truth_md_and_visualization
     generator.save_config()
-    generator.write_ground_truth()
-    generator.write_visualization_md()
     
-    print("Done!")
+    print(f"All processes complete. Output is in: {generator.config['output_dir']}")
 
 if __name__ == "__main__":
     main()
