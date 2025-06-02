@@ -31,18 +31,38 @@ def run_preprocessing_pipeline(data_input_dir, output_feature_path, train_mode=T
         return pd.DataFrame() # Return empty DataFrame
 
     # --- Step 3: Feature Engineering ---
+    # Calculate questions per quiz dynamically from actual data
     q_per_quiz_map = {}
-    gen_config_path = os.path.join(data_input_dir, 'generator_config.json')
-    if os.path.exists(gen_config_path):
-        with open(gen_config_path, 'r') as f_cfg:
-            gen_cfg = json.load(f_cfg)
-            q_val = gen_cfg.get("questions_per_quiz", 10)
+    
+    # Method 1: Count from question_attempts linked to quiz_attempts
+    if not raw_data_dict['mdl_quiz_attempts'].empty and not raw_data_dict['mdl_question_attempts'].empty:
+        # Link quiz attempts to question attempts via question_usage_id
+        quiz_attempts = raw_data_dict['mdl_quiz_attempts'][['quiz_id', 'question_usage_id']].copy()
+        question_attempts = raw_data_dict['mdl_question_attempts'][['question_usage_id', 'questionid']].copy()
+        
+        # Count unique questions per quiz
+        quiz_to_questions = pd.merge(quiz_attempts, question_attempts, on='question_usage_id', how='inner')
+        if not quiz_to_questions.empty:
+            q_counts = quiz_to_questions.groupby('quiz_id')['questionid'].nunique().to_dict()
+            q_per_quiz_map.update(q_counts)
+            print(f"Calculated questions per quiz from data: {dict(list(q_counts.items())[:5])}{'...' if len(q_counts) > 5 else ''}")
+    
+    # Fallback: Use config file if available, otherwise default
+    if not q_per_quiz_map:
+        gen_config_path = os.path.join(data_input_dir, 'generator_config.json')
+        if os.path.exists(gen_config_path):
+            with open(gen_config_path, 'r') as f_cfg:
+                gen_cfg = json.load(f_cfg)
+                q_val = gen_cfg.get("questions_per_quiz", 10)
+                if not raw_data_dict['mdl_quiz'].empty:
+                    for qid_ in raw_data_dict['mdl_quiz']['quiz_id'].unique(): 
+                        q_per_quiz_map[qid_] = q_val
+                    print(f"Used config questions_per_quiz: {q_val}")
+        else:
+            print("Warning: Could not determine questions_per_quiz from data or config. Using default=10.")
             if not raw_data_dict['mdl_quiz'].empty:
-                for qid_ in raw_data_dict['mdl_quiz']['quiz_id'].unique(): q_per_quiz_map[qid_] = q_val
-    else:
-        print("Warning: generator_config.json not found. questions_per_quiz might be inaccurate.")
-        if not raw_data_dict['mdl_quiz'].empty:
-             for qid_ in raw_data_dict['mdl_quiz']['quiz_id'].unique(): q_per_quiz_map[qid_] = 10 # Default
+                for qid_ in raw_data_dict['mdl_quiz']['quiz_id'].unique(): 
+                    q_per_quiz_map[qid_] = 10
 
     attempt_level_features = extract_intra_attempt_features(processed_event_log, q_per_quiz_map)
     if attempt_level_features.empty:
@@ -166,13 +186,25 @@ if __name__ == "__main__":
         print(final_df.head())
         print(f"Final selected features for training: {len([c for c in final_df.columns if c not in ['attempt_id', 'user_id', 'quiz_id', 'is_cheater', 'cheating_group_id']])}")
 
-    # Placeholder for real data processing
-    # print("\n" + "="*20 + " PROCESSING REAL DATA (DETECTION MODE - SIMULATED) " + "="*20)
-    # real_data_dir_example = 'data/moodle_logs_final_viz_corrected/' # Using same data for example
-    # real_output_features_example = 'data/processed_real_features_for_detection_V2.csv'
-    # run_preprocessing_pipeline(
-    #     data_input_dir=real_data_dir_example, # Replace with actual path to real data
-    #     output_feature_path=real_output_features_example,
-    #     train_mode=False, 
-    #     ground_truth_path=None 
-    # )
+    # Real data processing (Detection Mode)
+    print("\n" + "="*20 + " PROCESSING REAL DATA (DETECTION MODE) " + "="*20)
+    real_data_dir = '../institute_log_legacy/lumbung_sampled/'  # Real-world data from institute
+    real_output_features = '../data/processed_real_features_for_detection_V2.csv'
+    
+    if os.path.exists(real_data_dir):
+        real_df = run_preprocessing_pipeline(
+            data_input_dir=real_data_dir,
+            output_feature_path=real_output_features,
+            train_mode=False,  # Detection mode - uses saved artifacts from training
+            ground_truth_path=None  # No ground truth for real data
+        )
+        if not real_df.empty:
+            print("\nSample of final processed real data for detection:")
+            print(real_df.head())
+            print(f"Final features for detection: {len([c for c in real_df.columns if c not in ['attempt_id', 'user_id', 'quiz_id', 'is_cheater', 'cheating_group_id']])}")
+            print(f"Total real-world attempts processed: {len(real_df)}")
+        else:
+            print("Warning: No real data was processed.")
+    else:
+        print(f"Warning: Real data directory not found at {real_data_dir}")
+        print("Skipping real data processing.")

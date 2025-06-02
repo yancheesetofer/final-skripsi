@@ -13,7 +13,7 @@ EXPECTED_TABLES = {
     "mdl_question_attempts": {"question_attempt_id": int, "question_usage_id": int, "questionid": int, "maxmark": float}, # This is the question-specific attempts log
     "mdl_question_attempt_steps": {"question_step_id": int, "question_attempt_id": int, "sequencenumber": int, "state": str, "timecreated": int},
     "mdl_question_attempt_step_data": {"step_data_id": int, "question_step_id": int, "name": str, "value": str},
-    "mdl_Youtubes": {"Youtubes_id": int, "questionid": int, "answer_text": str, "fraction": float},
+    "mdl_question_answers": {"question_answers_id": int, "questionid": int, "answer_text": str, "fraction": float},
     "mdl_sessions": {"session_id": int, "user_id": int, "timecreated": int, "lastip": str}, # Simplified
     "mdl_quiz_grades": {"quiz_grades_id": int, "quiz_id": int, "user_id": int, "final_grade": float},
     "cheating_ground_truth": {"user_id": int, "is_cheater": int, "cheating_group_id": str, "cheating_severity": str} # For training labels
@@ -27,9 +27,17 @@ def load_csv_table(data_dir, table_name, schema):
         return pd.DataFrame(columns=schema.keys())
     
     try:
-        # Specify dtype for all columns to prevent misinterpretation, allow missing for non-critical
-        # For simplicity here, we load then cast. For robustness, specify dtype in read_csv.
-        df = pd.read_csv(file_path)
+        # Handle CSV parsing errors more gracefully for real-world data
+        # Try with error handling for malformed lines
+        try:
+            df = pd.read_csv(file_path)
+        except pd.errors.ParserError as parse_error:
+            print(f"CSV parsing error in {table_name}.csv: {parse_error}")
+            print("Attempting to read with error handling...")
+            df = pd.read_csv(file_path, on_bad_lines='skip')
+        except Exception as read_error:
+            print(f"Fallback: Using pandas on_bad_lines='skip' for {table_name}.csv")
+            df = pd.read_csv(file_path, on_bad_lines='skip')
         
         # Validate columns
         for col, col_type in schema.items():
