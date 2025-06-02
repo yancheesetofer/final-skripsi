@@ -1,0 +1,68 @@
+{
+  "total_users": 45,
+  "total_quizzes": 2,
+  "questions_per_quiz": 10,
+  "base_date": "2025-03-01 09:00:00",
+  "cheating_groups": {
+    "high_severity": {
+      "count": 1,
+      "size": 3,
+      "patterns": {
+        "navigation": {
+          "similarity": 0.96,
+          "noise": 0.07
+        },
+        "timing": {
+          "start_delay": 1,
+          "variance": 2,
+          "completion_speed": "fast"
+        },
+        "answers": {
+          "similarity": 0.94,
+          "wrong_bias": 0.87
+        }
+      }
+    },
+    "medium_severity": {
+      "count": 1,
+      "size": 4,
+      "patterns": {
+        "navigation": {
+          "similarity": 0.8,
+          "noise": 0.3
+        },
+        "timing": {
+          "start_delay": 5,
+          "variance": 15,
+          "completion_speed": "medium"
+        },
+        "answers": {
+          "similarity": 0.84,
+          "wrong_bias": 0.6
+        }
+      }
+    },
+    "low_severity": {
+      "count": 1,
+      "size": 5,
+      "patterns": {
+        "navigation": {
+          "similarity": 0.55,
+          "noise": 0.45
+        },
+        "timing": {
+          "start_delay": 10,
+          "variance": 30,
+          "completion_speed": "slow"
+        },
+        "answers": {
+          "similarity": 0.55,
+          "wrong_bias": 0.4
+        }
+      }
+    }
+  },
+  "output_format": "csv",
+  "output_dir": "/Users/yan.christofer/Documents/final_skripsi/data/moodle_logs_final_viz_corrected",
+  "seed": 12345
+}

@@ -1,0 +1,81 @@
+question_answers_id,questionid,answer_text,fraction
+1,1,Option B for Q1 (Quiz 1: Intro to Python),0.0
+2,1,Option D for Q1 (Quiz 1: Intro to Python),0.0
+3,1,Option C for Q1 (Quiz 1: Intro to Python),0.0
+4,1,Option A for Q1 (Quiz 1: Intro to Python),1.0
+5,2,Option B for Q2 (Quiz 1: Intro to Python),1.0
+6,2,Option D for Q2 (Quiz 1: Intro to Python),0.0
+7,2,Option A for Q2 (Quiz 1: Intro to Python),0.0
+8,2,Option C for Q2 (Quiz 1: Intro to Python),0.0
+9,3,Option A for Q3 (Quiz 1: Intro to Python),0.0
+10,3,Option C for Q3 (Quiz 1: Intro to Python),1.0
+11,3,Option D for Q3 (Quiz 1: Intro to Python),0.0
+12,3,Option B for Q3 (Quiz 1: Intro to Python),0.0
+13,4,Option B for Q4 (Quiz 1: Intro to Python),0.0
+14,4,Option C for Q4 (Quiz 1: Intro to Python),0.0
+15,4,Option D for Q4 (Quiz 1: Intro to Python),1.0
+16,4,Option A for Q4 (Quiz 1: Intro to Python),0.0
+17,5,Option B for Q5 (Quiz 1: Intro to Python),1.0
+18,5,Option D for Q5 (Quiz 1: Intro to Python),0.0
+19,5,Option A for Q5 (Quiz 1: Intro to Python),0.0
+20,5,Option C for Q5 (Quiz 1: Intro to Python),0.0
+21,6,Option C for Q6 (Quiz 1: Intro to Python),0.0
+22,6,Option D for Q6 (Quiz 1: Intro to Python),1.0
+23,6,Option A for Q6 (Quiz 1: Intro to Python),0.0
+24,6,Option B for Q6 (Quiz 1: Intro to Python),0.0
+25,7,Option B for Q7 (Quiz 1: Intro to Python),1.0
+26,7,Option A for Q7 (Quiz 1: Intro to Python),0.0
+27,7,Option C for Q7 (Quiz 1: Intro to Python),0.0
+28,7,Option D for Q7 (Quiz 1: Intro to Python),0.0
+29,8,Option B for Q8 (Quiz 1: Intro to Python),0.0
+30,8,Option A for Q8 (Quiz 1: Intro to Python),0.0
+31,8,Option C for Q8 (Quiz 1: Intro to Python),1.0
+32,8,Option D for Q8 (Quiz 1: Intro to Python),0.0
+33,9,Option C for Q9 (Quiz 1: Intro to Python),0.0
+34,9,Option D for Q9 (Quiz 1: Intro to Python),1.0
+35,9,Option A for Q9 (Quiz 1: Intro to Python),0.0
+36,9,Option B for Q9 (Quiz 1: Intro to Python),0.0
+37,10,Option D for Q10 (Quiz 1: Intro to Python),0.0
+38,10,Option C for Q10 (Quiz 1: Intro to Python),0.0
+39,10,Option A for Q10 (Quiz 1: Intro to Python),1.0
+40,10,Option B for Q10 (Quiz 1: Intro to Python),0.0
+41,11,Option B for Q1 (Quiz 2: ML Foundations),0.0
+42,11,Option C for Q1 (Quiz 2: ML Foundations),0.0
+43,11,Option D for Q1 (Quiz 2: ML Foundations),0.0
+44,11,Option A for Q1 (Quiz 2: ML Foundations),1.0
+45,12,Option D for Q2 (Quiz 2: ML Foundations),1.0
+46,12,Option C for Q2 (Quiz 2: ML Foundations),0.0
+47,12,Option B for Q2 (Quiz 2: ML Foundations),0.0
+48,12,Option A for Q2 (Quiz 2: ML Foundations),0.0
+49,13,Option B for Q3 (Quiz 2: ML Foundations),0.0
+50,13,Option C for Q3 (Quiz 2: ML Foundations),1.0
+51,13,Option A for Q3 (Quiz 2: ML Foundations),0.0
+52,13,Option D for Q3 (Quiz 2: ML Foundations),0.0
+53,14,Option B for Q4 (Quiz 2: ML Foundations),0.0
+54,14,Option C for Q4 (Quiz 2: ML Foundations),1.0
+55,14,Option A for Q4 (Quiz 2: ML Foundations),0.0
+56,14,Option D for Q4 (Quiz 2: ML Foundations),0.0
+57,15,Option C for Q5 (Quiz 2: ML Foundations),1.0
+58,15,Option A for Q5 (Quiz 2: ML Foundations),0.0
+59,15,Option B for Q5 (Quiz 2: ML Foundations),0.0
+60,15,Option D for Q5 (Quiz 2: ML Foundations),0.0
+61,16,Option D for Q6 (Quiz 2: ML Foundations),0.0
+62,16,Option A for Q6 (Quiz 2: ML Foundations),1.0
+63,16,Option C for Q6 (Quiz 2: ML Foundations),0.0
+64,16,Option B for Q6 (Quiz 2: ML Foundations),0.0
+65,17,Option D for Q7 (Quiz 2: ML Foundations),1.0
+66,17,Option C for Q7 (Quiz 2: ML Foundations),0.0
+67,17,Option B for Q7 (Quiz 2: ML Foundations),0.0
+68,17,Option A for Q7 (Quiz 2: ML Foundations),0.0
+69,18,Option B for Q8 (Quiz 2: ML Foundations),0.0
+70,18,Option D for Q8 (Quiz 2: ML Foundations),1.0
+71,18,Option C for Q8 (Quiz 2: ML Foundations),0.0
+72,18,Option A for Q8 (Quiz 2: ML Foundations),0.0
+73,19,Option D for Q9 (Quiz 2: ML Foundations),0.0
+74,19,Option C for Q9 (Quiz 2: ML Foundations),0.0
+75,19,Option B for Q9 (Quiz 2: ML Foundations),1.0
+76,19,Option A for Q9 (Quiz 2: ML Foundations),0.0
+77,20,Option A for Q10 (Quiz 2: ML Foundations),0.0
+78,20,Option D for Q10 (Quiz 2: ML Foundations),0.0
+79,20,Option B for Q10 (Quiz 2: ML Foundations),0.0
+80,20,Option C for Q10 (Quiz 2: ML Foundations),1.0
