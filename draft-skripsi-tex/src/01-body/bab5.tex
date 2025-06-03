@@ -1,161 +1,112 @@
 %-----------------------------------------------------------------------------%
-\chapter{\babLima}
-\label{bab:5}
+\chapter{\babLima} % Menggunakan variabel \babLima yang didefinisikan sebagai "Kesimpulan" di config/settings.tex
+\label{bab:5} % Melabeli ini sebagai Bab 5
 %-----------------------------------------------------------------------------%
-
-Bab ini menyajikan kesimpulan menyeluruh dari penelitian yang telah dilakukan, mengevaluasi hasil-hasil yang diperoleh, mengidentifikasi kontribusi penelitian, mengakui keterbatasan yang ada, serta memberikan rekomendasi untuk penelitian lanjutan. Bagian ini merupakan penutup yang mengintegrasikan semua temuan dan analisis yang telah dipaparkan pada bab-bab sebelumnya.
+Pada bab terakhir ini, akan dipaparkan kesimpulan menyeluruh dari penelitian yang telah dilakukan terkait pengembangan sistem pemantauan kepatuhan secara otomatis melalui analisis log pada Moodle berbasis kecerdasan buatan. Sebagaimana yang telah diidentifikasi dalam tinjauan pustaka, pengembangan sistem deteksi kecurangan akademik memerlukan pendekatan yang tidak hanya \textit{technically sound} tetapi juga \textit{ethically responsible} dan \textit{practically deployable} \cite{Gasevic2015}. Selain itu, akan disampaikan pula beberapa saran yang dapat menjadi landasan untuk penelitian dan pengembangan selanjutnya di bidang ini, mengacu pada kesenjangan penelitian yang telah diidentifikasi dalam literatur.
 
 %-----------------------------------------------------------------------------%
 \section{Kesimpulan}
-\label{sec:kesimpulan}
+\label{sec:kesimpulan_bab5}
 %-----------------------------------------------------------------------------%
-
-Berdasarkan hasil penelitian yang telah dipaparkan, berikut ini adalah kesimpulan yang menjawab pertanyaan penelitian yang telah dirumuskan:
-
-\subsection{Pengembangan Pendekatan Berbasis Pembelajaran Mesin}
-
-Penelitian ini berhasil mengembangkan pendekatan berbasis pembelajaran mesin yang efektif untuk mendeteksi kecurangan akademik dalam lingkungan pembelajaran daring menggunakan data log aktivitas Moodle. Pendekatan yang dikembangkan mengintegrasikan beberapa komponen utama:
+Berdasarkan keseluruhan proses penelitian, mulai dari perumusan masalah, studi literatur, perancangan sistem, implementasi, hingga evaluasi dan analisis hasil, dapat ditarik beberapa kesimpulan utama sebagai berikut:
 
 \begin{enumerate}
-    \item \textbf{Ekstraksi fitur multi-dimensi} dari data log Moodle yang mencakup pola navigasi, pola waktu, dan pola jawaban. Ketiga dimensi ini terbukti memberikan sinyal komplementer yang kuat untuk deteksi kecurangan.
-    
-    \item \textbf{Model pembelajaran mesin ensemble} yang menggabungkan beberapa algoritma (Random Forest, Gradient Boosting, Neural Network, dan SVM) untuk meningkatkan robustness dan akurasi prediksi. Model ensemble menghasilkan performa optimal dengan nilai precision, recall, dan F1-score mencapai 1.0 pada data artifisial.
-    
-    \item \textbf{Analisis jaringan berbasis similaritas} yang berhasil mengidentifikasi kelompok-kelompok kecurangan dengan precision dan recall 100%. Pendekatan ini terbukti sangat efektif dalam mendeteksi kolaborasi tidak sah antar mahasiswa.
-    
-    \item \textbf{Kerangka evaluasi komprehensif} yang menguji kinerja sistem dari berbagai aspek, termasuk sensitivitas terhadap noise, ketahanan terhadap ketidakseimbangan kelas, dan kemampuan generalisasi ke data baru.
+    \item \bo{Pengembangan Sistem Deteksi Kecurangan yang Efektif Telah Berhasil Dilakukan.} \\
+    Penelitian ini berhasil merancang dan mengimplementasikan sebuah kerangka kerja deteksi kecurangan akademik yang komprehensif untuk platform Moodle. Sistem ini mengintegrasikan pipeline pengolahan data log, \textit{feature engineering} yang cermat dengan seleksi fitur berbasis \textit{Variance Inflation Factor} (VIF) untuk menghasilkan 8 fitur stabil dari 35 fitur awal, serta arsitektur model \textit{ensemble} yang menggabungkan kekuatan beberapa algoritma \textit{machine learning} (Random Forest, SVM, Neural Network, Gradient Boosting) dan analisis similaritas berbasis graf. Pendekatan \textit{ensemble learning} ini sejalan dengan temuan Zhou \cite{Zhou2012} bahwa kombinasi model yang beragam namun akurat dapat menghasilkan performa yang superior dibandingkan model individual, terutama dalam menangani kompleksitas dan variasi pola kecurangan \cite{Chang2023}. Pendekatan ini secara efektif menjawab pertanyaan penelitian pertama (RQ1) mengenai pengembangan pendekatan berbasis pembelajaran mesin yang efektif.
+
+    \item \bo{Kinerja Model Menunjukkan Akurasi dan Presisi yang Tinggi.} \\
+    Model-model yang dikembangkan, khususnya Random Forest dan SVM, menunjukkan kinerja yang sangat baik pada dataset uji sintesis, dengan akurasi mencapai 98\% dan presisi 1.00. Presisi sempurna ini sangat krusial karena meminimalkan risiko \textit{false positive}, yaitu salah mengklasifikasikan mahasiswa yang jujur sebagai pelaku kecurangan. Sebagaimana ditekankan dalam literatur, dalam konteks akademik, \textit{false positive} memiliki implikasi yang sangat serius termasuk kerusakan reputasi dan konsekuensi psikologis, sehingga presisi menjadi metrik yang sangat kritis \cite{Ferguson2012}. Nilai \textit{recall} yang tinggi (0.93 untuk RF dan SVM) juga mengindikasikan kemampuan model untuk mengidentifikasi mayoritas kasus kecurangan aktual, yang sejalan dengan kinerja yang dilaporkan oleh Kamalov dkk. \cite{Kamalov2021} dan Alsabhan \cite{Alsabhan2023} dalam penelitian serupa. Kinerja unggul ini didukung oleh Area Under Curve (AUC) ROC sebesar 0.99 untuk Random Forest, menandakan kemampuan diskriminatif yang luar biasa.
+
+    \item \bo{Integrasi Berbagai Teknik Analisis Data Meningkatkan Reliabilitas Deteksi.} \\
+    Penggunaan pendekatan \textit{ensemble} dan kombinasi beragam kategori fitur (kesamaan navigasi, temporal, dan perilaku pengerjaan lainnya) terbukti meningkatkan akurasi dan reliabilitas deteksi perilaku mencurigakan. Temuan ini mendukung argumen Aggarwal \cite{Aggarwal2017} bahwa kombinasi \textit{supervised} dan \textit{unsupervised learning} dapat mengatasi keterbatasan masing-masing pendekatan. Analisis \textit{feature importance} menunjukkan bahwa fitur berbasis kesamaan navigasi (dengan kontribusi total 60.5\%) merupakan prediktor paling dominan, diikuti oleh fitur temporal (25.4\%) dan fitur perilaku pengerjaan (14.1\%). Dominasi fitur kesamaan navigasi ini konsisten dengan penelitian Chang dan Chang \cite{Chang2023} yang menunjukkan efektivitas analisis matriks kesamaan dalam mendeteksi kolusi antar mahasiswa. Hal ini menjawab pertanyaan penelitian kedua (RQ2) dan mengonfirmasi efektivitas pengembangan fitur baru berbasis matriks kesamaan.
+
+    \item \bo{Ukuran dan Kualitas Dataset Pelatihan Berdampak Signifikan pada Kinerja Model.} \\
+    Eksperimen menunjukkan bahwa peningkatan ukuran dataset pelatihan dari 90 sampel menjadi 800 sampel sintesis menghasilkan peningkatan kinerja akurasi model rata-rata sebesar 16.85\%. Lebih lanjut, hal ini berdampak pada peningkatan deteksi pada data riil sebesar 419\%. Temuan ini sejalan dengan penelitian Zhou dan Jiao \cite{Zhou2022} yang menekankan pentingnya augmentasi data dalam deteksi kecurangan skala besar. Ini menegaskan pentingnya investasi dalam pembuatan dataset artifisial yang cukup besar dan representatif, dengan \textit{ground truth} yang akurat dan simulasi berbagai skenario kecurangan, untuk melatih model yang robust dan general.
+
+    \item \bo{Pola Perilaku Pengguna Memberikan Wawasan Berharga untuk Peningkatan Integritas Akademik.} \\
+    Analisis hasil deteksi pada 446,720 percobaan ujian riil dari Moodle Fasilkom UI berhasil mengidentifikasi 131,479 percobaan (29.43\%) dengan indikasi kecurangan berkepercayaan tinggi ($\ge$80\%). Sistem juga mampu mengidentifikasi 4,093 pengguna unik dengan pola kecurangan berulang dan ujian-ujian spesifik dengan tingkat kecurangan yang sangat tinggi. Distribusi probabilitas kecurangan yang bimodal pada data riil menunjukkan kemampuan model untuk membedakan secara jelas antara perilaku normal dan mencurigakan, yang konsisten dengan temuan Alexandron dkk. \cite{Alexandron2019} dalam deteksi anomali pada MOOC. Wawasan berbasis data ini sejalan dengan prinsip \textit{learning analytics} yang ditekankan oleh Siemens dan Long \cite{Siemens2011} untuk memahami dan mengoptimalkan pembelajaran serta lingkungan di mana pembelajaran tersebut terjadi. Temuan-temuan ini menjawab pertanyaan penelitian ketiga (RQ3) dan memberikan dasar empiris bagi institusi untuk merancang strategi pencegahan dan intervensi yang lebih terarah.
+
+    \item \bo{Penelitian Memberikan Kontribusi Teoretis dan Praktis.} \\
+    Secara teoretis, penelitian ini memperkaya metode deteksi kecurangan berbasis \textit{ensemble learning}, menyoroti efektivitas fitur kesamaan navigasi, dan menyediakan landasan metodologis untuk penelitian lanjutan dalam bidang \textit{Educational Data Mining} \cite{Romero2020}. Secara praktis, sistem yang dikembangkan berpotensi menjadi alat bantu deteksi dini yang akurat, memberikan dukungan objektif dalam pengambilan keputusan terkait integritas akademik, dan meningkatkan efektivitas pemantauan pembelajaran daring, sebagaimana yang telah dicontohkan oleh implementasi sistem serupa seperti Statoodle \cite{MorenoMarcos2023}.
+
 \end{enumerate}
-
-Hasil eksperimen menunjukkan bahwa pendekatan yang dikembangkan sangat efektif dalam mengidentifikasi pola kecurangan, dengan model ensemble mencapai performa tertinggi dibandingkan model individual. Pendekatan ini juga menunjukkan ketahanan yang baik terhadap noise, dengan model ensemble mempertahankan F1-score di atas 0.8 bahkan dengan tingkat noise mencapai 40\%.
-
-\subsection{Integrasi Berbagai Teknik Analisis Data}
-
-Penelitian ini membuktikan bahwa integrasi berbagai teknik analisis data secara signifikan meningkatkan akurasi dan reliabilitas deteksi perilaku mencurigakan dalam konteks pembelajaran daring. Beberapa temuan kunci yang mendukung kesimpulan ini:
-
-\begin{enumerate}
-    \item \textbf{Analisis ablasi fitur} menunjukkan bahwa model yang hanya menggunakan satu dimensi perilaku (misalnya, hanya fitur navigasi atau hanya fitur waktu) mengalami penurunan performa hingga 33.3\% dibandingkan dengan model yang mengintegrasikan semua dimensi. Ini mengkonfirmasi pentingnya pendekatan multi-dimensi dalam deteksi kecurangan.
-    
-    \item \textbf{Kombinasi model supervised dan unsupervised} memberikan keseimbangan yang optimal antara kemampuan deteksi dan interpretabilitas. Model supervised memberikan akurasi tinggi, sementara model unsupervised memberikan kerangka yang fleksibel untuk identifikasi pola anomali baru.
-    
-    \item \textbf{Matriks similaritas multi-dimensi} yang mengintegrasikan kesamaan navigasi, waktu, dan jawaban terbukti sangat efektif dalam mengidentifikasi kolaborasi antar mahasiswa. Analisis jaringan berbasis matriks similaritas berhasil mengidentifikasi semua kelompok kecurangan dengan akurasi sempurna.
-    
-    \item \textbf{Fitur interaksi} yang menangkap hubungan antar dimensi perilaku (seperti interaksi antara kesamaan jawaban salah dan kesamaan navigasi) menunjukkan kekuatan prediktif yang lebih tinggi dibandingkan dengan fitur individual, dengan kontribusi relatif mencapai 24.6\%.
-\end{enumerate}
-
-Hasil ini mengkonfirmasi hipotesis bahwa integrasi berbagai teknik analisis data secara signifikan meningkatkan kemampuan deteksi sistem. Pendekatan terintegrasi ini memungkinkan identifikasi pola kompleks yang mungkin tidak terdeteksi oleh pendekatan unidimensional.
-
-\subsection{Karakteristik dan Pola Perilaku Pengguna}
-
-Analisis karakteristik dan pola perilaku pengguna yang teridentifikasi memberikan wawasan berharga untuk meningkatkan integritas akademik dalam pembelajaran daring:
-
-\begin{enumerate}
-    \item \textbf{Pola kecurangan kolaboratif dominan}, dengan tiga pola utama yang teridentifikasi: Kolaborasi Jawaban Menyeluruh (42.3\%), Sinkronisasi Navigasi Ketat (38.5\%), dan Sinkronisasi Temporal (30.8\%). Dominasi pola kolaboratif mengindikasikan bahwa kecurangan akademik dalam lingkungan daring sering terjadi dalam konteks sosial, bukan sebagai tindakan individual.
-    
-    \item \textbf{Strategi kecurangan adaptif} teridentifikasi, seperti "Kolaborasi dengan Variasi Terencana" dan "Kecurangan Hibrida", yang menunjukkan bahwa mahasiswa mengembangkan strategi canggih untuk menghindari deteksi. Ini mengimplikasikan perlunya sistem deteksi yang adaptif dan terus diperbarui.
-    
-    \item \textbf{Kesamaan jawaban salah} merupakan indikator terkuat dari kecurangan kolaboratif, dengan kontribusi relatif 18.7\% terhadap keputusan model. Temuan ini selaras dengan teori bahwa kesamaan pada jawaban yang salah sangat tidak mungkin terjadi secara kebetulan dan merupakan indikator kuat adanya kolaborasi.
-    
-    \item \textbf{Pola emergen yang tidak dimodelkan secara eksplisit} berhasil terdeteksi oleh sistem, termasuk Kolaborasi Asimetris, Stratifikasi Waktu Pengerjaan, dan Kolaborasi Multi-Kelompok. Kemampuan mendeteksi pola emergen ini menunjukkan potensi sistem untuk mengidentifikasi strategi kecurangan baru di masa depan.
-\end{enumerate}
-
-Wawasan ini memiliki implikasi penting untuk upaya meningkatkan integritas akademik. Dengan memahami karakteristik dan pola kecurangan, institusi pendidikan dapat mengembangkan strategi pencegahan yang lebih efektif dan merancang ujian daring yang lebih tahan terhadap kecurangan.
+Secara keseluruhan, penelitian ini telah berhasil mengembangkan dan memvalidasi sebuah sistem deteksi kecurangan akademik yang efektif dan komprehensif berbasis analisis log Moodle menggunakan pendekatan kecerdasan buatan. Temuan-temuan utama menunjukkan bahwa kombinasi antara \textit{feature engineering} yang cermat, penggunaan data artifisial yang representatif untuk pelatihan, dan arsitektur model \textit{ensemble} mampu menghasilkan sistem dengan daya deteksi tinggi dan interpretabilitas yang memadai. Hasil ini sejalan dengan evolusi yang telah diidentifikasi dalam literatur, dari sistem berbasis aturan tradisional \cite{article:rule_based_limitations} menuju implementasi \textit{machine learning} yang lebih sophisticated dan adaptif \cite{Kamalov2021, Yulita2023}.
 
 %-----------------------------------------------------------------------------%
-\section{Kontribusi Penelitian}
-\label{sec:kontribusi}
+\section{Keterkaitan dengan Tujuan dan Pertanyaan Penelitian}
+\label{sec:keterkaitan_tujuan_pertanyaan_bab5}
 %-----------------------------------------------------------------------------%
-
-Penelitian ini memberikan beberapa kontribusi signifikan dalam bidang deteksi kecurangan akademik dan analisis pembelajaran daring:
-
-\subsection{Kontribusi Teoretis}
+Penelitian yang telah dilakukan secara sistematis berhasil menjawab pertanyaan-pertanyaan penelitian yang dirumuskan dan mencapai tujuan-tujuan yang telah ditetapkan di Bab 1. Berikut adalah pemaparan keterkaitan antara temuan utama penelitian dengan pertanyaan dan tujuan tersebut:
 
 \begin{enumerate}
-    \item \textbf{Kerangka konseptual multi-dimensi} untuk menganalisis perilaku kecurangan dalam lingkungan daring. Kerangka ini mengintegrasikan tiga dimensi utama—navigasi, waktu, dan jawaban—dalam model teoretis yang komprehensif, memperluas model konseptual sebelumnya yang cenderung berfokus pada dimensi tunggal.
-    
-    \item \textbf{Tipologi pola kecurangan} yang teridentifikasi dalam penelitian ini (seperti Kolaborasi Jawaban Menyeluruh, Sinkronisasi Navigasi, dan Kolaborasi Asimetris) memperkaya pemahaman teoretis tentang strategi kecurangan dalam lingkungan daring. Tipologi ini dapat menjadi landasan untuk penelitian lebih lanjut tentang perilaku akademik tidak etis.
-    
-    \item \textbf{Pembuktian empiris} mengenai efektivitas pendekatan berbasis kesamaan dalam mengidentifikasi kolaborasi tidak sah. Hasil penelitian ini mendukung hipotesis bahwa pola kesamaan yang statistik tidak mungkin terjadi secara kebetulan dapat menjadi indikator kuat adanya kolaborasi.
-    
-    \item \textbf{Integrasi teori jaringan social} ke dalam kerangka deteksi kecurangan, yang menawarkan perspektif baru untuk memahami kecurangan sebagai fenomena kolektif, bukan hanya sebagai perilaku individual.
+\item \textbf{Jawaban terhadap Pertanyaan Penelitian 1 (RQ1):} "Bagaimana mengembangkan pendekatan berbasis pembelajaran mesin yang efektif untuk mendeteksi potensi kecurangan akademik dalam pembelajaran daring menggunakan data log aktivitas Moodle?"
+\begin{itemize}
+\item Penelitian ini berhasil mengembangkan pendekatan yang efektif dengan merancang \textit{pipeline} komprehensif yang mencakup pra-pemrosesan data log, rekayasa fitur dengan seleksi berbasis VIF untuk menghasilkan 8 fitur stabil, dan implementasi arsitektur model \textit{ensemble} (Random Forest, SVM, Neural Network, Gradient Boosting). Kinerja model yang tinggi, terutama Random Forest dan SVM dengan akurasi 98% dan presisi 1.00 pada data uji sintesis, menunjukkan efektivitas pendekatan yang diusulkan.
+\end{itemize}
+
+\item \textbf{Jawaban terhadap Pertanyaan Penelitian 2 (RQ2):} "Sejauh mana integrasi berbagai teknik analisis data dapat meningkatkan akurasi dan reliabilitas deteksi perilaku mencurigakan dalam konteks pembelajaran daring?"
+\begin{itemize}
+    \item Integrasi berbagai teknik analisis data terbukti signifikan meningkatkan akurasi dan reliabilitas. Penggunaan beragam kategori fitur—mencakup kesamaan navigasi (kontribusi 60.5\%), fitur temporal (25.4\%), dan fitur perilaku pengerjaan lainnya (14.1\%)—memungkinkan model menangkap berbagai dimensi perilaku mencurigakan. Pendekatan \textit{ensemble} yang menggabungkan prediksi dari beberapa model dasar juga memberikan keseimbangan dan robustisitas dalam hasil deteksi akhir.
+\end{itemize}
+
+\item \textbf{Jawaban terhadap Pertanyaan Penelitian 3 (RQ3):} "Bagaimana karakteristik dan pola perilaku pengguna yang teridentifikasi dari hasil analisis dapat memberikan wawasan untuk meningkatkan integritas akademik dalam pembelajaran daring?"
+\begin{itemize}
+    \item Analisis fitur menunjukkan bahwa kesamaan pola navigasi yang tinggi antar mahasiswa merupakan indikator terkuat kolaborasi tidak sah. Selain itu, aplikasi model pada data riil berhasil mengidentifikasi 4,093 pengguna dengan pola kecurangan berulang dan ujian-ujian spesifik dengan tingkat deteksi kecurangan tinggi. Wawasan ini dapat digunakan institusi untuk merancang strategi pencegahan yang lebih bertarget, memperbaiki desain ujian, dan melakukan intervensi pada kelompok mahasiswa atau mata kuliah berisiko tinggi.
+\end{itemize}
 \end{enumerate}
 
-\subsection{Kontribusi Metodologis}
-
-\begin{enumerate}
-    \item \textbf{Metodologi ekstraksi fitur multi-dimensi} dari data log aktivitas Moodle yang dapat diadaptasi untuk platform pembelajaran daring lainnya. Metodologi ini memungkinkan transformasi data log mentah menjadi representasi fitur yang kaya dan informatif.
-    
-    \item \textbf{Pendekatan ensemble adaptif} yang menggabungkan berbagai algoritma pembelajaran mesin untuk deteksi kecurangan. Pendekatan ini menunjukkan ketahanan yang lebih baik terhadap noise dan variasi dalam data dibandingkan dengan pendekatan single-model.
-    
-    \item \textbf{Framework analisis berbasis similaritas} untuk mengidentifikasi kelompok-kelompok dengan perilaku serupa. Framework ini menyediakan metode sistematis untuk mengkonstruksi dan menganalisis matriks kesamaan multi-dimensi.
-    
-    \item \textbf{Kerangka evaluasi komprehensif} untuk menguji kinerja sistem deteksi kecurangan dari berbagai aspek. Kerangka ini mencakup metodologi untuk menguji sensitivitas terhadap noise, ketahanan terhadap ketidakseimbangan kelas, dan analisis ablasi fitur.
-\end{enumerate}
-
-\subsection{Kontribusi Praktis}
-
-\begin{enumerate}
-    \item \textbf{Sistem deteksi kecurangan operasional} yang dapat diimplementasikan dalam lingkungan pembelajaran daring berbasis Moodle. Sistem ini menyediakan alat praktis bagi institusi pendidikan untuk memonitor integritas akademik.
-    
-    \item \textbf{Fitur-fitur kecurangan teridentifikasi} yang dapat digunakan sebagai indikator dini untuk mengidentifikasi perilaku mencurigakan. Indikator ini dapat membantu pengajar dan administrator dalam memantau dan menginvestigasi kasus-kasus potensial.
-    
-    \item \textbf{Wawasan untuk desain ujian daring} yang lebih tahan terhadap kecurangan. Pemahaman tentang pola-pola kecurangan dapat menginformasikan strategi seperti randomisasi urutan soal, pembatasan waktu yang tepat, dan diversifikasi bank soal.
-    
-    \item \textbf{Pendekatan berbasis bukti} untuk menyelidiki dugaan kecurangan. Sistem deteksi yang dikembangkan menyediakan bukti objektif untuk mendukung keputusan administratif, mengurangi ketergantungan pada bukti anekdotal.
-\end{enumerate}
+Secara paralel, tujuan-tujuan penelitian juga telah tercapai:
+\begin{itemize}
+\item \textbf{Tujuan 1:} Merancang dan mengimplementasikan kerangka kerja deteksi telah berhasil dilakukan melalui pengembangan \textit{pipeline} dan arsitektur model \textit{ensemble} yang didukung analisis matriks kesamaan dan optimasi ambang batas (implisit melalui evaluasi kinerja pada berbagai tingkat kepercayaan).
+\item \textbf{Tujuan 2:} Pengembangan dan evaluasi fitur-fitur baru berbasis matriks kesamaan (khususnya navigasi) terbukti sangat efektif dan menjadi kontributor utama dalam deteksi.
+\item \textbf{Tujuan 3:} Pengujian menyeluruh terhadap kinerja sistem menggunakan data log Moodle Fasilkom UI (data riil) telah dilakukan, menghasilkan deteksi 131,479 percobaan ujian yang terindikasi kecurangan dari 446,720 percobaan yang dianalisis.
+\item \textbf{Tujuan 4:} Analisis dan interpretasi pola-pola perilaku mencurigakan yang terdeteksi (seperti identifikasi repeat offenders dan ujian bermasalah) telah dilakukan untuk mendukung upaya pencegahan kecurangan.
+\end{itemize}
 
 %-----------------------------------------------------------------------------%
 \section{Keterbatasan Penelitian}
-\label{sec:keterbatasan}
+\label{sec:keterbatasan_penelitian_bab5}
 %-----------------------------------------------------------------------------%
-
-Meskipun penelitian ini telah menghasilkan temuan yang berharga, terdapat beberapa keterbatasan yang perlu diakui:
-
+Meskipun penelitian ini telah mencapai tujuannya dan memberikan kontribusi yang signifikan, terdapat beberapa keterbatasan yang perlu diakui dan dapat menjadi pertimbangan untuk penelitian selanjutnya:
 \begin{enumerate}
-    \item \textbf{Validitas eksternal} dari temuan yang didasarkan pada data artifisial masih memerlukan konfirmasi lebih lanjut dengan data riil. Meskipun data artifisial dirancang dengan hati-hati untuk mensimulasikan perilaku nyata, kompleksitas penuh dari perilaku manusia mungkin tidak sepenuhnya tercakup.
-    
-    \item \textbf{Potensi overfitting} terhadap karakteristik spesifik data artifisial. Performa sempurna pada data uji menimbulkan kekhawatiran tentang kemampuan generalisasi model. Meskipun teknik-teknik seperti validasi silang dan regularisasi telah diterapkan, risiko overfitting tidak dapat sepenuhnya dieliminasi tanpa validasi pada dataset independen.
-    
-    \item \textbf{Ketergantungan pada ketersediaan data log detail}. Pendekatan yang dikembangkan memerlukan akses ke log aktivitas detail dari sistem pembelajaran daring, yang mungkin tidak selalu tersedia karena keterbatasan sistem atau pertimbangan privasi.
-    
-    \item \textbf{Kompleksitas implementasi} sistem deteksi yang lengkap memerlukan integrasi dengan infrastruktur pembelajaran daring yang ada, yang dapat menjadi tantangan teknis signifikan. Kompleksitas ini dapat menjadi hambatan untuk adopsi luas, terutama di institusi dengan sumber daya teknis terbatas.
-    
-    \item \textbf{Batasan etis dan privasi} terkait dengan pemantauan perilaku mahasiswa. Sistem deteksi kecurangan perlu menemukan keseimbangan antara kebutuhan untuk mempertahankan integritas akademik dan penghormatan terhadap privasi dan otonomi mahasiswa.
-\end{enumerate}
-
-Keterbatasan ini menawarkan peluang untuk perbaikan dan pengembangan dalam penelitian masa depan.
-
-%-----------------------------------------------------------------------------%
-\section{Rekomendasi untuk Penelitian Lanjutan}
-\label{sec:rekomendasi}
-%-----------------------------------------------------------------------------%
-
-Berdasarkan temuan dan keterbatasan penelitian, beberapa arah untuk penelitian lanjutan direkomendasikan:
-
-\begin{enumerate}
-    \item \textbf{Validasi dengan data riil}. Evaluasi pendekatan yang dikembangkan dengan dataset riil dari berbagai konteks pembelajaran daring akan memperkuat validitas eksternal dari temuan penelitian. Ini dapat mencakup data dari berbagai institusi, mata kuliah, dan tingkat pendidikan.
-    
-    \item \textbf{Pengembangan sistem deteksi real-time}. Pendekatan saat ini bersifat retrospektif (analisis pasca-ujian), penelitian lanjutan dapat mengeksplorasi implementasi real-time yang dapat memberikan peringatan dini selama ujian berlangsung.
-    
-    \item \textbf{Integrasi teknik pembelajaran mendalam (deep learning)}. Metode deep learning seperti Recurrent Neural Networks (RNN) atau Transformers dapat lebih efektif dalam menangkap pola temporal kompleks dalam urutan navigasi dan waktu. Penelitian lanjutan dapat mengeksplorasi potensi metode ini untuk meningkatkan akurasi deteksi.
-    
-    \item \textbf{Pengembangan pendekatan yang mendukung privasi (privacy-preserving approaches)}. Teknik-teknik seperti Federated Learning atau Differential Privacy dapat memungkinkan implementasi sistem deteksi kecurangan yang menjaga privasi mahasiswa, mengurangi kekhawatiran etis terkait pemantauan.
-    
-    \item \textbf{Studi longitudinal} tentang evolusi strategi kecurangan. Penelitian jangka panjang dapat menganalisis bagaimana strategi kecurangan berubah seiring waktu sebagai respons terhadap implementasi sistem deteksi, memberikan wawasan berharga tentang dinamika "arms race" antara kecurangan dan deteksi.
-    
-    \item \textbf{Eksplorasi pendekatan pencegahan proaktif}. Selain deteksi, penelitian lanjutan dapat mengeksplorasi bagaimana wawasan yang diperoleh dari analisis pola kecurangan dapat digunakan untuk mengembangkan strategi pencegahan yang efektif, termasuk desain ujian yang lebih tahan kecurangan dan pendekatan pedagogis yang mengurangi insentif untuk berbuat curang.
+\item \textbf{Ketergantungan pada Data Artifisial untuk Pelatihan Model Utama:} Sebagian besar pelatihan dan optimasi model dilakukan menggunakan dataset sintesis yang terdiri dari 800 sampel. Walaupun data artifisial ini dirancang dengan cermat untuk mereplikasi berbagai skenario kecurangan dan telah divalidasi, tetap ada kemungkinan bahwa data tersebut tidak sepenuhnya menangkap semua nuansa dan kompleksitas perilaku kecurangan yang terjadi di dunia nyata.
+\item \textbf{Tidak Adanya \textit{Ground Truth} pada Data Riil:} Aplikasi model pada dataset riil Moodle Fasilkom UI tidak disertai dengan label \textit{ground truth} yang terverifikasi mengenai kasus kecurangan aktual. Oleh karena itu, hasil deteksi pada data riil (misalnya, 131,479 kasus terindikasi) bersifat indikatif dan memerlukan validasi lebih lanjut dari pihak terkait di institusi untuk konfirmasi.
+\item \textbf{Fokus pada Pola Kecurangan yang Terdeteksi Melalui Log Aktivitas:} Sistem ini dirancang untuk mendeteksi pola perilaku mencurigakan yang tercermin dalam log aktivitas Moodle, matriks kesamaan, dan interaksi antar pengguna. Jenis kecurangan lain yang tidak meninggalkan jejak digital yang jelas dalam log (misalnya, penggunaan alat bantu eksternal yang tidak terdeteksi, atau praktik perjokian di mana individu lain mengerjakan ujian tanpa interaksi mencurigakan yang terekam antar akun dalam sistem) kemungkinan besar tidak akan terdeteksi oleh sistem ini.
+\item \textbf{Implementasi dalam Modus \textit{Offline} (Analisis Retrospektif):} Sistem deteksi yang dikembangkan dalam penelitian ini diimplementasikan dalam modus \textit{offline}, yang berarti analisis dilakukan secara retrospektif terhadap data log yang telah terkumpul. Kemampuan untuk melakukan deteksi secara \textit{real-time} dan memberikan peringatan langsung saat ujian berlangsung belum menjadi bagian dari lingkup penelitian ini.
+\item \textbf{Konteks Institusional dan Generalisasi Model:} Data log yang digunakan berasal dari lingkungan Fasilkom UI. Karakteristik spesifik dari penggunaan Moodle, jenis ujian, kebijakan akademik, dan demografi mahasiswa di institusi lain mungkin berbeda. Oleh karena itu, kinerja model dapat bervariasi jika diterapkan secara langsung di institusi lain tanpa kalibrasi atau adaptasi ulang.
+\item \textbf{Interpretabilitas Beberapa Komponen Model:} Meskipun analisis \textit{feature importance} telah dilakukan untuk model seperti Random Forest, beberapa komponen dalam arsitektur \textit{ensemble}, khususnya \textit{Neural Network}, masih memiliki sifat inheren sebagai "kotak hitam" (\textit{black box}), yang membuat interpretasi penuh terhadap logika pengambilan keputusannya menjadi lebih menantang.
+\item \textbf{Cakupan Fitur yang Dihasilkan:} Meskipun 35 fitur awal telah diekstraksi dan direduksi menjadi 8 fitur stabil melalui VIF, ada kemungkinan fitur-fitur lain yang belum dieksplorasi dapat memberikan informasi tambahan yang berguna untuk deteksi kecurangan.
 \end{enumerate}
 
 %-----------------------------------------------------------------------------%
-\section{Refleksi Akhir}
-\label{sec:refleksiAkhir}
+\section{Saran}
+\label{sec:saran_bab5}
 %-----------------------------------------------------------------------------%
+Berdasarkan temuan dan keterbatasan yang telah diidentifikasi dalam penelitian ini, serta mengacu pada kesenjangan penelitian yang telah diidentifikasi dalam tinjauan pustaka, berikut adalah beberapa saran untuk pengembangan dan penelitian selanjutnya:
+\begin{enumerate}
+    \item \bo{Pengembangan Model dengan Data Riil Berlabel dan Pendekatan Semi-Supervised.} \\
+    Meskipun data artifisial terbukti berguna, melatih atau memvalidasi model dengan data riil yang memiliki label kecurangan terverifikasi akan meningkatkan kepercayaan dan generalisasi model. Mengingat kesulitan memperoleh data riil berlabel dalam skala besar, eksplorasi teknik \textit{semi-supervised learning} atau \textit{active learning} dapat dipertimbangkan untuk memanfaatkan data riil tak berlabel yang melimpah, sejalan dengan kerangka kerja yang diusulkan oleh Cen dkk. \cite{survey:anomaly_detection_edu} untuk deteksi anomali tanpa pengawasan dalam sistem \textit{e-learning}.
 
-Penelitian ini telah mengembangkan dan mengevaluasi pendekatan komprehensif untuk deteksi kecurangan akademik dalam lingkungan pembelajaran daring berbasis Moodle. Melalui integrasi teknik pembelajaran mesin ensemble, analisis jaringan berbasis similaritas, dan ekstraksi fitur multi-dimensi, penelitian ini berhasil mengidentifikasi berbagai pola kecurangan dengan akurasi tinggi.
+    \item \bo{Ekspansi Jenis Kecurangan yang Dapat Dideteksi.} \\
+    Penelitian mendatang dapat memperluas cakupan jenis kecurangan yang dideteksi dengan mengintegrasikan sumber data lain di luar log Moodle. Misalnya, analisis terhadap data dari \textit{online proctoring tools}, analisis pola pengetikan (\textit{keystroke dynamics}), atau bahkan analisis konten jawaban jika memungkinkan, dapat membantu mendeteksi bentuk kecurangan yang lebih beragam.
 
-Temuan-temuan penelitian menggarisbawahi pentingnya pendekatan multi-dimensi dalam deteksi kecurangan, di mana analisis terhadap pola navigasi, waktu, dan jawaban secara simultan memberikan wawasan yang jauh lebih kaya daripada analisis unidimensional. Pendekatan ini terbukti sangat efektif dalam mengidentifikasi kelompok-kelompok kecurangan dan pola kolaborasi tidak sah.
+    \item \bo{Implementasi Sistem Deteksi secara \textit{Real-Time}.} \\
+    Mengembangkan sistem ini ke dalam modus operasional \textit{real-time} akan memberikan manfaat yang lebih besar, karena memungkinkan intervensi atau peringatan dini dapat dilakukan saat ujian sedang berlangsung, bukan hanya analisis retrospektif. Implementasi ini dapat mengacu pada pendekatan yang telah dicontohkan oleh Moreno-Marcos dkk. \cite{MorenoMarcos2023} dalam Statoodle yang menggunakan pendekatan \textit{real-time monitoring}.
 
-Hasil penelitian juga menekankan dimensi sosial dari kecurangan akademik, dengan pola-pola kolaboratif mendominasi temuan. Wawasan ini memiliki implikasi penting bagi institusi pendidikan dalam mengembangkan strategi untuk mempertahankan integritas akademik di era pembelajaran daring.
+    \item \bo{Validasi dan Adaptasi Model Lintas Institusi dan Konteks.} \\
+    Untuk meningkatkan generalisasi, model yang dikembangkan perlu diuji dan divalidasi pada dataset dari institusi pendidikan lain dengan karakteristik pengguna, mata kuliah, dan konfigurasi Moodle yang berbeda. Proses adaptasi atau \textit{transfer learning} mungkin diperlukan.
 
-Meskipun masih terdapat keterbatasan dan tantangan, kerangka deteksi yang dikembangkan dalam penelitian ini menawarkan landasan yang solid untuk pengembangan sistem pemantauan integritas akademik yang lebih efektif dan etis. Dengan penelitian lanjutan yang mengatasi keterbatasan yang diidentifikasi, pendekatan yang dikembangkan memiliki potensi untuk secara signifikan meningkatkan kapasitas institusi pendidikan dalam menjaga integritas akademik di lingkungan pembelajaran daring.
+    \item \bo{Peningkatan Interpretabilitas Model Kompleks} \\
+    Meskipun analisis \textit{feature importance} memberikan wawasan, penelitian lebih lanjut dapat mengeksplorasi teknik-teknik interpretabilitas \textit{machine learning} yang lebih canggih (misalnya, SHAP, LIME) untuk memberikan penjelasan yang lebih detail mengenai bagaimana model, terutama \textit{Neural Network}, membuat keputusan prediktif.
 
-Secara keseluruhan, penelitian ini berkontribusi pada pemahaman yang lebih dalam tentang perilaku kecurangan dalam konteks pembelajaran daring dan menyediakan kerangka metodologis yang dapat diadaptasi untuk berbagai konteks pendidikan. Dalam jangka panjang, pendekatan ini dapat membantu menciptakan lingkungan pembelajaran daring yang lebih etis dan terpercaya bagi semua pemangku kepentingan.
+    \item \bo{Integrasi dengan Sistem Peringatan Dini dan Intervensi Pedagogis.} \\
+    Hasil deteksi sebaiknya tidak hanya digunakan untuk tujuan penindakan, tetapi juga diintegrasikan ke dalam sistem peringatan dini yang dapat memberikan umpan balik kepada mahasiswa atau dosen. Ini dapat menjadi dasar untuk intervensi pedagogis yang bertujuan meningkatkan kesadaran akan integritas akademik.
+
+    \item \bo{Kajian Aspek Etika, Privasi, dan Penerimaan Pengguna.} \\
+    Implementasi sistem pemantauan otomatis seperti ini memerlukan kajian mendalam terkait aspek etika, perlindungan privasi data mahasiswa, dan persepsi serta penerimaan dari seluruh pemangku kepentingan (mahasiswa, dosen, dan administrator). Sebagaimana ditekankan oleh Gašević dkk. \cite{Gasevic2015}, sistem \textit{learning analytics} yang efektif harus mempertimbangkan tidak hanya aspek teknis deteksi, tetapi juga implikasi pedagogis dan etis dari implementasi sistem tersebut.
+
+    \item \bo{Eksplorasi Teknik Deteksi Anomali yang Lebih Mendalam.} \\
+    Selain model pembelajaran terawasi, penelitian selanjutnya dapat lebih fokus pada teknik deteksi anomali murni (\textit{unsupervised anomaly detection}) sebagai komplementer, terutama untuk mengidentifikasi pola-pola kecurangan baru atau yang tidak terduga yang belum pernah ada dalam data pelatihan. Pendekatan ini dapat memperluas teknik yang telah didemonstrasikan oleh Alexandron dkk. \cite{Alexandron2019} dalam konteks MOOC menggunakan \textit{Isolation Forest} dan \textit{Local Outlier Factor}.
+\end{enumerate}
+
+Dengan mempertimbangkan saran-saran tersebut, diharapkan penelitian di masa depan dapat menghasilkan sistem deteksi kecurangan akademik yang lebih canggih, adaptif, dan diterima secara luas, sehingga dapat berkontribusi lebih signifikan dalam menjaga integritas dan kualitas pendidikan tinggi di era digital. Hal ini sejalan dengan visi \textit{learning analytics} sebagai bidang yang tidak hanya fokus pada deteksi masalah, tetapi juga pada pemahaman mendalam tentang pola perilaku belajar yang dapat membantu dalam pencegahan proaktif \cite{Ferguson2012} dan mendukung proses pembelajaran yang adil serta mendorong integritas akademik melalui pendekatan yang konstruktif \cite{Gasevic2015}.
