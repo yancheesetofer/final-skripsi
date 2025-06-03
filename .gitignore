@@ -3,3 +3,4 @@
 latex_thesis/
 .local.env
 institute_log_legacy/
+__pycache__/
