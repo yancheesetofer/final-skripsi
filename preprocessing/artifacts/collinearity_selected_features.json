@@ -1,0 +1,1 @@
+["std_step_duration", "median_step_duration", "quick_actions_count", "long_actions_count", "sumgrades", "nav_unique_questions_visited", "nav_revisits_count", "nav_linearity", "nav_entropy", "high_nav_similarity_count", "mean_nav_similarity_zscore", "max_nav_similarity_zscore", "std_nav_similarity_zscore"]

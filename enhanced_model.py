@@ -26,7 +26,8 @@ OUTPUT_DIR = 'results' # Directory to save models and plots
 TARGET_VARIABLE = 'is_cheater'
 FEATURE_COLUMNS = [
     'max_nav_similarity_zscore', 'mean_nav_similarity_zscore', 'median_step_duration', 
-    'nav_revisits_count_zscore', 'quick_actions_count', 'std_step_duration', 'sumgrades'
+    'nav_revisits_count', 'quick_actions_count', 'std_nav_similarity_zscore', 
+    'std_step_duration', 'sumgrades'
 ]
 
 # ML Constants

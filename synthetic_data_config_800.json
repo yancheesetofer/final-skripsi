@@ -1,0 +1,68 @@
+{
+    "total_users": 200,
+    "total_quizzes": 4,
+    "questions_per_quiz": 20,
+    "base_date": "2024-08-15 09:00:00",
+    "cheating_groups": {
+        "high_severity": {
+            "count": 2,
+            "size": 4,
+            "patterns": {
+                "navigation": {
+                    "similarity": 0.92,
+                    "noise": 0.08
+                },
+                "timing": {
+                    "start_delay": 2,
+                    "variance": 5,
+                    "completion_speed": "fast"
+                },
+                "answers": {
+                    "similarity": 0.90,
+                    "wrong_bias": 0.85
+                }
+            }
+        },
+        "medium_severity": {
+            "count": 3,
+            "size": 6,
+            "patterns": {
+                "navigation": {
+                    "similarity": 0.75,
+                    "noise": 0.25
+                },
+                "timing": {
+                    "start_delay": 5,
+                    "variance": 20,
+                    "completion_speed": "medium"
+                },
+                "answers": {
+                    "similarity": 0.70,
+                    "wrong_bias": 0.60
+                }
+            }
+        },
+        "low_severity": {
+            "count": 3,
+            "size": 8,
+            "patterns": {
+                "navigation": {
+                    "similarity": 0.55,
+                    "noise": 0.35
+                },
+                "timing": {
+                    "start_delay": 10,
+                    "variance": 40,
+                    "completion_speed": "varied"
+                },
+                "answers": {
+                    "similarity": 0.50,
+                    "wrong_bias": 0.40
+                }
+            }
+        }
+    },
+    "output_format": "csv",
+    "output_dir": "data/synthetic_logs_800",
+    "seed": 42
+}
