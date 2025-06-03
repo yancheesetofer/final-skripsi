@@ -1,0 +1,46 @@
+%
+% Halaman Abstrak
+%
+% @author  Andreas Febrian
+% @version 2.2.0
+% @edit by Ichlasul Affan
+%
+
+\chapter*{Abstrak}
+\singlespacing
+
+\noindent \begin{tabular}{l l p{10cm}}
+	\ifx\blank\npmDua
+		Nama&: & \penulisSatu \\
+		Program Studi&: & \programSatu \\
+	\else
+		Nama Penulis 1 / Program Studi&: & \penulisSatu~/ \programSatu\\
+		Nama Penulis 2 / Program Studi&: & \penulisDua~/ \programDua\\
+	\fi
+	\ifx\blank\npmTiga\else
+		Nama Penulis 3 / Program Studi&: & \penulisTiga~/ \programTiga\\
+	\fi
+	Judul&: & \judul \\
+	Pembimbing&: & \pembimbingSatu \\
+	\ifx\blank\pembimbingDua
+    \else
+        \ &\ & \pembimbingDua \\
+    \fi
+    \ifx\blank\pembimbingTiga
+    \else
+    	\ &\ & \pembimbingTiga \\
+    \fi
+\end{tabular} \\
+
+\vspace*{0.5cm}
+
+\noindent
+Dalam rangka memperkuat integritas akademik pada pembelajaran era digital, penelitian ini mengembangkan sistem deteksi kecurangan yang lebih komprehensif berbasis \textit{machine learning}. Dengan memanfaatkan data log yang kaya dan terstruktur dari Moodle, sistem mengintegrasikan beragam teknik analitik yang mencakup \textbf{deteksi anomali}, \textbf{clustering}, dan \textbf{pembelajaran terawasi} menggunakan model \textit{advanced ensemble}. Berbagai \textit{similarity matrix} (seperti \textit{navigation}, \textit{timing}, dan \textit{answer similarity}) dikombinasikan untuk menghasilkan fitur-fitur baru yang mampu menggali pola perilaku mencurigakan. Selain itu, penerapan \textbf{gradient boosting}, \textbf{neural network}, hingga \textbf{one-class SVM} dan \textbf{ensemble threshold optimization} memberikan kemampuan deteksi kecurangan yang lebih akurat. Hasil evaluasi menunjukkan bahwa metode gabungan ini mampu meningkatkan sensitivitas dan spesifisitas dalam mengungkap potensi kecurangan secara proaktif, sehingga dapat menjadi landasan yang efektif bagi institusi pendidikan dalam mengurangi praktik kecurangan serta memastikan kepatuhan pengguna di platform Moodle.
+
+\vspace*{0.2cm}
+
+\noindent Kata kunci: \\
+\f{Moodle, LMS, Log Aktivitas, Pembelajaran Mesin, Deteksi Anomali, Ensemble Methods, Threshold Optimization, Integritas Akademik} \\
+
+\setstretch{1.4}
+\newpage

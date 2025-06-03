@@ -1,0 +1,161 @@
+%-----------------------------------------------------------------------------%
+\chapter{\babLima}
+\label{bab:5}
+%-----------------------------------------------------------------------------%
+
+Bab ini menyajikan kesimpulan menyeluruh dari penelitian yang telah dilakukan, mengevaluasi hasil-hasil yang diperoleh, mengidentifikasi kontribusi penelitian, mengakui keterbatasan yang ada, serta memberikan rekomendasi untuk penelitian lanjutan. Bagian ini merupakan penutup yang mengintegrasikan semua temuan dan analisis yang telah dipaparkan pada bab-bab sebelumnya.
+
+%-----------------------------------------------------------------------------%
+\section{Kesimpulan}
+\label{sec:kesimpulan}
+%-----------------------------------------------------------------------------%
+
+Berdasarkan hasil penelitian yang telah dipaparkan, berikut ini adalah kesimpulan yang menjawab pertanyaan penelitian yang telah dirumuskan:
+
+\subsection{Pengembangan Pendekatan Berbasis Pembelajaran Mesin}
+
+Penelitian ini berhasil mengembangkan pendekatan berbasis pembelajaran mesin yang efektif untuk mendeteksi kecurangan akademik dalam lingkungan pembelajaran daring menggunakan data log aktivitas Moodle. Pendekatan yang dikembangkan mengintegrasikan beberapa komponen utama:
+
+\begin{enumerate}
+    \item \textbf{Ekstraksi fitur multi-dimensi} dari data log Moodle yang mencakup pola navigasi, pola waktu, dan pola jawaban. Ketiga dimensi ini terbukti memberikan sinyal komplementer yang kuat untuk deteksi kecurangan.
+    
+    \item \textbf{Model pembelajaran mesin ensemble} yang menggabungkan beberapa algoritma (Random Forest, Gradient Boosting, Neural Network, dan SVM) untuk meningkatkan robustness dan akurasi prediksi. Model ensemble menghasilkan performa optimal dengan nilai precision, recall, dan F1-score mencapai 1.0 pada data artifisial.
+    
+    \item \textbf{Analisis jaringan berbasis similaritas} yang berhasil mengidentifikasi kelompok-kelompok kecurangan dengan precision dan recall 100%. Pendekatan ini terbukti sangat efektif dalam mendeteksi kolaborasi tidak sah antar mahasiswa.
+    
+    \item \textbf{Kerangka evaluasi komprehensif} yang menguji kinerja sistem dari berbagai aspek, termasuk sensitivitas terhadap noise, ketahanan terhadap ketidakseimbangan kelas, dan kemampuan generalisasi ke data baru.
+\end{enumerate}
+
+Hasil eksperimen menunjukkan bahwa pendekatan yang dikembangkan sangat efektif dalam mengidentifikasi pola kecurangan, dengan model ensemble mencapai performa tertinggi dibandingkan model individual. Pendekatan ini juga menunjukkan ketahanan yang baik terhadap noise, dengan model ensemble mempertahankan F1-score di atas 0.8 bahkan dengan tingkat noise mencapai 40\%.
+
+\subsection{Integrasi Berbagai Teknik Analisis Data}
+
+Penelitian ini membuktikan bahwa integrasi berbagai teknik analisis data secara signifikan meningkatkan akurasi dan reliabilitas deteksi perilaku mencurigakan dalam konteks pembelajaran daring. Beberapa temuan kunci yang mendukung kesimpulan ini:
+
+\begin{enumerate}
+    \item \textbf{Analisis ablasi fitur} menunjukkan bahwa model yang hanya menggunakan satu dimensi perilaku (misalnya, hanya fitur navigasi atau hanya fitur waktu) mengalami penurunan performa hingga 33.3\% dibandingkan dengan model yang mengintegrasikan semua dimensi. Ini mengkonfirmasi pentingnya pendekatan multi-dimensi dalam deteksi kecurangan.
+    
+    \item \textbf{Kombinasi model supervised dan unsupervised} memberikan keseimbangan yang optimal antara kemampuan deteksi dan interpretabilitas. Model supervised memberikan akurasi tinggi, sementara model unsupervised memberikan kerangka yang fleksibel untuk identifikasi pola anomali baru.
+    
+    \item \textbf{Matriks similaritas multi-dimensi} yang mengintegrasikan kesamaan navigasi, waktu, dan jawaban terbukti sangat efektif dalam mengidentifikasi kolaborasi antar mahasiswa. Analisis jaringan berbasis matriks similaritas berhasil mengidentifikasi semua kelompok kecurangan dengan akurasi sempurna.
+    
+    \item \textbf{Fitur interaksi} yang menangkap hubungan antar dimensi perilaku (seperti interaksi antara kesamaan jawaban salah dan kesamaan navigasi) menunjukkan kekuatan prediktif yang lebih tinggi dibandingkan dengan fitur individual, dengan kontribusi relatif mencapai 24.6\%.
+\end{enumerate}
+
+Hasil ini mengkonfirmasi hipotesis bahwa integrasi berbagai teknik analisis data secara signifikan meningkatkan kemampuan deteksi sistem. Pendekatan terintegrasi ini memungkinkan identifikasi pola kompleks yang mungkin tidak terdeteksi oleh pendekatan unidimensional.
+
+\subsection{Karakteristik dan Pola Perilaku Pengguna}
+
+Analisis karakteristik dan pola perilaku pengguna yang teridentifikasi memberikan wawasan berharga untuk meningkatkan integritas akademik dalam pembelajaran daring:
+
+\begin{enumerate}
+    \item \textbf{Pola kecurangan kolaboratif dominan}, dengan tiga pola utama yang teridentifikasi: Kolaborasi Jawaban Menyeluruh (42.3\%), Sinkronisasi Navigasi Ketat (38.5\%), dan Sinkronisasi Temporal (30.8\%). Dominasi pola kolaboratif mengindikasikan bahwa kecurangan akademik dalam lingkungan daring sering terjadi dalam konteks sosial, bukan sebagai tindakan individual.
+    
+    \item \textbf{Strategi kecurangan adaptif} teridentifikasi, seperti "Kolaborasi dengan Variasi Terencana" dan "Kecurangan Hibrida", yang menunjukkan bahwa mahasiswa mengembangkan strategi canggih untuk menghindari deteksi. Ini mengimplikasikan perlunya sistem deteksi yang adaptif dan terus diperbarui.
+    
+    \item \textbf{Kesamaan jawaban salah} merupakan indikator terkuat dari kecurangan kolaboratif, dengan kontribusi relatif 18.7\% terhadap keputusan model. Temuan ini selaras dengan teori bahwa kesamaan pada jawaban yang salah sangat tidak mungkin terjadi secara kebetulan dan merupakan indikator kuat adanya kolaborasi.
+    
+    \item \textbf{Pola emergen yang tidak dimodelkan secara eksplisit} berhasil terdeteksi oleh sistem, termasuk Kolaborasi Asimetris, Stratifikasi Waktu Pengerjaan, dan Kolaborasi Multi-Kelompok. Kemampuan mendeteksi pola emergen ini menunjukkan potensi sistem untuk mengidentifikasi strategi kecurangan baru di masa depan.
+\end{enumerate}
+
+Wawasan ini memiliki implikasi penting untuk upaya meningkatkan integritas akademik. Dengan memahami karakteristik dan pola kecurangan, institusi pendidikan dapat mengembangkan strategi pencegahan yang lebih efektif dan merancang ujian daring yang lebih tahan terhadap kecurangan.
+
+%-----------------------------------------------------------------------------%
+\section{Kontribusi Penelitian}
+\label{sec:kontribusi}
+%-----------------------------------------------------------------------------%
+
+Penelitian ini memberikan beberapa kontribusi signifikan dalam bidang deteksi kecurangan akademik dan analisis pembelajaran daring:
+
+\subsection{Kontribusi Teoretis}
+
+\begin{enumerate}
+    \item \textbf{Kerangka konseptual multi-dimensi} untuk menganalisis perilaku kecurangan dalam lingkungan daring. Kerangka ini mengintegrasikan tiga dimensi utama—navigasi, waktu, dan jawaban—dalam model teoretis yang komprehensif, memperluas model konseptual sebelumnya yang cenderung berfokus pada dimensi tunggal.
+    
+    \item \textbf{Tipologi pola kecurangan} yang teridentifikasi dalam penelitian ini (seperti Kolaborasi Jawaban Menyeluruh, Sinkronisasi Navigasi, dan Kolaborasi Asimetris) memperkaya pemahaman teoretis tentang strategi kecurangan dalam lingkungan daring. Tipologi ini dapat menjadi landasan untuk penelitian lebih lanjut tentang perilaku akademik tidak etis.
+    
+    \item \textbf{Pembuktian empiris} mengenai efektivitas pendekatan berbasis kesamaan dalam mengidentifikasi kolaborasi tidak sah. Hasil penelitian ini mendukung hipotesis bahwa pola kesamaan yang statistik tidak mungkin terjadi secara kebetulan dapat menjadi indikator kuat adanya kolaborasi.
+    
+    \item \textbf{Integrasi teori jaringan social} ke dalam kerangka deteksi kecurangan, yang menawarkan perspektif baru untuk memahami kecurangan sebagai fenomena kolektif, bukan hanya sebagai perilaku individual.
+\end{enumerate}
+
+\subsection{Kontribusi Metodologis}
+
+\begin{enumerate}
+    \item \textbf{Metodologi ekstraksi fitur multi-dimensi} dari data log aktivitas Moodle yang dapat diadaptasi untuk platform pembelajaran daring lainnya. Metodologi ini memungkinkan transformasi data log mentah menjadi representasi fitur yang kaya dan informatif.
+    
+    \item \textbf{Pendekatan ensemble adaptif} yang menggabungkan berbagai algoritma pembelajaran mesin untuk deteksi kecurangan. Pendekatan ini menunjukkan ketahanan yang lebih baik terhadap noise dan variasi dalam data dibandingkan dengan pendekatan single-model.
+    
+    \item \textbf{Framework analisis berbasis similaritas} untuk mengidentifikasi kelompok-kelompok dengan perilaku serupa. Framework ini menyediakan metode sistematis untuk mengkonstruksi dan menganalisis matriks kesamaan multi-dimensi.
+    
+    \item \textbf{Kerangka evaluasi komprehensif} untuk menguji kinerja sistem deteksi kecurangan dari berbagai aspek. Kerangka ini mencakup metodologi untuk menguji sensitivitas terhadap noise, ketahanan terhadap ketidakseimbangan kelas, dan analisis ablasi fitur.
+\end{enumerate}
+
+\subsection{Kontribusi Praktis}
+
+\begin{enumerate}
+    \item \textbf{Sistem deteksi kecurangan operasional} yang dapat diimplementasikan dalam lingkungan pembelajaran daring berbasis Moodle. Sistem ini menyediakan alat praktis bagi institusi pendidikan untuk memonitor integritas akademik.
+    
+    \item \textbf{Fitur-fitur kecurangan teridentifikasi} yang dapat digunakan sebagai indikator dini untuk mengidentifikasi perilaku mencurigakan. Indikator ini dapat membantu pengajar dan administrator dalam memantau dan menginvestigasi kasus-kasus potensial.
+    
+    \item \textbf{Wawasan untuk desain ujian daring} yang lebih tahan terhadap kecurangan. Pemahaman tentang pola-pola kecurangan dapat menginformasikan strategi seperti randomisasi urutan soal, pembatasan waktu yang tepat, dan diversifikasi bank soal.
+    
+    \item \textbf{Pendekatan berbasis bukti} untuk menyelidiki dugaan kecurangan. Sistem deteksi yang dikembangkan menyediakan bukti objektif untuk mendukung keputusan administratif, mengurangi ketergantungan pada bukti anekdotal.
+\end{enumerate}
+
+%-----------------------------------------------------------------------------%
+\section{Keterbatasan Penelitian}
+\label{sec:keterbatasan}
+%-----------------------------------------------------------------------------%
+
+Meskipun penelitian ini telah menghasilkan temuan yang berharga, terdapat beberapa keterbatasan yang perlu diakui:
+
+\begin{enumerate}
+    \item \textbf{Validitas eksternal} dari temuan yang didasarkan pada data artifisial masih memerlukan konfirmasi lebih lanjut dengan data riil. Meskipun data artifisial dirancang dengan hati-hati untuk mensimulasikan perilaku nyata, kompleksitas penuh dari perilaku manusia mungkin tidak sepenuhnya tercakup.
+    
+    \item \textbf{Potensi overfitting} terhadap karakteristik spesifik data artifisial. Performa sempurna pada data uji menimbulkan kekhawatiran tentang kemampuan generalisasi model. Meskipun teknik-teknik seperti validasi silang dan regularisasi telah diterapkan, risiko overfitting tidak dapat sepenuhnya dieliminasi tanpa validasi pada dataset independen.
+    
+    \item \textbf{Ketergantungan pada ketersediaan data log detail}. Pendekatan yang dikembangkan memerlukan akses ke log aktivitas detail dari sistem pembelajaran daring, yang mungkin tidak selalu tersedia karena keterbatasan sistem atau pertimbangan privasi.
+    
+    \item \textbf{Kompleksitas implementasi} sistem deteksi yang lengkap memerlukan integrasi dengan infrastruktur pembelajaran daring yang ada, yang dapat menjadi tantangan teknis signifikan. Kompleksitas ini dapat menjadi hambatan untuk adopsi luas, terutama di institusi dengan sumber daya teknis terbatas.
+    
+    \item \textbf{Batasan etis dan privasi} terkait dengan pemantauan perilaku mahasiswa. Sistem deteksi kecurangan perlu menemukan keseimbangan antara kebutuhan untuk mempertahankan integritas akademik dan penghormatan terhadap privasi dan otonomi mahasiswa.
+\end{enumerate}
+
+Keterbatasan ini menawarkan peluang untuk perbaikan dan pengembangan dalam penelitian masa depan.
+
+%-----------------------------------------------------------------------------%
+\section{Rekomendasi untuk Penelitian Lanjutan}
+\label{sec:rekomendasi}
+%-----------------------------------------------------------------------------%
+
+Berdasarkan temuan dan keterbatasan penelitian, beberapa arah untuk penelitian lanjutan direkomendasikan:
+
+\begin{enumerate}
+    \item \textbf{Validasi dengan data riil}. Evaluasi pendekatan yang dikembangkan dengan dataset riil dari berbagai konteks pembelajaran daring akan memperkuat validitas eksternal dari temuan penelitian. Ini dapat mencakup data dari berbagai institusi, mata kuliah, dan tingkat pendidikan.
+    
+    \item \textbf{Pengembangan sistem deteksi real-time}. Pendekatan saat ini bersifat retrospektif (analisis pasca-ujian), penelitian lanjutan dapat mengeksplorasi implementasi real-time yang dapat memberikan peringatan dini selama ujian berlangsung.
+    
+    \item \textbf{Integrasi teknik pembelajaran mendalam (deep learning)}. Metode deep learning seperti Recurrent Neural Networks (RNN) atau Transformers dapat lebih efektif dalam menangkap pola temporal kompleks dalam urutan navigasi dan waktu. Penelitian lanjutan dapat mengeksplorasi potensi metode ini untuk meningkatkan akurasi deteksi.
+    
+    \item \textbf{Pengembangan pendekatan yang mendukung privasi (privacy-preserving approaches)}. Teknik-teknik seperti Federated Learning atau Differential Privacy dapat memungkinkan implementasi sistem deteksi kecurangan yang menjaga privasi mahasiswa, mengurangi kekhawatiran etis terkait pemantauan.
+    
+    \item \textbf{Studi longitudinal} tentang evolusi strategi kecurangan. Penelitian jangka panjang dapat menganalisis bagaimana strategi kecurangan berubah seiring waktu sebagai respons terhadap implementasi sistem deteksi, memberikan wawasan berharga tentang dinamika "arms race" antara kecurangan dan deteksi.
+    
+    \item \textbf{Eksplorasi pendekatan pencegahan proaktif}. Selain deteksi, penelitian lanjutan dapat mengeksplorasi bagaimana wawasan yang diperoleh dari analisis pola kecurangan dapat digunakan untuk mengembangkan strategi pencegahan yang efektif, termasuk desain ujian yang lebih tahan kecurangan dan pendekatan pedagogis yang mengurangi insentif untuk berbuat curang.
+\end{enumerate}
+
+%-----------------------------------------------------------------------------%
+\section{Refleksi Akhir}
+\label{sec:refleksiAkhir}
+%-----------------------------------------------------------------------------%
+
+Penelitian ini telah mengembangkan dan mengevaluasi pendekatan komprehensif untuk deteksi kecurangan akademik dalam lingkungan pembelajaran daring berbasis Moodle. Melalui integrasi teknik pembelajaran mesin ensemble, analisis jaringan berbasis similaritas, dan ekstraksi fitur multi-dimensi, penelitian ini berhasil mengidentifikasi berbagai pola kecurangan dengan akurasi tinggi.
+
+Temuan-temuan penelitian menggarisbawahi pentingnya pendekatan multi-dimensi dalam deteksi kecurangan, di mana analisis terhadap pola navigasi, waktu, dan jawaban secara simultan memberikan wawasan yang jauh lebih kaya daripada analisis unidimensional. Pendekatan ini terbukti sangat efektif dalam mengidentifikasi kelompok-kelompok kecurangan dan pola kolaborasi tidak sah.
+
+Hasil penelitian juga menekankan dimensi sosial dari kecurangan akademik, dengan pola-pola kolaboratif mendominasi temuan. Wawasan ini memiliki implikasi penting bagi institusi pendidikan dalam mengembangkan strategi untuk mempertahankan integritas akademik di era pembelajaran daring.
+
+Meskipun masih terdapat keterbatasan dan tantangan, kerangka deteksi yang dikembangkan dalam penelitian ini menawarkan landasan yang solid untuk pengembangan sistem pemantauan integritas akademik yang lebih efektif dan etis. Dengan penelitian lanjutan yang mengatasi keterbatasan yang diidentifikasi, pendekatan yang dikembangkan memiliki potensi untuk secara signifikan meningkatkan kapasitas institusi pendidikan dalam menjaga integritas akademik di lingkungan pembelajaran daring.
+
+Secara keseluruhan, penelitian ini berkontribusi pada pemahaman yang lebih dalam tentang perilaku kecurangan dalam konteks pembelajaran daring dan menyediakan kerangka metodologis yang dapat diadaptasi untuk berbagai konteks pendidikan. Dalam jangka panjang, pendekatan ini dapat membantu menciptakan lingkungan pembelajaran daring yang lebih etis dan terpercaya bagi semua pemangku kepentingan.

@@ -1,0 +1,141 @@
+%-----------------------------------------------------------------------------%
+\chapter{\babSatu}
+\label{bab:1}
+%-----------------------------------------------------------------------------%
+Pada bab ini, akan dijelaskan tentang topik penelitian, termasuk di dalamnya latar belakang dan permasalahan yang diselesaikan pada penelitian ini. 
+
+%-----------------------------------------------------------------------------%
+\section{Latar Belakang}
+\label{sec:latarBelakang}
+%-----------------------------------------------------------------------------%
+
+Era digital mendorong transformasi pendidikan tinggi secara pesat, terutama sejak pandemi COVID-19. Institusi perguruan tinggi berbondong-bondong mengadopsi \textit{Learning Management System} (LMS) seperti Moodle untuk mendukung pembelajaran daring dan pelaksanaan ujian jarak jauh \cite{Yulita2023}. Digitalisasi ini membawa manfaat dalam hal fleksibilitas dan jangkauan, namun juga menimbulkan tantangan baru terhadap integritas akademik. Menjaga kejujuran akademik di lingkungan pembelajaran daring kini menjadi isu krusial, karena proses evaluasi yang berpindah ke ranah online rentan disalahgunakan untuk melakukan kecurangan \cite{Kamalov2021}.
+
+Studi menunjukkan bahwa risiko kecurangan akademik cenderung meningkat dalam konteks pembelajaran daring. Lanier menemukan tingkat kecurangan yang jauh lebih tinggi pada kelas jarak jauh dibanding kelas tatap muka tradisional \cite{Lanier2006}. Sementara itu, survei terhadap mahasiswa dan dosen di Norwegia mengidentifikasi enam modus kecurangan paling umum dalam ujian daring, seperti peniruan identitas, penggunaan bahan terlarang, dan kolaborasi tidak sah \cite{Chirumamilla2020}.
+
+Dalam konteks ini, data log aktivitas Moodle menjadi sumber informasi yang sangat berharga. Moodle secara otomatis merekam jejak interaksi pengguna secara terstruktur, mencakup waktu akses, pola navigasi, durasi pengerjaan soal, hingga kesamaan jawaban antar peserta. Analisis mendalam terhadap log ini berpotensi mengungkap berbagai pola perilaku yang mengindikasikan kecurangan, seperti kolaborasi tidak sah yang terdeteksi dari kesamaan pola navigasi dan jawaban \cite{Murdoch2019}, serta berbagai anomali perilaku selama pandemi \cite{Balderas2020}.
+
+Pendekatan konvensional untuk mendeteksi kecurangan umumnya mengandalkan pemeriksaan manual atau sistem berbasis aturan sederhana. Namun, metode ini memiliki keterbatasan serius, seperti skalabilitas rendah dan kecenderungan menghasilkan \textit{false positives} \cite{MorenoMarcos2023}. 
+
+Sebagai solusi, penelitian ini mengusulkan pendekatan berbasis \textit{machine learning} yang mengintegrasikan beragam teknik analitik. Kerangka kerja yang dikembangkan berfokus pada model pembelajaran terawasi (\textit{supervised learning}) seperti \textit{Gradient Boosting}, \textit{Random Forest}, dan \textit{Neural Network}, yang diperkuat dengan metode deteksi anomali seperti \textit{Isolation Forest} dan \textit{Local Outlier Factor} sebagai teknik komplementer. Pendekatan ensemble ini dilengkapi dengan analisis matriks kesamaan (\textit{similarity matrices}) yang mencakup pola navigasi, waktu pengerjaan, dan jawaban mahasiswa, serta optimasi ambang batas (\textit{threshold optimization}) untuk meningkatkan akurasi deteksi.
+
+Integrasi berbagai teknik ini memungkinkan sistem mengenali pola-pola mencurigakan dengan lebih akurat, seperti yang ditunjukkan dalam penelitian sebelumnya menggunakan data MOOC \cite{Alexandron2019}. Penggunaan matriks kesamaan dan analisis graf juga terbukti efektif dalam mengungkap kolusi antar mahasiswa \cite{Chang2023}. Dengan demikian, penelitian ini berkontribusi pada pengembangan sistem deteksi kecurangan yang lebih komprehensif dan adaptif untuk platform Moodle.
+
+%-----------------------------------------------------------------------------%
+\section{Permasalahan}
+\label{sec:masalah}
+%-----------------------------------------------------------------------------%
+
+Kecurangan akademik merupakan permasalahan serius di institusi pendidikan tinggi karena dapat merusak integritas dan kualitas hasil pembelajaran. Dalam konteks pembelajaran \textit{e-learning} menggunakan platform Moodle, potensi terjadinya kecurangan akademik semakin tinggi seiring dengan meningkatnya penggunaan ujian daring dan tugas online. Beragam bentuk kecurangan dapat terjadi, misalnya kolusi antar mahasiswa untuk berbagi jawaban, penyalahgunaan akun, atau penggunaan sumber tidak sah selama ujian.
+
+Kompleksitas permasalahan ini menuntut pendekatan deteksi yang lebih canggih, yang tidak hanya mengandalkan satu metode, melainkan mengintegrasikan berbagai teknik analitik untuk menghasilkan deteksi yang lebih akurat dan dapat diandalkan. Diperlukan juga kemampuan untuk menganalisis berbagai aspek perilaku pengguna secara simultan, dari pola navigasi hingga kesamaan jawaban, serta mengoptimalkan parameter deteksi untuk meminimalkan kesalahan klasifikasi.
+
+%-----------------------------------------------------------------------------%
+\subsection{Pertanyaan Penelitian}
+\label{sec:definisiMasalah}
+%-----------------------------------------------------------------------------%
+Berdasarkan permasalahan yang telah diuraikan, penelitian ini berusaha menjawab pertanyaan-pertanyaan berikut:
+\begin{enumerate}
+    \item Bagaimana mengembangkan pendekatan berbasis pembelajaran mesin yang efektif untuk mendeteksi potensi kecurangan akademik dalam pembelajaran daring menggunakan data log aktivitas Moodle?
+    \item Sejauh mana integrasi berbagai teknik analisis data dapat meningkatkan akurasi dan reliabilitas deteksi perilaku mencurigakan dalam konteks pembelajaran daring?
+    \item Bagaimana karakteristik dan pola perilaku pengguna yang teridentifikasi dari hasil analisis dapat memberikan wawasan untuk meningkatkan integritas akademik dalam pembelajaran daring?
+\end{enumerate}
+
+%-----------------------------------------------------------------------------%
+\subsection{Batasan Penelitian}
+\label{sec:batasanMasalah}
+%-----------------------------------------------------------------------------%
+Untuk memastikan penelitian ini tetap terfokus dan terarah, beberapa batasan dan ruang lingkup berikut diterapkan:
+\begin{enumerate}
+    \item Lingkup Data: Data yang digunakan dalam penelitian ini dibatasi pada log aktivitas pengguna dari platform Moodle di lingkungan Fasilkom UI,dengan model dilatih menggunakan data artifisial yang karakteristiknya divalidasi terhadap data riil, dan kemudian diterapkan pada data log riil Fasilkom UI untuk analisis.
+    \item Jenis Kecurangan: Deteksi difokuskan pada pola perilaku mencurigakan yang tercermin dalam log aktivitas, matriks kesamaan, dan interaksi antar pengguna.
+    \item Metode dan Algoritma: Pendekatan utama menggunakan model pembelajaran terawasi dengan ensemble, didukung metode deteksi anomali sebagai komplemen.
+    \item Mode Implementasi: Sistem deteksi diimplementasikan dalam modus \textit{offline} untuk analisis retrospektif.
+    \item Evaluasi: Kinerja sistem dievaluasi menggunakan metrik standar seperti presisi, sensitivitas, dan skor F1.
+\end{enumerate}
+
+%-----------------------------------------------------------------------------%
+\section{Tujuan Penelitian}
+\label{sec:tujuan}
+%-----------------------------------------------------------------------------%
+Penelitian ini memiliki tujuan utama untuk mengembangkan sistem deteksi kecurangan yang komprehensif berbasis analisis log aktivitas Moodle. Secara terperinci, tujuan penelitian ini adalah:
+\begin{enumerate}
+    \item Merancang dan mengimplementasikan kerangka kerja deteksi yang mengintegrasikan model pembelajaran terawasi dengan ensemble, didukung metode deteksi anomali, analisis matriks kesamaan, dan optimasi ambang batas.
+    \item Mengembangkan dan mengevaluasi fitur-fitur baru berbasis matriks kesamaan untuk meningkatkan akurasi deteksi.
+    \item Melakukan pengujian menyeluruh terhadap kinerja sistem menggunakan data log Moodle Fasilkom UI.
+    \item Menganalisis dan menginterpretasikan pola-pola perilaku mencurigakan yang terdeteksi untuk mendukung upaya pencegahan kecurangan.
+\end{enumerate}
+
+%-----------------------------------------------------------------------------%
+\section{Manfaat Penelitian}
+\label{sec:manfaat}
+%-----------------------------------------------------------------------------%
+Penelitian ini diharapkan memberikan manfaat baik secara teoretis maupun praktis:
+\begin{enumerate}
+    \item Manfaat Teoretis:
+    \begin{enumerate}
+        \item Kontribusi pada pengembangan metode deteksi kecurangan berbasis ensemble.
+        \item Pemahaman baru tentang efektivitas matriks kesamaan dalam analisis perilaku.
+        \item Landasan metodologis untuk penelitian lanjutan.
+    \end{enumerate}
+    
+    \item Manfaat Praktis:
+    \begin{enumerate}
+        \item Sistem deteksi dini yang lebih akurat untuk institusi pendidikan.
+        \item Dukungan objektif untuk pengambilan keputusan terkait integritas akademik.
+        \item Peningkatan efektivitas monitoring pembelajaran daring.
+        \item Dasar pengembangan sistem deteksi real-time di masa depan.
+    \end{enumerate}
+\end{enumerate}
+
+%-----------------------------------------------------------------------------%
+\section{Langkah Penelitian}
+\label{sec:langkahPenelitian}
+%-----------------------------------------------------------------------------%
+
+Berikut ini adalah langkah penelitian yang dilakukan:
+
+\begin{enumerate}
+\item \textbf{Tinjauan Literatur}\\
+Mengkaji teori dan penelitian terkait deteksi kecurangan, metode ensemble, dan analisis matriks kesamaan dalam konteks pembelajaran daring.
+
+\item \textbf{Pengumpulan dan Pengolahan Data}\\
+Mengumpulkan log aktivitas Moodle, melakukan pembersihan data, dan mengekstraksi fitur-fitur relevan termasuk matriks kesamaan.
+
+\item \textbf{Pengembangan Sistem}\\
+Mengimplementasikan kerangka kerja deteksi yang mengintegrasikan model pembelajaran terawasi (\textit{Gradient Boosting}, \textit{Random Forest}, \textit{Neural Network}) sebagai komponen utama, diperkaya dengan metode deteksi anomali, analisis matriks kesamaan, dan optimasi ambang batas.
+
+\item \textbf{Evaluasi dan Analisis}\\
+Menguji kinerja sistem menggunakan metrik standar, menganalisis pola-pola yang terdeteksi, dan menginterpretasikan implikasinya.
+
+\item \textbf{Penarikan Kesimpulan}\\
+Menyimpulkan efektivitas pendekatan yang diusulkan dan merumuskan rekomendasi untuk pengembangan sistem dan penelitian lanjutan.
+\end{enumerate}
+
+%-----------------------------------------------------------------------------%
+\section{Sistematika Penulisan}
+\label{sec:sistematikaPenulisan}
+%-----------------------------------------------------------------------------%
+
+Sistematika penulisan laporan penelitian ini adalah sebagai berikut:
+
+\begin{itemize}
+\item \textbf{Bab 1 Pendahuluan}\\
+Berisi latar belakang penelitian, perumusan masalah, batasan penelitian, tujuan penelitian, manfaat penelitian, langkah-langkah penelitian, serta sistematika penulisan.
+
+\item \textbf{Bab 2 Landasan Teori dan Studi Literatur}\\
+Mengkaji konsep-konsep fundamental tentang integritas akademik dalam pembelajaran daring, teknik-teknik pembelajaran mesin untuk deteksi anomali, serta penelitian-penelitian terkait dalam bidang analisis perilaku pengguna sistem pembelajaran daring.
+
+\item \textbf{Bab 3 Metodologi dan Rancangan Sistem}\\
+Menjelaskan pendekatan metodologis yang digunakan, termasuk desain sistem deteksi, proses pengolahan data, pemilihan dan integrasi metode analisis, serta kerangka evaluasi yang diterapkan.
+
+\item \textbf{Bab 4 Implementasi dan Hasil Eksperimen}\\
+Memaparkan implementasi sistem yang dikembangkan, hasil eksperimen yang dilakukan, serta analisis kinerja berdasarkan berbagai metrik evaluasi.
+
+\item \textbf{Bab 5 Analisis dan Pembahasan}\\
+Menganalisis secara mendalam temuan-temuan penelitian, interpretasi pola perilaku yang terdeteksi, serta implikasinya terhadap praktik pembelajaran daring.
+
+\item \textbf{Bab 6 Kesimpulan dan Saran}\\
+Menyajikan kesimpulan penelitian, kontribusi yang dihasilkan, keterbatasan yang ditemui, serta rekomendasi untuk pengembangan dan penelitian lanjutan.
+\end{itemize}
+

@@ -1,0 +1,46 @@
+%
+% Halaman Abstract
+%
+% @author  Andreas Febrian
+% @version 2.2.0
+% @edit by Ichlasul Affan
+%
+
+\chapter*{ABSTRACT}
+\singlespacing
+
+\noindent \begin{tabular}{l l p{11.0cm}}
+	\ifx\blank\npmDua
+		Name&: & \penulisSatu \\
+		Study Program&: & \studyProgramSatu \\
+	\else
+		Writer 1 / Study Program&: & \penulisSatu~/ \studyProgramSatu\\
+		Writer 2 / Study Program&: & \penulisDua~/ \studyProgramDua\\
+	\fi
+	\ifx\blank\npmTiga\else
+		Writer 3 / Study Program&: & \penulisTiga~/ \studyProgramTiga\\
+	\fi
+	Title&: & \judulInggris \\
+	Counselor&: & \pembimbingSatu \\
+	\ifx\blank\pembimbingDua
+    \else
+        \ &\ & \pembimbingDua \\
+    \fi
+    \ifx\blank\pembimbingTiga
+    \else
+    	\ &\ & \pembimbingTiga \\
+    \fi
+\end{tabular} \\
+
+\vspace*{0.5cm}
+
+\noindent
+In order to strengthen academic integrity in the digital learning era, this study develops a more comprehensive cheating detection system based on machine learning. By utilizing rich and structured log data from Moodle, our system integrates multiple analytical techniques including anomaly detection, clustering, and supervised learning through advanced ensemble models. Various similarity matrices (such as navigation, timing, and answer similarity) are combined to generate new features that uncover potentially suspicious behavior patterns. In addition, the application of gradient boosting, neural network, one-class SVM, and ensemble threshold optimization provides more accurate cheating detection capabilities. Evaluation results show that this combined method enhances both sensitivity and specificity in proactively revealing potential cheating incidents, making it an effective foundation for educational institutions to minimize dishonest practices and ensure user compliance within the Moodle platform.
+
+\vspace*{0.2cm}
+
+\noindent Key words: \\
+Moodle, LMS, Activity Logs, Machine Learning, Anomaly Detection, Ensemble Methods, Threshold Optimization, Academic Integrity \\
+
+\setstretch{1.4}
+\newpage
