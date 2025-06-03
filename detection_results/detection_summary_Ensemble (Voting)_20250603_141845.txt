@@ -1,0 +1,16 @@
+Cheating Detection Summary
+Model: Ensemble (Voting)
+Timestamp: 20250603_141845
+Total Attempts: 446,720
+
+Detection Statistics:
+- High Confidence (≥80%): 131,479 (29.43%)
+- Medium Confidence (≥60%): 172,318 (38.57%)
+- Low Confidence (≥40%): 197,159 (44.13%)
+
+Probability Statistics:
+- Mean: 0.4933
+- Std: 0.2918
+- Min: 0.0023
+- Max: 0.9993
+- Median: 0.3017
