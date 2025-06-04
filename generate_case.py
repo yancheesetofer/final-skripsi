@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+#MASUKKAN KE DALAM DRAFT-SKRIPSI-TEX/src/01-body/bab3.tex
+#README
 import csv
 import json
 import os
