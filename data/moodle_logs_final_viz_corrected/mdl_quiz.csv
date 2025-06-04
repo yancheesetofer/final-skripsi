@@ -1,3 +1,5 @@
 quiz_id,course,quiz_name,timeopen,timeclose,timelimit
-1,103,Quiz 1: Intro to Python,1740909600,1741212000,5400
-2,103,Quiz 2: ML Foundations,1741428000,1741698000,2700
+1,103,Quiz 1: OS Concepts,1723802400,1723978800,3600
+2,102,Quiz 2: Software Design Patterns,1724328000,1724454000,7200
+3,103,Quiz 3: Advanced Algorithms,1724925600,1725109200,7200
+4,101,Quiz 4: DB Management,1725537600,1725739200,1800

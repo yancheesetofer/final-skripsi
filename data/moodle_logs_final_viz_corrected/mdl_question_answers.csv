@@ -1,81 +1,321 @@
 question_answers_id,questionid,answer_text,fraction
-1,1,Option B for Q1 (Quiz 1: Intro to Python),0.0
-2,1,Option D for Q1 (Quiz 1: Intro to Python),0.0
-3,1,Option C for Q1 (Quiz 1: Intro to Python),0.0
-4,1,Option A for Q1 (Quiz 1: Intro to Python),1.0
-5,2,Option B for Q2 (Quiz 1: Intro to Python),1.0
-6,2,Option D for Q2 (Quiz 1: Intro to Python),0.0
-7,2,Option A for Q2 (Quiz 1: Intro to Python),0.0
-8,2,Option C for Q2 (Quiz 1: Intro to Python),0.0
-9,3,Option A for Q3 (Quiz 1: Intro to Python),0.0
-10,3,Option C for Q3 (Quiz 1: Intro to Python),1.0
-11,3,Option D for Q3 (Quiz 1: Intro to Python),0.0
-12,3,Option B for Q3 (Quiz 1: Intro to Python),0.0
-13,4,Option B for Q4 (Quiz 1: Intro to Python),0.0
-14,4,Option C for Q4 (Quiz 1: Intro to Python),0.0
-15,4,Option D for Q4 (Quiz 1: Intro to Python),1.0
-16,4,Option A for Q4 (Quiz 1: Intro to Python),0.0
-17,5,Option B for Q5 (Quiz 1: Intro to Python),1.0
-18,5,Option D for Q5 (Quiz 1: Intro to Python),0.0
-19,5,Option A for Q5 (Quiz 1: Intro to Python),0.0
-20,5,Option C for Q5 (Quiz 1: Intro to Python),0.0
-21,6,Option C for Q6 (Quiz 1: Intro to Python),0.0
-22,6,Option D for Q6 (Quiz 1: Intro to Python),1.0
-23,6,Option A for Q6 (Quiz 1: Intro to Python),0.0
-24,6,Option B for Q6 (Quiz 1: Intro to Python),0.0
-25,7,Option B for Q7 (Quiz 1: Intro to Python),1.0
-26,7,Option A for Q7 (Quiz 1: Intro to Python),0.0
-27,7,Option C for Q7 (Quiz 1: Intro to Python),0.0
-28,7,Option D for Q7 (Quiz 1: Intro to Python),0.0
-29,8,Option B for Q8 (Quiz 1: Intro to Python),0.0
-30,8,Option A for Q8 (Quiz 1: Intro to Python),0.0
-31,8,Option C for Q8 (Quiz 1: Intro to Python),1.0
-32,8,Option D for Q8 (Quiz 1: Intro to Python),0.0
-33,9,Option C for Q9 (Quiz 1: Intro to Python),0.0
-34,9,Option D for Q9 (Quiz 1: Intro to Python),1.0
-35,9,Option A for Q9 (Quiz 1: Intro to Python),0.0
-36,9,Option B for Q9 (Quiz 1: Intro to Python),0.0
-37,10,Option D for Q10 (Quiz 1: Intro to Python),0.0
-38,10,Option C for Q10 (Quiz 1: Intro to Python),0.0
-39,10,Option A for Q10 (Quiz 1: Intro to Python),1.0
-40,10,Option B for Q10 (Quiz 1: Intro to Python),0.0
-41,11,Option B for Q1 (Quiz 2: ML Foundations),0.0
-42,11,Option C for Q1 (Quiz 2: ML Foundations),0.0
-43,11,Option D for Q1 (Quiz 2: ML Foundations),0.0
-44,11,Option A for Q1 (Quiz 2: ML Foundations),1.0
-45,12,Option D for Q2 (Quiz 2: ML Foundations),1.0
-46,12,Option C for Q2 (Quiz 2: ML Foundations),0.0
-47,12,Option B for Q2 (Quiz 2: ML Foundations),0.0
-48,12,Option A for Q2 (Quiz 2: ML Foundations),0.0
-49,13,Option B for Q3 (Quiz 2: ML Foundations),0.0
-50,13,Option C for Q3 (Quiz 2: ML Foundations),1.0
-51,13,Option A for Q3 (Quiz 2: ML Foundations),0.0
-52,13,Option D for Q3 (Quiz 2: ML Foundations),0.0
-53,14,Option B for Q4 (Quiz 2: ML Foundations),0.0
-54,14,Option C for Q4 (Quiz 2: ML Foundations),1.0
-55,14,Option A for Q4 (Quiz 2: ML Foundations),0.0
-56,14,Option D for Q4 (Quiz 2: ML Foundations),0.0
-57,15,Option C for Q5 (Quiz 2: ML Foundations),1.0
-58,15,Option A for Q5 (Quiz 2: ML Foundations),0.0
-59,15,Option B for Q5 (Quiz 2: ML Foundations),0.0
-60,15,Option D for Q5 (Quiz 2: ML Foundations),0.0
-61,16,Option D for Q6 (Quiz 2: ML Foundations),0.0
-62,16,Option A for Q6 (Quiz 2: ML Foundations),1.0
-63,16,Option C for Q6 (Quiz 2: ML Foundations),0.0
-64,16,Option B for Q6 (Quiz 2: ML Foundations),0.0
-65,17,Option D for Q7 (Quiz 2: ML Foundations),1.0
-66,17,Option C for Q7 (Quiz 2: ML Foundations),0.0
-67,17,Option B for Q7 (Quiz 2: ML Foundations),0.0
-68,17,Option A for Q7 (Quiz 2: ML Foundations),0.0
-69,18,Option B for Q8 (Quiz 2: ML Foundations),0.0
-70,18,Option D for Q8 (Quiz 2: ML Foundations),1.0
-71,18,Option C for Q8 (Quiz 2: ML Foundations),0.0
-72,18,Option A for Q8 (Quiz 2: ML Foundations),0.0
-73,19,Option D for Q9 (Quiz 2: ML Foundations),0.0
-74,19,Option C for Q9 (Quiz 2: ML Foundations),0.0
-75,19,Option B for Q9 (Quiz 2: ML Foundations),1.0
-76,19,Option A for Q9 (Quiz 2: ML Foundations),0.0
-77,20,Option A for Q10 (Quiz 2: ML Foundations),0.0
-78,20,Option D for Q10 (Quiz 2: ML Foundations),0.0
-79,20,Option B for Q10 (Quiz 2: ML Foundations),0.0
-80,20,Option C for Q10 (Quiz 2: ML Foundations),1.0
+1,1,Option B for Q1 (Quiz 1: OS Concepts),0.0
+2,1,Option D for Q1 (Quiz 1: OS Concepts),1.0
+3,1,Option A for Q1 (Quiz 1: OS Concepts),0.0
+4,1,Option C for Q1 (Quiz 1: OS Concepts),0.0
+5,2,Option D for Q2 (Quiz 1: OS Concepts),1.0
+6,2,Option B for Q2 (Quiz 1: OS Concepts),0.0
+7,2,Option C for Q2 (Quiz 1: OS Concepts),0.0
+8,2,Option A for Q2 (Quiz 1: OS Concepts),0.0
+9,3,Option C for Q3 (Quiz 1: OS Concepts),0.0
+10,3,Option D for Q3 (Quiz 1: OS Concepts),1.0
+11,3,Option A for Q3 (Quiz 1: OS Concepts),0.0
+12,3,Option B for Q3 (Quiz 1: OS Concepts),0.0
+13,4,Option B for Q4 (Quiz 1: OS Concepts),0.0
+14,4,Option C for Q4 (Quiz 1: OS Concepts),0.0
+15,4,Option A for Q4 (Quiz 1: OS Concepts),1.0
+16,4,Option D for Q4 (Quiz 1: OS Concepts),0.0
+17,5,Option A for Q5 (Quiz 1: OS Concepts),1.0
+18,5,Option D for Q5 (Quiz 1: OS Concepts),0.0
+19,5,Option B for Q5 (Quiz 1: OS Concepts),0.0
+20,5,Option C for Q5 (Quiz 1: OS Concepts),0.0
+21,6,Option B for Q6 (Quiz 1: OS Concepts),0.0
+22,6,Option D for Q6 (Quiz 1: OS Concepts),1.0
+23,6,Option C for Q6 (Quiz 1: OS Concepts),0.0
+24,6,Option A for Q6 (Quiz 1: OS Concepts),0.0
+25,7,Option B for Q7 (Quiz 1: OS Concepts),1.0
+26,7,Option C for Q7 (Quiz 1: OS Concepts),0.0
+27,7,Option D for Q7 (Quiz 1: OS Concepts),0.0
+28,7,Option A for Q7 (Quiz 1: OS Concepts),0.0
+29,8,Option A for Q8 (Quiz 1: OS Concepts),0.0
+30,8,Option C for Q8 (Quiz 1: OS Concepts),1.0
+31,8,Option D for Q8 (Quiz 1: OS Concepts),0.0
+32,8,Option B for Q8 (Quiz 1: OS Concepts),0.0
+33,9,Option C for Q9 (Quiz 1: OS Concepts),0.0
+34,9,Option B for Q9 (Quiz 1: OS Concepts),0.0
+35,9,Option A for Q9 (Quiz 1: OS Concepts),0.0
+36,9,Option D for Q9 (Quiz 1: OS Concepts),1.0
+37,10,Option A for Q10 (Quiz 1: OS Concepts),0.0
+38,10,Option C for Q10 (Quiz 1: OS Concepts),0.0
+39,10,Option B for Q10 (Quiz 1: OS Concepts),0.0
+40,10,Option D for Q10 (Quiz 1: OS Concepts),1.0
+41,11,Option C for Q11 (Quiz 1: OS Concepts),0.0
+42,11,Option B for Q11 (Quiz 1: OS Concepts),0.0
+43,11,Option D for Q11 (Quiz 1: OS Concepts),1.0
+44,11,Option A for Q11 (Quiz 1: OS Concepts),0.0
+45,12,Option C for Q12 (Quiz 1: OS Concepts),0.0
+46,12,Option D for Q12 (Quiz 1: OS Concepts),1.0
+47,12,Option A for Q12 (Quiz 1: OS Concepts),0.0
+48,12,Option B for Q12 (Quiz 1: OS Concepts),0.0
+49,13,Option C for Q13 (Quiz 1: OS Concepts),1.0
+50,13,Option D for Q13 (Quiz 1: OS Concepts),0.0
+51,13,Option A for Q13 (Quiz 1: OS Concepts),0.0
+52,13,Option B for Q13 (Quiz 1: OS Concepts),0.0
+53,14,Option B for Q14 (Quiz 1: OS Concepts),0.0
+54,14,Option C for Q14 (Quiz 1: OS Concepts),1.0
+55,14,Option D for Q14 (Quiz 1: OS Concepts),0.0
+56,14,Option A for Q14 (Quiz 1: OS Concepts),0.0
+57,15,Option B for Q15 (Quiz 1: OS Concepts),0.0
+58,15,Option C for Q15 (Quiz 1: OS Concepts),0.0
+59,15,Option A for Q15 (Quiz 1: OS Concepts),0.0
+60,15,Option D for Q15 (Quiz 1: OS Concepts),1.0
+61,16,Option A for Q16 (Quiz 1: OS Concepts),0.0
+62,16,Option C for Q16 (Quiz 1: OS Concepts),0.0
+63,16,Option B for Q16 (Quiz 1: OS Concepts),0.0
+64,16,Option D for Q16 (Quiz 1: OS Concepts),1.0
+65,17,Option B for Q17 (Quiz 1: OS Concepts),0.0
+66,17,Option D for Q17 (Quiz 1: OS Concepts),0.0
+67,17,Option C for Q17 (Quiz 1: OS Concepts),1.0
+68,17,Option A for Q17 (Quiz 1: OS Concepts),0.0
+69,18,Option D for Q18 (Quiz 1: OS Concepts),0.0
+70,18,Option C for Q18 (Quiz 1: OS Concepts),1.0
+71,18,Option A for Q18 (Quiz 1: OS Concepts),0.0
+72,18,Option B for Q18 (Quiz 1: OS Concepts),0.0
+73,19,Option C for Q19 (Quiz 1: OS Concepts),0.0
+74,19,Option A for Q19 (Quiz 1: OS Concepts),1.0
+75,19,Option D for Q19 (Quiz 1: OS Concepts),0.0
+76,19,Option B for Q19 (Quiz 1: OS Concepts),0.0
+77,20,Option D for Q20 (Quiz 1: OS Concepts),0.0
+78,20,Option C for Q20 (Quiz 1: OS Concepts),0.0
+79,20,Option B for Q20 (Quiz 1: OS Concepts),1.0
+80,20,Option A for Q20 (Quiz 1: OS Concepts),0.0
+81,21,Option A for Q1 (Quiz 2: Software Design Patterns),0.0
+82,21,Option C for Q1 (Quiz 2: Software Design Patterns),1.0
+83,21,Option D for Q1 (Quiz 2: Software Design Patterns),0.0
+84,21,Option B for Q1 (Quiz 2: Software Design Patterns),0.0
+85,22,Option B for Q2 (Quiz 2: Software Design Patterns),0.0
+86,22,Option D for Q2 (Quiz 2: Software Design Patterns),0.0
+87,22,Option A for Q2 (Quiz 2: Software Design Patterns),0.0
+88,22,Option C for Q2 (Quiz 2: Software Design Patterns),1.0
+89,23,Option B for Q3 (Quiz 2: Software Design Patterns),0.0
+90,23,Option C for Q3 (Quiz 2: Software Design Patterns),0.0
+91,23,Option D for Q3 (Quiz 2: Software Design Patterns),1.0
+92,23,Option A for Q3 (Quiz 2: Software Design Patterns),0.0
+93,24,Option C for Q4 (Quiz 2: Software Design Patterns),0.0
+94,24,Option B for Q4 (Quiz 2: Software Design Patterns),0.0
+95,24,Option D for Q4 (Quiz 2: Software Design Patterns),1.0
+96,24,Option A for Q4 (Quiz 2: Software Design Patterns),0.0
+97,25,Option B for Q5 (Quiz 2: Software Design Patterns),0.0
+98,25,Option A for Q5 (Quiz 2: Software Design Patterns),0.0
+99,25,Option D for Q5 (Quiz 2: Software Design Patterns),1.0
+100,25,Option C for Q5 (Quiz 2: Software Design Patterns),0.0
+101,26,Option C for Q6 (Quiz 2: Software Design Patterns),1.0
+102,26,Option A for Q6 (Quiz 2: Software Design Patterns),0.0
+103,26,Option D for Q6 (Quiz 2: Software Design Patterns),0.0
+104,26,Option B for Q6 (Quiz 2: Software Design Patterns),0.0
+105,27,Option B for Q7 (Quiz 2: Software Design Patterns),0.0
+106,27,Option A for Q7 (Quiz 2: Software Design Patterns),0.0
+107,27,Option D for Q7 (Quiz 2: Software Design Patterns),1.0
+108,27,Option C for Q7 (Quiz 2: Software Design Patterns),0.0
+109,28,Option A for Q8 (Quiz 2: Software Design Patterns),0.0
+110,28,Option B for Q8 (Quiz 2: Software Design Patterns),0.0
+111,28,Option D for Q8 (Quiz 2: Software Design Patterns),1.0
+112,28,Option C for Q8 (Quiz 2: Software Design Patterns),0.0
+113,29,Option D for Q9 (Quiz 2: Software Design Patterns),0.0
+114,29,Option B for Q9 (Quiz 2: Software Design Patterns),0.0
+115,29,Option C for Q9 (Quiz 2: Software Design Patterns),1.0
+116,29,Option A for Q9 (Quiz 2: Software Design Patterns),0.0
+117,30,Option A for Q10 (Quiz 2: Software Design Patterns),0.0
+118,30,Option D for Q10 (Quiz 2: Software Design Patterns),1.0
+119,30,Option C for Q10 (Quiz 2: Software Design Patterns),0.0
+120,30,Option B for Q10 (Quiz 2: Software Design Patterns),0.0
+121,31,Option B for Q11 (Quiz 2: Software Design Patterns),1.0
+122,31,Option A for Q11 (Quiz 2: Software Design Patterns),0.0
+123,31,Option C for Q11 (Quiz 2: Software Design Patterns),0.0
+124,31,Option D for Q11 (Quiz 2: Software Design Patterns),0.0
+125,32,Option D for Q12 (Quiz 2: Software Design Patterns),0.0
+126,32,Option A for Q12 (Quiz 2: Software Design Patterns),0.0
+127,32,Option C for Q12 (Quiz 2: Software Design Patterns),1.0
+128,32,Option B for Q12 (Quiz 2: Software Design Patterns),0.0
+129,33,Option C for Q13 (Quiz 2: Software Design Patterns),0.0
+130,33,Option D for Q13 (Quiz 2: Software Design Patterns),0.0
+131,33,Option A for Q13 (Quiz 2: Software Design Patterns),1.0
+132,33,Option B for Q13 (Quiz 2: Software Design Patterns),0.0
+133,34,Option C for Q14 (Quiz 2: Software Design Patterns),0.0
+134,34,Option D for Q14 (Quiz 2: Software Design Patterns),1.0
+135,34,Option B for Q14 (Quiz 2: Software Design Patterns),0.0
+136,34,Option A for Q14 (Quiz 2: Software Design Patterns),0.0
+137,35,Option B for Q15 (Quiz 2: Software Design Patterns),0.0
+138,35,Option A for Q15 (Quiz 2: Software Design Patterns),1.0
+139,35,Option C for Q15 (Quiz 2: Software Design Patterns),0.0
+140,35,Option D for Q15 (Quiz 2: Software Design Patterns),0.0
+141,36,Option C for Q16 (Quiz 2: Software Design Patterns),0.0
+142,36,Option A for Q16 (Quiz 2: Software Design Patterns),1.0
+143,36,Option D for Q16 (Quiz 2: Software Design Patterns),0.0
+144,36,Option B for Q16 (Quiz 2: Software Design Patterns),0.0
+145,37,Option B for Q17 (Quiz 2: Software Design Patterns),0.0
+146,37,Option A for Q17 (Quiz 2: Software Design Patterns),0.0
+147,37,Option C for Q17 (Quiz 2: Software Design Patterns),1.0
+148,37,Option D for Q17 (Quiz 2: Software Design Patterns),0.0
+149,38,Option C for Q18 (Quiz 2: Software Design Patterns),0.0
+150,38,Option B for Q18 (Quiz 2: Software Design Patterns),1.0
+151,38,Option A for Q18 (Quiz 2: Software Design Patterns),0.0
+152,38,Option D for Q18 (Quiz 2: Software Design Patterns),0.0
+153,39,Option D for Q19 (Quiz 2: Software Design Patterns),0.0
+154,39,Option A for Q19 (Quiz 2: Software Design Patterns),1.0
+155,39,Option B for Q19 (Quiz 2: Software Design Patterns),0.0
+156,39,Option C for Q19 (Quiz 2: Software Design Patterns),0.0
+157,40,Option D for Q20 (Quiz 2: Software Design Patterns),0.0
+158,40,Option A for Q20 (Quiz 2: Software Design Patterns),0.0
+159,40,Option B for Q20 (Quiz 2: Software Design Patterns),1.0
+160,40,Option C for Q20 (Quiz 2: Software Design Patterns),0.0
+161,41,Option B for Q1 (Quiz 3: Advanced Algorithms),0.0
+162,41,Option D for Q1 (Quiz 3: Advanced Algorithms),0.0
+163,41,Option A for Q1 (Quiz 3: Advanced Algorithms),1.0
+164,41,Option C for Q1 (Quiz 3: Advanced Algorithms),0.0
+165,42,Option B for Q2 (Quiz 3: Advanced Algorithms),0.0
+166,42,Option D for Q2 (Quiz 3: Advanced Algorithms),0.0
+167,42,Option A for Q2 (Quiz 3: Advanced Algorithms),0.0
+168,42,Option C for Q2 (Quiz 3: Advanced Algorithms),1.0
+169,43,Option B for Q3 (Quiz 3: Advanced Algorithms),0.0
+170,43,Option A for Q3 (Quiz 3: Advanced Algorithms),0.0
+171,43,Option C for Q3 (Quiz 3: Advanced Algorithms),0.0
+172,43,Option D for Q3 (Quiz 3: Advanced Algorithms),1.0
+173,44,Option D for Q4 (Quiz 3: Advanced Algorithms),1.0
+174,44,Option B for Q4 (Quiz 3: Advanced Algorithms),0.0
+175,44,Option C for Q4 (Quiz 3: Advanced Algorithms),0.0
+176,44,Option A for Q4 (Quiz 3: Advanced Algorithms),0.0
+177,45,Option A for Q5 (Quiz 3: Advanced Algorithms),1.0
+178,45,Option C for Q5 (Quiz 3: Advanced Algorithms),0.0
+179,45,Option D for Q5 (Quiz 3: Advanced Algorithms),0.0
+180,45,Option B for Q5 (Quiz 3: Advanced Algorithms),0.0
+181,46,Option B for Q6 (Quiz 3: Advanced Algorithms),0.0
+182,46,Option A for Q6 (Quiz 3: Advanced Algorithms),0.0
+183,46,Option D for Q6 (Quiz 3: Advanced Algorithms),1.0
+184,46,Option C for Q6 (Quiz 3: Advanced Algorithms),0.0
+185,47,Option A for Q7 (Quiz 3: Advanced Algorithms),0.0
+186,47,Option D for Q7 (Quiz 3: Advanced Algorithms),1.0
+187,47,Option B for Q7 (Quiz 3: Advanced Algorithms),0.0
+188,47,Option C for Q7 (Quiz 3: Advanced Algorithms),0.0
+189,48,Option B for Q8 (Quiz 3: Advanced Algorithms),0.0
+190,48,Option A for Q8 (Quiz 3: Advanced Algorithms),0.0
+191,48,Option C for Q8 (Quiz 3: Advanced Algorithms),1.0
+192,48,Option D for Q8 (Quiz 3: Advanced Algorithms),0.0
+193,49,Option D for Q9 (Quiz 3: Advanced Algorithms),0.0
+194,49,Option A for Q9 (Quiz 3: Advanced Algorithms),0.0
+195,49,Option B for Q9 (Quiz 3: Advanced Algorithms),0.0
+196,49,Option C for Q9 (Quiz 3: Advanced Algorithms),1.0
+197,50,Option A for Q10 (Quiz 3: Advanced Algorithms),0.0
+198,50,Option D for Q10 (Quiz 3: Advanced Algorithms),0.0
+199,50,Option B for Q10 (Quiz 3: Advanced Algorithms),0.0
+200,50,Option C for Q10 (Quiz 3: Advanced Algorithms),1.0
+201,51,Option D for Q11 (Quiz 3: Advanced Algorithms),0.0
+202,51,Option A for Q11 (Quiz 3: Advanced Algorithms),0.0
+203,51,Option C for Q11 (Quiz 3: Advanced Algorithms),1.0
+204,51,Option B for Q11 (Quiz 3: Advanced Algorithms),0.0
+205,52,Option B for Q12 (Quiz 3: Advanced Algorithms),0.0
+206,52,Option D for Q12 (Quiz 3: Advanced Algorithms),0.0
+207,52,Option A for Q12 (Quiz 3: Advanced Algorithms),1.0
+208,52,Option C for Q12 (Quiz 3: Advanced Algorithms),0.0
+209,53,Option B for Q13 (Quiz 3: Advanced Algorithms),0.0
+210,53,Option C for Q13 (Quiz 3: Advanced Algorithms),0.0
+211,53,Option D for Q13 (Quiz 3: Advanced Algorithms),0.0
+212,53,Option A for Q13 (Quiz 3: Advanced Algorithms),1.0
+213,54,Option C for Q14 (Quiz 3: Advanced Algorithms),0.0
+214,54,Option A for Q14 (Quiz 3: Advanced Algorithms),0.0
+215,54,Option B for Q14 (Quiz 3: Advanced Algorithms),0.0
+216,54,Option D for Q14 (Quiz 3: Advanced Algorithms),1.0
+217,55,Option C for Q15 (Quiz 3: Advanced Algorithms),0.0
+218,55,Option B for Q15 (Quiz 3: Advanced Algorithms),1.0
+219,55,Option D for Q15 (Quiz 3: Advanced Algorithms),0.0
+220,55,Option A for Q15 (Quiz 3: Advanced Algorithms),0.0
+221,56,Option B for Q16 (Quiz 3: Advanced Algorithms),1.0
+222,56,Option C for Q16 (Quiz 3: Advanced Algorithms),0.0
+223,56,Option A for Q16 (Quiz 3: Advanced Algorithms),0.0
+224,56,Option D for Q16 (Quiz 3: Advanced Algorithms),0.0
+225,57,Option A for Q17 (Quiz 3: Advanced Algorithms),0.0
+226,57,Option D for Q17 (Quiz 3: Advanced Algorithms),0.0
+227,57,Option B for Q17 (Quiz 3: Advanced Algorithms),0.0
+228,57,Option C for Q17 (Quiz 3: Advanced Algorithms),1.0
+229,58,Option A for Q18 (Quiz 3: Advanced Algorithms),0.0
+230,58,Option C for Q18 (Quiz 3: Advanced Algorithms),1.0
+231,58,Option B for Q18 (Quiz 3: Advanced Algorithms),0.0
+232,58,Option D for Q18 (Quiz 3: Advanced Algorithms),0.0
+233,59,Option B for Q19 (Quiz 3: Advanced Algorithms),0.0
+234,59,Option A for Q19 (Quiz 3: Advanced Algorithms),0.0
+235,59,Option C for Q19 (Quiz 3: Advanced Algorithms),1.0
+236,59,Option D for Q19 (Quiz 3: Advanced Algorithms),0.0
+237,60,Option A for Q20 (Quiz 3: Advanced Algorithms),0.0
+238,60,Option C for Q20 (Quiz 3: Advanced Algorithms),0.0
+239,60,Option D for Q20 (Quiz 3: Advanced Algorithms),1.0
+240,60,Option B for Q20 (Quiz 3: Advanced Algorithms),0.0
+241,61,Option C for Q1 (Quiz 4: DB Management),0.0
+242,61,Option D for Q1 (Quiz 4: DB Management),1.0
+243,61,Option A for Q1 (Quiz 4: DB Management),0.0
+244,61,Option B for Q1 (Quiz 4: DB Management),0.0
+245,62,Option A for Q2 (Quiz 4: DB Management),0.0
+246,62,Option C for Q2 (Quiz 4: DB Management),0.0
+247,62,Option B for Q2 (Quiz 4: DB Management),0.0
+248,62,Option D for Q2 (Quiz 4: DB Management),1.0
+249,63,Option B for Q3 (Quiz 4: DB Management),0.0
+250,63,Option A for Q3 (Quiz 4: DB Management),0.0
+251,63,Option C for Q3 (Quiz 4: DB Management),0.0
+252,63,Option D for Q3 (Quiz 4: DB Management),1.0
+253,64,Option A for Q4 (Quiz 4: DB Management),0.0
+254,64,Option D for Q4 (Quiz 4: DB Management),1.0
+255,64,Option B for Q4 (Quiz 4: DB Management),0.0
+256,64,Option C for Q4 (Quiz 4: DB Management),0.0
+257,65,Option C for Q5 (Quiz 4: DB Management),0.0
+258,65,Option B for Q5 (Quiz 4: DB Management),0.0
+259,65,Option A for Q5 (Quiz 4: DB Management),1.0
+260,65,Option D for Q5 (Quiz 4: DB Management),0.0
+261,66,Option C for Q6 (Quiz 4: DB Management),1.0
+262,66,Option A for Q6 (Quiz 4: DB Management),0.0
+263,66,Option D for Q6 (Quiz 4: DB Management),0.0
+264,66,Option B for Q6 (Quiz 4: DB Management),0.0
+265,67,Option C for Q7 (Quiz 4: DB Management),0.0
+266,67,Option B for Q7 (Quiz 4: DB Management),1.0
+267,67,Option D for Q7 (Quiz 4: DB Management),0.0
+268,67,Option A for Q7 (Quiz 4: DB Management),0.0
+269,68,Option A for Q8 (Quiz 4: DB Management),0.0
+270,68,Option D for Q8 (Quiz 4: DB Management),1.0
+271,68,Option B for Q8 (Quiz 4: DB Management),0.0
+272,68,Option C for Q8 (Quiz 4: DB Management),0.0
+273,69,Option A for Q9 (Quiz 4: DB Management),0.0
+274,69,Option C for Q9 (Quiz 4: DB Management),0.0
+275,69,Option B for Q9 (Quiz 4: DB Management),1.0
+276,69,Option D for Q9 (Quiz 4: DB Management),0.0
+277,70,Option C for Q10 (Quiz 4: DB Management),1.0
+278,70,Option D for Q10 (Quiz 4: DB Management),0.0
+279,70,Option B for Q10 (Quiz 4: DB Management),0.0
+280,70,Option A for Q10 (Quiz 4: DB Management),0.0
+281,71,Option B for Q11 (Quiz 4: DB Management),1.0
+282,71,Option C for Q11 (Quiz 4: DB Management),0.0
+283,71,Option D for Q11 (Quiz 4: DB Management),0.0
+284,71,Option A for Q11 (Quiz 4: DB Management),0.0
+285,72,Option B for Q12 (Quiz 4: DB Management),0.0
+286,72,Option A for Q12 (Quiz 4: DB Management),1.0
+287,72,Option C for Q12 (Quiz 4: DB Management),0.0
+288,72,Option D for Q12 (Quiz 4: DB Management),0.0
+289,73,Option B for Q13 (Quiz 4: DB Management),0.0
+290,73,Option D for Q13 (Quiz 4: DB Management),1.0
+291,73,Option A for Q13 (Quiz 4: DB Management),0.0
+292,73,Option C for Q13 (Quiz 4: DB Management),0.0
+293,74,Option D for Q14 (Quiz 4: DB Management),0.0
+294,74,Option C for Q14 (Quiz 4: DB Management),0.0
+295,74,Option B for Q14 (Quiz 4: DB Management),0.0
+296,74,Option A for Q14 (Quiz 4: DB Management),1.0
+297,75,Option C for Q15 (Quiz 4: DB Management),1.0
+298,75,Option D for Q15 (Quiz 4: DB Management),0.0
+299,75,Option A for Q15 (Quiz 4: DB Management),0.0
+300,75,Option B for Q15 (Quiz 4: DB Management),0.0
+301,76,Option D for Q16 (Quiz 4: DB Management),0.0
+302,76,Option C for Q16 (Quiz 4: DB Management),0.0
+303,76,Option B for Q16 (Quiz 4: DB Management),1.0
+304,76,Option A for Q16 (Quiz 4: DB Management),0.0
+305,77,Option D for Q17 (Quiz 4: DB Management),1.0
+306,77,Option C for Q17 (Quiz 4: DB Management),0.0
+307,77,Option B for Q17 (Quiz 4: DB Management),0.0
+308,77,Option A for Q17 (Quiz 4: DB Management),0.0
+309,78,Option B for Q18 (Quiz 4: DB Management),0.0
+310,78,Option A for Q18 (Quiz 4: DB Management),0.0
+311,78,Option C for Q18 (Quiz 4: DB Management),0.0
+312,78,Option D for Q18 (Quiz 4: DB Management),1.0
+313,79,Option A for Q19 (Quiz 4: DB Management),0.0
+314,79,Option B for Q19 (Quiz 4: DB Management),0.0
+315,79,Option D for Q19 (Quiz 4: DB Management),0.0
+316,79,Option C for Q19 (Quiz 4: DB Management),1.0
+317,80,Option D for Q20 (Quiz 4: DB Management),1.0
+318,80,Option A for Q20 (Quiz 4: DB Management),0.0
+319,80,Option B for Q20 (Quiz 4: DB Management),0.0
+320,80,Option C for Q20 (Quiz 4: DB Management),0.0
