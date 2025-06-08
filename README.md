@@ -118,6 +118,9 @@ moodle-cheating-detection/
 │   ├── core_processor.py             # Core data processing functions
 │   └── artifacts/                    # Saved preprocessing artifacts
 ├── data/                             # Data directory (created by you)
+│   ├── synthetic_moodle_logs/        # Generated synthetic data
+│   ├── real_moodle_logs/            # Real Moodle data (copy from institute_log_legacy/lumbung_sampled/)
+│   └── processed_*.csv              # Processed feature files
 ├── results/                          # Model training outputs
 ├── detection_results/                # Detection results
 └── draft-skripsi-tex/               # LaTeX thesis files
@@ -159,6 +162,7 @@ python -m preprocessing.main_preprocessor \
     --ground_truth_path data/synthetic_ground_truth.csv
 
 # For real data (detection mode) - if you have real Moodle data
+# Note: Copy files from institute_log_legacy/lumbung_sampled/ to data/real_moodle_logs/
 python -m preprocessing.main_preprocessor \
     --data_input_dir data/real_moodle_logs \
     --output_feature_path data/processed_real_features_for_detection_V2.csv
