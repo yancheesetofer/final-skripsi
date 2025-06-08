@@ -3,4 +3,10 @@ description:
 globs: 
 alwaysApply: true
 ---
-always prefer pdf over other images format.
+- You might want to use python script when creating intuitive figures.
+you never need to remove the graph generator script! just make sure the script name is self explanatory
+- When adding figures, always add to draft-skripsi-tex/newfigures/
+- Always prefer PDF over other image formats for figures
+- Clearly distinguish between real and synthetic data in visualizations
+- Ensure all figures are labeled and described accurately
+- Maintain consistency in figure styles and colors across the document

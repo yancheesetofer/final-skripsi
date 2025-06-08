@@ -6,16 +6,31 @@ Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem d
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.95\textwidth]{figures/pipeline_overview.pdf}
-    \caption{Pipeline Metodologi Penelitian Deteksi Kecurangan Berbasis AI}
-    \label{fig:pipeline_overview}
+    \includegraphics[width=0.95\textwidth]{newfigures/research_methodology_stages.pdf}
+    \caption{Kerangka Metodologi Penelitian Deteksi Kecurangan}
+    \label{fig:research_stages}
 \end{figure}
 
-Gambar \ref{fig:pipeline_overview} menunjukkan kerangka metodologis penelitian yang dikembangkan dalam penelitian ini. Metodologi dimulai dari dua sumber data utama: data log Moodle riil yang mencakup 446,720 events dari 5,562 pengguna, dan data artifisial yang terdiri dari 800 sampel dengan ground truth yang telah didefinisikan. Kedua jenis data ini melalui tahap pra-pemrosesan untuk pembersihan dan normalisasi, kemudian diekstraksi menjadi 35 fitur awal. Melalui analisis Variance Inflation Factor (VIF), fitur-fitur ini direduksi menjadi 8 fitur stabil yang memiliki kolinearitas rendah dan importance tinggi. Fitur-fitur terpilih kemudian digunakan untuk melatih ensemble model yang terdiri dari Random Forest, SVM, Neural Network, dan Gradient Boosting. Secara paralel, analisis similaritas berbasis graph network dilakukan untuk mendeteksi kelompok kecurangan. Hasil akhir dari pipeline ini adalah deteksi 131,479 percobaan ujian yang terindikasi kecurangan dari total 446,720 percobaan yang dianalisis.
+Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang terdiri dari enam fase utama yang saling berkaitan. Metodologi dirancang dengan pendekatan sistematis yang memungkinkan validasi dan reproducibility hasil penelitian. Setiap fase dirancang untuk menjawab aspek-aspek tertentu dari research questions yang telah dirumuskan pada Bab 1.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.98\textwidth]{newfigures/technical_pipeline_flow_final.pdf}
+    \caption{Pipeline Alur Data Deteksi Kecurangan}
+    \label{fig:technical_pipeline}
+\end{figure}
+
+Gambar \ref{fig:technical_pipeline} menerjemahkan kerangka metodologi tingkat tinggi menjadi implementasi teknis yang spesifik. Diagram ini menampilkan alur teknis pemrosesan data dengan transparansi penuh mengenai sumber data dan perbedaan pemrosesan antara data riil dan artifisial. 
+
+Pipeline dimulai dari dua sumber data: \textbf{Data Riil ITF} berisi 446,720 events dari aktivitas nyata mahasiswa, dan \textbf{Data Artifisial} dengan 800 sampel terkontrol beserta ground truth. Kedua jenis data diproses melalui \textbf{Preprocessing Pipeline} yang terdiri dari empat modul terintegrasi: Data Loading, Core Preprocessing, Feature Engineering, dan VIF \& Scaling.
+
+Perbedaan fundamental terletak pada mode operasi dual-processing: data artifisial menggunakan \textit{Training Mode} untuk membangun dan menyimpan artifacts (scaler, feature selector, imputer), sedangkan data riil menggunakan \textit{Detection Mode} dengan memanfaatkan artifacts yang telah disimpan. Strategi ini memastikan konsistensi transformasi dan mencegah data leakage. Proses feature engineering berhasil mereduksi 35 fitur awal menjadi 8 fitur stabil melalui analisis VIF. Pipeline menghasilkan model ensemble terlatih dan deteksi 131,479 percobaan ujian yang terindikasi kecurangan dengan tingkat deteksi 29.43%.
+
+Kombinasi kedua diagram ini memberikan pemahaman komprehensif: Gambar \ref{fig:research_stages} menyediakan roadmap metodologis untuk memandu pembaca melalui setiap bagian Bab 3, sedangkan Gambar \ref{fig:technical_pipeline} memberikan detail implementasi teknis yang memungkinkan reproduksi penelitian.
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
-\section{Desain Penelitian}
+\section{Kerangka Metodologi Penelitian}
 \label{sec:desainPenelitian}
 %-----------------------------------------------------------------------------%
 Penelitian ini mengadopsi pendekatan eksperimental dengan kombinasi data artifisial dan riil untuk mengembangkan sistem deteksi kecurangan yang robust. Desain penelitian dirancang untuk menjawab pertanyaan penelitian utama: bagaimana mengembangkan sistem deteksi kecurangan otomatis yang akurat untuk platform Moodle menggunakan pendekatan machine learning?
@@ -35,33 +50,83 @@ Penelitian dilakukan melalui beberapa tahapan sistematis:
     \item \textbf{Evaluasi dan Validasi:} Pengujian model pada data artifisial dengan ground truth dan aplikasi pada data riil untuk validasi praktis.
 \end{enumerate}
 
+Setiap fase dalam kerangka metodologi yang ditampilkan pada Gambar \ref{fig:comprehensive_pipeline} dirancang dengan pendekatan sistematis yang memungkinkan validasi dan reproducibility hasil penelitian. Keunggulan dari desain ini adalah transparansi penuh mengenai alur data yang berbeda antara mode training dan detection, sehingga memberikan pemahaman yang jelas tentang bagaimana sistem beroperasi dalam kondisi riil. Setiap fase dalam kerangka ini akan diuraikan secara detail dalam bagian-bagian berikutnya untuk memberikan pemahaman komprehensif tentang proses penelitian yang dilakukan.
+
 \subsection{Hipotesis Penelitian}
 Penelitian ini didasarkan pada hipotesis bahwa pola kecurangan akademik dalam ujian daring dapat diidentifikasi melalui analisis multi-dimensi dari data log aktivitas pengguna. Secara spesifik:
 \begin{itemize}
-    \item Kolaborasi kecurangan akan menghasilkan pola similaritas yang dapat dideteksi dalam navigasi, timing, dan jawaban.
+    \item Kolaborasi kecurangan akan menghasilkan pola similaritas yang dapat dideteksi dalam navigasi, timing, dan jawaban dengan tingkat akurasi tinggi (>90\%).
     \item Ensemble model akan memberikan performa superior dibandingkan model tunggal dalam mendeteksi berbagai strategi kecurangan.
     \item Dataset dengan minimal 500-1000 sampel diperlukan untuk mencapai performa deteksi yang optimal.
+    \item Model yang dilatih pada data artifisial dapat menggeneralisasi dengan baik pada data riil skala besar.
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
-\section{Tinjauan Pustaka}
+\section{Studi Literatur dan Analisis Gap}
 \label{sec:tinjauanPustaka}
-% Hal baru di template 2017
 %-----------------------------------------------------------------------------%
 Studi literatur terkait materi-materi yang relevan dengan penelitian dilakukan untuk menunjang penelitian. Topik-topik relevan yang dipelajari ialah \textit{Moodle}, \textit{Machine Learning}, Deteksi non-compliance, \textit{Log Processing}, dan \textit{eLearning}. Hasil dari studi literatur ini sebagai landasan dalam pengembangan model.
 
 %-----------------------------------------------------------------------------%
-\section{Sumber Data Log}
+\section{Akuisisi Data dan Perancangan Data Artifisial}
 \label{sec:sumberDataLog}
 %-----------------------------------------------------------------------------%
-Bagian ini menguraikan secara mendalam mengenai dua jenis data utama yang digunakan dalam penelitian: data log aktivitas sistem \textit{Moodle} dan data artifisial. 
+Penelitian ini menggunakan pendekatan dual-data strategy yang menggabungkan data riil dan data artifisial untuk mengoptimalkan pengembangan model deteksi kecurangan. Strategi ini memungkinkan kontrol penuh terhadap ground truth dalam fase pelatihan sambil mempertahankan validitas real-world dalam fase evaluasi.
 
-\textbf{Data Log Moodle:} \\
-Data log \textit{Moodle} diambil langsung dari sistem yang dikelola oleh tim ITF Fasilkom UI dan disimpan di Lumbung Storage Cloud. Data tersebut telah melalui proses anonimisasi dengan menggantikan identitas asli pengguna (seperti \textit{username} dan nama lengkap) dengan \textit{user\_id}, guna menjaga privasi pengguna.
+%-----------------------------------------------------------------------------%
+\section{Pipeline Preprocessing Data}
+\label{sec:pipelinePreprocessing}
+%-----------------------------------------------------------------------------%
+Sesuai dengan yang ditampilkan pada Phase 3 dalam Gambar \ref{fig:comprehensive_pipeline}, pipeline preprocessing data merupakan komponen krusial yang memproses kedua jenis data (riil dan artifisial) melalui empat modul terintegrasi. Pipeline ini dirancang untuk mendukung dua mode operasi yang berbeda: \textit{training mode} untuk data artifisial dan \textit{detection mode} untuk data riil.
+
+\subsection{Arsitektur Pipeline Preprocessing}
+\label{sec:arsitekturPipelinePreprocessing}
+
+Pipeline preprocessing terdiri dari empat modul yang saling terintegrasi:
+
+\textbf{Module I - Data Loading:} \\
+Modul ini bertanggung jawab untuk memuat dan memvalidasi data dari berbagai tabel Moodle (mdl\_quiz\_attempts, mdl\_question\_attempt\_steps, mdl\_question\_attempt\_step\_data, dll.) dengan skema yang telah didefinisikan. Validasi meliputi pemeriksaan tipe data, konsistensi referensial, dan penanganan data yang hilang atau corrupt.
+
+\textbf{Module II - Core Preprocessing:} \\
+Melakukan pembersihan dan normalisasi data fundamental, termasuk unifikasi timestamp ke format POSIX, penggabungan tabel-tabel terkait untuk membentuk event log yang komprehensif, dan filtering data sesuai kriteria penelitian (misalnya, hanya quiz attempts yang completed).
+
+\textbf{Module III - Feature Engineering:} \\
+Mengekstraksi fitur-fitur behavioral dari event log, mencakup:
+\begin{itemize}
+    \item \textbf{Intra-Attempt Features:} Total duration, number of actions, step duration statistics
+    \item \textbf{Sequential Features:} Navigation patterns, revisit counts, linearity measures, entropy
+    \item \textbf{Similarity Features:} Inter-user similarity berdasarkan navigation, timing, dan answer patterns menggunakan Levenshtein distance dan korelasi statistik
+    \item \textbf{Comparative Features:} Z-score normalization untuk membandingkan perilaku individual dengan rata-rata quiz
+\end{itemize}
+
+\textbf{Module IV - Feature Post-Processing:} \\
+Menerapkan feature selection dan normalization lanjutan:
+\begin{itemize}
+    \item \textbf{Missing Value Imputation:} Menggunakan strategi mean imputation dengan SimpleImputer
+    \item \textbf{Collinearity Analysis:} Analisis VIF (Variance Inflation Factor) untuk mengidentifikasi dan menghilangkan fitur dengan multicollinearity tinggi (VIF > 10)
+    \item \textbf{Variance Threshold Selection:} Menghilangkan fitur dengan variance rendah (threshold = 0.01)
+    \item \textbf{Feature Scaling:} StandardScaler untuk normalisasi distribusi fitur
+\end{itemize}
+
+\subsection{Dual Mode Processing Strategy}
+\label{sec:dualModeProcessingStrategy}
+
+Perbedaan kunci dalam pemrosesan data riil dan artifisial terletak pada mode operasi pipeline:
+
+\textbf{Training Mode (Data Artifisial):} \\
+Data artifisial diproses dalam training mode dimana semua modul pipeline melakukan fitting terhadap data dan menyimpan artifacts (imputer, scaler, feature selector, selected feature lists) ke dalam direktori preprocessing/artifacts/. Mode ini memungkinkan eksplorasi dan optimasi parameter preprocessing untuk mencapai performa model optimal.
+
+\textbf{Detection Mode (Data Riil):} \\
+Data riil diproses dalam detection mode dimana pipeline menggunakan artifacts yang telah disimpan dari training mode. Hal ini memastikan konsistensi transformasi dan mencegah data leakage. Model preprocessing yang sama yang digunakan untuk training akan diterapkan secara identik pada data riil untuk detection.
+
+Strategi dual mode ini memastikan bahwa model yang dilatih pada data artifisial dapat diterapkan secara valid pada data riil tanpa bias metodologis, sambil mempertahankan transparansi penuh dalam proses transformasi data.
+
+\textbf{Data Riil Moodle:} \\
+Data log \textit{Moodle} diperoleh langsung dari sistem yang dikelola oleh tim ITF Fasilkom UI dan telah melalui proses anonimisasi untuk menjaga privasi pengguna. Data ini digunakan untuk validasi model dalam konteks operasional nyata.
 
 \textbf{Data Artifisial:} \\
-Sementara itu, data artifisial dikembangkan untuk keperluan pengembangan model deteksi \textit{non-compliance}. Dalam penelitian ini, model dikembangkan sepenuhnya menggunakan data artifisial sehingga memungkinkan eksplorasi berbagai skenario ekstrem. Pada tahap akhir, model akan dievaluasi dengan data log riil untuk menguji kemampuannya dalam mendeteksi kasus kecurangan yang terjadi di dunia nyata.
+Data artifisial dirancang khusus untuk pelatihan model dengan ground truth yang terdokumentasi. Pendekatan ini memungkinkan eksplorasi berbagai skenario kecurangan dan kontrol parameter yang tidak mungkin dilakukan pada data riil.
 
 \subsection{Data Log Moodle Riil: Deskripsi (periode, jumlah event/user, fitur utama), Proses Akuisisi, Kebijakan Anonimisasi \& Etika.}
 \label{sec:logRiil}
@@ -173,10 +238,10 @@ Untuk melindungi privasi pengguna, data telah diproses sehingga informasi identi
 Penggunaan data riil ini telah mempertimbangkan aspek etika dan regulasi perlindungan data. Kebijakan anonimisasi yang diterapkan memastikan bahwa data tidak dapat dikaitkan langsung dengan individu tertentu, sehingga menjaga kerahasiaan dan privasi pengguna.
 
 %-----------------------------------------------------------------------------%
-\subsection{Data Artifisial: Peran dan Tujuan Penggunaannya}
+\subsection{Strategi Data Artifisial}
 \label{sec:dataArtifisial}
 %-----------------------------------------------------------------------------%
-Subbab ini memaparkan peran dan tujuan penggunaan data artifisial dalam penelitian. Data artifisial dirancang untuk menggantikan penggunaan data riil pada tahap pengembangan model, dengan alasan-alasan sebagai berikut:
+Data artifisial dalam penelitian ini dirancang untuk mengatasi keterbatasan ground truth pada data riil. Strategi ini memungkinkan kontrol penuh terhadap parameter kecurangan dan validasi objektif terhadap performa model, dengan alasan-alasan sebagai berikut:
 
 \begin{enumerate}
     \item \textbf{Kontrol Variabel dan Simulasi Skenario Ekstrem:} \\
@@ -195,10 +260,10 @@ Subbab ini memaparkan peran dan tujuan penggunaan data artifisial dalam peneliti
 Dengan demikian, penggunaan data artifisial dalam penelitian ini memberikan keuntungan dalam hal kontrol variabilitas dan eksplorasi skenario ekstrem, serta mempercepat proses pengembangan model. Evaluasi akhir dengan data log riil akan menjadi tolok ukur untuk menilai kemampuan model dalam mendeteksi kecurangan yang terjadi secara nyata dalam sistem \textit{Moodle}.
 
 %-----------------------------------------------------------------------------%
-\section{Pra-pemrosesan Data Log}
-\label{sec:praPemrosesanDataLog}
+\section{Preprocessing Pipeline dan Feature Engineering}
+\label{sec:preprocessingPipelineFeatureEngineering}
 %-----------------------------------------------------------------------------%
-Tahap pra-pemrosesan data log merupakan fondasi penting dalam penelitian ini, di mana seluruh data mentah—baik yang dihasilkan oleh sistem \textit{Moodle} maupun data artifisial—diolah agar memiliki kualitas, konsistensi, dan keseragaman yang diperlukan untuk analisis selanjutnya. 
+Tahap feature engineering dan analisis VIF merupakan komponen kritis dalam pipeline penelitian ini. Proses ini mencakup transformasi data mentah menjadi representasi fitur yang bermakna, analisis multikolinearitas, dan seleksi fitur optimal untuk model machine learning. 
 
 \begin{figure}[htbp]
     \centering
@@ -332,7 +397,7 @@ Checklist dan struktur modular pada skrip memastikan bahwa seluruh proses dapat 
 Melalui serangkaian proses yang sistematis dan berbasis algoritma yang telah teruji, tahap pra-pemrosesan ini memberikan dasar yang kuat untuk langkah-langkah selanjutnya dalam pipeline, yaitu ekstraksi fitur lanjutan, pelatihan model, dan akhirnya evaluasi deteksi kecurangan.
 
 %-----------------------------------------------------------------------------%
-\section{Perancangan dan Generasi Data Log Moodle Artifisial}
+\subsection{Perancangan dan Generasi Data Artifisial}
 \label{sec:perancanganGenerasiDataArtifisial}
 %-----------------------------------------------------------------------------%
 Subbab ini menjelaskan secara mendalam mengenai rancangan, implementasi, dan validasi data log \textit{Moodle} artifisial yang digunakan untuk mengembangkan model deteksi \textit{non-compliance}. Pendekatan yang diterapkan dikenal dengan istilah \textit{Skenario Perilaku Sintetik}, yaitu simulasi aktivitas pengguna (baik perilaku normal maupun \textit{non-compliance}) melalui algoritma yang menggabungkan simulasi berbasis aturan dan proses stokastik. Data artifisial ini tidak hanya mereplikasi aktivitas log riil, tetapi juga memungkinkan eksplorasi skenario ekstrem yang jarang terekam pada data nyata, seperti koordinasi kelompok kecurangan dengan pola sinkronisasi tinggi.
@@ -509,11 +574,10 @@ Data artifisial yang telah divalidasi ini dilengkapi dengan label \textit{ground
 Melalui serangkaian proses validasi yang komprehensif ini, data log artifisial tidak hanya diverifikasi secara statistik tetapi juga diuji secara kualitatif, sehingga memberikan keyakinan bahwa skenario perilaku sintetik yang dihasilkan dapat dijadikan basis yang valid dan \textit{reproducible} untuk pengembangan model deteksi \textit{non-compliance}.
 
 %-----------------------------------------------------------------------------%
-%-----------------------------------------------------------------------------%
-\section{Feature Engineering}
+\subsection{Ekstraksi dan Seleksi Fitur}
 \label{sec:featureEngineering}
 %-----------------------------------------------------------------------------%
-\textit{Feature engineering} merupakan tahap kunci dalam penelitian ini, di mana data log—baik artifisial maupun riil—diubah menjadi representasi numerik yang bermakna. Tahap ini berperan penting dalam mengurangi noise, menangkap pola-pola perilaku pengguna, serta memaksimalkan kemampuan model dalam mendeteksi \textit{non-compliance} (kecurangan). 
+Ekstraksi dan seleksi fitur merupakan proses transformasi data log menjadi representasi numerik yang optimal untuk model machine learning. Proses ini menggabungkan ekstraksi fitur multidimensional dengan analisis VIF untuk menghasilkan set fitur yang stabil dan interpretable. 
 
 \begin{figure}[htbp]
     \centering
@@ -665,11 +729,11 @@ Secara keseluruhan, pendekatan \textit{feature engineering} dalam penelitian ini
 %-----------------------------------------------------------------------------%
 
 %-----------------------------------------------------------------------------%
-\section{Perancangan, Implementasi, dan Evaluasi Model Deteksi Kecurangan}
+\section{Pengembangan Model Ensemble}
 \label{sec:modelDeteksiKecurangan}
 %-----------------------------------------------------------------------------%
 
-Bab ini menjelaskan secara menyeluruh perancangan model deteksi kecurangan yang menggabungkan berbagai algoritma machine learning serta pendekatan ensemble untuk meningkatkan akurasi dan keandalan prediksi. Proses pelatihan model menggunakan fitur-fitur yang telah direkayasa dari data log (baik artifisial maupun riil), dan evaluasi dilakukan dengan metrik performa seperti precision, recall, F1-score, dan akurasi. Selain itu, bab ini juga membahas interpretasi visual dari output model—termasuk analisis jaringan kemiripan antar pengguna—yang berfungsi untuk mengidentifikasi pola kolusi dan kelompok kecurangan secara komprehensif. Setiap pilihan metode dan parameter dipilih berdasarkan validasi empiris dan analisis sensitivitas, sehingga mendukung dasar ilmiah yang kuat untuk penerapan model deteksi non-compliance.
+Pengembangan model ensemble mengintegrasikan berbagai algoritma machine learning untuk menciptakan sistem deteksi kecurangan yang robust dan akurat. Proses pelatihan model menggunakan fitur-fitur yang telah direkayasa dari data log (baik artifisial maupun riil), dan evaluasi dilakukan dengan metrik performa seperti precision, recall, F1-score, dan akurasi. Selain itu, bab ini juga membahas interpretasi visual dari output model—termasuk analisis jaringan kemiripan antar pengguna—yang berfungsi untuk mengidentifikasi pola kolusi dan kelompok kecurangan secara komprehensif. Setiap pilihan metode dan parameter dipilih berdasarkan validasi empiris dan analisis sensitivitas, sehingga mendukung dasar ilmiah yang kuat untuk penerapan model deteksi non-compliance.
 
 %-----------------------------------------------------------------------------%
 \subsection{Pemilihan Arsitektur Model Deteksi Kecurangan}
@@ -903,7 +967,7 @@ Hasil penyetelan hyperparameter untuk setiap model diintegrasikan ke dalam mekan
 Proses penyetelan hyperparameter yang terstruktur ini menghasilkan konfigurasi model yang optimal, sebagaimana dibuktikan melalui evaluasi empiris pada data log artifisial yang telah diproses. Pendekatan ini memastikan bahwa model deteksi kecurangan mampu mengatasi variabilitas data secara efektif dan memenuhi standar reproducibility yang tinggi, sehingga temuan yang diperoleh dapat dipertanggungjawabkan secara ilmiah.
 
 %-----------------------------------------------------------------------------%
-\section{Strategi Evaluasi Kinerja Model}
+\section{Evaluasi dan Validasi Model}
 \label{sec:strategiEvaluasiKinerjaModel}
 %-----------------------------------------------------------------------------%
 Evaluasi kinerja model merupakan tahap penting untuk memastikan bahwa sistem deteksi kecurangan mampu mengidentifikasi pola \textit{non-compliance} secara akurat dan dapat diandalkan. Evaluasi dilakukan secara kuantitatif menggunakan data uji artifisial yang telah dilabeli, serta secara kualitatif melalui studi kasus dan visualisasi pada data riil yang tidak berlabel. Pendekatan evaluasi ini memberikan gambaran menyeluruh mengenai performa model dari berbagai aspek, baik dari segi metrik numerik maupun interpretabilitas pola yang terdeteksi.

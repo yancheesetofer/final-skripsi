@@ -476,7 +476,7 @@
 
 % Perintah untuk membuat variabel baru. Teks yang ditulis dalam
 % perintah ini akan diformat ulang menggunakan huruf kapital.
-\newcommand{\Var}[2]{\MakeUppercase{\gdef\noexpand#1{#2}}}
+\newcommand{\Var}[2]{\expandafter\gdef\expandafter#1\expandafter{\MakeUppercase{#2}}}
 
 % Tambahkan kata-kata yang dimasukan kedalam Table of Contents.
 \newcommand{\addChapter}[1]{ % Dengan mereset chapter page counter

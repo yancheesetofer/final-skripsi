@@ -15,11 +15,11 @@ alwaysApply: true
 - **Primary Goal:** Write thesis chapters Bab 2, 3, 4, and 5 based on the completed Python experiments.
 - **Key Files:** The main thesis document is `thesis-draft.pdf` (or `thesis.tex`). All results are pre-generated.
 ## Writing Style
-- **Language:** Bahasa Indonesia (formal, academic).
+- **Language:** Bahasa Indonesia (formal, academic, prevent extremely AI-sounded generation).
 - **Tone:** Objective and impersonal. Avoid using "saya" (I). Instead, use passive voice ("dilakukan analisis...") or refer to "peneliti" (the researcher).
 - **Chapter Structure:**
     - **Bab 1: Pendahuluan** (Introduction - Mostly complete)
     - **Bab 2: Tinjauan Pustaka** (Literature Review)
-    - **Bab 3: Desain Sistem** (System Design / Methodology)
-    - **Bab 4: Evaluasi dan Analisis** (Evaluation and Analysis)
+    - **Bab 3: Metode Penelitian** (Methodology)
+    - **Bab 4: Experiment dan Analysis** (Experiment and Analysis)
     - **Bab 5: Kesimpulan** (Conclusion)

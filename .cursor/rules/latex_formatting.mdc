@@ -1,21 +1,21 @@
 ---
 description: 
-globs: *thesis.tex
+globs: *.tex,**/*.tex
 alwaysApply: false
 ---
----
-description: "Provides guidelines for LaTeX formatting based on the Fasilkom UI template."
-globs: ["*thesis.tex"]
-alwaysApply: false
-ruleType: autoAttached
----
-# LaTeX Formatting Rules
+
+- **Narrative Style:** Transform overly technical content into a more narrative style to make findings accessible to a broader audience.
+
+- **Intuitive Flow:** Structure your thesis to ensure readers can easily follow the research journey.
+
+- **Clear Terminology:** Avoid jargon where possible and define necessary technical terms clearly.
+
 
 - **Figures:** To insert a figure, use the following structure. Place image files in the `figures/` directory.
     ```latex
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=0.8\textwidth]{figures/figure_filename.png}
+        \includegraphics[width=0.8\textwidth]{figures/figure_filename.pdf}
         \caption{Caption explaining the figure.}
         \label{fig:label_for_figure}
     \end{figure}

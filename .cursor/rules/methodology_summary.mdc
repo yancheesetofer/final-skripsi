@@ -3,12 +3,6 @@ description:
 globs: *thesis.tex
 alwaysApply: false
 ---
----
-description: "Summary of the final methodology for writing Bab 3. Describes the data pipeline (Modules I-IV) and the model training process."
-globs: ["*thesis.tex"]
-alwaysApply: false
-ruleType: autoAttached
----
 # Methodology for Bab 3
 
 ## Data Pipeline

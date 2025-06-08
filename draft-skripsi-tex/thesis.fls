@@ -717,12 +717,17 @@ OUTPUT src/01-body/bab3.aux
 INPUT ./src/01-body/bab3.tex
 INPUT ./src/01-body/bab3.tex
 INPUT src/01-body/bab3.tex
-INPUT ./figures/pipeline_overview.pdf
-INPUT ./figures/pipeline_overview.pdf
-INPUT ./figures/pipeline_overview.pdf
-INPUT ./figures/pipeline_overview.pdf
-INPUT ./figures/pipeline_overview.pdf
+INPUT ./newfigures/research_methodology_stages.pdf
+INPUT ./newfigures/research_methodology_stages.pdf
+INPUT ./newfigures/research_methodology_stages.pdf
+INPUT ./newfigures/research_methodology_stages.pdf
+INPUT ./newfigures/research_methodology_stages.pdf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Bold-tlf-ot1.tfm
+INPUT ./newfigures/technical_pipeline_flow_final.pdf
+INPUT ./newfigures/technical_pipeline_flow_final.pdf
+INPUT ./newfigures/technical_pipeline_flow_final.pdf
+INPUT ./newfigures/technical_pipeline_flow_final.pdf
+INPUT ./newfigures/technical_pipeline_flow_final.pdf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntx-Bold-tlf-ot1.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/txbmiaX.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Bold-tlf-ot1r.tfm
@@ -786,11 +791,6 @@ INPUT ./figures/feature_importance_Random Forest.png
 INPUT ./figures/feature_importance_Random Forest.png
 INPUT ./figures/feature_importance_Random Forest.png
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
-INPUT ./figures/feature_correlation_heatmap.pdf
-INPUT ./figures/feature_correlation_heatmap.pdf
-INPUT ./figures/feature_correlation_heatmap.pdf
-INPUT ./figures/feature_correlation_heatmap.pdf
-INPUT ./figures/feature_correlation_heatmap.pdf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/zptmcmrm.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmri8r.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
@@ -812,6 +812,11 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/zapfchan/pzcmi8r.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/zptmcmr.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
+INPUT ./figures/feature_correlation_heatmap.pdf
+INPUT ./figures/feature_correlation_heatmap.pdf
+INPUT ./figures/feature_correlation_heatmap.pdf
+INPUT ./figures/feature_correlation_heatmap.pdf
+INPUT ./figures/feature_correlation_heatmap.pdf
 INPUT ./figures/probability_distribution_analysis.pdf
 INPUT ./figures/probability_distribution_analysis.pdf
 INPUT ./figures/probability_distribution_analysis.pdf
