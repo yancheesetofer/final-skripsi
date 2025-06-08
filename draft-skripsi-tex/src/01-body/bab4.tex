@@ -15,7 +15,7 @@ Bab ini menyajikan hasil eksperimen dan analisis komprehensif terhadap sistem de
 
 Dataset pelatihan model deteksi kecurangan dalam penelitian ini menggunakan data sintesis yang dihasilkan melalui simulasi berbasis konfigurasi yang terkontrol. Pendekatan ini dipilih untuk memastikan ketersediaan ground truth yang akurat dan untuk mengontrol berbagai parameter kecurangan dalam lingkungan yang terstruktur.
 
-Dataset sintesis terdiri dari 800 sampel percobaan ujian yang disimulasikan dari 200 mahasiswa yang mengerjakan 4 kuis, dengan setiap kuis terdiri dari 20 soal. Konfigurasi ini menghasilkan total 800 percobaan ujian (200 mahasiswa × 4 kuis = 800 attempts) dengan distribusi kelas sebagai berikut:
+Dataset sintesis terdiri dari 800 sampel percobaan ujian yang disimulasikan dari 200 mahasiswa yang mengerjakan 4 kuis, dengan setiap kuis terdiri dari 20 soal. Konfigurasi ini menghasilkan total 800 percobaan ujian (200 mahasiswa $\times$ 4 kuis = 800 attempts) dengan distribusi kelas sebagai berikut:
 \begin{itemize}
     \item 600 percobaan ujian normal (75\%)
     \item 200 percobaan ujian dengan indikasi kecurangan (25\%)
@@ -234,9 +234,9 @@ Meskipun terdapat korelasi tinggi antar beberapa fitur, model Random Forest dan 
 Model terbaik (Random Forest) diaplikasikan pada 446,720 percobaan ujian riil dengan hasil sebagai berikut:
 
 \begin{itemize}
-    \item \textbf{Total deteksi dengan confidence tinggi (≥80\%):} 131,479 percobaan (29.43\%)
+    \item \textbf{Total deteksi dengan confidence tinggi ($\geq$80\%):} 131,479 percobaan (29.43\%)
     \item \textbf{Total deteksi dengan confidence medium (60-79\%):} 89,344 percobaan (20.0\%)
-    \item \textbf{Total deteksi dengan confidence rendah (<60\%):} 225,897 percobaan (50.57\%)
+    \item \textbf{Total deteksi dengan confidence rendah ($<60\%$):} 225,897 percobaan (50.57\%)
 \end{itemize}
 
 Tingkat deteksi 29.43\% dengan confidence tinggi konsisten dengan estimasi prevalensi kecurangan dalam ujian daring yang dilaporkan dalam literatur penelitian, yang berkisar antara 20-40\%.
@@ -300,7 +300,7 @@ Untuk memberikan pemahaman yang lebih mendalam tentang pola perilaku pengguna ya
 
 Analisis profil detail menunjukkan pola perilaku yang konsisten mencurigakan:
 \begin{itemize}
-    \item Distribusi z-score kesamaan navigasi yang sangat tinggi (>2.5 SD)
+    \item Distribusi z-score kesamaan navigasi yang sangat tinggi ($>2.5$ SD)
     \item Pola temporal yang tidak natural dengan clustering pada nilai-nilai ekstrem
     \item Konsistensi tinggi dalam perilaku yang mengindikasikan koordinasi dengan pengguna lain
 \end{itemize}
@@ -324,7 +324,7 @@ Distribusi repeat offenders menunjukkan pola power-law dimana:
     \item 355 pengguna (8.7\%) memiliki lebih dari 20 deteksi, mengindikasikan pola kecurangan sistematis
 \end{itemize}
 
-Keberadaan pengguna dengan deteksi sangat tinggi (>100 kali) menunjukkan adanya kelompok kecil mahasiswa yang secara konsisten melakukan kecurangan di berbagai ujian. Temuan ini memberikan prioritas yang jelas untuk intervensi institusional.
+Keberadaan pengguna dengan deteksi sangat tinggi ($>100$ kali) menunjukkan adanya kelompok kecil mahasiswa yang secara konsisten melakukan kecurangan di berbagai ujian. Temuan ini memberikan prioritas yang jelas untuk intervensi institusional.
 
 \subsection{Analisis Ujian dengan Tingkat Kecurangan Tinggi}
 \label{subsec:analisisUjianBermasalah}
@@ -340,7 +340,7 @@ Keberadaan pengguna dengan deteksi sangat tinggi (>100 kali) menunjukkan adanya 
 Dari 15 ujian dengan tingkat kecurangan tertinggi, beberapa pola menarik terungkap:
 \begin{itemize}
     \item Ujian dengan ID 1773 memiliki tingkat deteksi tertinggi (68.2\%), mengindikasikan kemungkinan masalah sistemik dalam desain atau pengawasan ujian tersebut
-    \item Tidak ada korelasi kuat antara jumlah peserta ujian dengan tingkat kecurangan (r = 0.12), menunjukkan bahwa kecurangan bukan semata-mata fungsi dari ukuran kelas
+    \item Tidak ada korelasi kuat antara jumlah peserta ujian dengan tingkat kecurangan ($r = 0.12$), menunjukkan bahwa kecurangan bukan semata-mata fungsi dari ukuran kelas
     \item Ujian dengan tingkat kecurangan tinggi cenderung memiliki standar deviasi probabilitas yang lebih rendah, mengindikasikan pola kecurangan yang lebih seragam
 \end{itemize}
 
@@ -432,7 +432,7 @@ Penelitian ini & Random Forest + Z-score & 98.33\% & 800 sampel \\
 \hline
 Alexandron et al. (2017) & Clustering + Threshold & 87\% & 300 sampel \\
 \hline
-Ruipérez-Valiente et al. (2018) & SVM + Behavioral & 84\% & 500 sampel \\
+Ruip\'{e}rez-Valiente et al. (2018) & SVM + Behavioral & 84\% & 500 sampel \\
 \hline
 Wolff et al. (2019) & Neural Network & 91\% & 1000 sampel \\
 \hline
@@ -455,7 +455,7 @@ Penelitian ini mencapai akurasi tertinggi (98.33\%) dibandingkan penelitian terd
 \textbf{Peningkatan Signifikan:}
 \begin{itemize}
     \item +11.33\% dibandingkan penelitian terbaik sebelumnya (Wolff et al., 2019)
-    \item +14.33\% dibandingkan SVM behavioral approach (Ruipérez-Valiente et al., 2018)
+    \item +14.33\% dibandingkan SVM behavioral approach (Ruip\'{e}rez-Valiente et al., 2018)
     \item +7.33\% improvement dengan dataset yang lebih efisien (800 vs 1000 sampel)
 \end{itemize}
 
@@ -485,7 +485,7 @@ Hasil eksperimen dan analisis yang telah dilakukan menunjukkan beberapa temuan k
 \begin{itemize}
     \item Fitur berbasis z-score kesamaan navigasi berkontribusi 60.5\% dalam deteksi
     \item max\_nav\_similarity\_zscore menjadi fitur paling penting (24.5\%)
-    \item Validasi statistik menunjukkan probabilitas kejadian acak < 2.38 × 10⁻⁷ untuk pola serupa
+    \item Validasi statistik menunjukkan probabilitas kejadian acak $< 2.38 \times 10^{-7}$ untuk pola serupa
 \end{itemize}
 
 \textbf{4. Validitas Aplikasi Real-World}
@@ -506,7 +506,7 @@ Hasil eksperimen dan analisis yang telah dilakukan menunjukkan beberapa temuan k
 \textbf{6. Kontribusi Metodologis}
 \begin{itemize}
     \item Feature engineering berbasis z-score terbukti efektif
-    \item VIF analysis berhasil mereduksi 35→8 fitur tanpa degradasi performa
+    \item VIF analysis berhasil mereduksi 35$\rightarrow$8 fitur tanpa degradasi performa
     \item Ensemble architecture memberikan robustness tinggi
     \item Artificial data strategy memungkinkan controlled training
 \end{itemize}

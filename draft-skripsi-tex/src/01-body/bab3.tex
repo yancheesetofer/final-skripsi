@@ -108,8 +108,8 @@ Modul ketiga mengekstraksi fitur-fitur behavioral dari event log yang telah dibe
 Modul terakhir melakukan optimasi fitur melalui beberapa tahap:
 \begin{itemize}
     \item \textbf{Missing Value Imputation:} Menggunakan SimpleImputer dengan strategi mean untuk fitur numerik
-    \item \textbf{Multicollinearity Analysis:} Menghitung Variance Inflation Factor (VIF) dan mengeliminasi fitur dengan VIF > 10
-    \item \textbf{Variance Filtering:} Menghilangkan fitur dengan variance < 0.01 yang tidak informatif
+    \item \textbf{Multicollinearity Analysis:} Menghitung Variance Inflation Factor (VIF) dan mengeliminasi fitur dengan VIF $> 10$
+    \item \textbf{Variance Filtering:} Menghilangkan fitur dengan variance $< 0.01$ yang tidak informatif
     \item \textbf{Standardization:} Menerapkan StandardScaler untuk normalisasi distribusi fitur
 \end{itemize}
 
@@ -180,16 +180,16 @@ Mencatat aktivitas sesi pengguna, mulai dari waktu pembuatan sesi hingga informa
 Data log \textit{Moodle} mencakup periode hampir 10 tahun, dengan rentang data keseluruhan dari tanggal 31 Juli 2015 hingga 22 Februari 2025. Secara spesifik:
 
 \textbf{mdl\_question\_attempt\_steps:} \\
-Rentang waktu: 29 Agustus 2015 – 22 Februari 2025 \\
+Rentang waktu: 29 Agustus 2015--22 Februari 2025 \\
 Durasi: sekitar 3.565 hari
 
 \textbf{mdl\_quiz\_attempts:} \\
-Rentang waktu untuk \textit{timestart}: 31 Juli 2015 – 22 Februari 2025 \\
+Rentang waktu untuk \textit{timestart}: 31 Juli 2015--22 Februari 2025 \\
 Rentang waktu untuk \textit{timefinish}: (dengan catatan anomali timestamp 1970 sebagai default) hingga 22 Februari 2025 \\
 Durasi: sekitar 3.594 hari (mengabaikan nilai default 1970)
 
 \textbf{mdl\_sessions:} \\
-Rentang waktu: 17 Maret 2020 – 22 Februari 2025 \\
+Rentang waktu: 17 Maret 2020--22 Februari 2025 \\
 Durasi: sekitar 1.803 hari
 
 Skala data secara keseluruhan meliputi:
@@ -435,7 +435,7 @@ Definisi operasional ini menjadi dasar untuk memformulasikan parameter simulasi.
 \subsection{Desain Ground Truth Artifisial}
 \label{sec:desainGroundTruthArtifisial}
 %-----------------------------------------------------------------------------%
-Dalam proses generasi data log artifisial, setiap entitas—baik pada level sesi, upaya pengerjaan, maupun langkah pertanyaan—diberi label \textit{ground truth} yang mendefinisikan status sebagai aktivitas normal atau \textit{non-compliance}. Desain \textit{ground truth} ini tidak hanya merupakan hasil dari parameter simulasi, tetapi juga dilengkapi dengan dokumentasi yang komprehensif melalui file \texttt{cheating\_ground\_truth.md}. File ini berfungsi sebagai acuan empiris untuk validasi dan evaluasi model deteksi kecurangan.
+Dalam proses generasi data log artifisial, setiap entitas---baik pada level sesi, upaya pengerjaan, maupun langkah pertanyaan---diberi label \textit{ground truth} yang mendefinisikan status sebagai aktivitas normal atau \textit{non-compliance}. Desain \textit{ground truth} ini tidak hanya merupakan hasil dari parameter simulasi, tetapi juga dilengkapi dengan dokumentasi yang komprehensif melalui file \texttt{cheating\_ground\_truth.md}. File ini berfungsi sebagai acuan empiris untuk validasi dan evaluasi model deteksi kecurangan.
 
 \textbf{Komponen Utama Ground Truth:}
 \begin{itemize}
@@ -446,7 +446,7 @@ Dalam proses generasi data log artifisial, setiap entitas—baik pada level sesi
         \item 1: Menunjukkan aktivitas \textit{non-compliance} (kecurangan), yang dihasilkan dari simulasi kelompok dengan pola sinkronisasi tinggi dan koordinasi yang jelas.
     \end{itemize}
     \item \textbf{Komposisi Dataset:} \\
-    Data artifisial dihasilkan dengan proporsi tertentu antara perilaku normal dan \textit{non-compliance}. Proporsi ini dikonfigurasi dalam parameter simulasi, misalnya 10–20\% pengguna disimulasikan sebagai \textit{non-compliance}, untuk memastikan keseimbangan yang memadai dalam pelatihan dan evaluasi model.
+    Data artifisial dihasilkan dengan proporsi tertentu antara perilaku normal dan \textit{non-compliance}. Proporsi ini dikonfigurasi dalam parameter simulasi, misalnya 10--20\% pengguna disimulasikan sebagai \textit{non-compliance}, untuk memastikan keseimbangan yang memadai dalam pelatihan dan evaluasi model.
     \item \textbf{Pencatatan Parameter Simulasi dan Contoh Kasus:} \\
     Parameter-parameter yang mendasari penetapan label \textit{ground truth} direkam secara detail, mencakup:
     \begin{itemize}
@@ -530,7 +530,7 @@ Implementasi dibangun secara modular untuk mendukung pemeliharaan dan pengembang
 
 \textbf{Reproducibility dan Konfigurasi:} \\
 Penggunaan Seed Random: Seluruh fungsi random dijalankan dengan seed yang telah ditentukan, sehingga eksperimen dapat diulang dengan hasil yang konsisten. \\
-File Konfigurasi: Parameter simulasi—seperti jumlah pengguna, proporsi \textit{non-compliance}, \texttt{timelimit}, dan \texttt{base\_date}—disimpan dalam file JSON. Pendekatan ini memungkinkan penyesuaian parameter secara transparan dan mendokumentasikan setiap eksperimen. \\
+File Konfigurasi: Parameter simulasi---seperti jumlah pengguna, proporsi \textit{non-compliance}, \texttt{timelimit}, dan \texttt{base\_date}---disimpan dalam file JSON. Pendekatan ini memungkinkan penyesuaian parameter secara transparan dan mendokumentasikan setiap eksperimen. \\
 Output Terstruktur: Data log artifisial yang dihasilkan beserta \textit{ground truth} disimpan dalam format CSV dan JSON, memudahkan integrasi ke tahap evaluasi model serta analisis statistik.
 
 \textbf{Integrasi dengan Pipeline Deteksi Kecurangan:} \\
@@ -562,7 +562,7 @@ Untuk mendukung analisis statistik, data artifisial divisualisasikan secara komp
     \item \textbf{Quiz Attempt Visualization:} Menampilkan urutan navigasi setiap pengguna. Kelompok \textit{non-compliance} ditandai dengan urutan yang sangat seragam, menunjukkan koordinasi dalam pengulangan pertanyaan.
     \item \textbf{Analisis Pola Jawaban:} Visualisasi pola jawaban (benar/salah) yang identik atau sangat mirip antar anggota kelompok \textit{non-compliance}, sehingga mengindikasikan kolusi.
     \item \textbf{Timing Patterns dan Variance Analysis:} Diagram dan tabel yang menunjukkan waktu mulai, total durasi, dan rata-rata waktu per pertanyaan. \textit{Cheater} cenderung menunjukkan pace yang konsisten (misalnya, penyelesaian kuis dengan delay yang seragam) dibandingkan dengan variabilitas yang lebih tinggi pada pengguna normal.
-    \item \textbf{Transition Time Correlation Analysis:} Tabel yang menampilkan korelasi waktu transisi antar pertanyaan pada kelompok \textit{non-compliance}. Nilai korelasi tinggi (misalnya, >0.95) memberikan bukti kuat atas adanya koordinasi.
+    \item \textbf{Transition Time Correlation Analysis:} Tabel yang menampilkan korelasi waktu transisi antar pertanyaan pada kelompok \textit{non-compliance}. Nilai korelasi tinggi (misalnya, $>0.95$) memberikan bukti kuat atas adanya koordinasi.
 \end{itemize}
 
 \textbf{Validasi Kualitatif:} \\
@@ -728,7 +728,7 @@ Setiap modul dalam pipeline \textit{feature engineering} dirancang secara modula
 Fitur yang dihasilkan disimpan dalam format CSV dan JSON, dengan dokumentasi yang mendetail mengenai proses ekstraksi dan transformasi yang telah dilakukan.
 \textbf{Justifikasi:} Dokumentasi yang baik mendukung transparansi dan memungkinkan peneliti lain untuk memahami serta mengaudit seluruh proses \textit{feature engineering}.
 
-Secara keseluruhan, pendekatan \textit{feature engineering} dalam penelitian ini dirancang untuk mengoptimalkan informasi yang terdapat dalam data log, mengurangi noise, dan menghasilkan representasi numerik yang mendukung model deteksi \textit{non-compliance} secara efektif. Setiap pilihan—dari ekstraksi statistik waktu hingga penggunaan metrik similarity—dipilih berdasarkan dasar metodologis yang kuat dan didukung oleh literatur yang relevan, sehingga memberikan dasar yang valid dan \textit{reproducible} untuk pengembangan model \textit{machine learning}.
+Secara keseluruhan, pendekatan \textit{feature engineering} dalam penelitian ini dirancang untuk mengoptimalkan informasi yang terdapat dalam data log, mengurangi noise, dan menghasilkan representasi numerik yang mendukung model deteksi \textit{non-compliance} secara efektif. Setiap pilihan---dari ekstraksi statistik waktu hingga penggunaan metrik similarity---dipilih berdasarkan dasar metodologis yang kuat dan didukung oleh literatur yang relevan, sehingga memberikan dasar yang valid dan \textit{reproducible} untuk pengembangan model \textit{machine learning}.
 
 %-----------------------------------------------------------------------------%
 
@@ -942,14 +942,14 @@ Analisis mendalam terhadap tipe kesalahan klasifikasi:
 \textbf{False Positives (Type I Error):}
 \begin{itemize}
     \item Implikasi: Tuduhan kecurangan yang salah
-    \item Target: Minimize untuk fairness (precision > 0.95)
+    \item Target: Minimize untuk fairness (precision $> 0.95$)
     \item Analisis: Pattern dari FP cases untuk improvement
 \end{itemize}
 
 \textbf{False Negatives (Type II Error):}
 \begin{itemize}
     \item Implikasi: Kecurangan yang terlewat
-    \item Target: Balance dengan FP (recall > 0.90)
+    \item Target: Balance dengan FP (recall $> 0.90$)
     \item Analisis: Characteristics dari undetected cheating
 \end{itemize}
 
@@ -1181,7 +1181,7 @@ Generator data artifisial dirancang dengan arsitektur modular yang mensimulasika
 \textbf{Parameter Simulasi Berjenjang:}
 Generator menghasilkan tiga tingkat severity kecurangan untuk menciptakan dataset yang challenging:
 \begin{itemize}
-    \item \textbf{High Severity:} Navigation similarity >90\%, timing correlation >0.9, wrong answer bias >80\%
+    \item \textbf{High Severity:} Navigation similarity $>90\%$, timing correlation $>0.9$, wrong answer bias $>80\%$
     \item \textbf{Medium Severity:} Navigation similarity 70-89\%, timing correlation 0.6-0.89, wrong answer bias 50-79\%
     \item \textbf{Low Severity:} Navigation similarity 50-69\%, timing correlation 0.3-0.59, wrong answer bias 30-49\%
 \end{itemize}
@@ -1193,7 +1193,7 @@ Untuk memastikan data artifisial representatif, dilakukan validasi multi-aspek:
 
 \textbf{Validasi Statistik:}
 \begin{itemize}
-    \item Distribusi durasi pengerjaan: Kolmogorov-Smirnov test menunjukkan p>0.05 (tidak berbeda signifikan dengan data riil)
+    \item Distribusi durasi pengerjaan: Kolmogorov-Smirnov test menunjukkan $p>0.05$ (tidak berbeda signifikan dengan data riil)
     \item Pola navigasi: Entropy dan revisit patterns konsisten dengan observed behavior
     \item Answer distribution: Proporsi correct/incorrect answers mengikuti kurva normal pembelajaran
 \end{itemize}
@@ -1341,8 +1341,8 @@ Fitur kritis untuk mendeteksi kolaborasi tidak sah:
 Fitur yang mendeteksi perilaku ekstrem atau tidak wajar:
 
 \begin{itemize}
-    \item \texttt{quick\_actions\_count}: Jumlah aksi sangat cepat (<3 detik)
-    \item \texttt{long\_pause\_count}: Jumlah jeda sangat lama (>10 menit)
+    \item \texttt{quick\_actions\_count}: Jumlah aksi sangat cepat ($<3$ detik)
+    \item \texttt{long\_pause\_count}: Jumlah jeda sangat lama ($>10$ menit)
     \item \texttt{speed\_variation\_coefficient}: Koefisien variasi kecepatan
     \item \texttt{abnormal\_pattern\_flags}: Binary flags untuk pola abnormal
 \end{itemize}
@@ -1376,8 +1376,8 @@ Proses eliminasi iteratif:
 \begin{enumerate}
     \item Hitung VIF untuk semua fitur
     \item Identifikasi fitur dengan VIF tertinggi
-    \item Jika VIF > 10, eliminasi fitur tersebut
-    \item Ulangi hingga semua VIF < 10
+    \item Jika VIF $> 10$, eliminasi fitur tersebut
+    \item Ulangi hingga semua VIF $< 10$
 \end{enumerate}
 
 Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan VIF < 10 yang memberikan informasi unik.
