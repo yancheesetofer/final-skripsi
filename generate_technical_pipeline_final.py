@@ -29,7 +29,7 @@ def draw_box(ax, center_x, center_y, width, height, text, facecolor, text_color=
     ax.text(
         center_x, center_y, text, 
         ha='center', va='center', 
-        fontsize=10, fontweight='bold', color=text_color,
+        fontsize=12, fontweight='bold', color=text_color,
         wrap=True
     )
     return box
@@ -50,18 +50,27 @@ generation_color = '#FF8C00'
 artifact_color = '#00B3B3'
 
 # --- Title ---
-ax.text(10, 13, 'Pipeline Alur Data Deteksi Kecurangan', fontsize=22, fontweight='bold', ha='center')
+ax.text(10, 13, 'Pipeline Alur Data Deteksi Kecurangan', fontsize=26, fontweight='bold', ha='center')
 
 # === 1. DATA SOURCES LEVEL ===
-draw_box(ax, 4, 11.5, 4, 1.5, 'Data Riil ITF\n446,720 events\n5,562 users', real_color)
-draw_box(ax, 16.5, 12.2, 3, 0.8, 'Data Generator\nStochastic + Rule-based', generation_color)
-draw_box(ax, 16.5, 10.8, 3, 1.3, 'Data Artifisial\n800 samples\n+ Ground Truth', artificial_color)
+# Custom larger text for important data sources
+box1 = FancyBboxPatch((4-2, 11.5-0.75), 4, 1.5, boxstyle='round,pad=0.1', facecolor=real_color, edgecolor='black', alpha=0.9, linewidth=1.5)
+ax.add_patch(box1)
+ax.text(4, 11.5, 'Data Riil ITF\n446,720 events\n5,562 users', ha='center', va='center', fontsize=14, fontweight='bold', color='white')
+
+box2 = FancyBboxPatch((16.5-1.5, 12.2-0.4), 3, 0.8, boxstyle='round,pad=0.1', facecolor=generation_color, edgecolor='black', alpha=0.9, linewidth=1.5)
+ax.add_patch(box2)
+ax.text(16.5, 12.2, 'Data Generator\nStochastic + Rule-based', ha='center', va='center', fontsize=13, fontweight='bold', color='white')
+
+box3 = FancyBboxPatch((16.5-1.5, 10.8-0.65), 3, 1.3, boxstyle='round,pad=0.1', facecolor=artificial_color, edgecolor='black', alpha=0.9, linewidth=1.5)
+ax.add_patch(box3)
+ax.text(16.5, 10.8, 'Data Artifisial\n800 samples\n+ Ground Truth', ha='center', va='center', fontsize=14, fontweight='bold', color='white')
 ax.add_patch(FancyArrowPatch((16.5, 11.7), (16.5, 11.4), mutation_scale=20, arrowstyle='-|>', color=generation_color, linewidth=2))
 
 # === 2. PREPROCESSING PIPELINE ===
 pipeline_bg = FancyBboxPatch((1.5, 6), 17, 4, boxstyle='round,pad=0.2', facecolor='whitesmoke', edgecolor='gray', linewidth=1.5, ls='--')
 ax.add_patch(pipeline_bg)
-ax.text(10, 9.5, 'Preprocessing Pipeline', ha='center', va='center', fontsize=18, fontweight='bold', color='black')
+ax.text(10, 9.5, 'Preprocessing Pipeline', ha='center', va='center', fontsize=20, fontweight='bold', color='black')
 
 # Mode indicators (these calls pass 'alpha' and now work correctly)
 draw_box(ax, 5, 8.8, 4, 0.6, 'Detection Mode', real_color, alpha=0.3, text_color=real_color)
@@ -78,12 +87,21 @@ draw_box(ax, module_positions['VIF'], 7.2, 3, 1.4, 'VIF Analysis\n& Scaling', 'w
 for start, end in [('Load', 'Preproc'), ('Preproc', 'FeatureEng'), ('FeatureEng', 'VIF')]:
     ax.add_patch(FancyArrowPatch((module_positions[start] + 1.5, 7.2), (module_positions[end] - 1.5, 7.2), mutation_scale=20, arrowstyle='-|>', color=process_color, linewidth=2))
 
-ax.text(17.5, 7.2, '35 → 8\nfitur', ha='center', va='center', fontsize=11, fontweight='bold', bbox=dict(boxstyle='round,pad=0.4', facecolor='gold', alpha=0.8, edgecolor='orange'))
+ax.text(17.5, 7.2, '35 → 8\nfitur', ha='center', va='center', fontsize=13, fontweight='bold', bbox=dict(boxstyle='round,pad=0.4', facecolor='gold', alpha=0.8, edgecolor='orange'))
 
 # === 3. OUTPUTS & ARTIFACTS LEVEL ===
-draw_box(ax, 5, 3.8, 5.5, 2.2, 'Detection Results\n131,479 deteksi\n4,093 users affected\n29.43% detection rate', eval_color, text_color='black')
-draw_box(ax, 15, 3.8, 5.5, 2.2, 'Model Training & Validation\nRandom Forest • SVM\nNeural Network • Gradient Boosting\nEnsemble Architecture', model_color)
-draw_box(ax, 10, 1.2, 5, 1.5, 'Saved Artifacts\nStandardScaler\nFeature Selector\nSimpleImputer', artifact_color)
+# Custom larger text for output boxes
+output1 = FancyBboxPatch((5-2.75, 3.8-1.1), 5.5, 2.2, boxstyle='round,pad=0.1', facecolor=eval_color, edgecolor='black', alpha=0.9, linewidth=1.5)
+ax.add_patch(output1)
+ax.text(5, 3.8, 'Detection Results\n131,479 deteksi\n4,093 users affected\n29.43% detection rate', ha='center', va='center', fontsize=13, fontweight='bold', color='black')
+
+output2 = FancyBboxPatch((15-2.75, 3.8-1.1), 5.5, 2.2, boxstyle='round,pad=0.1', facecolor=model_color, edgecolor='black', alpha=0.9, linewidth=1.5)
+ax.add_patch(output2)
+ax.text(15, 3.8, 'Model Training & Validation\nRandom Forest • SVM\nNeural Network • Gradient Boosting\nEnsemble Architecture', ha='center', va='center', fontsize=13, fontweight='bold', color='white')
+
+output3 = FancyBboxPatch((10-2.5, 1.2-0.75), 5, 1.5, boxstyle='round,pad=0.1', facecolor=artifact_color, edgecolor='black', alpha=0.9, linewidth=1.5)
+ax.add_patch(output3)
+ax.text(10, 1.2, 'Saved Artifacts\nStandardScaler\nFeature Selector\nSimpleImputer', ha='center', va='center', fontsize=14, fontweight='bold', color='white')
 
 # === 4. FLOW ARROWS ===
 ax.add_patch(FancyArrowPatch((4, 10.7), (4, 8.6), connectionstyle="arc3,rad=-0.2", mutation_scale=25, arrowstyle='-|>', color=real_color, linewidth=2.5))
@@ -96,7 +114,10 @@ ax.add_patch(FancyArrowPatch((8.5, 2.4), (5, 6.0), connectionstyle="arc3,rad=0.4
 # === 5. KEY DIFFERENCES & LEGEND ===
 key_text = '★ Training Mode: Fit preprocessing & save artifacts | ★ Detection Mode: Load & apply artifacts | ★ VIF reduces 35→8 features | ★ Ground truth only for artificial data'
 wrapped_text = textwrap.fill(key_text, width=140)
-draw_box(ax, 10, -0.8, 18, 1.2, wrapped_text, 'lightyellow', edgecolor='orange', text_color='black', linewidth=2)
+# Custom larger text for key information
+key_box = FancyBboxPatch((10-9, -0.8-0.6), 18, 1.2, boxstyle='round,pad=0.1', facecolor='lightyellow', edgecolor='orange', alpha=0.9, linewidth=2)
+ax.add_patch(key_box)
+ax.text(10, -0.8, wrapped_text, ha='center', va='center', fontsize=12, fontweight='bold', color='black')
 
 legend_elements = [
     mpatches.Patch(color=real_color, label='Data Riil & Detection Path'),
@@ -108,7 +129,7 @@ legend_elements = [
     mpatches.Patch(color=artifact_color, label='Saved Artifacts'),
     mpatches.Patch(facecolor='none', edgecolor='gray', ls='--', label='Artifact Flow (Save/Load)')
 ]
-ax.legend(handles=legend_elements, loc='lower left', bbox_to_anchor=(0.01, 0.01), fontsize=11, framealpha=0.95)
+ax.legend(handles=legend_elements, loc='lower left', bbox_to_anchor=(0.01, 0.01), fontsize=13, framealpha=0.95)
 
 # === 6. SAVE FIGURE ===
 plt.tight_layout(pad=0.5)
