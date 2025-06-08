@@ -2,18 +2,16 @@
 \chapter{\babTiga}
 \label{bab:3}
 %-----------------------------------------------------------------------------%
-Bab ini menjelaskan mengenai desain dari sistem yang dibuat untuk menjalankan dan
-menyelesaikan penelitian. Berikut ini diagram alur yang memvisualisasikan gambaran besar
-tahapan-tahapan yang dilakukan. Penjelasan setiap tahap disajikan pada paparan subbab selanjutnya.
+Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem deteksi kecurangan akademik berbasis kecerdasan buatan. Pembahasan mencakup desain penelitian, tahapan metodologis yang ditempuh, sumber data yang digunakan, serta prosedur pengolahan dan analisis data. Metode penelitian dirancang untuk menjawab pertanyaan penelitian melalui pendekatan eksperimental yang sistematis dan terstruktur.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{figures/pipeline_overview.pdf}
-    \caption{Pipeline Sistem Deteksi Kecurangan Berbasis AI}
+    \caption{Pipeline Metodologi Penelitian Deteksi Kecurangan Berbasis AI}
     \label{fig:pipeline_overview}
 \end{figure}
 
-Gambar \ref{fig:pipeline_overview} menunjukkan alur lengkap sistem deteksi kecurangan yang dikembangkan dalam penelitian ini. Pipeline dimulai dari dua sumber data utama: data log Moodle riil yang mencakup 446,720 events dari 5,562 pengguna, dan data artifisial yang terdiri dari 800 sampel dengan ground truth yang telah didefinisikan. Kedua jenis data ini melalui tahap pra-pemrosesan untuk pembersihan dan normalisasi, kemudian diekstraksi menjadi 35 fitur awal. Melalui analisis Variance Inflation Factor (VIF), fitur-fitur ini direduksi menjadi 8 fitur stabil yang memiliki kolinearitas rendah dan importance tinggi. Fitur-fitur terpilih kemudian digunakan untuk melatih ensemble model yang terdiri dari Random Forest, SVM, Neural Network, dan Gradient Boosting. Secara paralel, analisis similaritas berbasis graph network dilakukan untuk mendeteksi kelompok kecurangan. Hasil akhir dari pipeline ini adalah deteksi 131,479 percobaan ujian yang terindikasi kecurangan dari total 446,720 percobaan yang dianalisis.
+Gambar \ref{fig:pipeline_overview} menunjukkan kerangka metodologis penelitian yang dikembangkan dalam penelitian ini. Metodologi dimulai dari dua sumber data utama: data log Moodle riil yang mencakup 446,720 events dari 5,562 pengguna, dan data artifisial yang terdiri dari 800 sampel dengan ground truth yang telah didefinisikan. Kedua jenis data ini melalui tahap pra-pemrosesan untuk pembersihan dan normalisasi, kemudian diekstraksi menjadi 35 fitur awal. Melalui analisis Variance Inflation Factor (VIF), fitur-fitur ini direduksi menjadi 8 fitur stabil yang memiliki kolinearitas rendah dan importance tinggi. Fitur-fitur terpilih kemudian digunakan untuk melatih ensemble model yang terdiri dari Random Forest, SVM, Neural Network, dan Gradient Boosting. Secara paralel, analisis similaritas berbasis graph network dilakukan untuk mendeteksi kelompok kecurangan. Hasil akhir dari pipeline ini adalah deteksi 131,479 percobaan ujian yang terindikasi kecurangan dari total 446,720 percobaan yang dianalisis.
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
