@@ -4,18 +4,18 @@ globs: *.tex,**/*.tex
 alwaysApply: false
 ---
 
-- **Narrative Style:** Transform overly technical content into a more narrative style to make findings accessible to a broader audience.
+- **Narrative Style:** Transform overly technical content into a more understandable style to make findings accessible to a broader audience.
 
 - **Intuitive Flow:** Structure your thesis to ensure readers can easily follow the research journey.
 
 - **Clear Terminology:** Avoid jargon where possible and define necessary technical terms clearly.
 
 
-- **Figures:** To insert a figure, use the following structure. Place image files in the `figures/` directory.
+- **Figures:** To insert a figure, use the following structure. Place image files in the `newfigures/` directory.
     ```latex
     \begin{figure}[h!]
         \centering
-        \includegraphics[width=0.8\textwidth]{figures/figure_filename.pdf}
+        \includegraphics[width=0.8\textwidth]{newfigures/figure_filename.pdf}
         \caption{Caption explaining the figure.}
         \label{fig:label_for_figure}
     \end{figure}
@@ -30,6 +30,6 @@ alwaysApply: false
     \end{table}
     ```
 
-- **Citations:** When making a claim that requires a source from the literature review, use a placeholder for easy searching later: `[CITE: key_idea_or_author_year]`.
+- **Citations:** When making a claim that requires a source from the literature review, use a placeholder for easy searching later.
 
 - **Code Snippets:** Use the `lstlisting` environment for displaying code.

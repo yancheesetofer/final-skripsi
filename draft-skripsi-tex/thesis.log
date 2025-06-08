@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.4)  9 JUN 2025 02:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.4)  9 JUN 2025 04:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1225,7 +1225,11 @@ File: ot1ntxtlf.fd 2021/05/24 v1.0 font definition file for OT1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 12.0pt on input line 34.
- (./thesis.aux (./_internals/sampul.aux) (./_internals/judul_dalam.aux) (./src/00-frontMatter/pernyataanOrisinalitas.aux) (./src/00-frontMatter/pengesahanSidang.aux) (./src/00-frontMatter/kataPengantar.aux) (./src/00-frontMatter/persetujuanPublikasi.aux) (./src/00-frontMatter/abstrak.aux) (./src/00-frontMatter/abstract.aux) (./src/01-body/bab1.aux) (./src/01-body/bab2.aux) (./src/01-body/bab3.aux) (./src/01-body/bab4.aux) (./src/01-body/bab5.aux) (./src/01-body/kesimpulan.aux) (./_internals/pustaka.aux) (./_internals/markLampiran.aux) (./src/99-backMatter/lampiran.aux))
+ (./thesis.aux (./_internals/sampul.aux) (./_internals/judul_dalam.aux) (./src/00-frontMatter/pernyataanOrisinalitas.aux) (./src/00-frontMatter/pengesahanSidang.aux) (./src/00-frontMatter/kataPengantar.aux) (./src/00-frontMatter/persetujuanPublikasi.aux) (./src/00-frontMatter/abstrak.aux) (./src/00-frontMatter/abstract.aux) (./src/01-body/bab1.aux) (./src/01-body/bab2.aux) (./src/01-body/bab3.aux
+
+LaTeX Warning: Label `sec:dataArtifisial' multiply defined.
+
+) (./src/01-body/bab4.aux) (./src/01-body/bab5.aux) (./src/01-body/kesimpulan.aux) (./_internals/pustaka.aux) (./_internals/markLampiran.aux) (./src/99-backMatter/lampiran.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 34.
@@ -1418,7 +1422,7 @@ LaTeX Info: Redefining \BHBI on input line 130.
 \openout2 = `_internals/sampul.aux'.
 
  (./_internals/sampul.tex
-<assets/pics/makara_kuning.png, id=642, 293.1753pt x 294.1389pt>
+<assets/pics/makara_kuning.png, id=666, 293.1753pt x 294.1389pt>
 File: assets/pics/makara_kuning.png Graphic file (type png)
 <use assets/pics/makara_kuning.png>
 Package pdftex.def Info: assets/pics/makara_kuning.png  used on input line 15.
@@ -1635,7 +1639,7 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 9.0pt on input line 5.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/it' will be
 (Font)              scaled to size 12.0pt on input line 19.
-<assets/pics/creative_commons.png, id=680, 759.83875pt x 645.41125pt>
+<assets/pics/creative_commons.png, id=704, 759.83875pt x 645.41125pt>
 File: assets/pics/creative_commons.png Graphic file (type png)
 <use assets/pics/creative_commons.png>
 Package pdftex.def Info: assets/pics/creative_commons.png  used on input line 24.
@@ -1828,8 +1832,8 @@ Missing character: There is no ° in font ntx-Regular-tlf-ot1!
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.20 S
-      ebagai solusi, penelitian ini mengusulkan pendekatan berbasis \textit{... [1
+l.19 
+      [1
 
 
 
@@ -2027,14 +2031,14 @@ BAB 3.
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\MakeUppercase   ' on input line 2.
 
-<newfigures/research_methodology_stages.pdf, id=1321, 860.01299pt x 572.9pt>
+<newfigures/research_methodology_stages.pdf, id=1354, 860.01299pt x 572.9pt>
 File: newfigures/research_methodology_stages.pdf Graphic file (type pdf)
 <use newfigures/research_methodology_stages.pdf>
 Package pdftex.def Info: newfigures/research_methodology_stages.pdf  used on input line 9.
 (pdftex.def)             Requested size: 405.45047pt x 270.09349pt.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 10.0pt on input line 10.
-<newfigures/technical_pipeline_flow_final.pdf, id=1323, 1449.81653pt x 1016.19652pt>
+<newfigures/technical_pipeline_flow_final.pdf, id=1356, 1449.81653pt x 1016.19652pt>
 File: newfigures/technical_pipeline_flow_final.pdf Graphic file (type pdf)
 <use newfigures/technical_pipeline_flow_final.pdf>
 Package pdftex.def Info: newfigures/technical_pipeline_flow_final.pdf  used on input line 18.
@@ -2055,10 +2059,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 [19 <./newfigures/technical_pipeline_flow_final.pdf>]
 
-LaTeX Warning: Reference `fig:comprehensive_pipeline' on page 20 undefined on input line 53.
-
-
-
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2068,20 +2068,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 [20]
 
-LaTeX Warning: Reference `fig:comprehensive_pipeline' on page 21 undefined on input line 81.
-
-
-Underfull \hbox (badness 5862) in paragraph at lines 88--90
-\OT1/ntxtlf/m/n/12 Modul ini bertang-gung jawab un-tuk memuat dan mem-val-i-dasi data dari
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 88--90
-\OT1/ntxtlf/m/n/12 berba-gai tabel Moo-dle (mdl[]quiz[]attempts, mdl[]question[]attempt[]steps,
- []
-
-
-
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2090,6 +2076,16 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [21]
+Underfull \hbox (badness 3690) in paragraph at lines 92--94
+\OT1/ntxtlf/m/n/12 Modul per-tama bertang-gung jawab memuat data dari berba-gai tabel Moo-
+ []
+
+
+Underfull \hbox (badness 1609) in paragraph at lines 92--94
+\OT1/ntxtlf/m/n/12 dle de-ngan va-li-dasi kom-pre-hen-sif. Tabel-tabel utama yang diproses meliputi
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2117,16 +2113,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [24]
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no ì in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no ì in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no ì in font ntx-Regular-tlf-ot1!
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2136,6 +2122,16 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [25]
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no ì in font ntx-Regular-tlf-ot1!
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no ì in font ntx-Regular-tlf-ot1!
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no ì in font ntx-Regular-tlf-ot1!
+
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2154,10 +2150,19 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [27]
-<figures/data_flow_diagram.pdf, id=1548, 597.23125pt x 845.1575pt>
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[28]
+<figures/data_flow_diagram.pdf, id=1587, 597.23125pt x 845.1575pt>
 File: figures/data_flow_diagram.pdf Graphic file (type pdf)
 <use figures/data_flow_diagram.pdf>
-Package pdftex.def Info: figures/data_flow_diagram.pdf  used on input line 270.
+Package pdftex.def Info: figures/data_flow_diagram.pdf  used on input line 274.
 (pdftex.def)             Requested size: 405.45047pt x 573.77098pt.
 
 
@@ -2168,7 +2173,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[28]
+[29]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2177,16 +2182,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[29 <./figures/data_flow_diagram.pdf>]
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[30]
+[30 <./figures/data_flow_diagram.pdf>]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2196,16 +2192,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [31]
-Overfull \hbox (26.08716pt too wide) in paragraph at lines 354--354
-[]        \OT1/pcr/m/n/12 features['quick_answers'] = int(sum(1 for t in time_seq if t < 5))[] 
- []
-
-
-Overfull \hbox (62.80704pt too wide) in paragraph at lines 354--354
-[]        \OT1/pcr/m/n/12 features['very_long_answers'] = int(sum(1 for t in time_seq if t > 600))[] 
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2215,6 +2201,16 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [32]
+Overfull \hbox (26.08716pt too wide) in paragraph at lines 358--358
+[]        \OT1/pcr/m/n/12 features['quick_answers'] = int(sum(1 for t in time_seq if t < 5))[] 
+ []
+
+
+Overfull \hbox (62.80704pt too wide) in paragraph at lines 358--358
+[]        \OT1/pcr/m/n/12 features['very_long_answers'] = int(sum(1 for t in time_seq if t > 600))[] 
+ []
+
+
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2233,13 +2229,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [34]
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2251,7 +2240,10 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 [35]
 Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
 Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no ì in font ntx-Regular-tlf-ot1!
+Missing character: There is no î in font ntx-Regular-tlf-ot1!
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no î in font ntx-Regular-tlf-ot1!
 
 
 
@@ -2262,6 +2254,10 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [36]
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no ì in font ntx-Regular-tlf-ot1!
+
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2280,7 +2276,16 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 511--513
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[39]
+Underfull \hbox (badness 10000) in paragraph at lines 515--517
 
  []
 
@@ -2293,23 +2298,14 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[39]
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
 [40]
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no î in font ntx-Regular-tlf-ot1!
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no î in font ntx-Regular-tlf-ot1!
+
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2328,10 +2324,10 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [42]
-<figures/feature_engineering_process.pdf, id=1614, 845.1575pt x 597.23125pt>
+<figures/feature_engineering_process.pdf, id=1650, 845.1575pt x 597.23125pt>
 File: figures/feature_engineering_process.pdf Graphic file (type pdf)
 <use figures/feature_engineering_process.pdf>
-Package pdftex.def Info: figures/feature_engineering_process.pdf  used on input line 584.
+Package pdftex.def Info: figures/feature_engineering_process.pdf  used on input line 588.
 (pdftex.def)             Requested size: 384.1096pt x 271.43991pt.
 
 
@@ -2342,7 +2338,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[43 <./figures/feature_engineering_process.pdf>]
+[43]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2351,7 +2347,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[44]
+[44 <./figures/feature_engineering_process.pdf>]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2361,16 +2357,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [45]
-Underfull \hbox (badness 1117) in paragraph at lines 668--669
-[]|\OT1/ntxtlf/m/n/12 Rata-rata waktu penger-jaan
- []
-
-
-Underfull \hbox (badness 1540) in paragraph at lines 670--671
-[]|\OT1/ntxtlf/m/n/12 Similaritas nav-i-gasi mak-si-
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2380,7 +2366,17 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [46]
-Underfull \hbox (badness 1194) in paragraph at lines 699--702
+Underfull \hbox (badness 1117) in paragraph at lines 672--673
+[]|\OT1/ntxtlf/m/n/12 Rata-rata waktu penger-jaan
+ []
+
+
+Underfull \hbox (badness 1540) in paragraph at lines 674--675
+[]|\OT1/ntxtlf/m/n/12 Similaritas nav-i-gasi mak-si-
+ []
+
+
+Underfull \hbox (badness 1194) in paragraph at lines 703--706
 \OT1/ntxtlf/m/n/12 Banyak data log yang awal-nya di-sim-pan se-ba-gai string re-pre-sen-tasi ar-ray atau
  []
 
@@ -2394,22 +2390,25 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [47]
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[48]
 Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
 Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
 Missing character: There is no î in font ntx-Regular-tlf-ot1!
 Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
 Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
 Missing character: There is no î in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-<figures/ensemble_architecture.pdf, id=1644, 856.71747pt x 712.47173pt>
+<figures/ensemble_architecture.pdf, id=1683, 856.71747pt x 712.47173pt>
 File: figures/ensemble_architecture.pdf Graphic file (type pdf)
 <use figures/ensemble_architecture.pdf>
-Package pdftex.def Info: figures/ensemble_architecture.pdf  used on input line 747.
+Package pdftex.def Info: figures/ensemble_architecture.pdf  used on input line 751.
 (pdftex.def)             Requested size: 384.1096pt x 319.44608pt.
 
 
@@ -2420,7 +2419,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[48]
+[49]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2429,21 +2428,8 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[49 <./figures/ensemble_architecture.pdf>]
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[50]
-<figures/neural_network_architecture.pdf, id=1727, 856.71747pt x 562.4658pt>
-File: figures/neural_network_architecture.pdf Graphic file (type pdf)
-<use figures/neural_network_architecture.pdf>
-Package pdftex.def Info: figures/neural_network_architecture.pdf  used on input line 788.
-(pdftex.def)             Requested size: 362.77525pt x 238.18225pt.
+[50 <./figures/ensemble_architecture.pdf>]
+Missing character: There is no Õ in font zpsycmrv!
 
 
 
@@ -2454,11 +2440,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [51]
-Underfull \hbox (badness 1082) in paragraph at lines 802--804
-\OT1/ntxtlf/m/n/12 hasilkan prob-a-bil-i-tas yang merep-re-sen-tasikan sta-tus ke-cu-ran-gan (1 un-tuk non-
- []
-
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2467,13 +2448,9 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[52 <./figures/neural_network_architecture.pdf>]
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
+[52]
+Missing character: There is no œ in font zpzccmry!
+Missing character: There is no œ in font zpzccmry!
 
 
 
@@ -2484,11 +2461,8 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [53]
-<figures/training_process.pdf, id=1810, 1074.33107pt x 739.93088pt>
-File: figures/training_process.pdf Graphic file (type pdf)
-<use figures/training_process.pdf>
-Package pdftex.def Info: figures/training_process.pdf  used on input line 840.
-(pdftex.def)             Requested size: 405.45047pt x 279.24599pt.
+Missing character: There is no œ in font zpzccmry!
+Missing character: There is no œ in font zpzccmry!
 
 
 
@@ -2507,7 +2481,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[55 <./figures/training_process.pdf>]
+[55]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2526,12 +2500,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [57]
-<figures/hyperparameter_tuning.pdf, id=1899, 1074.94911pt x 739.64857pt>
-File: figures/hyperparameter_tuning.pdf Graphic file (type pdf)
-<use figures/hyperparameter_tuning.pdf>
-Package pdftex.def Info: figures/hyperparameter_tuning.pdf  used on input line 919.
-(pdftex.def)             Requested size: 405.45047pt x 278.98145pt.
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2540,10 +2508,11 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[58 <./figures/hyperparameter_tuning.pdf>]
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no ì in font ntx-Regular-tlf-ot1!
+[58]
+Underfull \hbox (badness 3407) in paragraph at lines 1130--1131
+[]\OT1/ntxtlf/m/n/12 Anomali times-tamp: 2.3% data memi-liki times-tamp de-fault (1970) yang
+ []
+
 
 
 
@@ -2572,10 +2541,6 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [61]
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no ì in font ntx-Regular-tlf-ot1!
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2594,6 +2559,11 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [63]
+File: figures/feature_engineering_process.pdf Graphic file (type pdf)
+<use figures/feature_engineering_process.pdf>
+Package pdftex.def Info: figures/feature_engineering_process.pdf  used on input line 1359.
+(pdftex.def)             Requested size: 384.1096pt x 271.43991pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2602,7 +2572,37 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[64])
+[64]
+Overfull \hbox (5.3358pt too wide) in paragraph at lines 1398--1398
+[]|\OT1/pcr/m/n/12 max[]nav[]similarity[]zscore| 
+ []
+
+
+Underfull \hbox (badness 1394) in paragraph at lines 1398--1399
+[]|\OT1/ntxtlf/m/n/12 Z-score kemiri-pan nav-i-gasi
+ []
+
+
+Overfull \hbox (11.45578pt too wide) in paragraph at lines 1400--1400
+[]|\OT1/pcr/m/n/12 mean[]nav[]similarity[]zscore| 
+ []
+
+
+Overfull \hbox (5.3358pt too wide) in paragraph at lines 1404--1404
+[]|\OT1/pcr/m/n/12 std[]nav[]similarity[]zscore| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1404--1405
+[]|\OT1/ntxtlf/m/n/12 Variabilitas kemiri-pan,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1406--1407
+[]|\OT1/ntxtlf/m/n/12 Konsistensi ke-cepatan
+ []
+
+)
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2612,6 +2612,26 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [65]
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[66]
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.66}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.208 \clearchapter
+                    [66
+
+
+
+]
 \openout2 = `src/01-body/bab4.aux'.
 
  (./src/01-body/bab4.tex
@@ -2624,10 +2644,7 @@ Missing character: There is no √ in font ntx-Regular-tlf-ot1!
 Missing character: There is no ó in font ntx-Regular-tlf-ot1!
 
 
-[66
-
-
-
+[67
 
 
 ]
@@ -2639,8 +2656,8 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[67]
-<figures/confusion_matrix_Random Forest.png, id=2025, 578.16pt x 433.62pt>
+[68]
+<figures/confusion_matrix_Random Forest.png, id=1869, 578.16pt x 433.62pt>
 File: figures/confusion_matrix_Random Forest.png Graphic file (type png)
 <use figures/confusion_matrix_Random Forest.png>
 Package pdftex.def Info: figures/confusion_matrix_Random Forest.png  used on input line 112.
@@ -2654,18 +2671,18 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[68 <./figures/confusion_matrix_Random Forest.png>]
-<figures/curves_Random Forest.png, id=2032, 1156.32pt x 433.62pt>
+[69 <./figures/confusion_matrix_Random Forest.png>]
+<figures/curves_Random Forest.png, id=1875, 1156.32pt x 433.62pt>
 File: figures/curves_Random Forest.png Graphic file (type png)
 <use figures/curves_Random Forest.png>
 Package pdftex.def Info: figures/curves_Random Forest.png  used on input line 132.
 (pdftex.def)             Requested size: 298.75264pt x 112.03056pt.
-<figures/model_performance_comparison.pdf, id=2033, 859.83795pt x 570.77817pt>
+<figures/model_performance_comparison.pdf, id=1876, 859.83795pt x 570.77817pt>
 File: figures/model_performance_comparison.pdf Graphic file (type pdf)
 <use figures/model_performance_comparison.pdf>
 Package pdftex.def Info: figures/model_performance_comparison.pdf  used on input line 144.
 (pdftex.def)             Requested size: 341.43437pt x 226.65244pt.
-<figures/feature_importance_Random Forest.png, id=2034, 722.7pt x 433.62pt>
+<figures/feature_importance_Random Forest.png, id=1877, 722.7pt x 433.62pt>
 File: figures/feature_importance_Random Forest.png Graphic file (type png)
 <use figures/feature_importance_Random Forest.png>
 Package pdftex.def Info: figures/feature_importance_Random Forest.png  used on input line 170.
@@ -2679,7 +2696,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[69 <./figures/curves_Random Forest.png>]
+[70 <./figures/curves_Random Forest.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2688,7 +2705,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[70 <./figures/model_performance_comparison.pdf> <./figures/feature_importance_Random Forest.png>]
+[71 <./figures/model_performance_comparison.pdf> <./figures/feature_importance_Random Forest.png>]
 LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 (Font)              scaled to size 7.0pt on input line 197.
 
@@ -2703,8 +2720,8 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[71]
-<figures/feature_correlation_heatmap.pdf, id=2117, 626.29858pt x 570.75423pt>
+[72]
+<figures/feature_correlation_heatmap.pdf, id=1956, 626.29858pt x 570.75423pt>
 File: figures/feature_correlation_heatmap.pdf Graphic file (type pdf)
 <use figures/feature_correlation_heatmap.pdf>
 Package pdftex.def Info: figures/feature_correlation_heatmap.pdf  used on input line 212.
@@ -2718,11 +2735,11 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[72 <./figures/feature_correlation_heatmap.pdf>]
+[73 <./figures/feature_correlation_heatmap.pdf>]
 Missing character: There is no ‚ in font ntx-Bold-tlf-ot1!
 Missing character: There is no â in font ntx-Bold-tlf-ot1!
 Missing character: There is no • in font ntx-Bold-tlf-ot1!
-<figures/probability_distribution_analysis.pdf, id=2169, 1004.43002pt x 426.12701pt>
+<figures/probability_distribution_analysis.pdf, id=2009, 1004.43002pt x 426.12701pt>
 File: figures/probability_distribution_analysis.pdf Graphic file (type pdf)
 <use figures/probability_distribution_analysis.pdf>
 Package pdftex.def Info: figures/probability_distribution_analysis.pdf  used on input line 250.
@@ -2736,8 +2753,8 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[73 <./figures/probability_distribution_analysis.pdf>]
-<figures/repeat_offender_analysis.pdf, id=2224, 1004.32405pt x 425.88297pt>
+[74 <./figures/probability_distribution_analysis.pdf>]
+<figures/repeat_offender_analysis.pdf, id=2064, 1004.32405pt x 425.88297pt>
 File: figures/repeat_offender_analysis.pdf Graphic file (type pdf)
 <use figures/repeat_offender_analysis.pdf>
 Package pdftex.def Info: figures/repeat_offender_analysis.pdf  used on input line 315.
@@ -2751,8 +2768,8 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[74]
-<figures/quiz_analysis.pdf, id=2230, 860.04625pt x 715.138pt>
+[75]
+<figures/quiz_analysis.pdf, id=2069, 860.04625pt x 715.138pt>
 File: figures/quiz_analysis.pdf Graphic file (type pdf)
 <use figures/quiz_analysis.pdf>
 Package pdftex.def Info: figures/quiz_analysis.pdf  used on input line 335.
@@ -2766,19 +2783,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[75 <./figures/repeat_offender_analysis.pdf> <./figures/quiz_analysis.pdf>]
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[76]
-Missing character: There is no √ in font ntx-Regular-tlf-ot1!
-Missing character: There is no © in font ntx-Regular-tlf-ot1!
-
+[76 <./figures/repeat_offender_analysis.pdf> <./figures/quiz_analysis.pdf>]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2801,6 +2806,18 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 
 [78]
 Missing character: There is no √ in font ntx-Regular-tlf-ot1!
+Missing character: There is no © in font ntx-Regular-tlf-ot1!
+
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[79]
+Missing character: There is no √ in font ntx-Regular-tlf-ot1!
 Missing character: There is no ó in font ntx-Regular-tlf-ot1!
 Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
 Missing character: There is no Å in font ntx-Regular-tlf-ot1!
@@ -2817,7 +2834,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[79]
+[80]
 Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
 Missing character: There is no Ü in font ntx-Regular-tlf-ot1!
 Missing character: There is no í in font ntx-Regular-tlf-ot1!
@@ -2830,14 +2847,14 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[80]
+[81]
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.80}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.81}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.210 \clearchapter
-                    [80
+                    [81
 
 
 
@@ -2856,7 +2873,7 @@ Missing character: There is no ƒ in font ntx-Regular-tlf-ot1!
 Missing character: There is no á in font ntx-Regular-tlf-ot1!
 
 
-[81
+[82
 
 
 ]
@@ -2868,23 +2885,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[82]
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
 [83]
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
-Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
-Missing character: There is no î in font ntx-Regular-tlf-ot1!
-
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2894,6 +2895,13 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [84]
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no î in font ntx-Regular-tlf-ot1!
+Missing character: There is no ‚ in font ntx-Regular-tlf-ot1!
+Missing character: There is no Ä in font ntx-Regular-tlf-ot1!
+Missing character: There is no î in font ntx-Regular-tlf-ot1!
+
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2912,6 +2920,15 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [86]
+
+
+Package fancyhdr Warning: \headheight is too small (0.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
+
+[87]
 Underfull \hbox (badness 1242) in paragraph at lines 87--89
 []\OT1/minntx/b/n/12 Pengembangan Model de-ngan Data Riil Berla-bel dan Pen-dekatan Semi-
  []
@@ -2925,7 +2942,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[87]
+[88]
 Missing character: There is no ≈ in font ntx-Regular-tlf-ot1!
 Missing character: There is no ° in font ntx-Regular-tlf-ot1!
 Missing character: There is no ƒ in font ntx-Regular-tlf-ot1!
@@ -2947,7 +2964,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[88]
+[89]
 \openout2 = `src/01-body/kesimpulan.aux'.
 
  (./src/01-body/kesimpulan.tex
@@ -2958,7 +2975,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 )
 
-[89
+[90
 
 
 
@@ -2967,11 +2984,11 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 ]
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.89}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.90}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.214 \clearchapter
-                    [89
+                    [90
 
 
 
@@ -2993,7 +3010,7 @@ Missing character: There is no ƒ in font ntx-Regular-tlf-ot1!
 Missing character: There is no á in font ntx-Regular-tlf-ot1!
 
 
-[90
+[91
 
 
 ]
@@ -3008,7 +3025,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[91]
+[92]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 233.
@@ -3040,11 +3057,11 @@ l.12 \end{titlepage}
 ])
 
 
-pdfTeX warning (ext4): destination with the same identifier (name{page.91}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.92}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.245 	\clearchapter
-                     [91
+                     [92
 
 
 
@@ -3060,7 +3077,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[92
+[93
 
 ]
 
@@ -3071,7 +3088,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[93]
+[94]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -3080,7 +3097,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[94])
+[95])
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -3089,7 +3106,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-[95
+[96
 
 ] (./thesis.aux (./_internals/sampul.aux) (./_internals/judul_dalam.aux) (./src/00-frontMatter/pernyataanOrisinalitas.aux) (./src/00-frontMatter/pengesahanSidang.aux) (./src/00-frontMatter/kataPengantar.aux) (./src/00-frontMatter/persetujuanPublikasi.aux) (./src/00-frontMatter/abstrak.aux) (./src/00-frontMatter/abstract.aux) (./src/01-body/bab1.aux) (./src/01-body/bab2.aux) (./src/01-body/bab3.aux) (./src/01-body/bab4.aux) (./src/01-body/bab5.aux) (./src/01-body/kesimpulan.aux) (./_internals/pustaka.aux) (./_internals/markLampiran.aux) (./src/99-backMatter/lampiran.aux))
  ***********
@@ -3098,24 +3115,24 @@ L3 programming layer <2020/03/25>
  ***********
 
 
-LaTeX Warning: There were undefined references.
+LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: EB9B86D9A6EFCC96B8ED03DB0BFF2DE3;40693.
+(rerunfilecheck)             Checksum: FB047D8E741D4A233FCC1856C8347CB3;43256.
  ) 
 Here is how much of TeX's memory you used:
- 42670 strings out of 473190
- 795874 string characters out of 5715801
- 1341148 words of memory out of 5000000
- 64522 multiletter control sequences out of 15000+600000
- 612448 words of font info for 140 fonts, out of 8000000 for 9000
+ 42702 strings out of 473190
+ 795909 string characters out of 5715801
+ 1343483 words of memory out of 5000000
+ 64534 multiletter control sequences out of 15000+600000
+ 612656 words of font info for 141 fonts, out of 8000000 for 9000
  1283 hyphenation exceptions out of 8191
  114i,12n,115p,18437b,871s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmbi.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on thesis.pdf (122 pages, 6707934 bytes).
+Output written on thesis.pdf (124 pages, 6627484 bytes).
 PDF statistics:
- 2657 PDF objects out of 2984 (max. 8388607)
- 1855 compressed objects within 19 object streams
- 409 named destinations out of 1000 (max. 500000)
- 1367 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2499 PDF objects out of 2984 (max. 8388607)
+ 1882 compressed objects within 19 object streams
+ 428 named destinations out of 1000 (max. 500000)
+ 1400 words of extra memory for PDF output out of 10000 (max. 10000000)
 

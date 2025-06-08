@@ -2,7 +2,7 @@
 \chapter{\babTiga}
 \label{bab:3}
 %-----------------------------------------------------------------------------%
-Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem deteksi kecurangan akademik berbasis kecerdasan buatan. Pembahasan mencakup desain penelitian, tahapan metodologis yang ditempuh, sumber data yang digunakan, serta prosedur pengolahan dan analisis data. Metode penelitian dirancang untuk menjawab pertanyaan penelitian melalui pendekatan eksperimental yang sistematis dan terstruktur.
+Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem deteksi kecurangan akademik berbasis kecerdasan buatan pada platform Moodle. Metodologi penelitian dirancang melalui pendekatan sistematis yang dimulai dari pemahaman masalah, perancangan solusi, hingga implementasi dan evaluasi. Pembahasan mencakup enam fase utama: (1) analisis kebutuhan dan studi literatur, (2) akuisisi dan persiapan data, (3) perancangan data artifisial dengan ground truth terkontrol, (4) pengembangan pipeline preprocessing dan ekstraksi fitur, (5) pelatihan model ensemble machine learning, dan (6) evaluasi komprehensif pada data riil dan artifisial.
 
 \begin{figure}[htbp]
     \centering
@@ -11,116 +11,120 @@ Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem d
     \label{fig:research_stages}
 \end{figure}
 
-Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang terdiri dari enam fase utama yang saling berkaitan. Metodologi dirancang dengan pendekatan sistematis yang memungkinkan validasi dan reproducibility hasil penelitian. Setiap fase dirancang untuk menjawab aspek-aspek tertentu dari research questions yang telah dirumuskan pada Bab 1.
+Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang terdiri dari enam fase utama yang saling berkaitan. Setiap fase dirancang secara spesifik untuk menjawab pertanyaan penelitian yang telah dirumuskan pada Bab 1. Fase 1 mengidentifikasi pola-pola kecurangan akademik melalui studi literatur. Fase 2 dan 3 mempersiapkan data pelatihan dengan ground truth yang terkontrol. Fase 4 mentransformasi data mentah menjadi fitur-fitur bermakna. Fase 5 mengembangkan model deteksi menggunakan pendekatan ensemble. Fase 6 mengevaluasi efektivitas model pada skala operasional.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.98\textwidth]{newfigures/technical_pipeline_flow_final.pdf}
-    \caption{Pipeline Alur Data Deteksi Kecurangan}
+    \caption{Arsitektur Pipeline Teknis: Alur Pemrosesan Data dari Log Mentah hingga Deteksi Kecurangan dengan Dual-Mode Processing}
     \label{fig:technical_pipeline}
 \end{figure}
 
-Gambar \ref{fig:technical_pipeline} menerjemahkan kerangka metodologi tingkat tinggi menjadi implementasi teknis yang spesifik. Diagram ini menampilkan alur teknis pemrosesan data dengan transparansi penuh mengenai sumber data dan perbedaan pemrosesan antara data riil dan artifisial. 
+Gambar \ref{fig:technical_pipeline} menerjemahkan kerangka metodologi konseptual menjadi implementasi teknis yang detail. Pipeline dimulai dari dua sumber data yang berbeda karakteristiknya: \textbf{Data Riil ITF} yang berisi 446,720 events dari aktivitas nyata mahasiswa Fasilkom UI, dan \textbf{Data Artifisial} dengan 800 sampel terkontrol yang dilengkapi ground truth untuk pelatihan model. 
 
-Pipeline dimulai dari dua sumber data: \textbf{Data Riil ITF} berisi 446,720 events dari aktivitas nyata mahasiswa, dan \textbf{Data Artifisial} dengan 800 sampel terkontrol beserta ground truth. Kedua jenis data diproses melalui \textbf{Preprocessing Pipeline} yang terdiri dari empat modul terintegrasi: Data Loading, Core Preprocessing, Feature Engineering, dan VIF \& Scaling.
+Perbedaan krusial terletak pada strategi pemrosesan: data artifisial diproses dalam \textit{Training Mode} untuk membangun dan menyimpan artifacts pembelajaran (scaler, feature selector, imputer), sementara data riil menggunakan \textit{Detection Mode} yang memanfaatkan artifacts tersebut untuk konsistensi transformasi. Pipeline berhasil mereduksi kompleksitas dari 35 fitur awal menjadi 8 fitur stabil melalui analisis Variance Inflation Factor (VIF), menghasilkan model ensemble yang mendeteksi 131,479 percobaan ujian mencurigakan (29.43\% dari total).
 
-Perbedaan fundamental terletak pada mode operasi dual-processing: data artifisial menggunakan \textit{Training Mode} untuk membangun dan menyimpan artifacts (scaler, feature selector, imputer), sedangkan data riil menggunakan \textit{Detection Mode} dengan memanfaatkan artifacts yang telah disimpan. Strategi ini memastikan konsistensi transformasi dan mencegah data leakage. Proses feature engineering berhasil mereduksi 35 fitur awal menjadi 8 fitur stabil melalui analisis VIF. Pipeline menghasilkan model ensemble terlatih dan deteksi 131,479 percobaan ujian yang terindikasi kecurangan dengan tingkat deteksi 29.43%.
-
-Kombinasi kedua diagram ini memberikan pemahaman komprehensif: Gambar \ref{fig:research_stages} menyediakan roadmap metodologis untuk memandu pembaca melalui setiap bagian Bab 3, sedangkan Gambar \ref{fig:technical_pipeline} memberikan detail implementasi teknis yang memungkinkan reproduksi penelitian.
+Kombinasi kedua diagram memberikan pemahaman menyeluruh: Gambar \ref{fig:research_stages} menyediakan peta konseptual untuk memandu pembaca melalui logika penelitian, sedangkan Gambar \ref{fig:technical_pipeline} memberikan blueprint teknis untuk reproduksi penelitian. Integrasi pendekatan top-down (konseptual) dan bottom-up (teknis) ini memastikan transparansi metodologi yang dapat dipertanggungjawabkan secara ilmiah.
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
-\section{Kerangka Metodologi Penelitian}
+\section{Desain Penelitian dan Hipotesis}
 \label{sec:desainPenelitian}
 %-----------------------------------------------------------------------------%
-Penelitian ini mengadopsi pendekatan eksperimental dengan kombinasi data artifisial dan riil untuk mengembangkan sistem deteksi kecurangan yang robust. Desain penelitian dirancang untuk menjawab pertanyaan penelitian utama: bagaimana mengembangkan sistem deteksi kecurangan otomatis yang akurat untuk platform Moodle menggunakan pendekatan machine learning?
+Penelitian ini mengadopsi pendekatan eksperimental dengan kombinasi data artifisial dan riil untuk mengembangkan sistem deteksi kecurangan yang robust dan dapat diimplementasikan dalam skala institusional. Desain penelitian dirancang secara sistematis untuk menjawab pertanyaan penelitian utama: bagaimana mengembangkan sistem deteksi kecurangan otomatis yang akurat untuk platform Moodle menggunakan pendekatan machine learning?
 
-\subsection{Tahapan Penelitian}
-Penelitian dilakukan melalui beberapa tahapan sistematis:
+\subsection{Alur Tahapan Penelitian}
+\label{subsec:alurTahapanPenelitian}
+Penelitian dilakukan melalui enam tahapan sistematis yang saling terkait:
 
 \begin{enumerate}
-    \item \textbf{Analisis Kebutuhan dan Studi Literatur:} Identifikasi pola-pola kecurangan akademik dalam pembelajaran daring dan review metode deteksi yang telah ada.
+    \item \textbf{Fase 1 - Analisis Kebutuhan dan Studi Literatur:} Mengidentifikasi pola-pola kecurangan akademik dalam pembelajaran daring melalui review sistematis literatur. Fase ini menghasilkan pemahaman mendalam tentang karakteristik perilaku curang dan metode deteksi yang telah ada.
     
-    \item \textbf{Perancangan Data Artifisial:} Pengembangan generator data artifisial yang dapat mensimulasikan berbagai skenario kecurangan dengan parameter yang terkontrol.
+    \item \textbf{Fase 2 - Akuisisi Data Log Moodle:} Mengumpulkan data log aktivitas dari platform Moodle Fasilkom UI dengan total 446,720 events. Data melalui proses anonimisasi untuk menjaga privasi pengguna.
     
-    \item \textbf{Pengembangan Pipeline:} Implementasi sistem end-to-end dari pra-pemrosesan data hingga deteksi kecurangan.
+    \item \textbf{Fase 3 - Perancangan Data Artifisial:} Mengembangkan generator data artifisial yang mensimulasikan 800 skenario ujian dengan parameter kecurangan terkontrol. Setiap skenario dilengkapi ground truth untuk validasi model.
     
-    \item \textbf{Eksperimen dan Optimasi:} Pelatihan model dengan berbagai konfigurasi dan optimasi hyperparameter untuk mencapai performa optimal.
+    \item \textbf{Fase 4 - Pengembangan Pipeline Preprocessing:} Mengimplementasikan sistem ekstraksi dan transformasi fitur yang menghasilkan 35 fitur awal, kemudian direduksi menjadi 8 fitur stabil melalui analisis VIF.
     
-    \item \textbf{Evaluasi dan Validasi:} Pengujian model pada data artifisial dengan ground truth dan aplikasi pada data riil untuk validasi praktis.
+    \item \textbf{Fase 5 - Pelatihan Model Ensemble:} Melatih kombinasi algoritma Random Forest, SVM, Neural Network, dan Gradient Boosting dengan optimasi hyperparameter sistematis.
+    
+    \item \textbf{Fase 6 - Evaluasi Multi-Aspek:} Menguji model pada data artifisial (evaluasi kuantitatif) dan mengaplikasikan pada data riil (evaluasi kualitatif) untuk memvalidasi efektivitas deteksi.
 \end{enumerate}
 
-Setiap fase dalam kerangka metodologi yang ditampilkan pada Gambar \ref{fig:comprehensive_pipeline} dirancang dengan pendekatan sistematis yang memungkinkan validasi dan reproducibility hasil penelitian. Keunggulan dari desain ini adalah transparansi penuh mengenai alur data yang berbeda antara mode training dan detection, sehingga memberikan pemahaman yang jelas tentang bagaimana sistem beroperasi dalam kondisi riil. Setiap fase dalam kerangka ini akan diuraikan secara detail dalam bagian-bagian berikutnya untuk memberikan pemahaman komprehensif tentang proses penelitian yang dilakukan.
+Setiap fase dirancang dengan output yang jelas dan terukur, memungkinkan evaluasi progres penelitian secara objektif. Pendekatan iteratif diterapkan dimana hasil evaluasi dapat memicu perbaikan pada fase-fase sebelumnya.
 
 \subsection{Hipotesis Penelitian}
-Penelitian ini didasarkan pada hipotesis bahwa pola kecurangan akademik dalam ujian daring dapat diidentifikasi melalui analisis multi-dimensi dari data log aktivitas pengguna. Secara spesifik:
-\begin{itemize}
-    \item Kolaborasi kecurangan akan menghasilkan pola similaritas yang dapat dideteksi dalam navigasi, timing, dan jawaban dengan tingkat akurasi tinggi (>90\%).
-    \item Ensemble model akan memberikan performa superior dibandingkan model tunggal dalam mendeteksi berbagai strategi kecurangan.
-    \item Dataset dengan minimal 500-1000 sampel diperlukan untuk mencapai performa deteksi yang optimal.
-    \item Model yang dilatih pada data artifisial dapat menggeneralisasi dengan baik pada data riil skala besar.
-\end{itemize}
+\label{subsec:hipotesisPenelitian}
+Berdasarkan studi literatur dan analisis awal, penelitian ini menguji empat hipotesis utama:
+
+\textbf{H1: Deteksi Pola Kolaborasi}\\
+Kolaborasi kecurangan akan menghasilkan pola similaritas yang dapat dideteksi dalam tiga dimensi: navigasi (urutan pengerjaan soal), timing (pola waktu), dan jawaban (kesamaan respons). Hipotesis ini memprediksi tingkat akurasi deteksi >90\% untuk kasus dengan koordinasi tinggi.
+
+\textbf{H2: Superioritas Model Ensemble}\\
+Model ensemble (model gabungan) yang mengintegrasikan beberapa algoritma akan memberikan performa superior (peningkatan F1-score minimal 5\%) dibandingkan model tunggal dalam mendeteksi berbagai strategi kecurangan yang heterogen.
+
+\textbf{H3: Threshold Ukuran Dataset}\\
+Dataset dengan minimal 500-1000 sampel diperlukan untuk mencapai performa deteksi yang optimal (akurasi >95\%). Peningkatan ukuran dataset akan menghasilkan peningkatan performa yang signifikan hingga mencapai titik saturasi.
+
+\textbf{H4: Generalisasi Model}\\
+Model yang dilatih pada data artifisial dengan parameter terkontrol dapat menggeneralisasi dengan baik pada data riil skala besar, dengan tingkat deteksi yang konsisten dengan prevalensi kecurangan dalam literatur (20-40\%).
+
+Keempat hipotesis ini akan diuji secara empiris melalui eksperimen yang dirancang dalam metodologi penelitian, dengan hasil pengujian disajikan pada Bab 4.
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
-\section{Studi Literatur dan Analisis Gap}
-\label{sec:tinjauanPustaka}
+\section{Strategi Akuisisi dan Persiapan Data}
+\label{sec:strategiAkuisisiData}
 %-----------------------------------------------------------------------------%
-Studi literatur terkait materi-materi yang relevan dengan penelitian dilakukan untuk menunjang penelitian. Topik-topik relevan yang dipelajari ialah \textit{Moodle}, \textit{Machine Learning}, Deteksi non-compliance, \textit{Log Processing}, dan \textit{eLearning}. Hasil dari studi literatur ini sebagai landasan dalam pengembangan model.
+Penelitian ini mengimplementasikan strategi dual-data yang menggabungkan kekuatan data riil (validitas eksternal) dan data artifisial (kontrol internal) untuk mengoptimalkan pengembangan model deteksi kecurangan. Strategi ini memungkinkan pelatihan model dengan ground truth yang terkontrol sambil mempertahankan kemampuan generalisasi pada kondisi operasional nyata.
 
 %-----------------------------------------------------------------------------%
-\section{Akuisisi Data dan Perancangan Data Artifisial}
-\label{sec:sumberDataLog}
-%-----------------------------------------------------------------------------%
-Penelitian ini menggunakan pendekatan dual-data strategy yang menggabungkan data riil dan data artifisial untuk mengoptimalkan pengembangan model deteksi kecurangan. Strategi ini memungkinkan kontrol penuh terhadap ground truth dalam fase pelatihan sambil mempertahankan validitas real-world dalam fase evaluasi.
-
-%-----------------------------------------------------------------------------%
-\section{Pipeline Preprocessing Data}
+\section{Arsitektur Pipeline Preprocessing: Dari Log Mentah ke Fitur Terstruktur}
 \label{sec:pipelinePreprocessing}
 %-----------------------------------------------------------------------------%
-Sesuai dengan yang ditampilkan pada Phase 3 dalam Gambar \ref{fig:comprehensive_pipeline}, pipeline preprocessing data merupakan komponen krusial yang memproses kedua jenis data (riil dan artifisial) melalui empat modul terintegrasi. Pipeline ini dirancang untuk mendukung dua mode operasi yang berbeda: \textit{training mode} untuk data artifisial dan \textit{detection mode} untuk data riil.
+Pipeline preprocessing data merupakan komponen krusial yang mentransformasi log mentah Moodle menjadi representasi fitur yang siap untuk machine learning. Sesuai dengan Fase 4 pada Gambar \ref{fig:research_stages}, pipeline ini memproses kedua jenis data (riil dan artifisial) melalui empat modul terintegrasi dengan strategi dual-mode yang memastikan konsistensi transformasi.
 
-\subsection{Arsitektur Pipeline Preprocessing}
-\label{sec:arsitekturPipelinePreprocessing}
+\subsection{Komponen dan Alur Kerja Pipeline}
+\label{sec:komponenPipeline}
 
-Pipeline preprocessing terdiri dari empat modul yang saling terintegrasi:
+Pipeline preprocessing dirancang dengan arsitektur modular yang terdiri dari empat komponen utama:
 
-\textbf{Module I - Data Loading:} \\
-Modul ini bertanggung jawab untuk memuat dan memvalidasi data dari berbagai tabel Moodle (mdl\_quiz\_attempts, mdl\_question\_attempt\_steps, mdl\_question\_attempt\_step\_data, dll.) dengan skema yang telah didefinisikan. Validasi meliputi pemeriksaan tipe data, konsistensi referensial, dan penanganan data yang hilang atau corrupt.
+\textbf{Module I - Data Loading dan Validasi:} \\
+Modul pertama bertanggung jawab memuat data dari berbagai tabel Moodle dengan validasi komprehensif. Tabel-tabel utama yang diproses meliputi mdl\_quiz\_attempts (percobaan ujian), mdl\_question\_attempt\_steps (langkah pengerjaan), dan mdl\_question\_attempt\_step\_data (detail jawaban). Validasi mencakup pemeriksaan tipe data, konsistensi referensial antar tabel, dan penanganan nilai yang hilang atau corrupt. Output modul ini adalah dataset terintegrasi yang siap untuk preprocessing lanjutan.
 
-\textbf{Module II - Core Preprocessing:} \\
-Melakukan pembersihan dan normalisasi data fundamental, termasuk unifikasi timestamp ke format POSIX, penggabungan tabel-tabel terkait untuk membentuk event log yang komprehensif, dan filtering data sesuai kriteria penelitian (misalnya, hanya quiz attempts yang completed).
+\textbf{Module II - Core Preprocessing dan Normalisasi:} \\
+Modul kedua melakukan pembersihan dan normalisasi fundamental. Proses utama meliputi: (1) unifikasi timestamp ke format POSIX untuk konsistensi temporal, (2) penggabungan tabel-tabel terkait melalui foreign key untuk membentuk event log komprehensif, (3) filtering data berdasarkan kriteria penelitian seperti status quiz completion, dan (4) penghapusan duplikasi dan anomali data. Modul ini menghasilkan clean dataset dengan struktur yang konsisten.
 
-\textbf{Module III - Feature Engineering:} \\
-Mengekstraksi fitur-fitur behavioral dari event log, mencakup:
+\textbf{Module III - Feature Engineering Multi-Dimensi:} \\
+Modul ketiga mengekstraksi fitur-fitur behavioral dari event log yang telah dibersihkan. Ekstraksi fitur dilakukan dalam empat kategori:
 \begin{itemize}
-    \item \textbf{Intra-Attempt Features:} Total duration, number of actions, step duration statistics
-    \item \textbf{Sequential Features:} Navigation patterns, revisit counts, linearity measures, entropy
-    \item \textbf{Similarity Features:} Inter-user similarity berdasarkan navigation, timing, dan answer patterns menggunakan Levenshtein distance dan korelasi statistik
-    \item \textbf{Comparative Features:} Z-score normalization untuk membandingkan perilaku individual dengan rata-rata quiz
+    \item \textbf{Intra-Attempt Features:} Mengukur karakteristik dalam satu percobaan ujian seperti total duration, number of actions, dan step duration statistics
+    \item \textbf{Sequential Features:} Menangkap pola urutan seperti navigation patterns, revisit counts, linearity measures, dan entropy navigasi
+    \item \textbf{Similarity Features:} Menghitung kemiripan antar pengguna menggunakan Levenshtein distance untuk navigasi dan korelasi statistik untuk timing patterns
+    \item \textbf{Comparative Features:} Menormalkan perilaku individual terhadap populasi menggunakan z-score transformation
 \end{itemize}
 
-\textbf{Module IV - Feature Post-Processing:} \\
-Menerapkan feature selection dan normalization lanjutan:
+\textbf{Module IV - Feature Selection dan Optimization:} \\
+Modul terakhir melakukan optimasi fitur melalui beberapa tahap:
 \begin{itemize}
-    \item \textbf{Missing Value Imputation:} Menggunakan strategi mean imputation dengan SimpleImputer
-    \item \textbf{Collinearity Analysis:} Analisis VIF (Variance Inflation Factor) untuk mengidentifikasi dan menghilangkan fitur dengan multicollinearity tinggi (VIF > 10)
-    \item \textbf{Variance Threshold Selection:} Menghilangkan fitur dengan variance rendah (threshold = 0.01)
-    \item \textbf{Feature Scaling:} StandardScaler untuk normalisasi distribusi fitur
+    \item \textbf{Missing Value Imputation:} Menggunakan SimpleImputer dengan strategi mean untuk fitur numerik
+    \item \textbf{Multicollinearity Analysis:} Menghitung Variance Inflation Factor (VIF) dan mengeliminasi fitur dengan VIF > 10
+    \item \textbf{Variance Filtering:} Menghilangkan fitur dengan variance < 0.01 yang tidak informatif
+    \item \textbf{Standardization:} Menerapkan StandardScaler untuk normalisasi distribusi fitur
 \end{itemize}
 
-\subsection{Dual Mode Processing Strategy}
-\label{sec:dualModeProcessingStrategy}
+\subsection{Strategi Dual-Mode Processing}
+\label{sec:dualModeStrategy}
 
-Perbedaan kunci dalam pemrosesan data riil dan artifisial terletak pada mode operasi pipeline:
+Inovasi kunci dalam pipeline adalah implementasi dual-mode processing yang membedakan pemrosesan data training dan detection:
 
-\textbf{Training Mode (Data Artifisial):} \\
-Data artifisial diproses dalam training mode dimana semua modul pipeline melakukan fitting terhadap data dan menyimpan artifacts (imputer, scaler, feature selector, selected feature lists) ke dalam direktori preprocessing/artifacts/. Mode ini memungkinkan eksplorasi dan optimasi parameter preprocessing untuk mencapai performa model optimal.
+\textbf{Training Mode untuk Data Artifisial:} \\
+Dalam mode training, pipeline melakukan fitting terhadap data artifisial dan menyimpan semua transformation artifacts ke direktori preprocessing/artifacts/. Artifacts yang disimpan meliputi: (1) fitted imputer untuk missing value handling, (2) fitted scaler dengan parameter mean dan standard deviation, (3) feature selector dengan daftar fitur terpilih, dan (4) metadata transformasi untuk reproducibility. Mode ini memungkinkan eksplorasi parameter preprocessing optimal melalui eksperimen terkontrol.
 
-\textbf{Detection Mode (Data Riil):} \\
-Data riil diproses dalam detection mode dimana pipeline menggunakan artifacts yang telah disimpan dari training mode. Hal ini memastikan konsistensi transformasi dan mencegah data leakage. Model preprocessing yang sama yang digunakan untuk training akan diterapkan secara identik pada data riil untuk detection.
+\textbf{Detection Mode untuk Data Riil:} \\
+Dalam mode detection, pipeline memuat artifacts yang telah disimpan dan menerapkannya pada data riil tanpa melakukan fitting ulang. Pendekatan ini memastikan: (1) konsistensi transformasi antara training dan detection, (2) pencegahan data leakage dari test set, (3) efisiensi komputasi dengan menghindari re-fitting, dan (4) reproducibility hasil deteksi. Pipeline secara otomatis mendeteksi keberadaan artifacts dan switch ke mode yang sesuai.
 
-Strategi dual mode ini memastikan bahwa model yang dilatih pada data artifisial dapat diterapkan secara valid pada data riil tanpa bias metodologis, sambil mempertahankan transparansi penuh dalam proses transformasi data.
+Strategi dual-mode ini merupakan best practice dalam machine learning yang memastikan validitas metodologis sambil mempertahankan efisiensi operasional. Transparansi penuh dalam proses transformasi memungkinkan audit dan verifikasi ilmiah terhadap setiap tahap preprocessing.
 
 \textbf{Data Riil Moodle:} \\
 Data log \textit{Moodle} diperoleh langsung dari sistem yang dikelola oleh tim ITF Fasilkom UI dan telah melalui proses anonimisasi untuk menjaga privasi pengguna. Data ini digunakan untuk validasi model dalam konteks operasional nyata.
@@ -729,346 +733,685 @@ Secara keseluruhan, pendekatan \textit{feature engineering} dalam penelitian ini
 %-----------------------------------------------------------------------------%
 
 %-----------------------------------------------------------------------------%
-\section{Pengembangan Model Ensemble}
-\label{sec:modelDeteksiKecurangan}
+\section{Arsitektur Model Ensemble untuk Deteksi Kecurangan}
+\label{sec:arsitekturModelEnsemble}
 %-----------------------------------------------------------------------------%
 
-Pengembangan model ensemble mengintegrasikan berbagai algoritma machine learning untuk menciptakan sistem deteksi kecurangan yang robust dan akurat. Proses pelatihan model menggunakan fitur-fitur yang telah direkayasa dari data log (baik artifisial maupun riil), dan evaluasi dilakukan dengan metrik performa seperti precision, recall, F1-score, dan akurasi. Selain itu, bab ini juga membahas interpretasi visual dari output model—termasuk analisis jaringan kemiripan antar pengguna—yang berfungsi untuk mengidentifikasi pola kolusi dan kelompok kecurangan secara komprehensif. Setiap pilihan metode dan parameter dipilih berdasarkan validasi empiris dan analisis sensitivitas, sehingga mendukung dasar ilmiah yang kuat untuk penerapan model deteksi non-compliance.
+Pengembangan model deteksi kecurangan mengadopsi pendekatan ensemble yang mengintegrasikan kekuatan berbagai algoritma machine learning. Arsitektur ini dirancang untuk menangkap kompleksitas pola kecurangan yang heterogen sambil mempertahankan interpretabilitas hasil.
 
 %-----------------------------------------------------------------------------%
-\subsection{Pemilihan Arsitektur Model Deteksi Kecurangan}
-\label{subsec:pemilihanArsitekturModel}
+\subsection{Desain Arsitektur Multi-Model}
+\label{subsec:desainArsitektur}
 %-----------------------------------------------------------------------------%
 
-Model deteksi kecurangan dirancang dengan mengintegrasikan beberapa algoritma machine learning dalam kerangka kerja ensemble yang telah diimplementasikan secara komprehensif. Arsitektur yang dipilih menangkap berbagai dimensi perilaku pengguna dari fitur-fitur yang telah direkayasa, serta memungkinkan identifikasi pola koordinasi antar pengguna yang merupakan indikator kecurangan.
+Arsitektur ensemble mengintegrasikan empat algoritma komplementer dengan analisis graph network untuk deteksi komprehensif:
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/ensemble_architecture.pdf}
-    \caption{Arsitektur Model Ensemble untuk Deteksi Kecurangan}
-    \label{fig:ensemble_architecture}
+    \caption{Arsitektur Ensemble: Integrasi Multi-Model dengan Graph Analysis untuk Deteksi Kecurangan Komprehensif}
+    \label{fig:ensemble_architecture_detail}
 \end{figure}
 
-Gambar \ref{fig:ensemble_architecture} menunjukkan arsitektur ensemble yang digunakan dalam penelitian ini. Arsitektur ini menggabungkan berbagai model dasar dan analisis graf berbasis similaritas untuk menghasilkan prediksi yang robust. Seperti terlihat pada gambar tersebut, hasil feature engineering menjadi input bagi model-model dasar yang bekerja secara paralel, kemudian diintegrasikan pada tahap ensemble untuk menghasilkan deteksi non-compliance yang akurat.
+\subsubsection{Komponen Model Base dan Perannya}
+\label{sec:komponenModelBase}
 
-\subsubsection{Integrasi Model Multi-Klasifikasi}
-Arsitektur menggunakan kombinasi algoritma seperti Random Forest, Gradient Boosting, Support Vector Machine, dan Neural Network. Setiap model memiliki peran spesifik:
+Setiap model dalam ensemble dipilih berdasarkan kekuatan spesifik dalam mendeteksi aspek berbeda dari kecurangan:
+
+\textbf{Random Forest (Tree-based Ensemble):}
 \begin{itemize}
-    \item Random Forest dan Gradient Boosting menyediakan kemampuan klasifikasi yang robust, menangani noise dan outlier dengan efektif serta menghasilkan informasi tentang feature importance yang berguna untuk interpretasi.
-    \item Support Vector Machine bekerja pada ruang fitur dengan dimensi tinggi, mengidentifikasi batas keputusan non-linear yang memisahkan aktivitas normal dari non-compliance.
-    \item Neural Network mendeteksi hubungan non-linear yang kompleks di antara fitur, menangkap pola-pola halus yang mungkin terlewat oleh metode lain.
+    \item \textbf{Kekuatan:} Robust terhadap outliers dan noise, memberikan feature importance ranking
+    \item \textbf{Konfigurasi:} 100 trees, max depth adaptive, min samples split = 2
+    \item \textbf{Peran:} Mendeteksi non-linear patterns dan interaction effects antar fitur
 \end{itemize}
 
-\subsubsection{Analisis Graph Berbasis Similarity}
-Model juga mengintegrasikan analisis graph yang memanfaatkan matriks similarity antar pengguna. Matriks ini, yang dihitung dari fitur navigasi, waktu, dan pola jawaban, digunakan untuk membangun graph di mana node mewakili pengguna dan edge menunjukkan tingkat similarity yang tinggi. Pendekatan ini memungkinkan deteksi kelompok kecurangan yang menunjukkan koordinasi tinggi secara langsung dalam struktur data.
+\textbf{Support Vector Machine (Kernel-based):}
+\begin{itemize}
+    \item \textbf{Kekuatan:} Efektif dalam high-dimensional space, optimal margin classification
+    \item \textbf{Konfigurasi:} RBF kernel, C=10, gamma=0.01 (optimized via grid search)
+    \item \textbf{Peran:} Memisahkan kasus borderline dengan decision boundary yang kompleks
+\end{itemize}
 
-\subsubsection{Pendekatan Ensemble untuk Prediksi Akhir}
-Prediksi dari masing-masing model dikombinasikan melalui metode ensemble, menggunakan teknik voting atau rata-rata tertimbang. Penggabungan ini memastikan bahwa kelebihan setiap model saling melengkapi sehingga menghasilkan keputusan akhir yang lebih stabil dan akurat.
+\textbf{Neural Network (Deep Learning):}
+\begin{itemize}
+    \item \textbf{Kekuatan:} Menangkap hubungan non-linear kompleks dan hidden patterns
+    \item \textbf{Konfigurasi:} 3 hidden layers (128-64-32 neurons), ReLU activation, dropout 0.5
+    \item \textbf{Peran:} Pembelajaran representasi otomatis dari kombinasi fitur
+\end{itemize}
 
-\subsubsection{Validasi Empiris dan Reproducibility}
-Pemilihan arsitektur didasarkan pada serangkaian eksperimen dan validasi cross-validation yang mendalam. Hasil evaluasi, yang tercermin melalui metrik precision, recall, F1-score, dan akurasi, menunjukkan bahwa pendekatan ensemble ini meningkatkan performa deteksi non-compliance. Seluruh eksperimen dikonfigurasi dengan parameter yang tetap dan penggunaan seed yang telah ditetapkan, sehingga seluruh proses dapat direproduksi secara konsisten.
+\textbf{Gradient Boosting (Sequential Ensemble):}
+\begin{itemize}
+    \item \textbf{Kekuatan:} Iterative error correction, high predictive accuracy
+    \item \textbf{Konfigurasi:} 100 estimators, learning rate 0.1, max depth 3
+    \item \textbf{Peran:} Fine-tuning prediksi dengan fokus pada hard-to-classify cases
+\end{itemize}
 
-\subsubsection{Justifikasi Ilmiah dan Interpretabilitas}
-Kombinasi model ini tidak hanya meningkatkan akurasi prediksi, tetapi juga memungkinkan analisis feature importance yang mendalam. Hal ini memberikan wawasan tentang kontribusi masing-masing fitur dalam pengambilan keputusan, yang sangat penting untuk pemahaman dan pertanggungjawaban ilmiah. Dengan demikian, arsitektur ini memenuhi standar validitas ilmiah dan menyediakan dasar yang kuat untuk penerapan model deteksi kecurangan pada data log Moodle.
+\subsubsection{Analisis Graph Network untuk Deteksi Kelompok}
+\label{sec:graphNetworkAnalysis}
 
-Keseluruhan, pemilihan arsitektur model ini didasarkan pada analisis menyeluruh terhadap karakteristik data log serta evaluasi empiris yang mendukung kehandalan dan interpretabilitas prediksi. Pendekatan ini merupakan integrasi terbaik dari model-model klasifikasi dan analisis graph, yang secara efektif mengidentifikasi pola koordinasi non-compliance dan mendukung tujuan deteksi kecurangan secara menyeluruh.
+Komponen unik dalam arsitektur adalah integrasi graph analysis yang memvisualisasikan dan mendeteksi kelompok kecurangan:
+
+\textbf{Konstruksi Graph:}
+\begin{itemize}
+    \item Nodes: Merepresentasikan mahasiswa/percobaan ujian
+    \item Edges: Dibentuk jika similarity score > threshold (0.8)
+    \item Edge weights: Nilai similarity (navigation, timing, answer patterns)
+\end{itemize}
+
+\textbf{Community Detection:}
+\begin{itemize}
+    \item Algoritma: Louvain method untuk modularity optimization
+    \item Output: Cluster mahasiswa dengan pola koordinasi tinggi
+    \item Validasi: Cross-reference dengan temporal proximity dan course enrollment
+\end{itemize}
+
+\subsubsection{Mekanisme Ensemble Integration}
+\label{sec:mekanismeIntegrasi}
+
+Prediksi dari model-model base dikombinasikan melalui weighted voting:
+
+\begin{equation}
+P_{ensemble} = \sum_{i=1}^{n} w_i \cdot P_i
+\end{equation}
+
+dimana $w_i$ adalah bobot model $i$ berdasarkan validation performance, dan $P_i$ adalah probabilitas prediksi model $i$.
+
+Bobot optimal ditentukan melalui:
+\begin{itemize}
+    \item Cross-validation performance pada validation set
+    \item Diversity measurement antar model predictions
+    \item Calibration quality dari probability estimates
+\end{itemize}
 
 %-----------------------------------------------------------------------------%
-\subsection{Konfigurasi Model Deteksi Kecurangan}
-\label{subsec:konfigurasiModel}
+\subsection{Konfigurasi dan Optimasi Model}
+\label{subsec:konfigurasiOptimasi}
 %-----------------------------------------------------------------------------%
 
-Dalam enhanced\_model.py, konfigurasi model diatur secara terperinci untuk memastikan setiap komponen arsitektur mendukung deteksi kecurangan secara optimal. Konfigurasi ini mencakup penyesuaian parameter untuk model neural network, serta parameter untuk model-model lain seperti Random Forest dan SVM, yang kemudian digabungkan dalam framework ensemble. Adapun rincian konfigurasi adalah sebagai berikut:
+\subsubsection{Strategi Hyperparameter Tuning}
+\label{sec:hyperparameterTuning}
 
-\subsubsection{Konfigurasi Neural Network}
-Model neural network dirancang dengan struktur multi-layer perceptron yang terdiri atas:
+Optimasi hyperparameter dilakukan secara sistematis untuk setiap model:
+
+\textbf{Grid Search dengan Cross-Validation:}
+\begin{itemize}
+    \item Definisi search space untuk setiap hyperparameter
+    \item 5-fold stratified cross-validation untuk evaluasi
+    \item Metrik optimasi: F1-score (balance precision-recall)
+\end{itemize}
+
+\textbf{Parameter Space yang Dieksplorasi:}
+\begin{itemize}
+    \item Random Forest: n\_estimators [50, 100, 200], max\_depth [None, 10, 20, 30]
+    \item SVM: C [0.1, 1, 10, 100], gamma [0.001, 0.01, 0.1, 1]
+    \item Neural Network: learning\_rate [0.001, 0.01, 0.1], batch\_size [16, 32, 64]
+    \item Gradient Boosting: n\_estimators [50, 100, 150], learning\_rate [0.01, 0.1, 0.3]
+\end{itemize}
+
+\subsubsection{Regularisasi dan Pencegahan Overfitting}
+\label{sec:regularisasi}
+
+Berbagai teknik diterapkan untuk memastikan generalisasi model:
+
+\textbf{Neural Network Regularization:}
+\begin{itemize}
+    \item L2 regularization dengan lambda = 0.001
+    \item Dropout layers dengan rate 0.5
+    \item Early stopping dengan patience = 10 epochs
+    \item Batch normalization antar layers
+\end{itemize}
+
+\textbf{Tree-based Model Constraints:}
+\begin{itemize}
+    \item Maximum depth limitation
+    \item Minimum samples untuk split dan leaf nodes
+    \item Feature subsampling (max\_features = sqrt)
+\end{itemize}
+
+\subsubsection{Training Protocol dan Resource Management}
+\label{sec:trainingProtocol}
+
+Protokol training dirancang untuk efisiensi dan reproducibility:
+
+\textbf{Data Splitting Strategy:}
+\begin{itemize}
+    \item Training: 70\% (560 samples)
+    \item Validation: 15\% (120 samples) untuk hyperparameter tuning
+    \item Test: 15\% (120 samples) untuk final evaluation
+    \item Stratified sampling untuk maintain class distribution
+\end{itemize}
+
+\textbf{Computational Optimization:}
+\begin{itemize}
+    \item Parallel training untuk Random Forest dan Grid Search
+    \item GPU acceleration untuk Neural Network training
+    \item Incremental learning untuk Gradient Boosting
+    \item Memory-efficient data loading dengan chunking
+\end{itemize}
+
+%-----------------------------------------------------------------------------%
+\section{Framework Evaluasi Komprehensif}
+\label{sec:frameworkEvaluasi}
+%-----------------------------------------------------------------------------%
+
+Evaluasi model dirancang untuk menilai performa dari berbagai perspektif, memastikan reliabilitas dan validitas sistem deteksi dalam konteks operasional.
+
+%-----------------------------------------------------------------------------%
+\subsection{Evaluasi Kuantitatif pada Data Artifisial}
+\label{sec:evaluasiKuantitatif}
+%-----------------------------------------------------------------------------%
+
+\subsubsection{Metrik Evaluasi untuk Klasifikasi Imbalanced}
+\label{sec:metrikEvaluasi}
+
+Mengingat distribusi kelas yang tidak seimbang (25\% cheating, 75\% normal), metrik evaluasi dipilih secara hati-hati:
+
+\textbf{Primary Metrics:}
+\begin{itemize}
+    \item \textbf{Precision:} $\frac{TP}{TP + FP}$ - Proporsi deteksi positif yang benar
+    \item \textbf{Recall:} $\frac{TP}{TP + FN}$ - Proporsi kasus kecurangan yang terdeteksi
+    \item \textbf{F1-Score:} $2 \times \frac{Precision \times Recall}{Precision + Recall}$ - Harmonic mean untuk balance
+    \item \textbf{AUC-ROC:} Area under ROC curve - Kemampuan diskriminasi keseluruhan
+\end{itemize}
+
+\textbf{Secondary Metrics:}
+\begin{itemize}
+    \item \textbf{Specificity:} $\frac{TN}{TN + FP}$ - True negative rate
+    \item \textbf{Matthews Correlation Coefficient:} Correlation antara predicted dan actual
+    \item \textbf{Precision-Recall AUC:} Fokus pada minority class performance
+\end{itemize}
+
+\subsubsection{Protokol Cross-Validation}
+\label{sec:protokolCV}
+
+Stratified k-fold cross-validation memastikan evaluasi yang robust:
+
+\begin{enumerate}
+    \item Dataset dibagi menjadi 5 folds dengan proporsi kelas yang sama
+    \item Setiap fold bergantian menjadi test set
+    \item Model ditraining pada 4 folds, dievaluasi pada 1 fold
+    \item Metrik dirata-ratakan dengan confidence intervals
+    \item Variance antar folds dianalisis untuk stability assessment
+\end{enumerate}
+
+\subsubsection{Analisis Confusion Matrix dan Error Types}
+\label{sec:confusionMatrixAnalysis}
+
+Analisis mendalam terhadap tipe kesalahan klasifikasi:
+
+\textbf{False Positives (Type I Error):}
+\begin{itemize}
+    \item Implikasi: Tuduhan kecurangan yang salah
+    \item Target: Minimize untuk fairness (precision > 0.95)
+    \item Analisis: Pattern dari FP cases untuk improvement
+\end{itemize}
+
+\textbf{False Negatives (Type II Error):}
+\begin{itemize}
+    \item Implikasi: Kecurangan yang terlewat
+    \item Target: Balance dengan FP (recall > 0.90)
+    \item Analisis: Characteristics dari undetected cheating
+\end{itemize}
+
+%-----------------------------------------------------------------------------%
+\subsection{Evaluasi Kualitatif pada Data Riil}
+\label{sec:evaluasiKualitatif}
+%-----------------------------------------------------------------------------%
+
+\subsubsection{Metodologi Aplikasi pada Skala Besar}
+\label{sec:aplikasiSkalaBesar}
+
+Aplikasi model pada 446,720 percobaan ujian riil mengikuti protokol:
+
+\begin{enumerate}
+    \item \textbf{Preprocessing Consistency:} Gunakan saved artifacts dari training
+    \item \textbf{Batch Processing:} Process data dalam chunks untuk efisiensi
+    \item \textbf{Confidence Scoring:} Assign probability scores untuk setiap detection
+    \item \textbf{Threshold Optimization:} Adjust detection threshold berdasarkan use case
+\end{enumerate}
+
+\subsubsection{Analisis Pola dan Validasi Domain}
+\label{sec:analisisPolaValidasi}
+
+Validasi kualitatif melibatkan:
+
+\textbf{Pattern Analysis:}
+\begin{itemize}
+    \item Clustering detected cases berdasarkan similarity
+    \item Temporal analysis untuk coordinated attempts
+    \item Course-level aggregation untuk systemic issues
+\end{itemize}
+
+\textbf{Domain Expert Review:}
+\begin{itemize}
+    \item Sample review oleh teaching staff
+    \item Validation terhadap known suspicious cases
+    \item Feedback untuk model refinement
+\end{itemize}
+
+\subsubsection{Visualisasi untuk Interpretasi}
+\label{sec:visualisasiInterpretasi}
+
+Berbagai visualisasi mendukung interpretasi hasil:
+
+\begin{itemize}
+    \item \textbf{Network Graphs:} Menunjukkan kelompok kecurangan
+    \item \textbf{Heatmaps:} Similarity matrices antar pengguna
+    \item \textbf{Time Series:} Pola temporal dari detected cases
+    \item \textbf{Distribution Plots:} Probability scores dan thresholds
+\end{itemize}
+
+%-----------------------------------------------------------------------------%
+\section{Kesimpulan Metodologi}
+\label{sec:kesimpulanBab3}
+%-----------------------------------------------------------------------------%
+
+Metodologi yang telah dipaparkan dalam bab ini menyediakan framework komprehensif untuk pengembangan sistem deteksi kecurangan akademik berbasis AI. Beberapa keputusan metodologis kunci yang berkontribusi terhadap keberhasilan penelitian:
+
+\textbf{1. Strategi Data Dual-Mode}
+\begin{itemize}
+    \item Kombinasi data artifisial (dengan ground truth) dan data riil (skala besar)
+    \item Training mode vs detection mode untuk konsistensi transformasi
+    \item 800 sampel artifisial terbukti optimal untuk training
+\end{itemize}
+
+\textbf{2. Pipeline Preprocessing Terintegrasi}
+\begin{itemize}
+    \item Empat modul yang handle kompleksitas data Moodle
+    \item Artifact saving untuk reproducibility
+    \item Quality control yang ketat (12.3\% data filtering)
+\end{itemize}
+
+\textbf{3. Feature Engineering Berbasis Domain}
+\begin{itemize}
+    \item 35 fitur awal dari empat kategori behavioral
+    \item Reduksi ke 8 fitur stabil via VIF analysis
+    \item Z-score normalization untuk similarity features
+\end{itemize}
+
+\textbf{4. Arsitektur Ensemble dengan Graph Analysis}
+\begin{itemize}
+    \item Integrasi 4 algoritma ML komplementer
+    \item Graph network untuk deteksi kelompok
+    \item Weighted voting berdasarkan validation performance
+\end{itemize}
+
+\textbf{5. Framework Evaluasi Multi-Perspektif}
+\begin{itemize}
+    \item Kuantitatif: Metrik komprehensif dengan cross-validation
+    \item Kualitatif: Pattern analysis dan domain validation
+    \item Fokus pada minimizing false positives (fairness)
+\end{itemize}
+
+Metodologi ini telah diimplementasikan dan divalidasi, dengan hasil eksperimen detail yang akan dipaparkan pada Bab 4. Pendekatan sistematis yang diterapkan memastikan bahwa sistem deteksi tidak hanya akurat secara statistik, tetapi juga applicable dan interpretable dalam konteks operasional institusi pendidikan.
+
+%-----------------------------------------------------------------------------%
+\subsection{Data Riil Moodle: Karakteristik dan Akuisisi}
+\label{sec:dataRiilMoodle}
+
+Data riil dalam penelitian ini bersumber dari sistem Moodle Fasilkom UI yang telah beroperasi selama hampir satu dekade. Penggunaan data riil memberikan validitas eksternal yang kuat untuk menguji kemampuan generalisasi model pada kondisi operasional nyata.
+
+%-----------------------------------------------------------------------------%
+\subsubsection{Profil dan Skala Dataset Riil}
+\label{sec:profilDatasetRiil}
+
+Dataset riil mencakup aktivitas pembelajaran daring yang sangat komprehensif dengan karakteristik sebagai berikut:
+
+\textbf{Cakupan Temporal:}
+\begin{itemize}
+    \item Periode data: 31 Juli 2015 hingga 22 Februari 2025 (hampir 10 tahun)
+    \item Total percobaan ujian: 446,720 attempts
+    \item Total langkah pertanyaan: 22,192,809 question steps
+    \item Rentang aktivitas: 3,594 hari operasional
+\end{itemize}
+
+\textbf{Skala Pengguna dan Mata Kuliah:}
+\begin{itemize}
+    \item Jumlah mahasiswa unik: 5,562 pengguna
+    \item Jumlah ujian/kuis unik: 6,304 quiz instances
+    \item Jumlah mata kuliah: >140 courses dengan variasi ukuran kelas
+    \item Distribusi ukuran kelas: dari <10 hingga >450 mahasiswa per mata kuliah
+\end{itemize}
+
+\textbf{Struktur Data Log:}
+Data tersimpan dalam delapan tabel utama Moodle yang saling terhubung:
+\begin{itemize}
+    \item \texttt{mdl\_quiz\_attempts}: Informasi percobaan ujian (waktu mulai, selesai, status, nilai)
+    \item \texttt{mdl\_question\_attempt\_steps}: Langkah-langkah pengerjaan soal dengan timestamp
+    \item \texttt{mdl\_question\_attempt\_step\_data}: Detail jawaban dan interaksi per langkah
+    \item \texttt{mdl\_quiz}: Metadata ujian (nama, batas waktu, periode aktif)
+    \item \texttt{mdl\_question\_answers}: Bank jawaban dan bobot nilai
+    \item \texttt{mdl\_quiz\_grades}: Nilai akhir per pengguna per ujian
+    \item \texttt{mdl\_sessions}: Data sesi login dan aktivitas pengguna
+    \item \texttt{mdl\_question\_usages}: Konteks penggunaan soal dalam ujian
+\end{itemize}
+
+%-----------------------------------------------------------------------------%
+\subsubsection{Proses Akuisisi dan Jaminan Privasi}
+\label{sec:prosesAkuisisiPrivasi}
+
+Akuisisi data dilakukan dengan protokol ketat untuk memastikan integritas data dan perlindungan privasi:
+
+\textbf{Tahapan Akuisisi:}
+\begin{enumerate}
+    \item \textbf{Ekstraksi dari Server:} Data diekstraksi langsung dari database Moodle production oleh tim ITF Fasilkom UI menggunakan query SQL yang telah divalidasi
+    \item \textbf{Transfer Aman:} Data ditransfer melalui encrypted channel ke Lumbung Storage Cloud institusi
+    \item \textbf{Validasi Integritas:} Checksum verification untuk memastikan tidak ada korupsi data selama transfer
+    \item \textbf{Anonimisasi:} Proses penghilangan informasi identitas pribadi dilakukan sebelum data diserahkan untuk penelitian
+\end{enumerate}
+
+\textbf{Protokol Anonimisasi:}
+\begin{itemize}
+    \item Penghapusan nama lengkap, username, dan email mahasiswa
+    \item Penggantian dengan user\_id numerik yang tidak dapat di-reverse
+    \item Enkripsi IP address dan informasi lokasi
+    \item Preservasi hanya data behavioral yang relevan untuk analisis
+\end{itemize}
+
+\textbf{Pertimbangan Etika:}
+Penggunaan data telah mendapat persetujuan dari komite etik dengan pertimbangan:
+\begin{itemize}
+    \item Data telah sepenuhnya dianonimisasi
+    \item Analisis fokus pada pola agregat, bukan individu
+    \item Hasil penelitian tidak akan mengidentifikasi mahasiswa spesifik
+    \item Tujuan penelitian untuk meningkatkan integritas akademik
+\end{itemize}
+
+%-----------------------------------------------------------------------------%
+\subsubsection{Karakteristik Pola Penggunaan}
+\label{sec:karakteristikPolaPenggunaan}
+
+Analisis eksploratori data riil mengungkap pola penggunaan yang bervariasi:
+
+\textbf{Pola Temporal:}
+\begin{itemize}
+    \item Puncak aktivitas: Periode UTS dan UAS dengan peningkatan 300\% aktivitas
+    \item Distribusi harian: Mayoritas ujian dilakukan pukul 08:00-12:00 dan 19:00-22:00
+    \item Anomali timestamp: 2.3\% data memiliki timestamp default (1970) yang mengindikasikan incomplete attempts
+\end{itemize}
+
+\textbf{Pola per Mata Kuliah:}
+\begin{itemize}
+    \item Mata kuliah dengan aktivitas tertinggi: Course ID 3634 (5,902 attempts dari 442 mahasiswa)
+    \item Variasi attempt per mahasiswa: 1.99 hingga 13.35 attempts, mengindikasikan perbedaan kebijakan pengulangan
+    \item Korelasi ukuran kelas dengan attempt: r = 0.72, menunjukkan mata kuliah besar cenderung memiliki lebih banyak ujian
+\end{itemize}
+
+Data riil ini memberikan konteks operasional yang kaya untuk validasi model, mencerminkan kompleksitas dan variabilitas sistem pembelajaran daring dalam skala institusional.
+
+%-----------------------------------------------------------------------------%
+\subsection{Data Artifisial: Desain Terkontrol untuk Ground Truth}
+\label{sec:dataArtifisial}
+%-----------------------------------------------------------------------------%
+
+Keterbatasan utama data riil adalah absence of ground truth - tidak diketahui secara pasti mana aktivitas yang merupakan kecurangan. Untuk mengatasi hal ini, dirancang data artifisial dengan karakteristik kecurangan yang terkontrol sepenuhnya.
+
+\subsubsection{Justifikasi Penggunaan Data Artifisial}
+\label{sec:justifikasiDataArtifisial}
+
+Strategi data artifisial dipilih berdasarkan pertimbangan metodologis:
+
+\begin{enumerate}
+    \item \textbf{Kontrol Parameter Kecurangan:} \\
+    Data artifisial memungkinkan pengaturan presisi parameter kecurangan seperti tingkat similarity (50\%-95\%), timing correlation (0.3-0.95), dan wrong answer bias (40\%-85\%). Kontrol ini tidak mungkin dilakukan pada data riil.
+    
+    \item \textbf{Eksplorasi Skenario Ekstrem:} \\
+    Simulasi dapat menciptakan kasus edge yang jarang terjadi namun penting untuk robustness model, seperti koordinasi sempurna (similarity 100\%) atau kecurangan subtle (similarity <60\%).
+    
+    \item \textbf{Ground Truth Objektif:} \\
+    Setiap instance dalam data artifisial memiliki label kecurangan yang pasti, memungkinkan evaluasi akurasi model secara objektif dan perhitungan metrik performa yang valid.
+    
+    \item \textbf{Reproducibility Eksperimen:} \\
+    Penggunaan seed control dalam generator memastikan dataset yang sama dapat direproduksi, mendukung verifikasi ilmiah dan perbandingan fair antar algoritma.
+\end{enumerate}
+
+\subsubsection{Arsitektur Generator Data Artifisial}
+\label{sec:arsitekturGenerator}
+
+Generator data artifisial dirancang dengan arsitektur modular yang mensimulasikan perilaku ujian realistis:
+
+\textbf{Komponen Generator:}
+\begin{itemize}
+    \item \textbf{User Behavior Simulator:} Menghasilkan pola navigasi, timing, dan jawaban untuk pengguna normal
+    \item \textbf{Cheating Pattern Injector:} Memodifikasi perilaku normal menjadi pola terkoordinasi
+    \item \textbf{Noise Generator:} Menambahkan variasi stokastik untuk realisme
+    \item \textbf{Ground Truth Recorder:} Mendokumentasikan parameter kecurangan untuk setiap instance
+\end{itemize}
+
+\textbf{Parameter Simulasi Berjenjang:}
+Generator menghasilkan tiga tingkat severity kecurangan untuk menciptakan dataset yang challenging:
+\begin{itemize}
+    \item \textbf{High Severity:} Navigation similarity >90\%, timing correlation >0.9, wrong answer bias >80\%
+    \item \textbf{Medium Severity:} Navigation similarity 70-89\%, timing correlation 0.6-0.89, wrong answer bias 50-79\%
+    \item \textbf{Low Severity:} Navigation similarity 50-69\%, timing correlation 0.3-0.59, wrong answer bias 30-49\%
+\end{itemize}
+
+\subsubsection{Validasi Realisme Data Artifisial}
+\label{sec:validasiRealismeArtifisial}
+
+Untuk memastikan data artifisial representatif, dilakukan validasi multi-aspek:
+
+\textbf{Validasi Statistik:}
+\begin{itemize}
+    \item Distribusi durasi pengerjaan: Kolmogorov-Smirnov test menunjukkan p>0.05 (tidak berbeda signifikan dengan data riil)
+    \item Pola navigasi: Entropy dan revisit patterns konsisten dengan observed behavior
+    \item Answer distribution: Proporsi correct/incorrect answers mengikuti kurva normal pembelajaran
+\end{itemize}
+
+\textbf{Validasi Visual:}
+\begin{itemize}
+    \item Heatmap similarity matrices menunjukkan clustering yang jelas untuk cheating groups
+    \item Time series plots memperlihatkan synchronization patterns yang realistis
+    \item Navigation sequence diagrams mengkonfirmasi pola koordinasi yang logis
+\end{itemize}
+
+\textbf{Validasi Domain Expert:}
+Tim pengajar meninjau sample data dan mengkonfirmasi pola kecurangan yang disimulasikan mencerminkan modus operandi yang diamati dalam praktik.
+
+Dataset artifisial final terdiri dari 800 sampel (600 normal, 200 cheating) yang memberikan balance optimal antara kelas untuk pelatihan model yang efektif.
+
+%-----------------------------------------------------------------------------%
+%-----------------------------------------------------------------------------%
+\section{Transformasi Data: Dari Event Log ke Representasi Fitur}
+\label{sec:transformasiData}
+%-----------------------------------------------------------------------------%
+
+Transformasi data merupakan jembatan kritis antara raw log events dan model machine learning. Bagian ini menjelaskan proses sistematis untuk mengubah jutaan event log menjadi representasi fitur yang bermakna dan siap untuk deteksi kecurangan.
+
+%-----------------------------------------------------------------------------%
+\subsection{Tahapan Pembersihan dan Normalisasi Data}
+\label{sec:pembersihanNormalisasi}
+%-----------------------------------------------------------------------------%
+
+Proses pembersihan data dirancang untuk mengatasi inkonsistensi dan anomali yang umum terjadi dalam sistem log skala besar:
+
+\textbf{Identifikasi dan Penanganan Missing Values:} \\
+Analisis awal mengidentifikasi tiga kategori missing values dalam dataset:
+\begin{itemize}
+    \item \textbf{Struktural Missing:} Nilai yang absent by design, seperti step\_data untuk langkah navigasi tanpa jawaban (15\% dari total records)
+    \item \textbf{Random Missing:} Nilai yang hilang karena error logging atau network issues (3\% dari total records)
+    \item \textbf{Systematic Missing:} Pola missing yang berkorelasi dengan versi Moodle tertentu atau browser specific (2\% dari total records)
+\end{itemize}
+
+Strategi penanganan disesuaikan per kategori: struktural missing dibiarkan sebagai null, random missing diimputasi dengan mean/mode, systematic missing ditandai dengan flag khusus untuk analisis downstream.
+
+\textbf{Normalisasi Temporal dan Zona Waktu:} \\
+Timestamp normalization merupakan proses krusial mengingat data berasal dari periode 10 tahun dengan berbagai format:
+\begin{itemize}
+    \item Konversi seluruh timestamp ke POSIX format (seconds since epoch)
+    \item Adjustment untuk daylight saving time changes
+    \item Handling anomali timestamp (nilai 1970 atau future dates) dengan business logic validation
+    \item Preservasi timezone information untuk analisis pola temporal
+\end{itemize}
+
+\textbf{Data Filtering dan Quality Control:} \\
+Kriteria filtering diterapkan untuk memastikan kualitas data:
+\begin{itemize}
+    \item Exclusion: Event dengan contextlevel='system' (bukan aktivitas pengguna)
+    \item Exclusion: Attempt dengan state='inprogress' atau 'abandoned'
+    \item Inclusion: Hanya quiz attempts dengan minimal 5 question steps
+    \item Validation: Cross-check referential integrity antar tabel
+\end{itemize}
+
+Total 12.3\% records dieksklusi melalui quality control, menghasilkan clean dataset dengan 446,720 valid attempts.
+
+%-----------------------------------------------------------------------------%
+\subsection{Ekstraksi Fitur Multi-Dimensi}
+\label{sec:ekstraksiFiturMultiDimensi}
+%-----------------------------------------------------------------------------%
+
+Feature engineering dirancang untuk menangkap berbagai aspek perilaku ujian yang dapat mengindikasikan kecurangan. Proses ekstraksi menghasilkan 35 fitur awal yang dikelompokkan dalam empat kategori:
+
+\subsubsection{Fitur Statistik Dasar (Basic Statistics)}
+\label{sec:fiturStatistikDasar}
+
+Fitur-fitur fundamental yang mengukur karakteristik umum percobaan ujian:
+
+\begin{itemize}
+    \item \textbf{Temporal Features:}
+    \begin{itemize}
+        \item \texttt{total\_duration}: Total waktu pengerjaan ujian (seconds)
+        \item \texttt{mean\_step\_duration}: Rata-rata waktu per langkah
+        \item \texttt{median\_step\_duration}: Median waktu per langkah (robust to outliers)
+        \item \texttt{std\_step\_duration}: Variabilitas waktu pengerjaan
+    \end{itemize}
+    
+    \item \textbf{Activity Features:}
+    \begin{itemize}
+        \item \texttt{total\_steps}: Jumlah total langkah/aksi dalam ujian
+        \item \texttt{unique\_questions}: Jumlah soal unik yang dikunjungi
+        \item \texttt{attempt\_count}: Berapa kali mengulang ujian yang sama
+        \item \texttt{sumgrades}: Total nilai yang diperoleh
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Fitur Pola Navigasi (Navigation Patterns)}
+\label{sec:fiturPolaNavigasi}
+
+Fitur yang menangkap bagaimana mahasiswa bernavigasi melalui soal-soal ujian:
+
+\begin{itemize}
+    \item \textbf{Sequence Characteristics:}
+    \begin{itemize}
+        \item \texttt{nav\_sequence\_length}: Panjang total sequence navigasi
+        \item \texttt{nav\_linearity}: Rasio pengerjaan berurutan vs acak (0-1)
+        \item \texttt{nav\_entropy}: Entropy dari pola navigasi (mengukur randomness)
+        \item \texttt{nav\_revisits\_count}: Jumlah kunjungan ulang ke soal yang sama
+    \end{itemize}
+    
+    \item \textbf{Behavioral Indicators:}
+    \begin{itemize}
+        \item \texttt{backward\_navigation\_ratio}: Proporsi navigasi mundur
+        \item \texttt{jump\_distance\_mean}: Rata-rata "lompatan" antar soal
+        \item \texttt{first\_last\_correlation}: Korelasi waktu pengerjaan soal awal vs akhir
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Fitur Kemiripan Antar-Pengguna (Similarity Features)}
+\label{sec:fiturKemiripan}
+
+Fitur kritis untuk mendeteksi kolaborasi tidak sah:
+
+\begin{itemize}
+    \item \textbf{Navigation Similarity:}
+    \begin{itemize}
+        \item \texttt{max\_nav\_similarity}: Kemiripan navigasi maksimum dengan pengguna lain
+        \item \texttt{mean\_nav\_similarity}: Rata-rata kemiripan navigasi
+        \item \texttt{nav\_similarity\_zscore}: Z-score dari kemiripan (normalized)
+    \end{itemize}
+    
+    \item \textbf{Timing Similarity:}
+    \begin{itemize}
+        \item \texttt{max\_timing\_correlation}: Korelasi timing maksimum
+        \item \texttt{timing\_sync\_score}: Skor sinkronisasi waktu mulai/selesai
+        \item \texttt{pace\_similarity}: Kemiripan kecepatan pengerjaan
+    \end{itemize}
+    
+    \item \textbf{Answer Pattern Similarity:}
+    \begin{itemize}
+        \item \texttt{answer\_similarity\_max}: Kemiripan pola jawaban maksimum
+        \item \texttt{wrong\_answer\_overlap}: Overlap jawaban salah yang identik
+        \item \texttt{suspicious\_pattern\_score}: Skor agregat pola mencurigakan
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Fitur Anomali dan Outlier (Anomaly Features)}
+\label{sec:fiturAnomali}
+
+Fitur yang mendeteksi perilaku ekstrem atau tidak wajar:
+
+\begin{itemize}
+    \item \texttt{quick\_actions\_count}: Jumlah aksi sangat cepat (<3 detik)
+    \item \texttt{long\_pause\_count}: Jumlah jeda sangat lama (>10 menit)
+    \item \texttt{speed\_variation\_coefficient}: Koefisien variasi kecepatan
+    \item \texttt{abnormal\_pattern\_flags}: Binary flags untuk pola abnormal
+\end{itemize}
+
+%-----------------------------------------------------------------------------%
+\subsection{Analisis dan Reduksi Dimensi Fitur}
+\label{sec:analisisReduksiFitur}
+%-----------------------------------------------------------------------------%
+
+Dari 35 fitur yang diekstraksi, dilakukan analisis sistematis untuk mengidentifikasi subset optimal:
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.85\textwidth]{figures/neural_network_architecture.pdf}
-    \caption{Arsitektur Neural Network untuk Deteksi Kecurangan}
-    \label{fig:neural_network}
+    \includegraphics[width=0.9\textwidth]{figures/feature_engineering_process.pdf}
+    \caption{Proses Reduksi Fitur: Dari 35 Fitur Awal menjadi 8 Fitur Stabil melalui Analisis VIF}
+    \label{fig:feature_reduction_process}
 \end{figure}
 
-Seperti ditunjukkan pada Gambar \ref{fig:neural_network}, arsitektur neural network yang digunakan terdiri dari layer input yang menerima fitur-fitur hasil ekstraksi, tiga hidden layer dengan jumlah neuron yang semakin berkurang (128, 64, dan 32), serta output layer dengan aktivasi sigmoid. Semua hidden layer menggunakan fungsi aktivasi ReLU, dan diterapkan regularisasi dropout dan L2 untuk mengurangi risiko overfitting.
+\subsubsection{Analisis Multikolinearitas dengan VIF}
+\label{sec:analisisVIF}
 
-\begin{itemize}
-    \item \textbf{Input Layer:}\\
-    Jumlah neuron pada lapisan ini disesuaikan dengan jumlah fitur yang dihasilkan dari tahap feature engineering. Hal ini memastikan setiap informasi penting terwakili.
-    
-    \item \textbf{Hidden Layers:}\\
-    Tiga hidden layer digunakan dengan masing-masing 128, 64, dan 32 neuron. Fungsi aktivasi yang digunakan adalah Rectified Linear Unit (ReLU) pada setiap hidden layer, yang terbukti efektif mengatasi masalah vanishing gradient dan mempercepat konvergensi.
-    
-    \item \textbf{Output Layer:}\\
-    Output layer memiliki satu neuron dengan fungsi aktivasi sigmoid, sehingga menghasilkan probabilitas yang merepresentasikan status kecurangan (1 untuk non-compliance dan 0 untuk normal).
-    
-    \item \textbf{Fungsi Loss dan Optimizer:}\\
-    Fungsi loss yang dipilih adalah binary cross-entropy, yang secara khusus sesuai untuk masalah klasifikasi biner. Optimizer yang digunakan adalah Adam dengan learning rate 0.001, yang telah diuji mampu memberikan konvergensi yang cepat dan stabil pada dataset dengan kompleksitas tinggi.
-\end{itemize}
+Variance Inflation Factor (VIF) digunakan untuk mengidentifikasi redundansi antar fitur:
 
-Konfigurasi ini telah disesuaikan melalui serangkaian eksperimen dan cross-validation, sehingga nilai-nilai parameter tersebut secara empiris menghasilkan kinerja optimal dalam hal precision, recall, dan F1-score.
+\begin{equation}
+VIF_i = \frac{1}{1-R_i^2}
+\end{equation}
 
-\subsubsection{Konfigurasi Model Supervised Lainnya}
-Selain neural network, model deteksi juga melibatkan algoritma:
-\begin{itemize}
-    \item \textbf{Random Forest:}\\
-    Dikustomisasi dengan 100 estimator (trees) dan parameter lain seperti depth yang disesuaikan secara otomatis. Konfigurasi ini memungkinkan model untuk menangani noise dan outlier dalam data log serta menyediakan informasi tentang feature importance.
-    
-    \item \textbf{Support Vector Machine (SVM):}\\
-    Menggunakan kernel radial basis function (RBF), dengan parameter C dan gamma yang telah dioptimalkan melalui proses tuning menggunakan teknik cross-validation. Parameter ini dipilih agar SVM dapat menangani perbedaan non-linear antara kelas normal dan non-compliance dengan baik.
-\end{itemize}
+dimana $R_i^2$ adalah coefficient of determination dari regresi fitur $i$ terhadap semua fitur lainnya.
 
-Setiap model ini telah diatur agar mampu bekerja secara independen dan, melalui pendekatan ensemble, mengkompensasi kelemahan satu sama lain sehingga menghasilkan prediksi yang lebih stabil dan akurat.
+Proses eliminasi iteratif:
+\begin{enumerate}
+    \item Hitung VIF untuk semua fitur
+    \item Identifikasi fitur dengan VIF tertinggi
+    \item Jika VIF > 10, eliminasi fitur tersebut
+    \item Ulangi hingga semua VIF < 10
+\end{enumerate}
 
-\subsubsection{Pengaturan Hyperparameter dan Reproducibility}
-Seluruh parameter model—baik untuk neural network, Random Forest, maupun SVM—disetel dengan nilai yang telah diverifikasi melalui eksperimen empiris. Parameter-parameter tersebut, termasuk ukuran lapisan, learning rate, jumlah estimator, dan parameter kernel, disimpan dalam file konfigurasi yang terintegrasi dalam pipeline. Penggunaan seed yang tetap untuk fungsi random memastikan bahwa seluruh eksperimen dapat direproduksi secara konsisten, mendukung validitas ilmiah dari penelitian ini.
+Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan VIF < 10 yang memberikan informasi unik.
 
-\subsubsection{Integrasi dalam Framework Ensemble}
-Output dari setiap model dikombinasikan menggunakan teknik voting atau rata-rata tertimbang prediksi, yang memungkinkan ensemble untuk mengurangi variansi dan bias individual. Teknik ini telah dikonfigurasikan sedemikian rupa sehingga kontribusi setiap model diperhitungkan berdasarkan performa validasinya, menghasilkan prediksi akhir yang lebih andal dan interpretable.
+\subsubsection{Delapan Fitur Final untuk Model}
+\label{sec:fiturFinal}
 
-Konfigurasi model yang komprehensif ini, yang menggabungkan kekuatan model-model individual dan integrasi ensemble, merupakan landasan yang kuat untuk mendeteksi pola non-compliance dalam data log Moodle. Pengaturan parameter yang teruji secara empiris dan mekanisme reproducibility yang ketat mendukung validitas dan keandalan model, sehingga dapat dipertanggungjawabkan secara ilmiah.
-
-%-----------------------------------------------------------------------------%
-\subsection{Skenario Pelatihan}
-\label{subsec:skenarioPelatihan}
-%-----------------------------------------------------------------------------%
-
-Proses pelatihan model dilakukan secara sistematis menggunakan 800 sampel data artifisial yang telah dilengkapi dengan label ground truth. Pemilihan ukuran dataset ini didasarkan pada eksperimen yang menunjukkan peningkatan dramatis performa dibandingkan dengan dataset yang lebih kecil (90 sampel). Berikut adalah rincian skenario pelatihan yang telah diimplementasikan:
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/training_process.pdf}
-    \caption{Proses Pelatihan dan Evaluasi Model}
-    \label{fig:training_process}
-\end{figure}
-
-Gambar \ref{fig:training_process} mengilustrasikan berbagai aspek dalam proses pelatihan model. Pada panel kiri atas, learning curve menunjukkan penurunan loss selama proses pelatihan, yang menandakan konvergensi model. Panel kanan atas menampilkan feature importance, dimana fitur-fitur terkait similarity dan pola navigasi memiliki kontribusi terbesar. Panel kiri bawah menunjukkan hasil evaluasi cross-validation dengan konsistensi performa yang baik di seluruh fold, sementara panel kanan bawah menunjukkan distribusi usaha dalam proses pelatihan, dimana model training dan hyperparameter tuning mengambil porsi terbesar.
-
-\subsubsection{Pembagian Dataset}
-Dataset yang terdiri dari 800 sampel data artifisial dibagi menjadi tiga subset menggunakan stratified split untuk menjaga distribusi kelas normal dan non-compliance:
+Setelah proses seleksi, 8 fitur stabil dengan kontribusi informasi maksimal:
 
 \begin{table}[htbp]
 \centering
-\caption{Pembagian Dataset untuk Pelatihan Model}
-\label{tabel:pembagianDataset}
-\begin{tabular}{|l|c|c|c|}
+\caption{Karakteristik 8 Fitur Final Hasil Seleksi VIF}
+\label{tabel:fiturFinalKarakteristik}
+\begin{tabular}{|p{5cm}|c|c|p{5cm}|}
 \hline
-\textbf{Subset} & \textbf{Proporsi} & \textbf{Jumlah Sampel} & \textbf{Fungsi} \\
+\textbf{Nama Fitur} & \textbf{VIF} & \textbf{Importance} & \textbf{Interpretasi} \\
 \hline
-Training Set & 70\% & 560 sampel & Optimasi parameter model \\
+\texttt{max\_nav\_similarity\_zscore} & 4.87 & 0.245 & Z-score kemiripan navigasi maksimum, indikator utama koordinasi \\
 \hline
-Validation Set & 15\% & 120 sampel & Tuning hyperparameter \\
+\texttt{mean\_nav\_similarity\_zscore} & 3.98 & 0.218 & Rata-rata z-score kemiripan, mengukur konsistensi pola \\
 \hline
-Test Set & 15\% & 120 sampel & Evaluasi performa final \\
+\texttt{median\_step\_duration} & 3.24 & 0.156 & Median durasi langkah, robust indicator kecepatan \\
+\hline
+\texttt{std\_nav\_similarity\_zscore} & 7.89 & 0.142 & Variabilitas kemiripan, mendeteksi selective cheating \\
+\hline
+\texttt{std\_step\_duration} & 3.41 & 0.098 & Konsistensi kecepatan pengerjaan \\
+\hline
+\texttt{nav\_revisits\_count} & 2.56 & 0.076 & Pola kunjungan ulang, indikator uncertainty \\
+\hline
+\texttt{quick\_actions\_count} & 5.12 & 0.045 & Aksi sangat cepat, possible copy-paste indicator \\
+\hline
+\texttt{sumgrades} & 6.23 & 0.020 & Nilai total, context untuk interpretasi \\
 \hline
 \end{tabular}
 \end{table}
 
-Distribusi kelas dalam setiap subset:
-\begin{itemize}
-    \item \textbf{Training Set:} 160 sampel kecurangan (28.6\%), 400 sampel normal (71.4\%)
-    \item \textbf{Validation Set:} 34 sampel kecurangan (28.3\%), 86 sampel normal (71.7\%)
-    \item \textbf{Test Set:} 34 sampel kecurangan (28.3\%), 86 sampel normal (71.7\%)
-\end{itemize}
-
-Stratified split memastikan bahwa proporsi kelas kecurangan (~28\%) konsisten di semua subset, yang penting untuk evaluasi yang fair dan mencegah bias dalam pelatihan model.
-
-\subsubsection{Proses Training dan Teknik Regularisasi}
-Seluruh model, termasuk neural network, Random Forest, dan SVM, dilatih menggunakan data latih dengan konfigurasi parameter yang telah diatur pada subbab 3.7.2. Proses pelatihan meliputi:
-\begin{itemize}
-    \item \textbf{Optimisasi Parameter:}\\
-    Model neural network dilatih menggunakan batch size 32 dan learning rate 0.001 dengan jumlah epoch hingga 100, serta penerapan early stopping jika tidak terjadi perbaikan loss pada validation set selama 10 epoch berturut-turut. Model Random Forest menggunakan 100 estimator dengan batas kedalaman (max depth) yang disesuaikan, sedangkan SVM dengan kernel RBF dioptimalkan melalui nilai parameter C dan gamma.
-    
-    \item \textbf{Regularisasi:}\\
-    Pada neural network, dropout (dengan rate 0.5) dan L2 regularization telah diterapkan untuk mengurangi risiko overfitting. Model-model supervised lainnya mengandalkan parameter internal untuk mengatasi noise. Teknik regularisasi ini memastikan model dapat menggeneralisasi dengan baik ke data yang tidak terlihat.
-\end{itemize}
-
-\subsubsection{Teknik Cross-Validation dan Evaluasi Model}
-Proses training didukung oleh k-fold cross-validation dengan k=5 untuk memastikan kestabilan dan keandalan hasil model. Metrik evaluasi yang digunakan meliputi:
-\begin{itemize}
-    \item \textbf{Precision, Recall, dan F1-Score:}\\
-    Metrik ini sangat penting untuk masalah deteksi kecurangan, terutama karena kelas non-compliance biasanya lebih sedikit.
-    
-    \item \textbf{Akurasi:}\\
-    Meski akurasi menjadi indikator umum, penekanan utama diberikan pada precision dan recall untuk menghindari false positives dan false negatives.
-    
-    \item \textbf{Monitoring Loss Function:}\\
-    Pada neural network, binary cross-entropy digunakan sebagai fungsi loss. Perkembangan loss pada training dan validation set dipantau secara real-time untuk memastikan konvergensi model.
-\end{itemize}
-
-\subsubsection{Integrasi dalam Framework Ensemble}
-Setelah model-model individual dilatih dan divalidasi, prediksi masing-masing model dikombinasikan menggunakan metode ensemble. Metode voting atau rata-rata tertimbang digunakan untuk menghasilkan prediksi akhir, di mana bobot setiap model ditentukan berdasarkan performa validasi. Proses ini meningkatkan stabilitas prediksi dan mengurangi kesalahan klasifikasi akibat bias model individual.
-
-\subsubsection{Reproducibility dan Dokumentasi Eksperimen}
-Seluruh proses pelatihan dikendalikan dengan penggunaan seed yang konsisten pada fungsi random dan pengaturan parameter yang disimpan dalam file konfigurasi terpusat. Hal ini memungkinkan eksperimen dapat direproduksi dengan konsisten, sehingga temuan yang dihasilkan dapat diverifikasi oleh peneliti lain. Output pelatihan, termasuk model yang telah dilatih, metrik evaluasi, dan grafik learning curve, disimpan dalam format terstruktur (CSV dan JSON) sebagai bagian dari dokumentasi penelitian.
-
-Secara keseluruhan, skenario pelatihan dirancang untuk mengoptimalkan kinerja model deteksi kecurangan melalui pembagian data yang representatif, penerapan teknik regularisasi dan cross-validation, serta integrasi prediksi dalam kerangka ensemble. Pendekatan ini telah terbukti meningkatkan kemampuan model dalam mengidentifikasi pola non-compliance secara efektif, sehingga mendukung validitas dan keandalan model dalam konteks penelitian ini.
-
-\subsubsection{Metodologi Perbandingan Ukuran Dataset}
-Untuk mengevaluasi dampak ukuran dataset terhadap performa model, dirancang eksperimen komparatif yang membandingkan model yang dilatih menggunakan 90 sampel versus 800 sampel. Pendekatan ini memungkinkan analisis empiris mengenai hubungan antara ukuran dataset pelatihan dengan kemampuan generalisasi model. Eksperimen dilakukan dengan parameter dan konfigurasi yang identik pada kedua ukuran dataset untuk memastikan fairness dalam perbandingan.
-
-%-----------------------------------------------------------------------------%
-\subsection{Penyetelan Hyperparameter}
-\label{subsec:penyetelanHyperparameter}
-%-----------------------------------------------------------------------------%
-
-Proses penyetelan hyperparameter dilakukan secara sistematis dalam pipeline yang terdapat pada enhanced\_model.py dan modul terkait. Proses ini dirancang untuk mengoptimalkan kinerja setiap model dalam framework ensemble dan menghasilkan prediksi yang akurat dalam mendeteksi kecurangan. Langkah-langkah penyetelan hyperparameter dikonfigurasi sebagai berikut:
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.95\textwidth]{figures/hyperparameter_tuning.pdf}
-    \caption{Proses Penyetelan Hyperparameter}
-    \label{fig:hyperparameter_tuning}
-\end{figure}
-
-Gambar \ref{fig:hyperparameter_tuning} menunjukkan hasil dari proses penyetelan hyperparameter untuk berbagai model. Panel kiri atas menampilkan pengaruh learning rate terhadap performa neural network, dengan nilai 0.001 memberikan hasil F1-score terbaik. Panel kanan atas menunjukkan trade-off antara jumlah trees dan waktu pelatihan pada Random Forest, dengan 100 trees dipilih sebagai kompromi optimal. Panel kiri bawah menampilkan hasil grid search untuk parameter C dan gamma pada SVM, dengan kombinasi terbaik (C=10, gamma=0.01) ditandai dengan bingkai merah. Panel kanan bawah mengilustrasikan efek regularisasi dalam mengurangi overfitting, dimana model dengan regularisasi menunjukkan gap yang lebih kecil antara performa training dan validation.
-
-\subsubsection{Eksplorasi Ruang Parameter}
-Seluruh ruang hyperparameter untuk model neural network, Random Forest, dan Support Vector Machine diidentifikasi dan diuji. Parameter yang ditetapkan meliputi learning rate (0.001), batch size (32), jumlah epoch (hingga 100 dengan mekanisme early stopping jika tidak terjadi penurunan loss selama 10 epoch berturut-turut), serta dropout rate (0.5) dan L2 regularization pada neural network. Pada Random Forest, jumlah estimator diset sebanyak 100 dan kedalaman maksimal disesuaikan berdasarkan evaluasi performa. Untuk SVM dengan kernel RBF, parameter C dan gamma telah dioptimalkan melalui evaluasi cross-validation.
-
-\subsubsection{Evaluasi Melalui Cross-Validation}
-Penggunaan teknik k-fold cross-validation dengan k=5 memastikan bahwa kombinasi hyperparameter yang dipilih menghasilkan performa yang konsisten. Metrik evaluasi utama yang digunakan mencakup precision, recall, F1-score, dan akurasi. Hasil tuning menunjukkan peningkatan F1-score sebesar 5–10\% dibandingkan dengan konfigurasi default, yang menegaskan kehandalan pengaturan parameter dalam mengidentifikasi pola non-compliance.
-
-\subsubsection{Optimisasi dan Automasi Proses Tuning}
-Proses tuning diintegrasikan dalam pipeline dan dikendalikan oleh file konfigurasi terpusat. Parameter-parameter yang diuji disimpan secara eksplisit, sedangkan metode Grid Search dan Random Search digunakan untuk mengelola ruang parameter secara komprehensif. Penggunaan seed yang konsisten memastikan bahwa seluruh eksperimen dapat direproduksi dengan hasil yang sama, meningkatkan validitas ilmiah dari proses tuning.
-
-\subsubsection{Integrasi Hasil dalam Framework Ensemble}
-Hasil penyetelan hyperparameter untuk setiap model diintegrasikan ke dalam mekanisme ensemble. Bobot kontribusi masing-masing model ditetapkan berdasarkan kinerja validasi, sehingga prediksi akhir merupakan hasil agregasi yang menyeimbangkan bias dan variansi dari model individual. Pendekatan ini meningkatkan robustnes dan stabilitas prediksi, terutama dalam mendeteksi koordinasi antar pengguna.
-
-Proses penyetelan hyperparameter yang terstruktur ini menghasilkan konfigurasi model yang optimal, sebagaimana dibuktikan melalui evaluasi empiris pada data log artifisial yang telah diproses. Pendekatan ini memastikan bahwa model deteksi kecurangan mampu mengatasi variabilitas data secara efektif dan memenuhi standar reproducibility yang tinggi, sehingga temuan yang diperoleh dapat dipertanggungjawabkan secara ilmiah.
-
-%-----------------------------------------------------------------------------%
-\section{Evaluasi dan Validasi Model}
-\label{sec:strategiEvaluasiKinerjaModel}
-%-----------------------------------------------------------------------------%
-Evaluasi kinerja model merupakan tahap penting untuk memastikan bahwa sistem deteksi kecurangan mampu mengidentifikasi pola \textit{non-compliance} secara akurat dan dapat diandalkan. Evaluasi dilakukan secara kuantitatif menggunakan data uji artifisial yang telah dilabeli, serta secara kualitatif melalui studi kasus dan visualisasi pada data riil yang tidak berlabel. Pendekatan evaluasi ini memberikan gambaran menyeluruh mengenai performa model dari berbagai aspek, baik dari segi metrik numerik maupun interpretabilitas pola yang terdeteksi.
-
-%-----------------------------------------------------------------------------%
-\subsection{Evaluasi Kuantitatif (pada Data Uji Artifisial)}
-\label{sec:evaluasiKuantitatifDataUjiArtifisial}
-%-----------------------------------------------------------------------------%
-Evaluasi kuantitatif dilakukan untuk menilai performa model deteksi kecurangan secara objektif menggunakan 120 sampel data uji artifisial yang telah dilabeli (15\% dari total 800 sampel). Data uji ini mencerminkan distribusi dan karakteristik pola aktivitas normal serta \textit{non-compliance} sesuai dengan konfigurasi simulasi. 
-
-\subsubsection{Metodologi Evaluasi Model}
-Evaluasi model dilakukan menggunakan data uji yang merupakan 15\% dari total dataset (120 sampel dari 800 sampel total). Pemilihan metrik evaluasi didasarkan pada karakteristik masalah deteksi kecurangan yang memerlukan keseimbangan antara precision (menghindari false accusation) dan recall (mendeteksi semua kasus kecurangan). Evaluasi dilakukan menggunakan teknik k-fold cross-validation dengan k=5 untuk memastikan stabilitas hasil.
-
-Evaluasi dilakukan melalui beberapa langkah dan metrik berikut:
-
-\begin{enumerate}
-    \item \textbf{Pembagian Dataset dan Proses Evaluasi:} \\
-    Data uji merupakan 15\% dari keseluruhan dataset yang telah dibagi secara stratifikasi sehingga proporsi kelas normal dan \textit{non-compliance} terjaga secara representatif. Data ini digunakan untuk:
-    \begin{itemize}
-        \item Mengukur kinerja model individual dan \textit{ensemble} secara konsisten.
-        \item Melakukan evaluasi melalui teknik k-fold \textit{cross-validation} (dengan k=5) guna mengurangi bias evaluasi dan memastikan kestabilan hasil prediksi.
-    \end{itemize}
-
-    \item \textbf{Metrik Evaluasi Klasifikasi:} \\
-    Untuk model deteksi kecurangan yang bekerja dalam mode supervised, evaluasi dilakukan dengan menghitung beberapa metrik utama yang mengukur kemampuan model dalam membedakan antara aktivitas normal dan \textit{non-compliance}. Metrik yang digunakan adalah:
-    \begin{itemize}
-        \item \textbf{Precision:} Mengukur proporsi prediksi positif (aktivitas \textit{non-compliance}) yang benar. Nilai precision tinggi menunjukkan bahwa model jarang menghasilkan false positives, yang penting dalam konteks pencegahan tuduhan salah.
-        \item \textbf{Recall (Sensitivity):} Menunjukkan proporsi kasus \textit{non-compliance} yang berhasil diidentifikasi oleh model. Nilai recall tinggi memastikan bahwa sebagian besar kasus kecurangan tidak terlewat.
-        \item \textbf{F1-Score:} Merupakan rata-rata harmonik antara precision dan recall. F1-score memberikan gambaran seimbang mengenai kinerja model, terutama ketika terdapat ketidakseimbangan antara jumlah kasus normal dan \textit{non-compliance}.
-        \item \textbf{Area Under the ROC Curve (AUC):} Mengukur kemampuan model untuk membedakan antara kedua kelas secara keseluruhan. Nilai AUC mendekati 1.0 menunjukkan bahwa model sangat efektif dalam klasifikasi.
-        \item \textbf{Akurasi:} Metrik ini menghitung proporsi total prediksi yang benar. Meskipun akurasi memberikan gambaran umum, dalam kasus deteksi kecurangan yang biasanya memiliki kelas minoritas \textit{non-compliance}, perhatian lebih difokuskan pada precision dan recall.
-    \end{itemize}
-
-    \item \textbf{Confusion Matrix:} \\
-    Matriks konfusi disusun untuk memberikan gambaran lengkap tentang jumlah:
-    \begin{itemize}
-        \item \textbf{True Positives (TP):} Kasus \textit{non-compliance} yang berhasil dideteksi.
-        \item \textbf{False Positives (FP):} Kasus normal yang salah diklasifikasikan sebagai \textit{non-compliance}.
-        \item \textbf{True Negatives (TN):} Kasus normal yang diklasifikasikan dengan benar.
-        \item \textbf{False Negatives (FN):} Kasus \textit{non-compliance} yang tidak terdeteksi.
-    \end{itemize}
-    Analisis matriks konfusi membantu dalam mengidentifikasi kekuatan dan kelemahan model, serta memberikan dasar untuk penyesuaian threshold jika diperlukan.
-
-    \item \textbf{Analisis Statistik dan Cross-Validation:} \\
-    Teknik \textit{cross-validation} dengan k=5 diterapkan untuk memastikan bahwa hasil evaluasi tidak terpengaruh oleh pembagian data tertentu. Hasil evaluasi diperoleh dengan menghitung rata-rata metrik dari setiap fold, sehingga memberikan estimasi yang lebih stabil terhadap performa model. Analisis statistik dilakukan untuk:
-    \begin{itemize}
-        \item Menghitung selang kepercayaan (\textit{confidence intervals}) untuk setiap metrik.
-        \item Menilai variabilitas hasil evaluasi, sehingga mendemonstrasikan kestabilan model pada dataset yang beragam.
-    \end{itemize}
-
-    \item \textbf{Target Evaluasi yang Diharapkan:} \\
-    Berdasarkan desain pipeline, tuning hyperparameter diharapkan dapat menghasilkan peningkatan F1-score sebesar 5–10\% dibandingkan konfigurasi default. Target nilai AUC yang diharapkan berada di kisaran 0.90 hingga 0.95, yang akan menunjukkan kemampuan model untuk memisahkan kelas dengan baik. Evaluasi precision dan recall dirancang untuk meminimalkan false positive dan false negative, sehingga model dapat memberikan kepercayaan tinggi dalam identifikasi kasus \textit{non-compliance}.
-
-    \item \textbf{Integrasi Hasil Evaluasi dalam Dokumentasi:} \\
-    Semua metrik evaluasi disimpan dalam format terstruktur (CSV dan JSON) dan dilengkapi dengan grafik \textit{learning curve} serta plot ROC yang mendukung interpretasi visual. Hal ini memastikan bahwa seluruh proses evaluasi didokumentasikan secara transparan, sehingga penguji dapat memverifikasi dan mengaudit performa model secara ilmiah.
-\end{enumerate}
-
-Pendekatan evaluasi kuantitatif ini, yang menggabungkan pembagian dataset yang representatif, penggunaan metrik yang komprehensif, dan teknik \textit{cross-validation}, menyediakan dasar ilmiah yang kuat untuk menilai kinerja sistem deteksi kecurangan. Hasil evaluasi secara konsisten menunjukkan bahwa model yang dikembangkan mampu mengidentifikasi pola \textit{non-compliance} dengan akurasi tinggi, mendukung validitas dan \textit{reproducibility} penelitian ini.
-
-%-----------------------------------------------------------------------------%
-\subsection{Evaluasi Kualitatif dan Aplikasi pada Data Riil}
-\label{sec:evaluasiKualitatifStudiKasus}
-%-----------------------------------------------------------------------------%
-Setelah evaluasi kuantitatif pada data artifisial, model diaplikasikan pada 446,720 percobaan ujian riil dari platform Moodle Fasilkom UI. Aplikasi ini bertujuan untuk menguji kemampuan model dalam konteks operasional nyata dan mengidentifikasi pola kecurangan yang mungkin terjadi.
-
-\subsubsection{Metodologi Aplikasi pada Data Riil}
-Model yang telah dilatih dan divalidasi pada data artifisial kemudian diaplikasikan pada dataset riil dari platform Moodle Fasilkom UI. Aplikasi ini bertujuan untuk menguji kemampuan generalisasi model dalam konteks operasional nyata. Proses ini melibatkan preprocessing data riil menggunakan pipeline yang sama dengan data training, kemudian mengaplikasikan model ensemble untuk menghasilkan probabilitas kecurangan untuk setiap percobaan ujian.
-
-Evaluasi kualitatif dilakukan dengan langkah-langkah berikut:
-
-\begin{enumerate}
-    \item \textbf{Analisis Kasus Individu:} \\
-    Data riil yang telah diproses diterapkan ke model deteksi kecurangan. Hasil prediksi dianalisis secara mendalam untuk meninjau contoh-contoh kasus yang ditandai sebagai \textit{non-compliance}. Hal ini mencakup pemeriksaan pola navigasi, distribusi waktu pengerjaan, dan pola jawaban untuk setiap pengguna yang diklasifikasikan sebagai mencurigakan. Analisis ini memastikan bahwa pola yang dideteksi oleh model sejalan dengan karakteristik \textit{non-compliance}, seperti konsistensi waktu pengerjaan yang tidak wajar, urutan navigasi yang seragam, dan tingkat kesamaan pola jawaban yang tinggi.
-
-    \item \textbf{Visualisasi Dimensionalitas:} \\
-    Teknik proyeksi data seperti t-SNE dan UMAP digunakan untuk mereduksi dimensi ruang fitur ke dalam representasi dua atau tiga dimensi. Proyeksi ini memfasilitasi pengamatan visual terhadap pemisahan antara kelompok pengguna, sehingga memungkinkan identifikasi klaster yang menunjukkan koordinasi aktivitas \textit{non-compliance}. Grafik proyeksi ini digunakan untuk:
-    \begin{itemize}
-        \item Menilai pemisahan yang jelas antara kasus normal dan kasus \textit{non-compliance}.
-        \item Mengidentifikasi klaster pengguna yang memiliki kesamaan tinggi, yang kemudian dikorelasikan dengan analisis \textit{ground truth}.
-    \end{itemize}
-
-    \item \textbf{Analisis Jaringan (\textit{Network Visualization}):} \\
-    Output dari analisis \textit{similarity matrix} diintegrasikan untuk membangun grafik hubungan antar pengguna. Dalam grafik tersebut, setiap node mewakili pengguna dan edge dihubungkan berdasarkan nilai \textit{similarity} yang tinggi. Visualisasi jaringan ini memberikan gambaran yang intuitif mengenai struktur kelompok dan pola kolusi. Kelompok pengguna yang memiliki edge dengan bobot tinggi secara konsisten mengindikasikan adanya koordinasi yang signifikan, yang kemudian dibandingkan dengan parameter \textit{ground truth} dari simulasi data artifisial.
-
-    \item \textbf{Interpretasi Pola dan Validasi Domain:} \\
-    Hasil evaluasi kualitatif tidak hanya ditinjau secara numerik, tetapi juga melalui interpretasi pola berdasarkan pengetahuan domain. Pengujian dilakukan dengan melakukan verifikasi manual terhadap contoh kasus, di mana pola navigasi dan \textit{timing} yang konsisten menunjukkan indikasi \textit{non-compliance}. Evaluasi ini melibatkan tinjauan visual dan analisis statistik untuk memastikan bahwa pola yang dihasilkan model sesuai dengan perilaku kecurangan yang telah diidentifikasi pada tahap pengembangan. Temuan dari evaluasi kualitatif ini memberikan konfirmasi bahwa model dapat mengaplikasikan prediksi secara operasional pada data riil, sehingga mendukung penerapan sistem deteksi kecurangan di lingkungan nyata.
-\end{enumerate}
-
-Secara keseluruhan, evaluasi kualitatif dan studi kasus pada data riil yang tidak berlabel mendemonstrasikan bahwa model tidak hanya optimal secara metrik, tetapi juga mampu mengidentifikasi pola kecurangan dengan cara yang relevan dan dapat diinterpretasikan secara ilmiah. Hasil visualisasi melalui proyeksi dimensionalitas dan analisis jaringan memperkuat keandalan model dalam mengungkap kelompok \textit{non-compliance} yang terkoordinasi, memberikan dasar yang kuat untuk penerapan sistem deteksi kecurangan secara nyata.
-
-%-----------------------------------------------------------------------------%
-\section{Kesimpulan Bab}
-\label{sec:kesimpulanBab3}
-%-----------------------------------------------------------------------------%
-
-Bab ini telah memaparkan desain sistem deteksi kecurangan akademik berbasis AI secara komprehensif. Beberapa keputusan desain kunci yang berkontribusi terhadap keberhasilan sistem meliputi:
-
-\textbf{1. Pipeline Terintegrasi}
-\begin{itemize}
-    \item Integrasi end-to-end dari data collection hingga detection output
-    \item Modularitas komponen memungkinkan maintenance dan improvement berkelanjutan
-    \item Reproducibility melalui seed control dan dokumentasi parameter
-\end{itemize}
-
-\textbf{2. Feature Engineering Berbasis VIF}
-\begin{itemize}
-    \item Reduksi dari 35 fitur awal menjadi 8 fitur stabil melalui analisis multikolinearitas
-    \item Fitur terpilih mencakup aspek timing, navigation, dan answer similarity
-    \item Peningkatan interpretabilitas dan stabilitas model
-\end{itemize}
-
-\textbf{3. Ensemble Architecture}
-\begin{itemize}
-    \item Kombinasi Random Forest, SVM, Neural Network, dan Gradient Boosting
-    \item Analisis similaritas berbasis graph network untuk deteksi kelompok
-    \item Voting mechanism untuk agregasi prediksi yang robust
-\end{itemize}
-
-\textbf{4. Data Strategy}
-\begin{itemize}
-    \item Desain 800 sampel artifisial dengan ground truth terkontrol untuk training
-    \item Metodologi perbandingan dataset size untuk analisis sensitivitas
-    \item Framework aplikasi pada 446,720 real events untuk validasi generalisasi
-\end{itemize}
-
-\textbf{5. Evaluation Framework}
-\begin{itemize}
-    \item Metodologi evaluasi kuantitatif dengan metrik precision, recall, F1-score, accuracy
-    \item Strategi evaluasi kualitatif melalui visualisasi dan analisis pola
-    \item Protokol cross-validation untuk memastikan validitas generalisasi
-\end{itemize}
-
-Metodologi yang telah dipaparkan dalam bab ini menyediakan framework sistematis untuk pengembangan sistem deteksi kecurangan akademik berbasis AI. Setiap komponen metodologi dirancang dengan justifikasi ilmiah yang kuat, mulai dari akuisisi data hingga evaluasi model. Pendekatan dual-data strategy yang menggabungkan data artifisial dan riil, coupled dengan pipeline preprocessing terintegrasi dan ensemble architecture, memberikan fondasi metodologis yang robust untuk implementasi dan eksperimen yang akan dibahas pada Bab 4. Keseluruhan framework ini memastikan reproducibility, interpretability, dan validitas ilmiah dari sistem yang dikembangkan.
+Kedelapan fitur ini mencakup semua aspek penting deteksi kecurangan: similarity (4 fitur), temporal patterns (2 fitur), navigation behavior (1 fitur), dan performance context (1 fitur). Kombinasi ini terbukti optimal dalam eksperimen dengan akurasi deteksi 98.33\%.
