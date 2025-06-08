@@ -55,7 +55,6 @@ See `requirements.txt` for complete list. Key packages:
 
 ### Step 1: Clone/Copy the Project
 ```bash
-# If using git
 git clone https://github.com/yancheesetofer/final-skripsi
 cd moodle-cheating-detection
 
