@@ -1,0 +1,35 @@
+---
+description: 
+globs: *thesis.tex
+alwaysApply: false
+---
+---
+description: "Provides guidelines for LaTeX formatting based on the Fasilkom UI template."
+globs: ["*thesis.tex"]
+alwaysApply: false
+ruleType: autoAttached
+---
+# LaTeX Formatting Rules
+
+- **Figures:** To insert a figure, use the following structure. Place image files in the `figures/` directory.
+    ```latex
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.8\textwidth]{figures/figure_filename.png}
+        \caption{Caption explaining the figure.}
+        \label{fig:label_for_figure}
+    \end{figure}
+    ```
+- **Tables:** For tables generated from code (as CSVs), convert them to `.tex` files and place them in a `tables/` directory. Input them using:
+    ```latex
+    \begin{table}[h!]
+        \centering
+        \caption{Caption explaining the table.}
+        \label{tab:label_for_table}
+        \input{tables/table_filename.tex}
+    \end{table}
+    ```
+
+- **Citations:** When making a claim that requires a source from the literature review, use a placeholder for easy searching later: `[CITE: key_idea_or_author_year]`.
+
+- **Code Snippets:** Use the `lstlisting` environment for displaying code.

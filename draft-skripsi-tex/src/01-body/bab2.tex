@@ -13,15 +13,15 @@ Bab ini menyajikan tinjauan pustaka yang komprehensif mengenai landasan teoretis
 \subsection{Evolusi Tantangan Integritas Akademik}
 \label{subsec:evolusiTantangan}
 
-Integritas akademik telah menjadi perhatian fundamental dalam dunia pendidikan sejak lama, namun transformasi digital pendidikan telah mengubah secara signifikan lanskap dan karakteristik permasalahan ini. Lanier \cite{Lanier2006} dalam penelitiannya yang menjadi rujukan penting, menemukan bahwa tingkat kecurangan dalam pembelajaran jarak jauh cenderung lebih tinggi dibandingkan dengan kelas tatap muka tradisional. Temuan ini menjadi dasar pemahaman bahwa lingkungan pembelajaran daring memerlukan pendekatan monitoring yang berbeda dan lebih komprehensif.
+Integritas akademik telah menjadi perhatian fundamental dalam dunia pendidikan sejak lama, namun transformasi digital pendidikan telah mengubah secara signifikan lanskap dan karakteristik permasalahan ini. Lanier \cite{Lanier2006} dalam penelitiannya yang menjadi rujukan penting, menemukan bahwa tingkat kecurangan dalam pembelajaran jarak jauh cenderung lebih tinggi dibandingkan dengan kelas tatap muka tradisional. Temuan ini menjadi dasar pemahaman bahwa lingkungan pembelajaran daring memerlukan pendekatan pemantauan yang berbeda dan lebih komprehensif.
 
-Chirumamilla dkk. \cite{Chirumamilla2020} melalui survei terhadap mahasiswa dan dosen di Norwegia, mengidentifikasi enam modus kecurangan paling umum dalam ujian daring: (1) peniruan identitas (\textit{identity theft}), (2) penggunaan bahan bantuan terlarang, (3) kolaborasi tidak sah antar peserta, (4) penggunaan perangkat komunikasi selama ujian, (5) akses ke sumber eksternal tanpa izin, dan (6) manipulasi waktu pengerjaan. Klasifikasi ini memberikan kerangka pemahaman yang sistematis tentang berbagai bentuk pelanggaran yang perlu dideteksi oleh sistem otomatis.
+Chirumamilla dkk. \cite{Chirumamilla2020} melalui survei terhadap mahasiswa dan dosen di Norwegia, mengidentifikasi enam modus kecurangan paling umum dalam ujian daring: (1) peniruan identitas (\textit{identity theft}), (2) penggunaan bahan bantuan terlarang, (3) kolaborasi tidak sah antarpeserta, (4) penggunaan perangkat komunikasi selama ujian, (5) akses ke sumber eksternal tanpa izin, dan (6) manipulasi waktu pengerjaan. Klasifikasi ini memberikan kerangka pemahaman yang sistematis tentang berbagai bentuk pelanggaran yang perlu dideteksi oleh sistem otomatis.
 
 Penelitian terbaru menunjukkan bahwa pandemi COVID-19 telah mempercepat adopsi pembelajaran daring sekaligus meningkatkan kompleksitas permasalahan integritas akademik. Yulita dkk. \cite{Yulita2023} mengamati peningkatan signifikan dalam kecanggihan metode kecurangan, termasuk penggunaan teknologi untuk memfasilitasi kolusi dan berbagi informasi secara real-time selama ujian berlangsung.
 
 \subsection{Karakteristik Kecurangan dalam Lingkungan Digital}
 
-Lingkungan pembelajaran digital memiliki karakteristik unik yang membedakannya dari setting tradisional. Murdoch dan House \cite{Murdoch2019} mengidentifikasi fenomena \textit{"ghost in the shell"}, di mana terjadi perpaduan antara kecurangan berbasis kontrak (\textit{contract cheating}) dengan peniruan identitas online. Fenomena ini menunjukkan evolusi kecurangan dari tindakan individual menjadi operasi yang lebih terorganisir dan teknologis.
+Lingkungan pembelajaran digital memiliki karakteristik unik yang membedakannya dari pengaturan tradisional. Murdoch dan House \cite{Murdoch2019} mengidentifikasi fenomena \textit{"ghost in the shell"}, yaitu perpaduan antara kecurangan berbasis kontrak (\textit{contract cheating}) dengan peniruan identitas daring. Fenomena ini menunjukkan evolusi kecurangan dari tindakan individual menjadi operasi yang lebih terorganisasi dan teknologis.
 
 Balderas dan Caballero-Hernández \cite{Balderas2020} dalam analisis mereka terhadap rekam jejak pembelajaran selama pandemi, menemukan bahwa pola perilaku mencurigakan dapat diidentifikasi melalui analisis temporal dan spasial aktivitas mahasiswa. Temuan ini memperkuat argumen bahwa data log aktivitas mengandung informasi yang kaya untuk deteksi kecurangan, asalkan dianalisis dengan metode yang tepat.
 
@@ -32,7 +32,7 @@ Balderas dan Caballero-Hernández \cite{Balderas2020} dalam analisis mereka terh
 
 \subsection{Evolusi dari Sistem Berbasis Aturan ke \textit{Machine Learning}}
 
-Pendekatan tradisional untuk deteksi kecurangan akademik umumnya mengandalkan sistem berbasis aturan (\textit{rule-based systems}) yang menggunakan ambang batas statis untuk mengidentifikasi perilaku mencurigakan. Huda dkk. \cite{article:rule_based_limitations} mengidentifikasi beberapa keterbatasan fundamental dari pendekatan ini: (1) rendahnya akurasi dalam menangani pola perilaku yang kompleks, (2) tingginya tingkat \textit{false positive} yang mengakibatkan banyak mahasiswa normal yang salah dituduh, (3) ketidakmampuan untuk beradaptasi dengan modus kecurangan yang berkembang, dan (4) kesulitan dalam menangani variasi kontekstual antar mata kuliah atau institusi.
+Pendekatan tradisional untuk deteksi kecurangan akademik umumnya mengandalkan sistem berbasis aturan (\textit{rule-based systems}) yang menggunakan ambang batas statis untuk mengidentifikasi perilaku mencurigakan. Huda dkk. \cite{article:rule_based_limitations} mengidentifikasi beberapa keterbatasan fundamental dari pendekatan ini: (1) rendahnya akurasi dalam menangani pola perilaku yang kompleks, (2) tingginya tingkat \textit{false positive} yang mengakibatkan banyak mahasiswa normal yang salah dituduh, (3) ketidakmampuan untuk beradaptasi dengan modus kecurangan yang berkembang, dan (4) kesulitan dalam menangani variasi kontekstual antarmata kuliah atau institusi.
 
 Sebagai respons terhadap keterbatasan ini, penelitian modern beralih ke pendekatan berbasis \textit{machine learning} yang menawarkan kemampuan adaptif dan akurasi yang lebih tinggi. Kamalov dkk. \cite{Kamalov2021} menunjukkan bahwa model pembelajaran mesin dapat mencapai akurasi deteksi hingga 94\% dalam mengidentifikasi kecurangan ujian, jauh melampaui kinerja sistem berbasis aturan tradisional.
 
@@ -40,9 +40,9 @@ Sebagai respons terhadap keterbatasan ini, penelitian modern beralih ke pendekat
 
 Pendekatan pembelajaran terawasi (\textit{supervised learning}) telah menjadi metode dominan dalam deteksi kecurangan akademik karena kemampuannya dalam mempelajari pola dari data berlabel. Zhou dan Jiao \cite{Zhou2022} dalam penelitian mereka tentang augmentasi data untuk deteksi kecurangan dalam asesmen skala besar, mendemonstrasikan efektivitas berbagai algoritma pembelajaran terawasi, termasuk \textit{Random Forest}, \textit{Support Vector Machine}, dan \textit{Gradient Boosting}.
 
-Alsabhan \cite{Alsabhan2023} mengembangkan pendekatan hibrida yang mengintegrasikan \textit{Long Short-Term Memory} (LSTM) dengan teknik pembelajaran mesin tradisional untuk mendeteksi kecurangan mahasiswa di perguruan tinggi. Penelitian ini menunjukkan bahwa kombinasi neural network dengan algoritma ensemble dapat meningkatkan akurasi deteksi hingga 96.8\%, dengan kemampuan khusus dalam menangkap pola temporal yang kompleks dalam perilaku mahasiswa.
+Alsabhan \cite{Alsabhan2023} mengembangkan pendekatan hibrida yang mengintegrasikan \textit{Long Short-Term Memory} (LSTM) dengan teknik pembelajaran mesin tradisional untuk mendeteksi kecurangan mahasiswa di perguruan tinggi. Penelitian ini menunjukkan bahwa kombinasi neural network dengan algoritma ensemble dapat meningkatkan akurasi deteksi hingga 96,8\%, dengan kemampuan khusus dalam menangkap pola temporal yang kompleks dalam perilaku mahasiswa.
 
-Chang dan Chang \cite{Chang2023} melakukan studi komprehensif tentang deteksi kolusi dalam ujian, dengan fokus pada teknik pembelajaran mesin dan representasi fitur. Mereka menemukan bahwa \textit{feature engineering} yang tepat, terutama yang berkaitan dengan matriks kesamaan dan analisis graf, dapat secara signifikan meningkatkan kemampuan deteksi kolaborasi tidak sah antar peserta ujian.
+Chang dan Chang \cite{Chang2023} melakukan studi komprehensif tentang deteksi kolusi dalam ujian, dengan fokus pada teknik pembelajaran mesin dan representasi fitur. Mereka menemukan bahwa \textit{feature engineering} yang tepat, terutama yang berkaitan dengan matriks kesamaan dan analisis graf, dapat secara signifikan meningkatkan kemampuan deteksi kolaborasi tidak sah antarpeserta ujian.
 
 \subsection{Deteksi Anomali dan \textit{Unsupervised Learning}}
 
@@ -57,21 +57,23 @@ Alexandron dkk. \cite{Alexandron2019} mengusulkan metode deteksi anomali tujuan 
 
 \subsection{Karakteristik Data Log Moodle}
 
-Moodle sebagai salah satu LMS yang paling banyak digunakan di dunia, menyediakan sistem logging yang komprehensif dan terstruktur. Mazza dan Dimitrova \cite{article:moodle_logs} dalam penelitian pionir mereka, menjelaskan bahwa log aktivitas Moodle mengandung informasi detail tentang setiap interaksi pengguna dengan platform, termasuk timestamp, tipe aktivitas, durasi, dan konteks akademik.
+Moodle sebagai salah satu LMS yang paling banyak digunakan di dunia, menyediakan sistem pencatatan log yang komprehensif dan terstruktur. Mazza dan Dimitrova \cite{article:moodle_logs} dalam penelitian pionir mereka, menjelaskan bahwa log aktivitas Moodle mengandung informasi detail tentang setiap interaksi pengguna dengan platform, termasuk timestamp, tipe aktivitas, durasi, dan konteks akademik.
 
-Data log Moodle memiliki beberapa karakteristik unik yang membuatnya sangat cocok untuk analisis \textit{machine learning}: (1) granularitas tinggi dalam perekaman aktivitas, (2) konsistensi format data across different modules, (3) integrasi dengan konteks pembelajaran yang memungkinkan analisis berbasis mata kuliah, dan (4) kemampuan tracking yang mencakup tidak hanya aktivitas ujian tetapi juga pola belajar secara keseluruhan.
+Data log Moodle memiliki beberapa karakteristik unik yang membuatnya sangat cocok untuk analisis \textit{machine learning}: (1) granularitas tinggi dalam perekaman aktivitas, (2) konsistensi format data lintas berbagai modul, (3) integrasi dengan konteks pembelajaran yang memungkinkan analisis berbasis mata kuliah, dan (4) kemampuan pelacakan yang mencakup tidak hanya aktivitas ujian tetapi juga pola belajar secara keseluruhan.
 
 \subsection{Implementasi Sistem Deteksi Terintegrasi}
 
-Moreno-Marcos dkk. \cite{MorenoMarcos2023} mengembangkan Statoodle, sebuah alat \textit{learning analytics} yang diintegrasikan langsung dengan Moodle untuk menganalisis aksi mahasiswa dan mencegah kecurangan. Sistem ini menggunakan pendekatan real-time monitoring yang dapat memberikan peringatan dini kepada pengawas ujian ketika terdeteksi aktivitas mencurigakan.
+Shatnawi dkk. \cite{Shatnawi2024} mengembangkan sistem deteksi kecurangan ujian elektronik yang terintegrasi langsung dengan platform Moodle LMS. Sistem ini menggunakan pendekatan pembelajaran mesin dengan metode statistik yang mampu mencapai akurasi 100\% dalam mendeteksi berbagai jenis anomali, termasuk deteksi waktu respons yang tidak wajar, pola navigasi mencurigakan, dan aktivitas yang tidak konsisten dengan perilaku normal mahasiswa.
 
-Pendekatan terintegrasi ini menawarkan beberapa keuntungan: (1) akses langsung ke data log tanpa perlu eksport manual, (2) kemampuan monitoring real-time, (3) integrasi dengan workflow existing di institusi pendidikan, dan (4) kemudahan dalam implementasi tindakan preventif atau responsif.
+Moreno-Marcos dkk. \cite{MorenoMarcos2023} mengembangkan Statoodle, sebuah alat \textit{learning analytics} yang diintegrasikan langsung dengan Moodle untuk menganalisis aksi mahasiswa dan mencegah kecurangan. Sistem ini menggunakan pendekatan pemantauan waktu nyata yang dapat memberikan peringatan dini kepada pengawas ujian ketika terdeteksi aktivitas mencurigakan.
+
+Pendekatan terintegrasi ini menawarkan beberapa keuntungan: (1) akses langsung ke data log tanpa perlu ekspor manual, (2) kemampuan pemantauan waktu nyata, (3) integrasi dengan alur kerja yang ada di institusi pendidikan, dan (4) kemudahan dalam implementasi tindakan preventif atau responsif.
 
 \subsection{Analisis Kesamaan dan Deteksi Kolusi}
 
-Salah satu kekuatan utama platform Moodle adalah kemampuannya dalam menyediakan data yang memungkinkan analisis kesamaan antar peserta. Chang dan Chang \cite{Chang2023} menunjukkan bahwa analisis matriks kesamaan berbasis jawaban, pola navigasi, dan timing dapat secara efektif mengidentifikasi kolusi antar mahasiswa.
+Salah satu kekuatan utama platform Moodle adalah kemampuannya dalam menyediakan data yang memungkinkan analisis kesamaan antarpeserta. Chang dan Chang \cite{Chang2023} menunjukkan bahwa analisis matriks kesamaan berbasis jawaban, pola navigasi, dan waktu dapat secara efektif mengidentifikasi kolusi antarmahasiswa.
 
-Teknik analisis graf juga dapat diterapkan pada data Moodle untuk mengidentifikasi cluster mahasiswa yang menunjukkan pola perilaku yang serupa secara tidak wajar. Pendekatan ini tidak hanya dapat mendeteksi kecurangan individual, tetapi juga mengungkap jaringan kolaborasi yang lebih luas.
+Teknik analisis graf juga dapat diterapkan pada data Moodle untuk mengidentifikasi kluster mahasiswa yang menunjukkan pola perilaku yang serupa secara tidak wajar. Pendekatan ini tidak hanya dapat mendeteksi kecurangan individual, tetapi juga mengungkap jaringan kolaborasi yang lebih luas.
 
 %-----------------------------------------------------------------------------%
 \section{\textit{Learning Analytics} dan \textit{Educational Data Mining}}
@@ -80,21 +82,21 @@ Teknik analisis graf juga dapat diterapkan pada data Moodle untuk mengidentifika
 
 \subsection{Evolusi \textit{Learning Analytics} sebagai Disiplin}
 
-\textit{Learning analytics} telah berkembang menjadi disiplin yang matang dalam dekade terakhir, dengan fokus pada penggunaan data pendidikan untuk meningkatkan proses dan outcome pembelajaran. Siemens dan Long (2011) mendefinisikan \textit{learning analytics} sebagai pengukuran, pengumpulan, analisis, dan pelaporan data tentang pelajar dan konteks mereka, dengan tujuan memahami dan mengoptimalkan pembelajaran serta lingkungan di mana pembelajaran tersebut terjadi.
+\textit{Learning analytics} telah berkembang menjadi disiplin yang matang dalam dekade terakhir, dengan fokus pada penggunaan data pendidikan untuk meningkatkan proses dan hasil pembelajaran. Siemens dan Long (2011) mendefinisikan \textit{learning analytics} sebagai pengukuran, pengumpulan, analisis, dan pelaporan data tentang pelajar dan konteks mereka, dengan tujuan memahami dan mengoptimalkan pembelajaran serta lingkungan tempat pembelajaran tersebut terjadi.
 
 Dalam konteks deteksi kecurangan, \textit{learning analytics} menyediakan kerangka metodologis dan teknologis yang komprehensif. Ferguson (2012) mengidentifikasi bahwa pendekatan \textit{learning analytics} tidak hanya fokus pada deteksi masalah, tetapi juga pada pemahaman mendalam tentang pola perilaku belajar yang dapat membantu dalam pencegahan proaktif.
 
 \subsection{Aplikasi \textit{Educational Data Mining} untuk Deteksi Anomali}
 
-\textit{Educational Data Mining} (EDM) sebagai sub-bidang dari \textit{learning analytics} menyediakan teknik-teknik khusus untuk ekstraksi pola dari data pendidikan. Romero dan Ventura (2020) dalam review komprehensif mereka, mengidentifikasi bahwa teknik EDM telah berkembang dari analisis deskriptif sederhana menjadi model prediktif yang kompleks.
+\textit{Educational Data Mining} (EDM) sebagai subbidang dari \textit{learning analytics} menyediakan teknik-teknik khusus untuk ekstraksi pola dari data pendidikan. Romero dan Ventura (2020) dalam ulasan komprehensif mereka, mengidentifikasi bahwa teknik EDM telah berkembang dari analisis deskriptif sederhana menjadi model prediktif yang kompleks.
 
-Dalam konteks deteksi kecurangan, EDM menawarkan beberapa teknik yang relevan: (1) \textit{sequence mining} untuk menganalisis pola navigasi, (2) \textit{clustering} untuk mengidentifikasi grup mahasiswa dengan perilaku serupa, (3) \textit{association rule mining} untuk menemukan hubungan antar aktivitas, dan (4) \textit{classification} untuk membedakan perilaku normal dan mencurigakan.
+Dalam konteks deteksi kecurangan, EDM menawarkan beberapa teknik yang relevan: (1) \textit{sequence mining} untuk menganalisis pola navigasi, (2) \textit{clustering} untuk mengidentifikasi grup mahasiswa dengan perilaku serupa, (3) \textit{association rule mining} untuk menemukan hubungan antaraktivitas, dan (4) \textit{classification} untuk membedakan perilaku normal dan mencurigakan.
 
 \subsection{Integrasi Perspektif Pedagogis dan Teknologis}
 
 Aspek penting dalam pengembangan sistem deteksi kecurangan adalah integrasi antara perspektif pedagogis dan teknologis. Gašević dkk. (2015) menekankan bahwa sistem \textit{learning analytics} yang efektif harus mempertimbangkan tidak hanya aspek teknis deteksi, tetapi juga implikasi pedagogis dan etis dari implementasi sistem tersebut.
 
-Dalam konteks deteksi kecurangan, hal ini berarti sistem harus dirancang tidak hanya untuk mengidentifikasi pelanggaran, tetapi juga untuk mendukung proses pembelajaran yang fair dan mendorong integritas akademik melalui pendekatan yang konstruktif rather than purely punitive.
+Dalam konteks deteksi kecurangan, hal ini berarti sistem harus dirancang tidak hanya untuk mengidentifikasi pelanggaran, tetapi juga untuk mendukung proses pembelajaran yang adil dan mendorong integritas akademik melalui pendekatan yang konstruktif daripada sekadar bersifat hukuman.
 
 %-----------------------------------------------------------------------------%
 \section{Teknik Ensemble dan Optimasi Model}
@@ -103,21 +105,21 @@ Dalam konteks deteksi kecurangan, hal ini berarti sistem harus dirancang tidak h
 
 \subsection{Pendekatan \textit{Ensemble Learning}}
 
-\textit{Ensemble learning} telah terbukti sebagai salah satu pendekatan paling efektif dalam meningkatkan akurasi dan robustness model \textit{machine learning}. Dalam konteks deteksi kecurangan akademik, teknik ensemble menawarkan keuntungan khusus karena kemampuannya dalam menggabungkan kekuatan berbagai algoritma untuk menangani kompleksitas dan variasi pola kecurangan.
+\textit{Ensemble learning} telah terbukti sebagai salah satu pendekatan paling efektif dalam meningkatkan akurasi dan ketahanan model \textit{machine learning}. Dalam konteks deteksi kecurangan akademik, teknik ensemble menawarkan keuntungan khusus karena kemampuannya dalam menggabungkan kekuatan berbagai algoritma untuk menangani kompleksitas dan variasi pola kecurangan.
 
-Zhou (2012) dalam "Ensemble Methods: Foundations and Algorithms" menjelaskan bahwa kekuatan ensemble terletak pada prinsip "diversity and accuracy", di mana kombinasi model yang beragam namun akurat dapat menghasilkan performa yang superior dibandingkan model individual. Dalam konteks deteksi kecurangan, diversity ini sangat penting karena berbagai jenis kecurangan mungkin lebih baik dideteksi oleh algoritma yang berbeda.
+Zhou (2012) dalam "Ensemble Methods: Foundations and Algorithms" menjelaskan bahwa kekuatan ensemble terletak pada prinsip "diversity and accuracy", yaitu kombinasi model yang beragam namun akurat dapat menghasilkan kinerja yang superior dibandingkan model individual. Dalam konteks deteksi kecurangan, keberagaman ini sangat penting karena berbagai jenis kecurangan mungkin lebih baik dideteksi oleh algoritma yang berbeda.
 
-\subsection{Strategi Integrasi Multi-Algoritma}
+\subsection{Strategi Integrasi Multialgoritma}
 
-Penelitian terkini menunjukkan bahwa integrasi strategis antara model pembelajaran terawasi dengan teknik deteksi anomali dapat menghasilkan sistem yang lebih robust. Aggarwal (2017) dalam "Outlier Analysis" menjelaskan bahwa kombinasi supervised dan unsupervised learning dapat mengatasi keterbatasan masing-masing pendekatan: supervised learning memberikan akurasi tinggi pada pola yang dikenal, sementara unsupervised learning dapat mendeteksi anomali baru yang belum pernah ditemui sebelumnya.
+Penelitian terkini menunjukkan bahwa integrasi strategis antara model pembelajaran terawasi dengan teknik deteksi anomali dapat menghasilkan sistem yang lebih kuat. Nadeem dkk. \cite{Nadeem2024} dalam penelitian mereka tentang teknik pembelajaran mesin canggih untuk deteksi penipuan keuangan, menunjukkan bahwa kombinasi supervised dan unsupervised learning dapat mengatasi keterbatasan masing-masing pendekatan: supervised learning memberikan akurasi tinggi pada pola yang dikenal, sementara unsupervised learning dapat mendeteksi anomali baru yang belum pernah ditemui sebelumnya.
 
-Dalam implementasi praktis, strategi ensemble dapat mencakup: (1) \textit{voting classifiers} yang menggabungkan prediksi multiple models, (2) \textit{stacking} yang menggunakan meta-learner untuk mengoptimalkan kombinasi, (3) \textit{bagging} untuk mengurangi variance, dan (4) \textit{boosting} untuk mengurangi bias.
+Dalam implementasi praktis, strategi ensemble dapat mencakup: (1) \textit{voting classifiers} yang menggabungkan prediksi beberapa model, (2) \textit{stacking} yang menggunakan meta-learner untuk mengoptimalkan kombinasi, (3) \textit{bagging} untuk mengurangi varians, dan (4) \textit{boosting} untuk mengurangi bias.
 
-\subsection{Optimasi Threshold dan Hyperparameter}
+\subsection{Optimasi Ambang Batas dan Hiperparameter}
 
-Optimasi threshold merupakan aspek kritis dalam sistem deteksi kecurangan karena trade-off antara false positive dan false negative memiliki implikasi praktis yang signifikan. Threshold yang terlalu rendah akan menghasilkan banyak false positive yang dapat merugikan mahasiswa innocent, sementara threshold yang terlalu tinggi dapat membiarkan kecurangan lolos dari deteksi.
+Optimasi ambang batas merupakan aspek kritis dalam sistem deteksi kecurangan karena pertukaran antara false positive dan false negative memiliki implikasi praktis yang signifikan. Ambang batas yang terlalu rendah akan menghasilkan banyak false positive yang dapat merugikan mahasiswa yang tidak bersalah, sementara ambang batas yang terlalu tinggi dapat membiarkan kecurangan lolos dari deteksi.
 
-Penelitian menunjukkan bahwa optimasi threshold sebaiknya dilakukan dengan mempertimbangkan cost-sensitive learning, di mana cost dari different types of errors diperhitungkan secara eksplisit. Dalam konteks akademik, cost dari false positive (menuduh mahasiswa innocent) mungkin berbeda dengan cost dari false negative (membiarkan cheater lolos).
+Niu dkk. \cite{Niu2025} dalam ulasan sistematis tentang metodologi pembelajaran mesin yang efektif menunjukkan bahwa optimasi ambang batas sebaiknya dilakukan dengan mempertimbangkan cost-sensitive learning, yaitu \textit{cost} dari berbagai jenis kesalahan diperhitungkan secara eksplisit. Dalam konteks akademik, \textit{cost} dari false positive (menuduh mahasiswa yang tidak bersalah) mungkin berbeda dengan \textit{cost} dari false negative (membiarkan pelanggar akademik lolos).
 
 %-----------------------------------------------------------------------------%
 \section{Analisis Matriks Kesamaan dan \textit{Graph-Based Detection}}
@@ -126,21 +128,21 @@ Penelitian menunjukkan bahwa optimasi threshold sebaiknya dilakukan dengan mempe
 
 \subsection{Teori Matriks Kesamaan dalam Deteksi Kolusi}
 
-Analisis matriks kesamaan telah menjadi teknik fundamental dalam deteksi kolaborasi tidak sah dalam konteks akademik. Konsep ini didasarkan pada premis bahwa mahasiswa yang melakukan kolusi akan menunjukkan pola perilaku yang tidak natural similar, baik dalam hal jawaban, pola navigasi, maupun timing.
+Analisis matriks kesamaan telah menjadi teknik fundamental dalam deteksi kolaborasi tidak sah dalam konteks akademik. Konsep ini didasarkan pada premis bahwa mahasiswa yang melakukan kolusi akan menunjukkan pola perilaku yang tidak natural serupa, baik dalam hal jawaban, pola navigasi, maupun waktu.
 
-Similarity measures yang umum digunakan dalam konteks ini meliputi: (1) \textit{Cosine similarity} untuk mengukur kemiripan vektor fitur, (2) \textit{Jaccard similarity} untuk data kategorikal, (3) \textit{Pearson correlation} untuk hubungan linear, dan (4) \textit{Edit distance} untuk sequence data. Pemilihan measure yang tepat sangat bergantung pada jenis data dan karakteristik kecurangan yang ingin dideteksi.
+Ukuran kesamaan yang umum digunakan dalam konteks ini meliputi: (1) \textit{Cosine similarity} untuk mengukur kemiripan vektor fitur, (2) \textit{Jaccard similarity} untuk data kategorikal, (3) \textit{Pearson correlation} untuk hubungan linear, dan (4) \textit{Edit distance} untuk data sekuensial. Pemilihan ukuran yang tepat sangat bergantung pada jenis data dan karakteristik kecurangan yang ingin dideteksi.
 
 \subsection{Analisis Graf dan \textit{Network Detection}}
 
-Pendekatan berbasis graf menawarkan perspektif yang powerful untuk memahami pola kolaborasi dalam skala yang lebih besar. Dalam representasi graf, mahasiswa dapat dimodelkan sebagai nodes, sementara edges merepresentasikan tingkat similarity atau suspected collaboration.
+Pendekatan berbasis graf menawarkan perspektif yang kuat untuk memahami pola kolaborasi dalam skala yang lebih besar. Dalam representasi graf, mahasiswa dapat dimodelkan sebagai simpul, sementara sisi merepresentasikan tingkat kesamaan atau kolaborasi yang dicurigai.
 
-Teknik analisis graf yang relevan meliputi: (1) \textit{community detection} untuk mengidentifikasi cluster mahasiswa yang berkolaborasi, (2) \textit{centrality measures} untuk mengidentifikasi individuals yang menjadi hub dalam jaringan kolaborasi, (3) \textit{clustering coefficient} untuk mengukur tingkat interconnectedness, dan (4) \textit{modularity analysis} untuk memvalidasi struktur komunitas.
+Teknik analisis graf yang relevan meliputi: (1) \textit{community detection} untuk mengidentifikasi kluster mahasiswa yang berkolaborasi, (2) \textit{centrality measures} untuk mengidentifikasi individu yang menjadi pusat dalam jaringan kolaborasi, (3) \textit{clustering coefficient} untuk mengukur tingkat interkoneksi, dan (4) \textit{modularity analysis} untuk memvalidasi struktur komunitas.
 
-\subsection{Temporal Analysis dan \textit{Dynamic Networks}}
+\subsection{Analisis Temporal dan \textit{Dynamic Networks}}
 
-Aspek temporal dalam analisis kesamaan memberikan dimensi tambahan yang penting. Kecurangan seringkali menunjukkan pola temporal yang karakteristik, seperti simultaneous submission, synchronized navigation patterns, atau coordinated answer changes.
+Aspek temporal dalam analisis kesamaan memberikan dimensi tambahan yang penting. Kecurangan seringkali menunjukkan pola temporal yang karakteristik, seperti pengiriman jawaban secara bersamaan, pola navigasi yang sinkron, atau perubahan jawaban yang terkoordinasi.
 
-Dynamic network analysis dapat mengungkap pola kolaborasi yang berkembang selama ujian berlangsung, memberikan insight yang tidak dapat diperoleh dari analisis statis. Hal ini sangat relevan untuk ujian yang berlangsung dalam periode waktu yang extended atau untuk menganalisis pola kecurangan across multiple sessions.
+Analisis jaringan dinamis dapat mengungkap pola kolaborasi yang berkembang selama ujian berlangsung, memberikan wawasan yang tidak dapat diperoleh dari analisis statis. Hal ini sangat relevan untuk ujian yang berlangsung dalam periode waktu yang diperpanjang atau untuk menganalisis pola kecurangan lintas beberapa sesi.
 
 %-----------------------------------------------------------------------------%
 \section{Evaluasi dan Validasi Sistem Deteksi}
@@ -149,21 +151,21 @@ Dynamic network analysis dapat mengungkap pola kolaborasi yang berkembang selama
 
 \subsection{Metrik Evaluasi dalam Konteks Akademik}
 
-Evaluasi sistem deteksi kecurangan memerlukan pertimbangan khusus karena karakteristik unik dari domain akademik. Metrik evaluasi standar seperti accuracy, precision, recall, dan F1-score tetap relevan, namun interpretasi dan prioritas mereka harus disesuaikan dengan konteks.
+Evaluasi sistem deteksi kecurangan memerlukan pertimbangan khusus karena karakteristik unik dari domain akademik. Metrik evaluasi standar seperti akurasi, presisi, recall, dan F1-score tetap relevan, namun interpretasi dan prioritas mereka harus disesuaikan dengan konteks.
 
-Dalam setting akademik, false positive (menuduh mahasiswa innocent) memiliki implikasi yang sangat serius, termasuk damage reputasi, stress psikologis, dan potential legal consequences. Oleh karena itu, precision menjadi metrik yang sangat critical. Di sisi lain, false negative (membiarkan cheater lolos) dapat merusak fairness sistem evaluasi dan mengancam integritas akademik secara keseluruhan.
+Dalam pengaturan akademik, false positive (menuduh mahasiswa yang tidak bersalah) memiliki implikasi yang sangat serius, termasuk kerusakan reputasi, stres psikologis, dan konsekuensi hukum yang potensial. Oleh karena itu, presisi menjadi metrik yang sangat kritis. Di sisi lain, false negative (membiarkan pelanggar akademik lolos) dapat merusak keadilan sistem evaluasi dan mengancam integritas akademik secara keseluruhan.
 
 \subsection{Validasi Lintas Domain dan Generalisasi}
 
-Salah satu tantangan utama dalam pengembangan sistem deteksi kecurangan adalah memastikan generalisasi across different courses, institutions, dan contexts. Model yang trained pada satu dataset mungkin tidak perform well pada context yang berbeda karena variasi dalam student behavior, course structure, atau examination format.
+Salah satu tantangan utama dalam pengembangan sistem deteksi kecurangan adalah memastikan generalisasi lintas mata kuliah, institusi, dan konteks yang berbeda. Model yang dilatih pada satu set data mungkin tidak berkinerja baik pada konteks yang berbeda karena variasi dalam perilaku mahasiswa, struktur mata kuliah, atau format ujian.
 
-Cross-validation strategies yang robust perlu mempertimbangkan not only random splits, tetapi juga stratification berdasarkan course type, student level, atau temporal factors. Hal ini penting untuk memastikan bahwa model dapat generalize ke situasi real-world yang beragam.
+Strategi validasi silang yang kuat perlu mempertimbangkan tidak hanya pembagian acak, tetapi juga stratifikasi berdasarkan jenis mata kuliah, tingkat mahasiswa, atau faktor temporal. Hal ini penting untuk memastikan bahwa model dapat menggeneralisasi ke situasi dunia nyata yang beragam.
 
-\subsection{Aspek Etis dan \textit{Fairness}}
+\subsection{Aspek Etis dan Keadilan}
 
-Implementasi sistem deteksi kecurangan otomatis menimbulkan berbagai pertanyaan etis yang perlu dipertimbangkan secara serius. Fairness algorithm menjadi isu yang critical, terutama terkait dengan potential bias terhadap certain groups of students.
+Implementasi sistem deteksi kecurangan otomatis menimbulkan berbagai pertanyaan etis yang perlu dipertimbangkan secara serius. Keadilan algoritma menjadi isu yang kritis, terutama terkait dengan bias potensial terhadap kelompok mahasiswa tertentu.
 
-Aspek etis yang perlu dipertimbangkan meliputi: (1) transparency dalam decision-making process, (2) explainability dari predictions yang dihasilkan, (3) fairness across different demographic groups, (4) privacy protection dalam data handling, dan (5) human oversight dalam proses pengambilan keputusan final.
+Aspek etis yang perlu dipertimbangkan meliputi: (1) transparansi dalam proses pengambilan keputusan, (2) dapat dijelaskannya prediksi yang dihasilkan, (3) keadilan lintas kelompok demografis yang berbeda, (4) perlindungan privasi dalam penanganan data, dan (5) pengawasan manusia dalam proses pengambilan keputusan final.
 
 %-----------------------------------------------------------------------------%
 \section{Kesenjangan Penelitian dan Peluang Pengembangan}
@@ -172,23 +174,23 @@ Aspek etis yang perlu dipertimbangkan meliputi: (1) transparency dalam decision-
 
 \subsection{Identifikasi Kesenjangan dalam Literatur}
 
-Meskipun telah terdapat banyak penelitian dalam bidang deteksi kecurangan akademik, beberapa kesenjangan masih dapat diidentifikasi: (1) kurangnya penelitian yang fokus pada integrasi comprehensif antara multiple techniques, (2) limited research pada optimization threshold untuk minimizing false positives dalam konteks high-stakes academic assessment, (3) insufficient attention pada temporal dynamics dan evolusi pola kecurangan, dan (4) kurangnya standardized benchmarks untuk comparative evaluation.
+Meskipun telah terdapat banyak penelitian dalam bidang deteksi kecurangan akademik, beberapa kesenjangan masih dapat diidentifikasi: (1) kurangnya penelitian yang fokus pada integrasi komprehensif antara beberapa teknik, (2) penelitian terbatas pada optimasi ambang batas untuk meminimalkan false positive dalam konteks asesmen akademik berisiko tinggi, (3) perhatian yang tidak memadai pada dinamika temporal dan evolusi pola kecurangan, dan (4) kurangnya standar pembanding untuk evaluasi komparatif.
 
 \subsection{Peluang untuk Kontribusi Novel}
 
-Penelitian ini memiliki peluang untuk memberikan kontribusi dalam beberapa area: (1) pengembangan framework ensemble yang mengintegrasikan supervised learning, anomaly detection, dan similarity analysis secara optimal, (2) innovation dalam feature engineering berbasis similarity matrices yang dapat capture complex collaboration patterns, (3) development of context-aware threshold optimization yang dapat adapt ke different academic settings, dan (4) creation of comprehensive evaluation framework yang mempertimbangkan both technical performance dan practical implications.
+Penelitian ini memiliki peluang untuk memberikan kontribusi dalam beberapa area: (1) pengembangan kerangka kerja ensemble yang mengintegrasikan supervised learning, deteksi anomali, dan analisis kesamaan secara optimal, (2) inovasi dalam feature engineering berbasis matriks kesamaan yang dapat menangkap pola kolaborasi yang kompleks, (3) pengembangan optimasi ambang batas yang sadar konteks yang dapat beradaptasi dengan pengaturan akademik yang berbeda, dan (4) penciptaan kerangka kerja evaluasi komprehensif yang mempertimbangkan kinerja teknis dan implikasi praktis.
 
 %-----------------------------------------------------------------------------%
 \section{Ringkasan}
 \label{sec:ringkasanBab2}
 %-----------------------------------------------------------------------------%
 
-Tinjauan pustaka ini menunjukkan bahwa deteksi kecurangan akademik dalam pembelajaran daring telah berkembang dari sistem berbasis aturan sederhana menjadi implementasi \textit{machine learning} yang sophisticated. Integrasi berbagai teknik analitik, termasuk \textit{supervised learning}, deteksi anomali, analisis matriks kesamaan, dan pendekatan ensemble, menawarkan potensi untuk mengembangkan sistem deteksi yang lebih akurat dan robust.
+Tinjauan pustaka ini menunjukkan bahwa deteksi kecurangan akademik dalam pembelajaran daring telah berkembang dari sistem berbasis aturan sederhana menjadi implementasi \textit{machine learning} yang canggih. Integrasi berbagai teknik analitik, termasuk \textit{supervised learning}, deteksi anomali, analisis matriks kesamaan, dan pendekatan ensemble, menawarkan potensi untuk mengembangkan sistem deteksi yang lebih akurat dan kuat.
 
-Penelitian-penelitian yang direview menunjukkan bahwa tidak ada single technique yang optimal untuk all types of cheating behavior. Sebaliknya, pendekatan integrated yang menggabungkan kekuatan different algorithms sambil mitigating weaknesses mereka masing-masing menunjukkan hasil yang paling promising.
+Penelitian-penelitian yang diulas menunjukkan bahwa tidak ada teknik tunggal yang optimal untuk semua jenis perilaku kecurangan. Sebaliknya, pendekatan terintegrasi yang menggabungkan kekuatan algoritma yang berbeda sambil memitigasi kelemahan masing-masing menunjukkan hasil yang paling menjanjikan.
 
-Platform Moodle, dengan sistem logging yang comprehensive dan integration capabilities yang baik, menyediakan environment yang ideal untuk implementasi advanced detection systems. Data log yang kaya dan terstruktur memungkinkan extraction of diverse features yang dapat capture various aspects of student behavior.
+Platform Moodle, dengan sistem pencatatan log yang komprehensif dan kemampuan integrasi yang baik, menyediakan lingkungan yang ideal untuk implementasi sistem deteksi canggih. Data log yang kaya dan terstruktur memungkinkan ekstraksi fitur beragam yang dapat menangkap berbagai aspek perilaku mahasiswa.
 
-Namun, implementasi praktis sistem deteksi otomatis juga menimbulkan challenges terkait fairness, ethics, dan practical deployment. Oleh karena itu, pengembangan sistem yang tidak hanya technically sound tetapi juga ethically responsible dan practically deployable menjadi fokus penting untuk penelitian selanjutnya.
+Namun, implementasi praktis sistem deteksi otomatis juga menimbulkan tantangan terkait keadilan, etika, dan penerapan praktis. Oleh karena itu, pengembangan sistem yang tidak hanya andal secara teknis tetapi juga bertanggung jawab secara etis dan dapat diterapkan secara praktis menjadi fokus penting untuk penelitian selanjutnya.
 
-Penelitian ini bertujuan untuk mengisi beberapa kesenjangan yang diidentifikasi dengan mengembangkan framework komprehensif yang mengintegrasikan multiple detection techniques sambil mempertimbangkan practical constraints dan ethical considerations dalam context akademik.
+Penelitian ini bertujuan untuk mengisi beberapa kesenjangan yang diidentifikasi dengan mengembangkan kerangka kerja komprehensif yang mengintegrasikan beberapa teknik deteksi sambil mempertimbangkan kendala praktis dan pertimbangan etis dalam konteks akademik.

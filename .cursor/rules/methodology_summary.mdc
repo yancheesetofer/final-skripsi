@@ -1,0 +1,27 @@
+---
+description: 
+globs: *thesis.tex
+alwaysApply: false
+---
+---
+description: "Summary of the final methodology for writing Bab 3. Describes the data pipeline (Modules I-IV) and the model training process."
+globs: ["*thesis.tex"]
+alwaysApply: false
+ruleType: autoAttached
+---
+# Methodology for Bab 3
+
+## Data Pipeline
+The process was structured into four main modules:
+1.  **Module I (Data Ingestion):** Loaded raw artificial data CSVs.
+2.  **Module II (Core Preprocessing):** Cleaned logs, unified timestamps, and aggregated events into user-quiz attempt sessions.
+3.  **Module III (Feature Engineering):** Extracted features organized into four categories:
+    - Intra-Attempt Basic Features (e.g., total duration).
+    - Intra-Attempt Sequential Features (e.g., navigation sequence).
+    - Inter-Attempt Similarity Features (e.g., Levenshtein distance for navigation, Jaccard for answers).
+    - Comparative Behavioral Features (Z-scores against quiz average).
+4.  **Module IV (Feature Post-Processing):** Handled missing values, applied StandardScaler, and checked for multicollinearity using VIF.
+## Model Training & Evaluation (`enhanced_model.py`)
+- **Models:** Trained Gradient Boosting, Random Forest, SVM, and a Neural Network. An ensemble of these was the final model.
+- **Evaluation:** Used standard metrics (Precision, Recall, F1, Accuracy) on a dedicated test set.
+- **Final Model:** The Random Forest model (`model_Random Forest.joblib`) was selected as the best-performing and most interpretable model.

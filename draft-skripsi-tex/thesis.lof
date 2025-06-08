@@ -1,0 +1,21 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Pipeline Sistem Deteksi Kecurangan Berbasis AI}}{19}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Alur Data dalam Pipeline Deteksi Kecurangan}}{27}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Proses Feature Engineering dari Raw Data hingga 8 Fitur Stabil}}{41}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Arsitektur Model Ensemble untuk Deteksi Kecurangan}}{47}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Arsitektur Neural Network untuk Deteksi Kecurangan}}{50}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Proses Pelatihan dan Evaluasi Model}}{52}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Proses Penyetelan Hyperparameter}}{56}{figure.caption.24}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Confusion Matrix Model Random Forest}}{66}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Kurva ROC dan Precision-Recall Model Random Forest}}{67}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Kinerja Model Machine Learning}}{67}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Feature Importance Analysis Model Random Forest}}{68}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Matriks Korelasi Antar Fitur Deteksi}}{70}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Distribusi Probabilitas Kecurangan pada Data Riil}}{71}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Analisis Distribusi Repeat Offenders}}{73}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Analisis Ujian dengan Tingkat Kecurangan Tinggi}}{73}{figure.caption.36}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }

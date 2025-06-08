@@ -910,15 +910,6 @@ Proses penyetelan hyperparameter yang terstruktur ini menghasilkan konfigurasi m
 %-----------------------------------------------------------------------------%
 Evaluasi kinerja model merupakan tahap penting untuk memastikan bahwa sistem deteksi kecurangan mampu mengidentifikasi pola \textit{non-compliance} secara akurat dan dapat diandalkan. Evaluasi dilakukan secara kuantitatif menggunakan data uji artifisial yang telah dilabeli, serta secara kualitatif melalui studi kasus dan visualisasi pada data riil yang tidak berlabel. Pendekatan evaluasi ini memberikan gambaran menyeluruh mengenai performa model dari berbagai aspek, baik dari segi metrik numerik maupun interpretabilitas pola yang terdeteksi.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figures/similarity_network.pdf}
-    \caption{Jaringan Similaritas Antar Pengguna}
-    \label{fig:similarity_network}
-\end{figure}
-
-Gambar \ref{fig:similarity_network} menunjukkan hasil analisis jaringan similaritas antar pengguna yang digunakan untuk mendeteksi kelompok kecurangan. Visualisasi ini mengungkapkan tiga cluster pengguna (ditandai dengan warna merah, oranye, dan ungu) yang memiliki tingkat similaritas sangat tinggi dalam pola navigasi, waktu, dan jawaban. Setiap cluster merupakan indikasi kuat adanya koordinasi kecurangan. Sementara itu, pengguna normal (warna biru muda) menunjukkan koneksi yang lebih lemah dan terdistribusi secara lebih merata, mencerminkan perilaku independen yang wajar. Ketebalan garis menunjukkan kekuatan similaritas, dengan koneksi yang lebih tebal mengindikasikan tingkat kemiripan yang lebih tinggi.
-
 %-----------------------------------------------------------------------------%
 \subsection{Evaluasi Kuantitatif (pada Data Uji Artifisial)}
 \label{sec:evaluasiKuantitatifDataUjiArtifisial}
@@ -933,7 +924,7 @@ Model-model yang dilatih menunjukkan performa yang sangat baik pada data uji:
 \caption{Performa Model pada Data Uji (800 Sampel)}
 \label{tabel:performaModelUji}
 \begin{tabular}{|l|c|c|c|c|}
-\hline
+\hline 
 \textbf{Model} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Accuracy} \\
 \hline
 Random Forest & 0.99 & 0.97 & 0.98 & 98.33\% \\

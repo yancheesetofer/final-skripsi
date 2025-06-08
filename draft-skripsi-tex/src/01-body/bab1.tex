@@ -17,9 +17,9 @@ Dalam konteks ini, data log aktivitas Moodle menjadi sumber informasi yang sanga
 
 Pendekatan konvensional untuk mendeteksi kecurangan umumnya mengandalkan pemeriksaan manual atau sistem berbasis aturan sederhana. Namun, metode ini memiliki keterbatasan serius, seperti skalabilitas rendah dan kecenderungan menghasilkan \textit{false positives} \cite{MorenoMarcos2023}. 
 
-Sebagai solusi, penelitian ini mengusulkan pendekatan berbasis \textit{machine learning} yang mengintegrasikan beragam teknik analitik. Kerangka kerja yang dikembangkan berfokus pada model pembelajaran terawasi (\textit{supervised learning}) seperti \textit{Gradient Boosting}, \textit{Random Forest}, dan \textit{Neural Network}, yang diperkuat dengan metode deteksi anomali seperti \textit{Isolation Forest} dan \textit{Local Outlier Factor} sebagai teknik komplementer. Pendekatan ensemble ini dilengkapi dengan analisis matriks kesamaan (\textit{similarity matrices}) yang mencakup pola navigasi, waktu pengerjaan, dan jawaban mahasiswa, serta optimasi ambang batas (\textit{threshold optimization}) untuk meningkatkan akurasi deteksi.
+Sebagai solusi, penelitian ini mengusulkan pendekatan berbasis \textit{machine learning} yang mengintegrasikan beragam teknik analitik. Kerangka kerja yang dikembangkan berfokus pada model pembelajaran terawasi (\textit{supervised learning}) seperti \textit{Gradient Boosting}, \textit{Random Forest}, \textit{Support Vector Machine} (SVM), dan \textit{Neural Network}, yang diperkuat dengan metode deteksi anomali seperti \textit{Isolation Forest} dan \textit{Local Outlier Factor} sebagai teknik komplementer. Pendekatan \textit{ensemble} ini dilengkapi dengan analisis matriks kesamaan (\textit{similarity matrices}) yang mencakup pola navigasi, waktu pengerjaan, dan jawaban mahasiswa, serta optimasi ambang batas (\textit{threshold optimization}) untuk meningkatkan akurasi deteksi.
 
-Integrasi berbagai teknik ini memungkinkan sistem mengenali pola-pola mencurigakan dengan lebih akurat, seperti yang ditunjukkan dalam penelitian sebelumnya menggunakan data MOOC \cite{Alexandron2019}. Penggunaan matriks kesamaan dan analisis graf juga terbukti efektif dalam mengungkap kolusi antar mahasiswa \cite{Chang2023}. Dengan demikian, penelitian ini berkontribusi pada pengembangan sistem deteksi kecurangan yang lebih komprehensif dan adaptif untuk platform Moodle.
+Implementasi sistem yang dikembangkan telah menunjukkan hasil yang sangat menjanjikan. Model \textit{Random Forest} dan SVM mencapai akurasi 98\% dengan presisi sempurna (1.00) pada dataset uji sintesis, sementara aplikasi pada data riil Moodle Fasilkom UI berhasil mengidentifikasi 131.479 percobaan ujian (29,43\% dari 446.720 percobaan) dengan indikasi kecurangan berkepercayaan tinggi. Analisis \textit{feature importance} mengungkap bahwa fitur kesamaan navigasi memberikan kontribusi paling dominan (60,5\%) dalam deteksi, diikuti oleh fitur temporal (25,4\%). Dengan demikian, penelitian ini berkontribusi pada pengembangan sistem deteksi kecurangan yang lebih komprehensif dan adaptif untuk platform Moodle dengan validasi empiris yang kuat.
 
 %-----------------------------------------------------------------------------%
 \section{Permasalahan}
@@ -47,11 +47,11 @@ Berdasarkan permasalahan yang telah diuraikan, penelitian ini berusaha menjawab 
 %-----------------------------------------------------------------------------%
 Untuk memastikan penelitian ini tetap terfokus dan terarah, beberapa batasan dan ruang lingkup berikut diterapkan:
 \begin{enumerate}
-    \item Lingkup Data: Data yang digunakan dalam penelitian ini dibatasi pada log aktivitas pengguna dari platform Moodle di lingkungan Fasilkom UI,dengan model dilatih menggunakan data artifisial yang karakteristiknya divalidasi terhadap data riil, dan kemudian diterapkan pada data log riil Fasilkom UI untuk analisis.
+    \item Lingkup Data: Data yang digunakan dalam penelitian ini dibatasi pada log aktivitas pengguna dari platform Moodle di lingkungan Fasilkom UI, dengan model dilatih menggunakan dataset artifisial berjumlah 800 sampel yang karakteristiknya divalidasi terhadap data riil, dan kemudian diterapkan pada 446.720 percobaan ujian riil dari data log Fasilkom UI untuk analisis.
     \item Jenis Kecurangan: Deteksi difokuskan pada pola perilaku mencurigakan yang tercermin dalam log aktivitas, matriks kesamaan, dan interaksi antar pengguna.
-    \item Metode dan Algoritma: Pendekatan utama menggunakan model pembelajaran terawasi dengan ensemble, didukung metode deteksi anomali sebagai komplemen.
+    \item Metode dan Algoritma: Pendekatan utama menggunakan model pembelajaran terawasi dengan \textit{ensemble} (\textit{Random Forest}, SVM, \textit{Neural Network}, \textit{Gradient Boosting}), didukung metode deteksi anomali sebagai komplemen.
     \item Mode Implementasi: Sistem deteksi diimplementasikan dalam modus \textit{offline} untuk analisis retrospektif.
-    \item Evaluasi: Kinerja sistem dievaluasi menggunakan metrik standar seperti presisi, sensitivitas, dan skor F1.
+    \item Evaluasi: Kinerja sistem dievaluasi menggunakan metrik standar seperti presisi, \textit{recall}, skor F1, dan \textit{Area Under Curve} (AUC) ROC.
 \end{enumerate}
 
 %-----------------------------------------------------------------------------%
@@ -60,7 +60,7 @@ Untuk memastikan penelitian ini tetap terfokus dan terarah, beberapa batasan dan
 %-----------------------------------------------------------------------------%
 Penelitian ini memiliki tujuan utama untuk mengembangkan sistem deteksi kecurangan yang komprehensif berbasis analisis log aktivitas Moodle. Secara terperinci, tujuan penelitian ini adalah:
 \begin{enumerate}
-    \item Merancang dan mengimplementasikan kerangka kerja deteksi yang mengintegrasikan model pembelajaran terawasi dengan ensemble, didukung metode deteksi anomali, analisis matriks kesamaan, dan optimasi ambang batas.
+    \item Merancang dan mengimplementasikan kerangka kerja deteksi yang mengintegrasikan model pembelajaran terawasi dengan \textit{ensemble}, didukung metode deteksi anomali, analisis matriks kesamaan, dan optimasi ambang batas.
     \item Mengembangkan dan mengevaluasi fitur-fitur baru berbasis matriks kesamaan untuk meningkatkan akurasi deteksi.
     \item Melakukan pengujian menyeluruh terhadap kinerja sistem menggunakan data log Moodle Fasilkom UI.
     \item Menganalisis dan menginterpretasikan pola-pola perilaku mencurigakan yang terdeteksi untuk mendukung upaya pencegahan kecurangan.
@@ -74,7 +74,7 @@ Penelitian ini diharapkan memberikan manfaat baik secara teoretis maupun praktis
 \begin{enumerate}
     \item Manfaat Teoretis:
     \begin{enumerate}
-        \item Kontribusi pada pengembangan metode deteksi kecurangan berbasis ensemble.
+        \item Kontribusi pada pengembangan metode deteksi kecurangan berbasis \textit{ensemble}.
         \item Pemahaman baru tentang efektivitas matriks kesamaan dalam analisis perilaku.
         \item Landasan metodologis untuk penelitian lanjutan.
     \end{enumerate}
@@ -84,7 +84,7 @@ Penelitian ini diharapkan memberikan manfaat baik secara teoretis maupun praktis
         \item Sistem deteksi dini yang lebih akurat untuk institusi pendidikan.
         \item Dukungan objektif untuk pengambilan keputusan terkait integritas akademik.
         \item Peningkatan efektivitas monitoring pembelajaran daring.
-        \item Dasar pengembangan sistem deteksi real-time di masa depan.
+        \item Dasar pengembangan sistem deteksi \textit{real-time} di masa depan.
     \end{enumerate}
 \end{enumerate}
 
@@ -97,7 +97,7 @@ Berikut ini adalah langkah penelitian yang dilakukan:
 
 \begin{enumerate}
 \item \textbf{Tinjauan Literatur}\\
-Mengkaji teori dan penelitian terkait deteksi kecurangan, metode ensemble, dan analisis matriks kesamaan dalam konteks pembelajaran daring.
+Mengkaji teori dan penelitian terkait deteksi kecurangan, metode \textit{ensemble}, dan analisis matriks kesamaan dalam konteks pembelajaran daring.
 
 \item \textbf{Pengumpulan dan Pengolahan Data}\\
 Mengumpulkan log aktivitas Moodle, melakukan pembersihan data, dan mengekstraksi fitur-fitur relevan termasuk matriks kesamaan.
@@ -126,16 +126,13 @@ Berisi latar belakang penelitian, perumusan masalah, batasan penelitian, tujuan 
 \item \textbf{Bab 2 Landasan Teori dan Studi Literatur}\\
 Mengkaji konsep-konsep fundamental tentang integritas akademik dalam pembelajaran daring, teknik-teknik pembelajaran mesin untuk deteksi anomali, serta penelitian-penelitian terkait dalam bidang analisis perilaku pengguna sistem pembelajaran daring.
 
-\item \textbf{Bab 3 Metodologi dan Rancangan Sistem}\\
+\item \textbf{Bab 3 Desain Sistem}\\
 Menjelaskan pendekatan metodologis yang digunakan, termasuk desain sistem deteksi, proses pengolahan data, pemilihan dan integrasi metode analisis, serta kerangka evaluasi yang diterapkan.
 
-\item \textbf{Bab 4 Implementasi dan Hasil Eksperimen}\\
-Memaparkan implementasi sistem yang dikembangkan, hasil eksperimen yang dilakukan, serta analisis kinerja berdasarkan berbagai metrik evaluasi.
+\item \textbf{Bab 4 Evaluasi Eksperimen dan Analisis}\\
+Memaparkan hasil implementasi sistem, analisis kinerja model berdasarkan berbagai metrik evaluasi, serta interpretasi temuan dari aplikasi sistem pada data riil Moodle Fasilkom UI.
 
-\item \textbf{Bab 5 Analisis dan Pembahasan}\\
-Menganalisis secara mendalam temuan-temuan penelitian, interpretasi pola perilaku yang terdeteksi, serta implikasinya terhadap praktik pembelajaran daring.
-
-\item \textbf{Bab 6 Kesimpulan dan Saran}\\
-Menyajikan kesimpulan penelitian, kontribusi yang dihasilkan, keterbatasan yang ditemui, serta rekomendasi untuk pengembangan dan penelitian lanjutan.
+\item \textbf{Bab 5 Kesimpulan}\\
+Menyajikan kesimpulan penelitian, keterkaitan dengan tujuan dan pertanyaan penelitian, keterbatasan yang ditemui, serta rekomendasi untuk pengembangan dan penelitian lanjutan.
 \end{itemize}
 

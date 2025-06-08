@@ -1,4 +1,23 @@
+# FEEDBACK
 # preprocess_pipeline/main_preprocess.py
+# Pisahkan data real dan data artifisial
+# kasih contoh output
+# buat sesuai gambar
+# judul subbab, bab dan tabel
+# gambarnya disesuaikan atau tidak 
+# mactexnogui
+# terlalu teknis, buat lebih naratif, buat lebih mudah dipahami
+# lebih intuitif. asumsi: orang baca langsung ngerti.
+# buat lebih ringkas, buat lebih padat.
+# ganti judul jadi metode penilitian bab 3
+# dibagi dua gambarnya, pipeline tetap ada -> graf tahapan penelitian
+# fokus saja, diremove agar 
+# tabel tidak intuitif
+# judul sama agar lebih cepat dipahami : tahapan penelitian + pipeline, ubah mudah dibaca
+# bab 4 ganti eksperimen dan analisis
+# dibalik masuk ke analisis, hasil deteksi dll, dampak perbedaan dataset dll
+# SENIN HARD DEADLINE
+
 import pandas as pd
 import os
 import json
