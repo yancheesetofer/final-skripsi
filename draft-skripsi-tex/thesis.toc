@@ -118,53 +118,55 @@
 \contentsline {subsubsection}{\numberline {3.6.3.3}Teknik Cross-Validation dan Evaluasi Model}{56}{subsubsection.3.6.3.3}%
 \contentsline {subsubsection}{\numberline {3.6.3.4}Integrasi dalam Framework Ensemble}{57}{subsubsection.3.6.3.4}%
 \contentsline {subsubsection}{\numberline {3.6.3.5}Reproducibility dan Dokumentasi Eksperimen}{57}{subsubsection.3.6.3.5}%
-\contentsline {subsubsection}{\numberline {3.6.3.6}Dampak Ukuran Dataset terhadap Performa}{57}{subsubsection.3.6.3.6}%
+\contentsline {subsubsection}{\numberline {3.6.3.6}Metodologi Perbandingan Ukuran Dataset}{57}{subsubsection.3.6.3.6}%
 \contentsline {subsection}{\numberline {3.6.4}Penyetelan Hyperparameter}{58}{subsection.3.6.4}%
-\contentsline {subsubsection}{\numberline {3.6.4.1}Eksplorasi Ruang Parameter}{58}{subsubsection.3.6.4.1}%
+\contentsline {subsubsection}{\numberline {3.6.4.1}Eksplorasi Ruang Parameter}{59}{subsubsection.3.6.4.1}%
 \contentsline {subsubsection}{\numberline {3.6.4.2}Evaluasi Melalui Cross-Validation}{59}{subsubsection.3.6.4.2}%
-\contentsline {subsubsection}{\numberline {3.6.4.3}Optimisasi dan Automasi Proses Tuning}{60}{subsubsection.3.6.4.3}%
-\contentsline {subsubsection}{\numberline {3.6.4.4}Integrasi Hasil dalam Framework Ensemble}{60}{subsubsection.3.6.4.4}%
+\contentsline {subsubsection}{\numberline {3.6.4.3}Optimisasi dan Automasi Proses Tuning}{59}{subsubsection.3.6.4.3}%
+\contentsline {subsubsection}{\numberline {3.6.4.4}Integrasi Hasil dalam Framework Ensemble}{59}{subsubsection.3.6.4.4}%
 \contentsline {section}{\numberline {3.7}Evaluasi dan Validasi Model}{60}{section.3.7}%
 \contentsline {subsection}{\numberline {3.7.1}Evaluasi Kuantitatif (pada Data Uji Artifisial)}{60}{subsection.3.7.1}%
-\contentsline {subsubsection}{\numberline {3.7.1.1}Hasil Evaluasi Model}{61}{subsubsection.3.7.1.1}%
+\contentsline {subsubsection}{\numberline {3.7.1.1}Metodologi Evaluasi Model}{60}{subsubsection.3.7.1.1}%
 \contentsline {subsection}{\numberline {3.7.2}Evaluasi Kualitatif dan Aplikasi pada Data Riil}{63}{subsection.3.7.2}%
-\contentsline {subsubsection}{\numberline {3.7.2.1}Hasil Deteksi pada Data Riil}{63}{subsubsection.3.7.2.1}%
-\contentsline {section}{\numberline {3.8}Kesimpulan Bab}{65}{section.3.8}%
-\contentsline {chapter}{\numberline {4}\MakeUppercase []{Eksperimen dan Analisis}}{67}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Dataset dan Konfigurasi Eksperimen}{67}{section.4.1}%
-\contentsline {subsection}{\numberline {4.1.1}Dataset Sintesis untuk Pelatihan Model}{67}{subsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.1.1}Parameter Simulasi Kecurangan}{68}{subsubsection.4.1.1.1}%
-\contentsline {subsection}{\numberline {4.1.2}Dataset Riil untuk Validasi}{68}{subsection.4.1.2}%
-\contentsline {section}{\numberline {4.2}Hasil Pelatihan dan Evaluasi Model}{69}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Kinerja Model pada Data Testing}{69}{subsection.4.2.1}%
-\contentsline {subsubsection}{\numberline {4.2.1.1}Analisis Confusion Matrix}{69}{subsubsection.4.2.1.1}%
-\contentsline {subsubsection}{\numberline {4.2.1.2}Kurva ROC dan Precision-Recall}{70}{subsubsection.4.2.1.2}%
-\contentsline {subsubsection}{\numberline {4.2.1.3}Perbandingan Kinerja Antar Model}{70}{subsubsection.4.2.1.3}%
-\contentsline {section}{\numberline {4.3}Analisis Feature Importance}{71}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Fitur-Fitur yang Paling Berpengaruh}{71}{subsection.4.3.1}%
-\contentsline {subsection}{\numberline {4.3.2}Interpretasi Fitur Berdasarkan Kategori}{72}{subsection.4.3.2}%
-\contentsline {subsubsection}{\numberline {4.3.2.1}Fitur Kesamaan Navigasi (60.5\%)}{72}{subsubsection.4.3.2.1}%
-\contentsline {subsubsection}{\numberline {4.3.2.2}Fitur Temporal (25.4\%)}{72}{subsubsection.4.3.2.2}%
-\contentsline {subsubsection}{\numberline {4.3.2.3}Fitur Perilaku Pengerjaan (14.1\%)}{73}{subsubsection.4.3.2.3}%
-\contentsline {subsection}{\numberline {4.3.3}Analisis Korelasi Antar Fitur}{73}{subsection.4.3.3}%
-\contentsline {section}{\numberline {4.4}Hasil Deteksi pada Data Riil}{74}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Statistik Deteksi Keseluruhan}{74}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Analisis Distribusi Probabilitas Kecurangan}{74}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Identifikasi Repeat Offenders}{75}{subsection.4.4.3}%
-\contentsline {subsubsection}{\numberline {4.4.3.1}Analisis Profil Pengguna Terindikasi}{75}{subsubsection.4.4.3.1}%
-\contentsline {subsubsection}{\numberline {4.4.3.2}Distribusi dan Karakteristik Repeat Offenders}{75}{subsubsection.4.4.3.2}%
-\contentsline {subsection}{\numberline {4.4.4}Analisis Ujian dengan Tingkat Kecurangan Tinggi}{76}{subsection.4.4.4}%
-\contentsline {section}{\numberline {4.5}Perbandingan dengan Baseline}{77}{section.4.5}%
-\contentsline {subsection}{\numberline {4.5.1}Perbandingan Dataset 90 vs 800 Sampel}{77}{subsection.4.5.1}%
+\contentsline {subsubsection}{\numberline {3.7.2.1}Metodologi Aplikasi pada Data Riil}{63}{subsubsection.3.7.2.1}%
+\contentsline {section}{\numberline {3.8}Kesimpulan Bab}{64}{section.3.8}%
+\contentsline {chapter}{\numberline {4}\MakeUppercase []{Eksperimen dan Analisis}}{66}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Dataset dan Konfigurasi Eksperimen}{66}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Dataset Sintesis untuk Pelatihan Model}{66}{subsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.1.1}Parameter Simulasi Kecurangan}{67}{subsubsection.4.1.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Dataset Riil untuk Validasi}{67}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Hasil Pelatihan dan Evaluasi Model}{68}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Kinerja Model pada Data Testing}{68}{subsection.4.2.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.1}Analisis Confusion Matrix}{68}{subsubsection.4.2.1.1}%
+\contentsline {subsubsection}{\numberline {4.2.1.2}Kurva ROC dan Precision-Recall}{69}{subsubsection.4.2.1.2}%
+\contentsline {subsubsection}{\numberline {4.2.1.3}Perbandingan Kinerja Antar Model}{69}{subsubsection.4.2.1.3}%
+\contentsline {section}{\numberline {4.3}Analisis Feature Importance}{70}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Fitur-Fitur yang Paling Berpengaruh}{70}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Interpretasi Fitur Berdasarkan Kategori}{71}{subsection.4.3.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.1}Fitur Kesamaan Navigasi (60.5\%)}{71}{subsubsection.4.3.2.1}%
+\contentsline {subsubsection}{\numberline {4.3.2.2}Fitur Temporal (25.4\%)}{71}{subsubsection.4.3.2.2}%
+\contentsline {subsubsection}{\numberline {4.3.2.3}Fitur Perilaku Pengerjaan (14.1\%)}{72}{subsubsection.4.3.2.3}%
+\contentsline {subsection}{\numberline {4.3.3}Analisis Korelasi Antar Fitur}{72}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Hasil Deteksi pada Data Riil}{73}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Statistik Deteksi Keseluruhan}{73}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Analisis Distribusi Probabilitas Kecurangan}{73}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Identifikasi Repeat Offenders}{74}{subsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {4.4.3.1}Analisis Profil Pengguna Terindikasi}{74}{subsubsection.4.4.3.1}%
+\contentsline {subsubsection}{\numberline {4.4.3.2}Distribusi dan Karakteristik Repeat Offenders}{74}{subsubsection.4.4.3.2}%
+\contentsline {subsection}{\numberline {4.4.4}Analisis Ujian dengan Tingkat Kecurangan Tinggi}{75}{subsection.4.4.4}%
+\contentsline {section}{\numberline {4.5}Analisis Dampak Ukuran Dataset}{76}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Perbandingan Performa Model: 90 vs 800 Sampel}{76}{subsection.4.5.1}%
 \contentsline {subsection}{\numberline {4.5.2}Dampak Ukuran Dataset pada Deteksi Data Riil}{77}{subsection.4.5.2}%
 \contentsline {section}{\numberline {4.6}Perbandingan dengan Penelitian Terdahulu}{78}{section.4.6}%
+\contentsline {subsection}{\numberline {4.6.1}Komparasi Performa dengan State-of-the-Art}{78}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Analisis Keunggulan Pendekatan}{78}{subsection.4.6.2}%
 \contentsline {section}{\numberline {4.7}Kesimpulan Bab}{78}{section.4.7}%
-\contentsline {chapter}{\numberline {5}\MakeUppercase []{Kesimpulan}}{80}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Kesimpulan}{80}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Keterkaitan dengan Tujuan dan Pertanyaan Penelitian}{83}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Keterbatasan Penelitian}{84}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Saran}{86}{section.5.4}%
-\contentsline {chapter}{\numberline {6}\MakeUppercase []{Penutup}}{88}{chapter.6}%
-\contentsline {chapter}{\uppercase {Daftar Referensi}}{89}{section*.40}%
+\contentsline {chapter}{\numberline {5}\MakeUppercase []{Kesimpulan}}{81}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Kesimpulan}{81}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Keterkaitan dengan Tujuan dan Pertanyaan Penelitian}{84}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Keterbatasan Penelitian}{85}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Saran}{87}{section.5.4}%
+\contentsline {chapter}{\numberline {6}\MakeUppercase []{Penutup}}{89}{chapter.6}%
+\contentsline {chapter}{\uppercase {Daftar Referensi}}{90}{section*.38}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {\uppercase {Daftar Istilah}}}{1}{section*.41}%
+\contentsline {chapter}{\uppercase {\uppercase {Daftar Istilah}}}{1}{section*.39}%

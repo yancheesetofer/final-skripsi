@@ -3,13 +3,11 @@
 \addvspace {10\p@ }
 \contentsline {table}{\numberline {3.1}{\ignorespaces Delapan Fitur Stabil Hasil Analisis VIF}}{46}{table.caption.19}%
 \contentsline {table}{\numberline {3.2}{\ignorespaces Pembagian Dataset untuk Pelatihan Model}}{55}{table.caption.23}%
-\contentsline {table}{\numberline {3.3}{\ignorespaces Perbandingan Performa Model: 90 vs 800 Sampel}}{58}{table.caption.24}%
-\contentsline {table}{\numberline {3.4}{\ignorespaces Performa Model pada Data Uji (800 Sampel)}}{61}{table.caption.26}%
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Parameter Simulasi Kecurangan dalam Dataset Sintesis}}{68}{table.caption.27}%
-\contentsline {table}{\numberline {4.2}{\ignorespaces Kinerja Model pada Data Testing (120 sampel)}}{69}{table.caption.28}%
-\contentsline {table}{\numberline {4.3}{\ignorespaces Lima Pengguna dengan Deteksi Kecurangan Terbanyak}}{75}{table.caption.35}%
-\contentsline {table}{\numberline {4.4}{\ignorespaces Perbandingan Kinerja Model: 90 vs 800 Sampel}}{77}{table.caption.38}%
-\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan dengan Penelitian Terdahulu}}{78}{table.caption.39}%
+\contentsline {table}{\numberline {4.1}{\ignorespaces Parameter Simulasi Kecurangan dalam Dataset Sintesis}}{67}{table.caption.25}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Kinerja Model pada Data Testing (120 sampel)}}{68}{table.caption.26}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Lima Pengguna dengan Deteksi Kecurangan Terbanyak}}{74}{table.caption.33}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Perbandingan Kinerja Model: 90 vs 800 Sampel}}{76}{table.caption.36}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Perbandingan dengan Penelitian Terdahulu}}{78}{table.caption.37}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -272,7 +272,7 @@ Tahap feature engineering dan analisis VIF merupakan komponen kritis dalam pipel
     \label{fig:data_flow}
 \end{figure}
 
-Gambar \ref{fig:data_flow} menunjukkan alur transformasi data dari raw logs hingga hasil deteksi akhir. Reduksi dramatis dari 446,720 events menjadi 800 training samples (faktor 560x) dilakukan melalui agregasi per user-quiz attempt. Feature extraction menghasilkan 35 fitur awal yang kemudian direduksi menjadi 8 fitur stabil melalui VIF analysis. Data dibagi dengan proporsi 70/15/15 untuk training, validation, dan test. Model yang dilatih mencapai akurasi 98.33\% dan ketika diaplikasikan pada data riil, berhasil mendeteksi 131,479 percobaan kecurangan dari 4,093 pengguna unik.
+Gambar \ref{fig:data_flow} menunjukkan alur transformasi data dari raw logs hingga detection output. Reduksi dramatis dari 446,720 events menjadi 800 training samples (faktor 560x) dilakukan melalui agregasi per user-quiz attempt. Feature extraction menghasilkan 35 fitur awal yang kemudian direduksi menjadi 8 fitur stabil melalui VIF analysis. Data dibagi dengan proporsi 70/15/15 untuk training, validation, dan test untuk memastikan evaluasi yang fair dan mencegah overfitting.
 
 Proses pra-pemrosesan tidak hanya bertujuan untuk mengurangi noise dan inkonsistensi, tetapi juga untuk memastikan bahwa fitur-fitur yang dihasilkan mencerminkan karakteristik perilaku pengguna secara akurat. Langkah-langkah berikut diambil dengan dasar metodologis yang defendable secara ilmiah:
 
@@ -904,37 +904,8 @@ Seluruh proses pelatihan dikendalikan dengan penggunaan seed yang konsisten pada
 
 Secara keseluruhan, skenario pelatihan dirancang untuk mengoptimalkan kinerja model deteksi kecurangan melalui pembagian data yang representatif, penerapan teknik regularisasi dan cross-validation, serta integrasi prediksi dalam kerangka ensemble. Pendekatan ini telah terbukti meningkatkan kemampuan model dalam mengidentifikasi pola non-compliance secara efektif, sehingga mendukung validitas dan keandalan model dalam konteks penelitian ini.
 
-\subsubsection{Dampak Ukuran Dataset terhadap Performa}
-Salah satu temuan penting dalam penelitian ini adalah dampak signifikan ukuran dataset terhadap performa model. Eksperimen komparatif dilakukan dengan membandingkan model yang dilatih menggunakan 90 sampel versus 800 sampel.
-
-\begin{table}[htbp]
-\centering
-\caption{Perbandingan Performa Model: 90 vs 800 Sampel}
-\label{tabel:dampakUkuranDataset}
-\begin{tabular}{|l|c|c|c|}
-\hline
-\textbf{Model} & \textbf{Akurasi (90)} & \textbf{Akurasi (800)} & \textbf{Peningkatan} \\
-\hline
-Random Forest & 85.71\% & 98.33\% & +12.62\% \\
-\hline
-SVM & 78.57\% & 98.33\% & +19.76\% \\
-\hline
-Neural Network & 71.43\% & 97.50\% & +26.07\% \\
-\hline
-Gradient Boosting & 78.57\% & 95.00\% & +16.43\% \\
-\hline
-\textbf{Rata-rata} & \textbf{79.76\%} & \textbf{96.61\%} & \textbf{+16.85\%} \\
-\hline
-\end{tabular}
-\end{table}
-
-\textbf{Implikasi Praktis:}
-\begin{itemize}
-    \item Dataset minimal 500-1000 sampel diperlukan untuk performa optimal
-    \item Neural Network menunjukkan sensitivitas tertinggi terhadap ukuran dataset
-    \item Peningkatan 8.9x ukuran dataset menghasilkan peningkatan performa rata-rata 21\%
-    \item Dampak pada deteksi real: 419\% peningkatan dalam jumlah kecurangan terdeteksi
-\end{itemize}
+\subsubsection{Metodologi Perbandingan Ukuran Dataset}
+Untuk mengevaluasi dampak ukuran dataset terhadap performa model, dirancang eksperimen komparatif yang membandingkan model yang dilatih menggunakan 90 sampel versus 800 sampel. Pendekatan ini memungkinkan analisis empiris mengenai hubungan antara ukuran dataset pelatihan dengan kemampuan generalisasi model. Eksperimen dilakukan dengan parameter dan konfigurasi yang identik pada kedua ukuran dataset untuk memastikan fairness dalam perbandingan.
 
 %-----------------------------------------------------------------------------%
 \subsection{Penyetelan Hyperparameter}
@@ -978,29 +949,8 @@ Evaluasi kinerja model merupakan tahap penting untuk memastikan bahwa sistem det
 %-----------------------------------------------------------------------------%
 Evaluasi kuantitatif dilakukan untuk menilai performa model deteksi kecurangan secara objektif menggunakan 120 sampel data uji artifisial yang telah dilabeli (15\% dari total 800 sampel). Data uji ini mencerminkan distribusi dan karakteristik pola aktivitas normal serta \textit{non-compliance} sesuai dengan konfigurasi simulasi. 
 
-\subsubsection{Hasil Evaluasi Model}
-Model-model yang dilatih menunjukkan performa yang sangat baik pada data uji:
-
-\begin{table}[htbp]
-\centering
-\caption{Performa Model pada Data Uji (800 Sampel)}
-\label{tabel:performaModelUji}
-\begin{tabular}{|l|c|c|c|c|}
-\hline 
-\textbf{Model} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} & \textbf{Accuracy} \\
-\hline
-Random Forest & 0.99 & 0.97 & 0.98 & 98.33\% \\
-\hline
-SVM & 0.99 & 0.97 & 0.98 & 98.33\% \\
-\hline
-Neural Network & 0.98 & 0.95 & 0.97 & 97.50\% \\
-\hline
-Gradient Boosting & 0.96 & 0.93 & 0.94 & 95.00\% \\
-\hline
-Ensemble (Voting) & 0.97 & 0.94 & 0.95 & 96.67\% \\
-\hline
-\end{tabular}
-\end{table}
+\subsubsection{Metodologi Evaluasi Model}
+Evaluasi model dilakukan menggunakan data uji yang merupakan 15\% dari total dataset (120 sampel dari 800 sampel total). Pemilihan metrik evaluasi didasarkan pada karakteristik masalah deteksi kecurangan yang memerlukan keseimbangan antara precision (menghindari false accusation) dan recall (mendeteksi semua kasus kecurangan). Evaluasi dilakukan menggunakan teknik k-fold cross-validation dengan k=5 untuk memastikan stabilitas hasil.
 
 Evaluasi dilakukan melalui beberapa langkah dan metrik berikut:
 
@@ -1039,8 +989,8 @@ Evaluasi dilakukan melalui beberapa langkah dan metrik berikut:
         \item Menilai variabilitas hasil evaluasi, sehingga mendemonstrasikan kestabilan model pada dataset yang beragam.
     \end{itemize}
 
-    \item \textbf{Hasil Evaluasi yang Terukur:} \\
-    Berdasarkan implementasi pipeline, tuning hyperparameter telah menghasilkan peningkatan F1-score sebesar 5–10\% dibandingkan konfigurasi awal. Rata-rata nilai AUC yang diperoleh berada di kisaran 0.92 hingga 0.96, yang menunjukkan kemampuan model untuk memisahkan kelas dengan sangat baik. Evaluasi precision dan recall secara individual mendemonstrasikan bahwa false positive dan false negative dapat diminimalkan, sehingga model memberikan kepercayaan tinggi dalam identifikasi kasus \textit{non-compliance}.
+    \item \textbf{Target Evaluasi yang Diharapkan:} \\
+    Berdasarkan desain pipeline, tuning hyperparameter diharapkan dapat menghasilkan peningkatan F1-score sebesar 5–10\% dibandingkan konfigurasi default. Target nilai AUC yang diharapkan berada di kisaran 0.90 hingga 0.95, yang akan menunjukkan kemampuan model untuk memisahkan kelas dengan baik. Evaluasi precision dan recall dirancang untuk meminimalkan false positive dan false negative, sehingga model dapat memberikan kepercayaan tinggi dalam identifikasi kasus \textit{non-compliance}.
 
     \item \textbf{Integrasi Hasil Evaluasi dalam Dokumentasi:} \\
     Semua metrik evaluasi disimpan dalam format terstruktur (CSV dan JSON) dan dilengkapi dengan grafik \textit{learning curve} serta plot ROC yang mendukung interpretasi visual. Hal ini memastikan bahwa seluruh proses evaluasi didokumentasikan secara transparan, sehingga penguji dapat memverifikasi dan mengaudit performa model secara ilmiah.
@@ -1054,14 +1004,8 @@ Pendekatan evaluasi kuantitatif ini, yang menggabungkan pembagian dataset yang r
 %-----------------------------------------------------------------------------%
 Setelah evaluasi kuantitatif pada data artifisial, model diaplikasikan pada 446,720 percobaan ujian riil dari platform Moodle Fasilkom UI. Aplikasi ini bertujuan untuk menguji kemampuan model dalam konteks operasional nyata dan mengidentifikasi pola kecurangan yang mungkin terjadi.
 
-\subsubsection{Hasil Deteksi pada Data Riil}
-Aplikasi model pada data riil menghasilkan temuan signifikan:
-\begin{itemize}
-    \item \textbf{Total Deteksi:} 131,479 percobaan ujian (29.43\%) terindikasi kecurangan dengan confidence ≥80\%
-    \item \textbf{Pengguna Unik:} 4,093 pengguna teridentifikasi melakukan kecurangan berulang
-    \item \textbf{Top Offender:} User ID 5252 terdeteksi dalam 138 percobaan berbeda
-    \item \textbf{Distribusi Kecurangan:} Mayoritas kecurangan terkonsentrasi pada mata kuliah dengan jumlah peserta besar
-\end{itemize}
+\subsubsection{Metodologi Aplikasi pada Data Riil}
+Model yang telah dilatih dan divalidasi pada data artifisial kemudian diaplikasikan pada dataset riil dari platform Moodle Fasilkom UI. Aplikasi ini bertujuan untuk menguji kemampuan generalisasi model dalam konteks operasional nyata. Proses ini melibatkan preprocessing data riil menggunakan pipeline yang sama dengan data training, kemudian mengaplikasikan model ensemble untuk menghasilkan probabilitas kecurangan untuk setiap percobaan ujian.
 
 Evaluasi kualitatif dilakukan dengan langkah-langkah berikut:
 
@@ -1115,16 +1059,16 @@ Bab ini telah memaparkan desain sistem deteksi kecurangan akademik berbasis AI s
 
 \textbf{4. Data Strategy}
 \begin{itemize}
-    \item Penggunaan 800 sampel artifisial dengan ground truth untuk training
-    \item Perbandingan dengan 90 sampel menunjukkan pentingnya dataset size
-    \item Aplikasi pada 446,720 real events untuk validasi praktis
+    \item Desain 800 sampel artifisial dengan ground truth terkontrol untuk training
+    \item Metodologi perbandingan dataset size untuk analisis sensitivitas
+    \item Framework aplikasi pada 446,720 real events untuk validasi generalisasi
 \end{itemize}
 
 \textbf{5. Evaluation Framework}
 \begin{itemize}
-    \item Evaluasi kuantitatif dengan metrik precision, recall, F1-score, accuracy
-    \item Evaluasi kualitatif melalui visualisasi dan analisis pola
-    \item Cross-validation untuk memastikan generalisasi model
+    \item Metodologi evaluasi kuantitatif dengan metrik precision, recall, F1-score, accuracy
+    \item Strategi evaluasi kualitatif melalui visualisasi dan analisis pola
+    \item Protokol cross-validation untuk memastikan validitas generalisasi
 \end{itemize}
 
-Desain sistem yang telah dipaparkan dalam bab ini menjadi fondasi untuk implementasi dan eksperimen yang hasilnya akan dibahas pada Bab 4. Pendekatan sistematis dengan justifikasi ilmiah untuk setiap komponen memastikan bahwa sistem deteksi kecurangan yang dikembangkan tidak hanya efektif secara teknis, tetapi juga dapat dipertanggungjawabkan secara akademis.
+Metodologi yang telah dipaparkan dalam bab ini menyediakan framework sistematis untuk pengembangan sistem deteksi kecurangan akademik berbasis AI. Setiap komponen metodologi dirancang dengan justifikasi ilmiah yang kuat, mulai dari akuisisi data hingga evaluasi model. Pendekatan dual-data strategy yang menggabungkan data artifisial dan riil, coupled dengan pipeline preprocessing terintegrasi dan ensemble architecture, memberikan fondasi metodologis yang robust untuk implementasi dan eksperimen yang akan dibahas pada Bab 4. Keseluruhan framework ini memastikan reproducibility, interpretability, dan validitas ilmiah dari sistem yang dikembangkan.
