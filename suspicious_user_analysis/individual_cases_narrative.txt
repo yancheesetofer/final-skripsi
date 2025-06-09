@@ -1,0 +1,66 @@
+INDIVIDUAL SUSPICIOUS USER ANALYSIS REPORT
+================================================================================
+
+EXECUTIVE SUMMARY
+----------------------------------------
+This report presents detailed analysis of individual users detected as suspicious
+cheaters, providing clear evidence of their coordination with collaborators.
+Each case demonstrates specific behavioral patterns that indicate academic dishonesty.
+
+CASE 1: USER 4426.0 ANALYSIS
+--------------------------------------------------
+
+USER PROFILE:
+• User ID: 4426.0
+• Quiz ID: 3144.0
+• Detection Probability: 0.9993
+• Confidence Level: VERY HIGH
+
+COLLABORATION EVIDENCE:
+• Identified 5 potential collaborators
+• Top collaborator (User 4148.0): 0.923 similarity
+• High-similarity collaborators: 5
+
+BEHAVIORAL ANALYSIS:
+• Navigation pattern indicates coordinated activity
+• Timing synchronization with multiple users detected
+• Answer patterns show suspicious similarities
+• Statistical analysis supports coordination hypothesis
+
+EVIDENCE ASSESSMENT: VERY STRONG - Compelling evidence
+
+RECOMMENDATION: IMMEDIATE academic integrity review recommended
+
+============================================================
+
+CASE 2: USER 7486.0 ANALYSIS
+--------------------------------------------------
+
+USER PROFILE:
+• User ID: 7486.0
+• Quiz ID: 8158.0
+• Detection Probability: 0.9991
+• Confidence Level: VERY HIGH
+
+COLLABORATION EVIDENCE:
+• Identified 5 potential collaborators
+• Top collaborator (User 7627.0): 0.869 similarity
+• High-similarity collaborators: 5
+
+BEHAVIORAL ANALYSIS:
+• Navigation pattern indicates coordinated activity
+• Timing synchronization with multiple users detected
+• Answer patterns show suspicious similarities
+• Statistical analysis supports coordination hypothesis
+
+EVIDENCE ASSESSMENT: VERY STRONG - Compelling evidence
+
+RECOMMENDATION: IMMEDIATE academic integrity review recommended
+
+============================================================
+
+OVERALL FINDINGS
+----------------------------------------
+The individual case analysis provides compelling evidence of coordinated cheating.
+Each analyzed user shows multiple indicators of collaboration with other students,
+supporting the automated detection results with detailed behavioral evidence.
