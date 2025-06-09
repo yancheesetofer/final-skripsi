@@ -7,23 +7,18 @@ Aggarwal, C.~C. (2017).
 
 \bibitem[Alexandron et~al., 2019]{Alexandron2019}
 Alexandron, G., Ruipérez-Valiente, J.~A., and Pritchard, D.~E. (2019).
-\newblock Towards a general purpose anomaly detection method to identify
-  cheaters in massive open online courses.
-\newblock In {\em 12th International Conference on Educational Data Mining (EDM
-  2019)}, pages 480--483, Montreal, Canada.
+\newblock Towards a general purpose anomaly detection method to identify cheaters in massive open online courses.
+\newblock In {\em 12th International Conference on Educational Data Mining (EDM 2019)}, pages 480--483, Montreal, Canada.
 
 \bibitem[Alsabhan, 2023]{Alsabhan2023}
 Alsabhan, W. (2023).
-\newblock Student cheating detection in higher education by implementing
-  machine learning and lstm techniques.
+\newblock Student cheating detection in higher education by implementing machine learning and lstm techniques.
 \newblock {\em Sensors}, 23(8):4149.
 
 \bibitem[Balderas and Caballero-Hernández, 2020]{Balderas2020}
 Balderas, A. and Caballero-Hernández, J.~A. (2020).
-\newblock Analysis of learning records to detect student cheating on online
-  exams: Case study during covid-19 pandemic.
-\newblock In {\em 8th International Conference on Technological Ecosystems for
-  Enhancing Multiculturality (TEEM)}, pages 752--757, Salamanca, Spain.
+\newblock Analysis of learning records to detect student cheating on online exams: Case study during covid-19 pandemic.
+\newblock In {\em 8th International Conference on Technological Ecosystems for Enhancing Multiculturality (TEEM)}, pages 752--757, Salamanca, Spain.
 
 \bibitem[Cen et~al., 2020]{survey:anomaly_detection_edu}
 Cen, H., Ruta, D., and Gabrys, B. (2020).
@@ -32,21 +27,18 @@ Cen, H., Ruta, D., and Gabrys, B. (2020).
 
 \bibitem[Chang and Chang, 2023]{Chang2023}
 Chang, S.-C. and Chang, K.~L. (2023).
-\newblock Cheating detection of test collusion: A study on machine learning
-  techniques and feature representation.
+\newblock Cheating detection of test collusion: A study on machine learning techniques and feature representation.
 \newblock {\em Educational Measurement: Issues and Practice}.
 
 \bibitem[Chirumamilla et~al., 2020]{Chirumamilla2020}
 Chirumamilla, A., Sindre, G., and Nguyen-Duc, A. (2020).
-\newblock Cheating in e-exams and paper exams: the perceptions of engineering
-  students and teachers in norway.
+\newblock Cheating in e-exams and paper exams: the perceptions of engineering students and teachers in norway.
 \newblock {\em Assessment \& Evaluation in Higher Education}, 45(7):940--957.
 
 \bibitem[Ferguson, 2012]{Ferguson2012}
 Ferguson, R. (2012).
 \newblock Learning analytics: drivers, developments and challenges.
-\newblock {\em International Journal of Technology Enhanced Learning},
-  4(5/6):304--317.
+\newblock {\em International Journal of Technology Enhanced Learning}, 4(5/6):304--317.
 
 \bibitem[Gašević et~al., 2015]{Gasevic2015}
 Gašević, D., Dawson, S., and Siemens, G. (2015).
@@ -55,10 +47,8 @@ Gašević, D., Dawson, S., and Siemens, G. (2015).
 
 \bibitem[Huda et~al., 2020]{article:rule_based_limitations}
 Huda, M., Jasmi, K.~A., Zakaria, G.~N., and et~al. (2020).
-\newblock Challenges of rule-based academic dishonesty detection in online
-  assessment.
-\newblock {\em International Journal of Emerging Technologies in Learning},
-  15(4):95--106.
+\newblock Challenges of rule-based academic dishonesty detection in online assessment.
+\newblock {\em International Journal of Emerging Technologies in Learning}, 15(4):95--106.
 
 \bibitem[Kamalov et~al., 2021]{Kamalov2021}
 Kamalov, F., Sulieman, H., and Calonge, D.~S. (2021).
@@ -72,47 +62,36 @@ Lanier, M.~M. (2006).
 
 \bibitem[Mazza and Dimitrova, 2004]{article:moodle_logs}
 Mazza, R. and Dimitrova, V. (2004).
-\newblock Visualizing student tracking data to support instructors in web-based
-  distance education.
-\newblock {\em Proceedings of the 13th international World Wide Web conference
-  on Alternate track papers \& posters}, pages 154--161.
+\newblock Visualizing student tracking data to support instructors in web-based distance education.
+\newblock {\em Proceedings of the 13th international World Wide Web conference on Alternate track papers \& posters}, pages 154--161.
 
 \bibitem[Moreno-Marcos et~al., 2023]{MorenoMarcos2023}
-Moreno-Marcos, P.~M., Barredo, J., Muñoz-Merino, P.~J., and Delgado~Kloos, C.
-  (2023).
-\newblock Statoodle: A learning analytics tool to analyze moodle students'
-  actions and prevent cheating.
-\newblock In {\em Lecture Notes in Computer Science}, volume 13884, pages
-  736--741. Springer.
+Moreno-Marcos, P.~M., Barredo, J., Muñoz-Merino, P.~J., and Delgado~Kloos, C. (2023).
+\newblock Statoodle: A learning analytics tool to analyze moodle students' actions and prevent cheating.
+\newblock In {\em Lecture Notes in Computer Science}, volume 13884, pages 736--741. Springer.
 
 \bibitem[Murdoch and House, 2019]{Murdoch2019}
 Murdoch, K. and House, D. (2019).
-\newblock Ghost in the shell: What happens when contract cheating meets online
-  impersonation.
+\newblock Ghost in the shell: What happens when contract cheating meets online impersonation.
 \newblock In {\em ICAI Annual Conference}, New Orleans, LA.
 
 \bibitem[Nadeem et~al., 2024]{Nadeem2024}
-Nadeem, M., Kumar, V., Yunus, F., Jain, S., Aggarwal, D., and Syed, T.~A.
-  (2024).
-\newblock Revolutionizing financial fraud detection using advanced machine
-  learning techniques.
+Nadeem, M., Kumar, V., Yunus, F., Jain, S., Aggarwal, D., and Syed, T.~A. (2024).
+\newblock Revolutionizing financial fraud detection using advanced machine learning techniques.
 \newblock {\em Scientific Reports}, 14(1):28542.
 
 \bibitem[Niu et~al., 2025]{Niu2025}
 Niu, K., Zhang, J., Wang, Y., Wang, J., and Zhang, X. (2025).
-\newblock Effective machine learning methodology for medical prediction: a
-  systematic review.
+\newblock Effective machine learning methodology for medical prediction: a systematic review.
 \newblock {\em BMC Medical Informatics and Decision Making}, 25(1):15.
 
 \bibitem[Romero and Ventura, 2020]{Romero2020}
 Romero, C. and Ventura, S. (2020).
 \newblock Educational data mining and learning analytics: An updated survey.
-\newblock {\em Wiley Interdisciplinary Reviews: Data Mining and Knowledge
-  Discovery}, 10(3):e1355.
+\newblock {\em Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery}, 10(3):e1355.
 
 \bibitem[Shatnawi et~al., 2024]{Shatnawi2024}
-Shatnawi, A., Al-Zoubi, A.~Y., Faris, H., Eshtay, M., and Hassonah, M.~A.
-  (2024).
+Shatnawi, A., Al-Zoubi, A.~Y., Faris, H., Eshtay, M., and Hassonah, M.~A. (2024).
 \newblock E-exam cheating detection system for moodle lms.
 \newblock {\em Applied Sciences}, 14(1):397.
 
@@ -123,14 +102,12 @@ Siemens, G. and Long, P. (2011).
 
 \bibitem[Yulita et~al., 2023]{Yulita2023}
 Yulita, I.~N., Hariz, F.~A., Suryana, I., and Prabuwono, A.~S. (2023).
-\newblock Educational innovation faced with covid-19: Deep learning for online
-  exam cheating detection.
+\newblock Educational innovation faced with covid-19: Deep learning for online exam cheating detection.
 \newblock {\em Education Sciences}, 13(2):194.
 
 \bibitem[Zhou and Jiao, 2022]{Zhou2022}
 Zhou, T. and Jiao, H. (2022).
-\newblock Data augmentation in machine learning for cheating detection in
-  large-scale assessment.
+\newblock Data augmentation in machine learning for cheating detection in large-scale assessment.
 \newblock {\em Psychological Test and Assessment Modeling}, 64(4):425--444.
 
 \bibitem[Zhou, 2012]{Zhou2012}

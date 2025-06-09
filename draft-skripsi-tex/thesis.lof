@@ -1,20 +1,20 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Kerangka Metodologi Penelitian Deteksi Kecurangan}}{18}{figure.caption.15}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Arsitektur Pipeline Teknis: Alur Pemrosesan Data dari Log Mentah hingga Deteksi Kecurangan dengan Dual-Mode Processing}}{19}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alur Data dalam Pipeline Deteksi Kecurangan}}{30}{figure.caption.17}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Proses Feature Engineering dari Raw Data hingga 8 Fitur Stabil}}{44}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Arsitektur Ensemble: Integrasi Multi-Model dengan Graph Analysis untuk Deteksi Kecurangan Komprehensif}}{50}{figure.caption.20}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Proses Reduksi Fitur: Dari 35 Fitur Awal menjadi 8 Fitur Stabil melalui Analisis VIF}}{65}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Kerangka Metodologi Penelitian Deteksi Kecurangan}}{18}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Arsitektur Pipeline Teknis: Alur Pemrosesan Data dari Log Mentah hingga Deteksi Kecurangan dengan Dual-Mode Processing}}{19}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alur Data dalam Pipeline Deteksi Kecurangan}}{30}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Proses Feature Engineering dari Raw Data hingga 8 Fitur Stabil}}{44}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Arsitektur Ensemble: Integrasi Multi-Model dengan Graph Analysis untuk Deteksi Kecurangan Komprehensif}}{50}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Proses Reduksi Fitur: Dari 35 Fitur Awal menjadi 8 Fitur Stabil melalui Analisis VIF}}{65}{figure.caption.20}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Confusion Matrix Model Random Forest}}{69}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Kurva ROC dan Precision-Recall Model Random Forest}}{70}{figure.caption.26}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Kinerja Model Machine Learning}}{71}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Feature Importance Analysis Model Random Forest}}{71}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Matriks Korelasi Antar Fitur Deteksi}}{73}{figure.caption.29}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Distribusi Probabilitas Kecurangan pada Data Riil}}{74}{figure.caption.30}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Analisis Distribusi Repeat Offenders}}{76}{figure.caption.32}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Analisis Ujian dengan Tingkat Kecurangan Tinggi}}{76}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Confusion Matrix Model Random Forest}}{69}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Kurva ROC dan Precision-Recall Model Random Forest}}{70}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Kinerja Model Machine Learning}}{71}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Feature Importance Analysis Model Random Forest}}{71}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Matriks Korelasi Antar Fitur Deteksi}}{73}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Distribusi Probabilitas Kecurangan pada Data Riil}}{74}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Analisis Distribusi Repeat Offenders}}{76}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Analisis Ujian dengan Tingkat Kecurangan Tinggi}}{76}{figure.caption.32}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }

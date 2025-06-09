@@ -58,13 +58,13 @@ Setiap fase dirancang dengan output yang jelas dan terukur, memungkinkan evaluas
 Berdasarkan studi literatur dan analisis awal, penelitian ini menguji empat hipotesis utama:
 
 \textbf{H1: Deteksi Pola Kolaborasi}\\
-Kolaborasi kecurangan akan menghasilkan pola similaritas yang dapat dideteksi dalam tiga dimensi: navigasi (urutan pengerjaan soal), timing (pola waktu), dan jawaban (kesamaan respons). Hipotesis ini memprediksi tingkat akurasi deteksi >90\% untuk kasus dengan koordinasi tinggi.
+Kolaborasi kecurangan akan menghasilkan pola similaritas yang dapat dideteksi dalam tiga dimensi: navigasi (urutan pengerjaan soal), \textit{timing} (pola waktu), dan jawaban (kesamaan respons). Hipotesis ini memprediksi tingkat akurasi deteksi $>90\%$ untuk kasus dengan koordinasi tinggi.
 
-\textbf{H2: Superioritas Model Ensemble}\\
+\textbf{H2: Superioritas Model Gabungan}\\
 Model ensemble (model gabungan) yang mengintegrasikan beberapa algoritma akan memberikan performa superior (peningkatan F1-score minimal 5\%) dibandingkan model tunggal dalam mendeteksi berbagai strategi kecurangan yang heterogen.
 
-\textbf{H3: Threshold Ukuran Dataset}\\
-Dataset dengan minimal 500-1000 sampel diperlukan untuk mencapai performa deteksi yang optimal (akurasi >95\%). Peningkatan ukuran dataset akan menghasilkan peningkatan performa yang signifikan hingga mencapai titik saturasi.
+\textbf{H3: \textit{Threshold} Ukuran Dataset}\\
+Dataset dengan minimal 500-1000 sampel diperlukan untuk mencapai performa deteksi yang optimal (akurasi $>95\%$). Peningkatan ukuran dataset akan menghasilkan peningkatan performa yang signifikan hingga mencapai titik saturasi.
 
 \textbf{H4: Generalisasi Model}\\
 Model yang dilatih pada data artifisial dengan parameter terkontrol dapat menggeneralisasi dengan baik pada data riil skala besar, dengan tingkat deteksi yang konsisten dengan prevalensi kecurangan dalam literatur (20-40\%).
@@ -209,8 +209,8 @@ Data ini mencakup aktivitas di lebih dari 140 Mata Kuliah unik, dengan variasi u
 \begin{itemize}
     \item Mata Kuliah besar (300+ mahasiswa): sekitar 10 Mata Kuliah
     \item Mata Kuliah menengah (100-300 mahasiswa): sekitar 30 Mata Kuliah
-    \item Mata Kuliah kecil (<100 mahasiswa): sekitar 100 Mata Kuliah
-    \item Mata Kuliah sangat kecil (<10 mahasiswa): sekitar 15 Mata Kuliah
+    \item Mata Kuliah kecil ($<100$ mahasiswa): sekitar 100 Mata Kuliah
+    \item Mata Kuliah sangat kecil ($<10$ mahasiswa): sekitar 15 Mata Kuliah
 \end{itemize}
 
 \textbf{Contoh Mata Kuliah dengan aktivitas tinggi:}

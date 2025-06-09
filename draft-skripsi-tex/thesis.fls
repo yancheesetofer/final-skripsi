@@ -2,7 +2,7 @@ PWD /Users/yan.christofer/Documents/final_skripsi/draft-skripsi-tex
 INPUT /usr/local/texlive/2025/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT thesis.tex
+INPUT /Users/yan.christofer/Documents/final_skripsi/draft-skripsi-tex/thesis.tex
 OUTPUT thesis.log
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/local/texlive/2025/texmf-dist/tex/latex/base/report.cls
@@ -623,31 +623,11 @@ OUTPUT src/00-frontMatter/kataPengantar.aux
 INPUT ./src/00-frontMatter/kataPengantar.tex
 INPUT ./src/00-frontMatter/kataPengantar.tex
 INPUT src/00-frontMatter/kataPengantar.tex
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-ot1.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/pslatex/pcrr7tn.tfm
-INPUT ./assets/pics/creative_commons.png
-INPUT ./assets/pics/creative_commons.png
-INPUT ./assets/pics/creative_commons.png
-INPUT ./assets/pics/creative_commons.png
-INPUT ./assets/pics/creative_commons.png
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-ot1.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/pslatex/pcrr7tn.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/pslatex/pcrr7tn.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntx-Regular-tlf-ot1.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/txmiaX.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1r.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntx-Italic-tlf-ot1.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/NewTXMI.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-ot1r.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/pslatex/pcrr7tn.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/pslatex/pcrr8rn.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntx-Italic-tlf-ot1.vf
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/NewTXMI.tfm
-INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-ot1r.tfm
 INPUT ./src/00-frontMatter/persetujuanPublikasi.tex
 INPUT ./src/00-frontMatter/persetujuanPublikasi.tex
 OUTPUT src/00-frontMatter/persetujuanPublikasi.aux
@@ -655,15 +635,20 @@ INPUT ./src/00-frontMatter/persetujuanPublikasi.tex
 INPUT ./src/00-frontMatter/persetujuanPublikasi.tex
 INPUT src/00-frontMatter/persetujuanPublikasi.tex
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-BoldItalic-tlf-ot1.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-ot1.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntx-BoldItalic-tlf-ot1.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/NewTXBMI.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-BoldItalic-tlf-ot1r.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntx-Italic-tlf-ot1.vf
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/NewTXMI.tfm
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-ot1r.tfm
 INPUT ./src/00-frontMatter/abstrak.tex
 INPUT ./src/00-frontMatter/abstrak.tex
 OUTPUT src/00-frontMatter/abstrak.aux
 INPUT ./src/00-frontMatter/abstrak.tex
 INPUT ./src/00-frontMatter/abstrak.tex
 INPUT src/00-frontMatter/abstrak.tex
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/helvetic/phvr7t.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/helvetic/phvb7t.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/helvetic/phvb7t.vf
@@ -762,6 +747,7 @@ INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntxmia.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/txmiaSTbb.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/public/newtx/ntxmia.vf
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/txmiaX.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/txmiaSTbb.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/vf/adobe/times/zptmcmr.vf
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
@@ -802,6 +788,7 @@ INPUT ./figures/feature_importance_Random Forest.png
 INPUT ./figures/feature_importance_Random Forest.png
 INPUT ./figures/feature_importance_Random Forest.png
 INPUT ./figures/feature_importance_Random Forest.png
+INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
 INPUT /usr/local/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
 INPUT ./figures/feature_correlation_heatmap.pdf
 INPUT ./figures/feature_correlation_heatmap.pdf

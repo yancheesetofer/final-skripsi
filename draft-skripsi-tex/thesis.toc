@@ -9,19 +9,19 @@
 \addvspace {-1em}
 \contentsline {chapter}{\uppercase {\MakeUppercase []{Kata Pengantar}}}{iv}{section*.6}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {Lembar Persetujuan Karya Ilmiah}}{vi}{section*.8}%
+\contentsline {chapter}{\uppercase {Lembar Persetujuan Karya Ilmiah}}{v}{section*.7}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {Abstrak}}{vii}{section*.9}%
+\contentsline {chapter}{\uppercase {Abstrak}}{vi}{section*.8}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {Daftar Isi}}{ix}{section*.10}%
+\contentsline {chapter}{\uppercase {Daftar Isi}}{viii}{section*.9}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {Daftar Gambar}}{xiii}{section*.11}%
+\contentsline {chapter}{\uppercase {Daftar Gambar}}{xii}{section*.10}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {Daftar Tabel}}{xiv}{section*.12}%
+\contentsline {chapter}{\uppercase {Daftar Tabel}}{xiii}{section*.11}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {\uppercase {Daftar Kode Program}}}{xiv}{section*.13}%
+\contentsline {chapter}{\uppercase {\uppercase {Daftar Kode Program}}}{xiii}{section*.12}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {\uppercase {Daftar Lampiran}}}{xv}{section*.14}%
+\contentsline {chapter}{\uppercase {\uppercase {Daftar Lampiran}}}{xiv}{section*.13}%
 \contentsline {chapter}{\numberline {1}\MakeUppercase []{Pendahuluan}}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Permasalahan}{2}{section.1.2}%
@@ -173,6 +173,6 @@
 \contentsline {section}{\numberline {5.3}Keterbatasan Penelitian}{86}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Saran}{88}{section.5.4}%
 \contentsline {chapter}{\numberline {6}\MakeUppercase []{Penutup}}{90}{chapter.6}%
-\contentsline {chapter}{\uppercase {Daftar Referensi}}{91}{section*.36}%
+\contentsline {chapter}{\uppercase {Daftar Referensi}}{91}{section*.35}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {\uppercase {Daftar Istilah}}}{1}{section*.37}%
+\contentsline {chapter}{\uppercase {\uppercase {Daftar Istilah}}}{1}{section*.36}%
