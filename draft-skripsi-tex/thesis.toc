@@ -70,7 +70,7 @@
 \contentsline {section}{\numberline {3.2}Strategi Akuisisi dan Persiapan Data}{22}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Arsitektur Pipeline Preprocessing: Dari Log Mentah ke Fitur Terstruktur}{22}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Komponen dan Alur Kerja Pipeline}{22}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Strategi Dual-Mode Processing}{23}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.2}Strategi \textit {Dual-Mode Processing}}{23}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}Data Log Moodle Riil: Deskripsi (periode, jumlah event/user, fitur utama), Proses Akuisisi, Kebijakan Anonimisasi \& Etika.}{24}{subsection.3.3.3}%
 \contentsline {subsubsection}{\numberline {3.3.3.1}Deskripsi Data}{24}{subsubsection.3.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.3.2}Rentang Waktu dan Skala Dataset}{26}{subsubsection.3.3.3.2}%
@@ -85,7 +85,7 @@
 \contentsline {subsection}{\numberline {3.4.5}Justifikasi Ilmiah}{34}{subsection.3.4.5}%
 \contentsline {subsection}{\numberline {3.4.6}Perancangan dan Generasi Data Artifisial}{35}{subsection.3.4.6}%
 \contentsline {subsection}{\numberline {3.4.7}Definisi Operasional Skenario Perilaku Sintetik}{35}{subsection.3.4.7}%
-\contentsline {subsection}{\numberline {3.4.8}Desain Ground Truth Artifisial}{36}{subsection.3.4.8}%
+\contentsline {subsection}{\numberline {3.4.8}Desain \textit {Ground Truth} Artifisial}{36}{subsection.3.4.8}%
 \contentsline {subsection}{\numberline {3.4.9}Metode Generasi Data}{38}{subsection.3.4.9}%
 \contentsline {subsection}{\numberline {3.4.10}Implementasi Teknis}{40}{subsection.3.4.10}%
 \contentsline {subsection}{\numberline {3.4.11}Validasi Data Artifisial}{41}{subsection.3.4.11}%
@@ -122,7 +122,7 @@
 \contentsline {subsubsection}{\numberline {3.7.1.1}Profil dan Skala Dataset Riil}{57}{subsubsection.3.7.1.1}%
 \contentsline {subsubsection}{\numberline {3.7.1.2}Proses Akuisisi dan Jaminan Privasi}{58}{subsubsection.3.7.1.2}%
 \contentsline {subsubsection}{\numberline {3.7.1.3}Karakteristik Pola Penggunaan}{58}{subsubsection.3.7.1.3}%
-\contentsline {subsection}{\numberline {3.7.2}Data Artifisial: Desain Terkontrol untuk Ground Truth}{59}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.2}Data Artifisial: Desain Terkontrol untuk \textit {Ground Truth}}{59}{subsection.3.7.2}%
 \contentsline {subsubsection}{\numberline {3.7.2.1}Justifikasi Penggunaan Data Artifisial}{59}{subsubsection.3.7.2.1}%
 \contentsline {subsubsection}{\numberline {3.7.2.2}Arsitektur Generator Data Artifisial}{60}{subsubsection.3.7.2.2}%
 \contentsline {subsubsection}{\numberline {3.7.2.3}Validasi Realisme Data Artifisial}{60}{subsubsection.3.7.2.3}%

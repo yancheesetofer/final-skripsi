@@ -2,7 +2,7 @@
 \chapter{\babTiga}
 \label{bab:3}
 %-----------------------------------------------------------------------------%
-Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem deteksi kecurangan akademik berbasis kecerdasan buatan pada platform Moodle. Metodologi penelitian dirancang melalui pendekatan sistematis yang dimulai dari pemahaman masalah, perancangan solusi, hingga implementasi dan evaluasi. Pembahasan mencakup enam fase utama: (1) analisis kebutuhan dan studi literatur, (2) akuisisi dan persiapan data, (3) perancangan data artifisial dengan ground truth terkontrol, (4) pengembangan pipeline preprocessing dan ekstraksi fitur, (5) pelatihan model ensemble machine learning, dan (6) evaluasi komprehensif pada data riil dan artifisial.
+Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem deteksi kecurangan akademik berbasis kecerdasan buatan pada platform Moodle. Metodologi penelitian dirancang melalui pendekatan sistematis yang dimulai dari pemahaman masalah, perancangan solusi, hingga implementasi dan evaluasi. Pembahasan mencakup enam fase utama: (1) analisis kebutuhan dan studi literatur, (2) akuisisi dan persiapan data, (3) perancangan data artifisial dengan ground truth terkontrol, (4) pengembangan \textit{pipeline} preprocessing dan ekstraksi fitur, (5) pelatihan model ensemble machine learning, dan (6) evaluasi komprehensif pada data riil dan artifisial.
 
 \begin{figure}[htbp]
     \centering
@@ -11,7 +11,7 @@ Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem d
     \label{fig:research_stages}
 \end{figure}
 
-Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang terdiri dari enam fase utama yang saling berkaitan. Setiap fase dirancang secara spesifik untuk menjawab pertanyaan penelitian yang telah dirumuskan pada Bab 1. Fase 1 mengidentifikasi pola-pola kecurangan akademik melalui studi literatur. Fase 2 dan 3 mempersiapkan data pelatihan dengan ground truth yang terkontrol. Fase 4 mentransformasi data mentah menjadi fitur-fitur bermakna. Fase 5 mengembangkan model deteksi menggunakan pendekatan ensemble. Fase 6 mengevaluasi efektivitas model pada skala operasional.
+Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang terdiri dari enam fase utama yang saling berkaitan. Setiap fase dirancang secara spesifik untuk menjawab pertanyaan penelitian yang telah dirumuskan pada Bab 1. Fase 1 mengidentifikasi pola-pola kecurangan akademik melalui studi literatur. Fase 2 dan 3 mempersiapkan data pelatihan dengan \textit{ground truth} yang terkontrol. Fase 4 mentransformasi data mentah menjadi fitur-fitur bermakna. Fase 5 mengembangkan model deteksi menggunakan pendekatan ensemble. Fase 6 mengevaluasi efektivitas model pada skala operasional.
 
 \begin{figure}[htbp]
     \centering
@@ -20,9 +20,9 @@ Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang
     \label{fig:technical_pipeline}
 \end{figure}
 
-Gambar \ref{fig:technical_pipeline} menerjemahkan kerangka metodologi konseptual menjadi implementasi teknis yang detail. Pipeline dimulai dari dua sumber data yang berbeda karakteristiknya: \textbf{Data Riil ITF} yang berisi 446,720 events dari aktivitas nyata mahasiswa Fasilkom UI, dan \textbf{Data Artifisial} dengan 800 sampel terkontrol yang dilengkapi ground truth untuk pelatihan model. 
+Gambar \ref{fig:technical_pipeline} menerjemahkan kerangka metodologi konseptual menjadi implementasi teknis yang detail. \textit{Pipeline} dimulai dari dua sumber data yang berbeda karakteristiknya: \textbf{Data Riil ITF} yang berisi 446,720 events dari aktivitas nyata mahasiswa Fasilkom UI, dan \textbf{Data Artifisial} dengan 800 sampel terkontrol yang dilengkapi \textit{ground truth} untuk pelatihan model. 
 
-Perbedaan krusial terletak pada strategi pemrosesan: data artifisial diproses dalam \textit{Training Mode} untuk membangun dan menyimpan artifacts pembelajaran (scaler, feature selector, imputer), sementara data riil menggunakan \textit{Detection Mode} yang memanfaatkan artifacts tersebut untuk konsistensi transformasi. Pipeline berhasil mereduksi kompleksitas dari 35 fitur awal menjadi 8 fitur stabil melalui analisis Variance Inflation Factor (VIF), menghasilkan model ensemble yang mendeteksi 131,479 percobaan ujian mencurigakan (29.43\% dari total).
+Perbedaan krusial terletak pada strategi pemrosesan: data artifisial diproses dalam \textit{Training Mode} untuk membangun dan menyimpan \textit{artifacts} pembelajaran (scaler, feature selector, imputer), sementara data riil menggunakan \textit{Detection Mode} yang memanfaatkan \textit{artifacts} tersebut untuk konsistensi transformasi. \textit{Pipeline} berhasil mereduksi kompleksitas dari 35 fitur awal menjadi 8 fitur stabil melalui analisis Variance Inflation Factor (VIF), menghasilkan model ensemble yang mendeteksi 131,479 percobaan ujian mencurigakan (29.43\% dari total).
 
 Kombinasi kedua diagram memberikan pemahaman menyeluruh: Gambar \ref{fig:research_stages} menyediakan peta konseptual untuk memandu pembaca melalui logika penelitian, sedangkan Gambar \ref{fig:technical_pipeline} memberikan blueprint teknis untuk reproduksi penelitian. Integrasi pendekatan top-down (konseptual) dan bottom-up (teknis) ini memastikan transparansi metodologi yang dapat dipertanggungjawabkan secara ilmiah.
 
@@ -31,7 +31,7 @@ Kombinasi kedua diagram memberikan pemahaman menyeluruh: Gambar \ref{fig:researc
 \section{Desain Penelitian dan Hipotesis}
 \label{sec:desainPenelitian}
 %-----------------------------------------------------------------------------%
-Penelitian ini mengadopsi pendekatan eksperimental dengan kombinasi data artifisial dan riil untuk mengembangkan sistem deteksi kecurangan yang robust dan dapat diimplementasikan dalam skala institusional. Desain penelitian dirancang secara sistematis untuk menjawab pertanyaan penelitian utama: bagaimana mengembangkan sistem deteksi kecurangan otomatis yang akurat untuk platform Moodle menggunakan pendekatan machine learning?
+Penelitian ini mengadopsi pendekatan eksperimental dengan kombinasi data artifisial dan riil untuk mengembangkan sistem deteksi kecurangan yang \textit{robust} (kokoh) dan dapat diimplementasikan dalam skala institusional. Desain penelitian dirancang secara sistematis untuk menjawab pertanyaan penelitian utama: bagaimana mengembangkan sistem deteksi kecurangan otomatis yang akurat untuk platform Moodle menggunakan pendekatan machine learning?
 
 \subsection{Alur Tahapan Penelitian}
 \label{subsec:alurTahapanPenelitian}
@@ -42,9 +42,9 @@ Penelitian dilakukan melalui enam tahapan sistematis yang saling terkait:
     
     \item \textbf{Fase 2 - Akuisisi Data Log Moodle:} Mengumpulkan data log aktivitas dari platform Moodle Fasilkom UI dengan total 446,720 events. Data melalui proses anonimisasi untuk menjaga privasi pengguna.
     
-    \item \textbf{Fase 3 - Perancangan Data Artifisial:} Mengembangkan generator data artifisial yang mensimulasikan 800 skenario ujian dengan parameter kecurangan terkontrol. Setiap skenario dilengkapi ground truth untuk validasi model.
+    \item \textbf{Fase 3 - Perancangan Data Artifisial:} Mengembangkan generator data artifisial yang mensimulasikan 800 skenario ujian dengan parameter kecurangan terkontrol. Setiap skenario dilengkapi \textit{ground truth} untuk validasi model.
     
-    \item \textbf{Fase 4 - Pengembangan Pipeline Preprocessing:} Mengimplementasikan sistem ekstraksi dan transformasi fitur yang menghasilkan 35 fitur awal, kemudian direduksi menjadi 8 fitur stabil melalui analisis VIF.
+    \item \textbf{Fase 4 - Pengembangan \textit{Pipeline Preprocessing}:} Mengimplementasikan sistem ekstraksi dan transformasi fitur yang menghasilkan 35 fitur awal, kemudian direduksi menjadi 8 fitur stabil melalui analisis VIF.
     
     \item \textbf{Fase 5 - Pelatihan Model Ensemble:} Melatih kombinasi algoritma Random Forest, SVM, Neural Network, dan Gradient Boosting dengan optimasi hyperparameter sistematis.
     
@@ -76,7 +76,7 @@ Keempat hipotesis ini akan diuji secara empiris melalui eksperimen yang dirancan
 \section{Strategi Akuisisi dan Persiapan Data}
 \label{sec:strategiAkuisisiData}
 %-----------------------------------------------------------------------------%
-Penelitian ini mengimplementasikan strategi dual-data yang menggabungkan kekuatan data riil (validitas eksternal) dan data artifisial (kontrol internal) untuk mengoptimalkan pengembangan model deteksi kecurangan. Strategi ini memungkinkan pelatihan model dengan ground truth yang terkontrol sambil mempertahankan kemampuan generalisasi pada kondisi operasional nyata.
+Penelitian ini mengimplementasikan strategi dual-data yang menggabungkan kekuatan data riil (validitas eksternal) dan data artifisial (kontrol internal) untuk mengoptimalkan pengembangan model deteksi kecurangan. Strategi ini memungkinkan pelatihan model dengan \textit{ground truth} yang terkontrol sambil mempertahankan kemampuan generalisasi pada kondisi operasional nyata.
 
 %-----------------------------------------------------------------------------%
 \section{Arsitektur Pipeline Preprocessing: Dari Log Mentah ke Fitur Terstruktur}
@@ -89,13 +89,13 @@ Pipeline preprocessing data merupakan komponen krusial yang mentransformasi log 
 
 Pipeline preprocessing dirancang dengan arsitektur modular yang terdiri dari empat komponen utama:
 
-\textbf{Module I - Data Loading dan Validasi:} \\
+\textbf{Modul I - Data Loading dan Validasi:} \\
 Modul pertama bertanggung jawab memuat data dari berbagai tabel Moodle dengan validasi komprehensif. Tabel-tabel utama yang diproses meliputi mdl\_quiz\_attempts (percobaan ujian), mdl\_question\_attempt\_steps (langkah pengerjaan), dan mdl\_question\_attempt\_step\_data (detail jawaban). Validasi mencakup pemeriksaan tipe data, konsistensi referensial antar tabel, dan penanganan nilai yang hilang atau corrupt. Output modul ini adalah dataset terintegrasi yang siap untuk preprocessing lanjutan.
 
-\textbf{Module II - Core Preprocessing dan Normalisasi:} \\
+\textbf{Modul II - Core Preprocessing dan Normalisasi:} \\
 Modul kedua melakukan pembersihan dan normalisasi fundamental. Proses utama meliputi: (1) unifikasi timestamp ke format POSIX untuk konsistensi temporal, (2) penggabungan tabel-tabel terkait melalui foreign key untuk membentuk event log komprehensif, (3) filtering data berdasarkan kriteria penelitian seperti status quiz completion, dan (4) penghapusan duplikasi dan anomali data. Modul ini menghasilkan clean dataset dengan struktur yang konsisten.
 
-\textbf{Module III - Feature Engineering Multi-Dimensi:} \\
+\textbf{Modul III - \textit{Feature Engineering} Multi-Dimensi:} \\
 Modul ketiga mengekstraksi fitur-fitur behavioral dari event log yang telah dibersihkan. Ekstraksi fitur dilakukan dalam empat kategori:
 \begin{itemize}
     \item \textbf{Intra-Attempt Features:} Mengukur karakteristik dalam satu percobaan ujian seperti total duration, number of actions, dan step duration statistics
@@ -104,7 +104,7 @@ Modul ketiga mengekstraksi fitur-fitur behavioral dari event log yang telah dibe
     \item \textbf{Comparative Features:} Menormalkan perilaku individual terhadap populasi menggunakan z-score transformation
 \end{itemize}
 
-\textbf{Module IV - Feature Selection dan Optimization:} \\
+\textbf{Modul IV - \textit{Feature Selection} dan \textit{Optimization}:} \\
 Modul terakhir melakukan optimasi fitur melalui beberapa tahap:
 \begin{itemize}
     \item \textbf{Missing Value Imputation:} Menggunakan SimpleImputer dengan strategi mean untuk fitur numerik
@@ -113,16 +113,16 @@ Modul terakhir melakukan optimasi fitur melalui beberapa tahap:
     \item \textbf{Standardization:} Menerapkan StandardScaler untuk normalisasi distribusi fitur
 \end{itemize}
 
-\subsection{Strategi Dual-Mode Processing}
+\subsection{Strategi \textit{Dual-Mode Processing}}
 \label{sec:dualModeStrategy}
 
 Inovasi kunci dalam pipeline adalah implementasi dual-mode processing yang membedakan pemrosesan data training dan detection:
 
 \textbf{Training Mode untuk Data Artifisial:} \\
-Dalam mode training, pipeline melakukan fitting terhadap data artifisial dan menyimpan semua transformation artifacts ke direktori preprocessing/artifacts/. Artifacts yang disimpan meliputi: (1) fitted imputer untuk missing value handling, (2) fitted scaler dengan parameter mean dan standard deviation, (3) feature selector dengan daftar fitur terpilih, dan (4) metadata transformasi untuk reproducibility. Mode ini memungkinkan eksplorasi parameter preprocessing optimal melalui eksperimen terkontrol.
+Dalam mode training, pipeline melakukan fitting terhadap data artifisial dan menyimpan semua transformation \textit{artifacts} ke direktori preprocessing/\textit{artifacts}/. \textit{Artifacts} yang disimpan meliputi: (1) fitted imputer untuk menangani \textit{missing value}, (2) fitted scaler dengan parameter mean dan standard deviation, (3) feature selector dengan daftar fitur terpilih, dan (4) metadata transformasi untuk reproducibility. Mode ini memungkinkan eksplorasi parameter preprocessing optimal melalui eksperimen terkontrol.
 
 \textbf{Detection Mode untuk Data Riil:} \\
-Dalam mode detection, pipeline memuat artifacts yang telah disimpan dan menerapkannya pada data riil tanpa melakukan fitting ulang. Pendekatan ini memastikan: (1) konsistensi transformasi antara training dan detection, (2) pencegahan data leakage dari test set, (3) efisiensi komputasi dengan menghindari re-fitting, dan (4) reproducibility hasil deteksi. Pipeline secara otomatis mendeteksi keberadaan artifacts dan switch ke mode yang sesuai.
+Dalam mode detection, pipeline memuat \textit{artifacts} yang telah disimpan dan menerapkannya pada data riil tanpa melakukan fitting ulang. Pendekatan ini memastikan: (1) konsistensi transformasi antara training dan detection, (2) pencegahan data leakage dari test set, (3) efisiensi komputasi dengan menghindari re-fitting, dan (4) reproducibility hasil deteksi. Pipeline secara otomatis mendeteksi keberadaan \textit{artifacts} dan switch ke mode yang sesuai.
 
 Strategi dual-mode ini merupakan best practice dalam machine learning yang memastikan validitas metodologis sambil mempertahankan efisiensi operasional. Transparansi penuh dalam proses transformasi memungkinkan audit dan verifikasi ilmiah terhadap setiap tahap preprocessing.
 
@@ -130,7 +130,7 @@ Strategi dual-mode ini merupakan best practice dalam machine learning yang memas
 Data log \textit{Moodle} diperoleh langsung dari sistem yang dikelola oleh tim ITF Fasilkom UI dan telah melalui proses anonimisasi untuk menjaga privasi pengguna. Data ini digunakan untuk validasi model dalam konteks operasional nyata.
 
 \textbf{Data Artifisial:} \\
-Data artifisial dirancang khusus untuk pelatihan model dengan ground truth yang terdokumentasi. Pendekatan ini memungkinkan eksplorasi berbagai skenario kecurangan dan kontrol parameter yang tidak mungkin dilakukan pada data riil.
+Data artifisial dirancang khusus untuk pelatihan model dengan \textit{ground truth} yang terdokumentasi. Pendekatan ini memungkinkan eksplorasi berbagai skenario kecurangan dan kontrol parameter yang tidak mungkin dilakukan pada data riil.
 
 \subsection{Data Log Moodle Riil: Deskripsi (periode, jumlah event/user, fitur utama), Proses Akuisisi, Kebijakan Anonimisasi \& Etika.}
 \label{sec:logRiil}
@@ -245,7 +245,7 @@ Penggunaan data riil ini telah mempertimbangkan aspek etika dan regulasi perlind
 \subsection{Strategi Data Artifisial}
 \label{sec:dataArtifisial}
 %-----------------------------------------------------------------------------%
-Data artifisial dalam penelitian ini dirancang untuk mengatasi keterbatasan ground truth pada data riil. Strategi ini memungkinkan kontrol penuh terhadap parameter kecurangan dan validasi objektif terhadap performa model, dengan alasan-alasan sebagai berikut:
+Data artifisial dalam penelitian ini dirancang untuk mengatasi keterbatasan \textit{ground truth} pada data riil. Strategi ini memungkinkan kontrol penuh terhadap parameter kecurangan dan validasi objektif terhadap performa model, dengan alasan-alasan sebagai berikut:
 
 \begin{enumerate}
     \item \textbf{Kontrol Variabel dan Simulasi Skenario Ekstrem:} \\
@@ -432,12 +432,12 @@ Pada skenario \textit{non-compliance}, pola aktivitas sengaja diatur untuk menci
 Definisi operasional ini menjadi dasar untuk memformulasikan parameter simulasi. Parameter-parameter tersebut, seperti tingkat kemiripan navigasi, delay waktu, dan distribusi jawaban, kemudian diintegrasikan dalam algoritma generasi data log artifisial. Setiap skenario diberikan label \textit{ground truth}, yang memungkinkan validasi dan evaluasi model deteksi kecurangan secara kuantitatif dan kualitatif.
 
 %-----------------------------------------------------------------------------%
-\subsection{Desain Ground Truth Artifisial}
+\subsection{Desain \textit{Ground Truth} Artifisial}
 \label{sec:desainGroundTruthArtifisial}
 %-----------------------------------------------------------------------------%
 Dalam proses generasi data log artifisial, setiap entitas---baik pada level sesi, upaya pengerjaan, maupun langkah pertanyaan---diberi label \textit{ground truth} yang mendefinisikan status sebagai aktivitas normal atau \textit{non-compliance}. Desain \textit{ground truth} ini tidak hanya merupakan hasil dari parameter simulasi, tetapi juga dilengkapi dengan dokumentasi yang komprehensif melalui file \texttt{cheating\_ground\_truth.md}. File ini berfungsi sebagai acuan empiris untuk validasi dan evaluasi model deteksi kecurangan.
 
-\textbf{Komponen Utama Ground Truth:}
+\textbf{Komponen Utama \textit{Ground Truth}:}
 \begin{itemize}
     \item \textbf{Label Kecurangan:} \\
     Setiap entitas data dilengkapi dengan label:
@@ -460,7 +460,7 @@ Dalam proses generasi data log artifisial, setiap entitas---baik pada level sesi
 
 Nilai-nilai di atas disajikan sebagai contoh dalam file \texttt{cheating\_ground\_truth.md}. Penting untuk dicatat bahwa angka-angka tersebut merupakan representasi sample yang dapat dikonfigurasi ulang sesuai kebutuhan eksperimen, dan bukan merupakan nilai final yang harus diterapkan secara universal.
 
-\textbf{Dokumentasi Melalui File Cheating Ground Truth:} \\
+\textbf{Dokumentasi Melalui \textit{File Cheating} \textit{Ground Truth}:} \\
 File \texttt{cheating\_ground\_truth.md} menyajikan tabel ringkasan statistik kelompok kecurangan beserta parameter-parameter yang telah diukur secara simulatif. Contoh tabel tersebut mencakup:
 \begin{itemize}
     \item Kelompok Kecurangan dengan Severity Tinggi: Menunjukkan kesamaan navigasi, pola jawaban, dan korelasi waktu yang sangat tinggi, serta standar deviasi dan wrong answer bias yang rendah.
@@ -572,7 +572,7 @@ Selain analisis numerik, validasi kualitatif dilakukan melalui review visualisas
     \item Evaluasi Realisme Data Sintetik: Perbandingan visual antara data artifisial dan data log riil memastikan bahwa skenario yang disimulasikan masuk akal secara operasional. Misalnya, pola waktu dan transisi yang dihasilkan harus mencerminkan kemungkinan terjadinya koordinasi dalam situasi nyata, tanpa menghasilkan data yang terlalu "ideal" atau tidak realistis.
 \end{itemize}
 
-\textbf{Integrasi Ground Truth untuk Evaluasi Model:} \\
+\textbf{Integrasi \textit{Ground Truth} untuk Evaluasi Model:} \\
 Data artifisial yang telah divalidasi ini dilengkapi dengan label \textit{ground truth} yang tercatat dalam file \texttt{cheating\_ground\_truth.md} dan digunakan sebagai acuan dalam pelatihan serta evaluasi model deteksi kecurangan. Validasi statistik dan visualisasi mendukung keandalan label tersebut dan memberikan dasar yang kuat untuk pengukuran metrik seperti precision, recall, F1-score, dan akurasi pada tahap evaluasi model.
 
 Melalui serangkaian proses validasi yang komprehensif ini, data log artifisial tidak hanya diverifikasi secara statistik tetapi juga diuji secara kualitatif, sehingga memberikan keyakinan bahwa skenario perilaku sintetik yang dihasilkan dapat dijadikan basis yang valid dan \textit{reproducible} untuk pengembangan model deteksi \textit{non-compliance}.
@@ -760,7 +760,7 @@ Setiap model dalam ensemble dipilih berdasarkan kekuatan spesifik dalam mendetek
 
 \textbf{Random Forest (Tree-based Ensemble):}
 \begin{itemize}
-    \item \textbf{Kekuatan:} Robust terhadap outliers dan noise, memberikan feature importance ranking
+    \item \textbf{Kekuatan:} Kokoh terhadap outliers dan noise, memberikan feature importance ranking
     \item \textbf{Konfigurasi:} 100 trees, max depth adaptive, min samples split = 2
     \item \textbf{Peran:} Mendeteksi non-linear patterns dan interaction effects antar fitur
 \end{itemize}
@@ -924,7 +924,7 @@ Mengingat distribusi kelas yang tidak seimbang (25\% cheating, 75\% normal), met
 \subsubsection{Protokol Cross-Validation}
 \label{sec:protokolCV}
 
-Stratified k-fold cross-validation memastikan evaluasi yang robust:
+Stratified k-fold cross-validation memastikan evaluasi yang kokoh:
 
 \begin{enumerate}
     \item Dataset dibagi menjadi 5 folds dengan proporsi kelas yang sama
@@ -964,7 +964,7 @@ Analisis mendalam terhadap tipe kesalahan klasifikasi:
 Aplikasi model pada 446,720 percobaan ujian riil mengikuti protokol:
 
 \begin{enumerate}
-    \item \textbf{Preprocessing Consistency:} Gunakan saved artifacts dari training
+    \item \textbf{Preprocessing Consistency:} Gunakan saved \textit{artifacts} dari training
     \item \textbf{Batch Processing:} Process data dalam chunks untuk efisiensi
     \item \textbf{Confidence Scoring:} Assign probability scores untuk setiap detection
     \item \textbf{Threshold Optimization:} Adjust detection threshold berdasarkan use case
@@ -1008,9 +1008,9 @@ Berbagai visualisasi mendukung interpretasi hasil:
 
 Metodologi yang telah dipaparkan dalam bab ini menyediakan framework komprehensif untuk pengembangan sistem deteksi kecurangan akademik berbasis AI. Beberapa keputusan metodologis kunci yang berkontribusi terhadap keberhasilan penelitian:
 
-\textbf{1. Strategi Data Dual-Mode}
+\textbf{1. Strategi Data \textit{Dual-Mode}}
 \begin{itemize}
-    \item Kombinasi data artifisial (dengan ground truth) dan data riil (skala besar)
+    \item Kombinasi data artifisial (dengan \textit{ground truth}) dan data riil (skala besar)
     \item Training mode vs detection mode untuk konsistensi transformasi
     \item 800 sampel artifisial terbukti optimal untuk training
 \end{itemize}
@@ -1018,29 +1018,29 @@ Metodologi yang telah dipaparkan dalam bab ini menyediakan framework komprehensi
 \textbf{2. Pipeline Preprocessing Terintegrasi}
 \begin{itemize}
     \item Empat modul yang handle kompleksitas data Moodle
-    \item Artifact saving untuk reproducibility
-    \item Quality control yang ketat (12.3\% data filtering)
+    \item \textit{Artifact saving} untuk \textit{reproducibility}
+    \item Kontrol kualitas yang ketat (12.3\% \textit{data filtering})
 \end{itemize}
 
-\textbf{3. Feature Engineering Berbasis Domain}
+\textbf{3. \textit{Feature Engineering} Berbasis Domain}
 \begin{itemize}
     \item 35 fitur awal dari empat kategori behavioral
-    \item Reduksi ke 8 fitur stabil via VIF analysis
-    \item Z-score normalization untuk similarity features
+    \item Reduksi ke 8 fitur stabil melalui analisis VIF
+    \item Normalisasi Z-score untuk \textit{similarity features}
 \end{itemize}
 
-\textbf{4. Arsitektur Ensemble dengan Graph Analysis}
+\textbf{4. Arsitektur Ensemble dengan \textit{Graph Analysis}}
 \begin{itemize}
     \item Integrasi 4 algoritma ML komplementer
     \item Graph network untuk deteksi kelompok
-    \item Weighted voting berdasarkan validation performance
+    \item \textit{Weighted voting} berdasarkan \textit{validation performance}
 \end{itemize}
 
 \textbf{5. Framework Evaluasi Multi-Perspektif}
 \begin{itemize}
-    \item Kuantitatif: Metrik komprehensif dengan cross-validation
-    \item Kualitatif: Pattern analysis dan domain validation
-    \item Fokus pada minimizing false positives (fairness)
+    \item Kuantitatif: Metrik komprehensif dengan \textit{cross-validation}
+    \item Kualitatif: \textit{Pattern analysis} dan \textit{domain validation}
+    \item Fokus pada \textit{minimizing false positives} (fairness)
 \end{itemize}
 
 Metodologi ini telah diimplementasikan dan divalidasi, dengan hasil eksperimen detail yang akan dipaparkan pada Bab 4. Pendekatan sistematis yang diterapkan memastikan bahwa sistem deteksi tidak hanya akurat secara statistik, tetapi juga applicable dan interpretable dalam konteks operasional institusi pendidikan.
@@ -1140,11 +1140,11 @@ Analisis eksploratori data riil mengungkap pola penggunaan yang bervariasi:
 Data riil ini memberikan konteks operasional yang kaya untuk validasi model, mencerminkan kompleksitas dan variabilitas sistem pembelajaran daring dalam skala institusional.
 
 %-----------------------------------------------------------------------------%
-\subsection{Data Artifisial: Desain Terkontrol untuk Ground Truth}
+\subsection{Data Artifisial: Desain Terkontrol untuk \textit{Ground Truth}}
 \label{sec:dataArtifisial}
 %-----------------------------------------------------------------------------%
 
-Keterbatasan utama data riil adalah absence of ground truth - tidak diketahui secara pasti mana aktivitas yang merupakan kecurangan. Untuk mengatasi hal ini, dirancang data artifisial dengan karakteristik kecurangan yang terkontrol sepenuhnya.
+Keterbatasan utama data riil adalah tidak adanya \textit{ground truth} - tidak diketahui secara pasti mana aktivitas yang merupakan kecurangan. Untuk mengatasi hal ini, dirancang data artifisial dengan karakteristik kecurangan yang terkontrol sepenuhnya.
 
 \subsubsection{Justifikasi Penggunaan Data Artifisial}
 \label{sec:justifikasiDataArtifisial}
@@ -1156,12 +1156,12 @@ Strategi data artifisial dipilih berdasarkan pertimbangan metodologis:
     Data artifisial memungkinkan pengaturan presisi parameter kecurangan seperti tingkat similarity (50\%-95\%), timing correlation (0.3-0.95), dan wrong answer bias (40\%-85\%). Kontrol ini tidak mungkin dilakukan pada data riil.
     
     \item \textbf{Eksplorasi Skenario Ekstrem:} \\
-    Simulasi dapat menciptakan kasus edge yang jarang terjadi namun penting untuk robustness model, seperti koordinasi sempurna (similarity 100\%) atau kecurangan subtle (similarity <60\%).
+    Simulasi dapat menciptakan kasus edge yang jarang terjadi namun penting untuk \textit{robustness} model, seperti koordinasi sempurna (similarity 100\%) atau kecurangan subtle (similarity <60\%).
     
-    \item \textbf{Ground Truth Objektif:} \\
+    \item \textbf{\textit{Ground Truth} Objektif:} \\
     Setiap instance dalam data artifisial memiliki label kecurangan yang pasti, memungkinkan evaluasi akurasi model secara objektif dan perhitungan metrik performa yang valid.
     
-    \item \textbf{Reproducibility Eksperimen:} \\
+    \item \textbf{\textit{Reproducibility} Eksperimen:} \\
     Penggunaan seed control dalam generator memastikan dataset yang sama dapat direproduksi, mendukung verifikasi ilmiah dan perbandingan fair antar algoritma.
 \end{enumerate}
 
@@ -1272,7 +1272,7 @@ Fitur-fitur fundamental yang mengukur karakteristik umum percobaan ujian:
     \begin{itemize}
         \item \texttt{total\_duration}: Total waktu pengerjaan ujian (seconds)
         \item \texttt{mean\_step\_duration}: Rata-rata waktu per langkah
-        \item \texttt{median\_step\_duration}: Median waktu per langkah (robust to outliers)
+        \item \texttt{median\_step\_duration}: Median waktu per langkah (kokoh terhadap outliers)
         \item \texttt{std\_step\_duration}: Variabilitas waktu pengerjaan
     \end{itemize}
     
@@ -1399,7 +1399,7 @@ Setelah proses seleksi, 8 fitur stabil dengan kontribusi informasi maksimal:
 \hline
 \texttt{mean\_nav\_similarity\_zscore} & 3.98 & 0.218 & Rata-rata z-score kemiripan, mengukur konsistensi pola \\
 \hline
-\texttt{median\_step\_duration} & 3.24 & 0.156 & Median durasi langkah, robust indicator kecepatan \\
+\texttt{median\_step\_duration} & 3.24 & 0.156 & Median durasi langkah, \textit{robust indicator} kecepatan \\
 \hline
 \texttt{std\_nav\_similarity\_zscore} & 7.89 & 0.142 & Variabilitas kemiripan, mendeteksi selective cheating \\
 \hline
