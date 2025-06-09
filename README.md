@@ -1,6 +1,6 @@
 # Moodle Cheating Detection System
 
-**PEMANTAUAN KEPATUHAN SECARA OTOMATIS MELALUI ANALISIS LOG PADA MOODLE BERBASIS KECERDASAN BUATAN**
+**Pemantauan Kepatuhan Otomatis melalui Analisis Log Berbasis AI di Moodle**
 
 A comprehensive machine learning pipeline for detecting academic cheating patterns in Moodle log data using artificial intelligence techniques.
 
