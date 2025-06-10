@@ -3,7 +3,7 @@
 \contentsline {chapter}{\uppercase {Halaman Judul}}{i}{section*.2}%
 \addvspace {-1em}
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {Halaman Orisinalitas}}{iii}{section*.4}%
+\contentsline {chapter}{\uppercase {Halaman Orisinalitas}}{ii}{section*.4}%
 \addvspace {-1em}
 \contentsline {chapter}{\uppercase {Lembar Pengesahan}}{iii}{section*.5}%
 \addvspace {-1em}
@@ -20,8 +20,6 @@
 \contentsline {chapter}{\uppercase {Daftar Tabel}}{xiii}{section*.11}%
 \addvspace {-1em}
 \contentsline {chapter}{\uppercase {\uppercase {Daftar Kode Program}}}{xiii}{section*.12}%
-\addvspace {-1em}
-\contentsline {chapter}{\uppercase {\uppercase {Daftar Lampiran}}}{xiv}{section*.13}%
 \contentsline {chapter}{\numberline {1}\MakeUppercase []{Pendahuluan}}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Latar Belakang}{1}{section.1.1}%
 \contentsline {section}{\numberline {1.2}Permasalahan}{2}{section.1.2}%
@@ -172,6 +170,4 @@
 \contentsline {subsection}{\numberline {4.7.3}Saran dan Insight untuk Implementasi Institusional}{83}{subsection.4.7.3}%
 \contentsline {section}{\numberline {4.8}Kesimpulan}{85}{section.4.8}%
 \contentsline {chapter}{\numberline {5}\MakeUppercase []{Penutup}}{87}{chapter.5}%
-\contentsline {chapter}{\uppercase {Daftar Referensi}}{88}{section*.37}%
-\addvspace {-1em}
-\contentsline {chapter}{\uppercase {\uppercase {Daftar Istilah}}}{1}{section*.38}%
+\contentsline {chapter}{\uppercase {Daftar Referensi}}{88}{section*.36}%

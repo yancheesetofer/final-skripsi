@@ -176,7 +176,7 @@
 % Daftar Lampiran
 % Jika tidak digunakan, commment kode ini.
 %
-\addCustomListPage{\listofappendix}{\listofappendixname}
+%\addCustomListPage{\listofappendix}{\listofappendixname}
 
 
 % Kembalikan pengaturan chapter dan daftar isi ke aturan awal mulai dari halaman ini
@@ -235,15 +235,16 @@
 
 %
 % Lampiran
+% Commented out - not needed
 %
-\noCAPinToC % Revert to original \addcontentsline formatting
-\begin{appendix}
-	\newcounter{pagetemp}
-	\setcounter{pagetemp}{\thepage}
-	\include{_internals/markLampiran}
-	\setcounter{page}{\thepagetemp}
-	\clearchapter
-	\include{src/99-backMatter/lampiran}
-\end{appendix}
+%\noCAPinToC % Revert to original \addcontentsline formatting
+%\begin{appendix}
+%	\newcounter{pagetemp}
+%	\setcounter{pagetemp}{\thepage}
+%	\include{_internals/markLampiran}
+%	\setcounter{page}{\thepagetemp}
+%	\clearchapter
+%	\include{src/99-backMatter/lampiran}
+%\end{appendix}
 
 \end{document}

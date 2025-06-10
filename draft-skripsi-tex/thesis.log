@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.4)  10 JUN 2025 12:21
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.6.4)  10 JUN 2025 13:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1229,7 +1229,7 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
 
 LaTeX Warning: Label `sec:dataArtifisial' multiply defined.
 
-) (./src/01-body/bab4.aux) (./src/01-body/kesimpulan.aux) (./_internals/pustaka.aux) (./_internals/markLampiran.aux) (./src/99-backMatter/lampiran.aux))
+) (./src/01-body/bab4.aux) (./src/01-body/kesimpulan.aux) (./_internals/pustaka.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 34.
@@ -1422,7 +1422,7 @@ LaTeX Info: Redefining \BHBI on input line 130.
 \openout2 = `_internals/sampul.aux'.
 
  (./_internals/sampul.tex
-<assets/pics/makara_kuning.png, id=662, 293.1753pt x 294.1389pt>
+<assets/pics/makara_kuning.png, id=654, 293.1753pt x 294.1389pt>
 File: assets/pics/makara_kuning.png Graphic file (type png)
 <use assets/pics/makara_kuning.png>
 Package pdftex.def Info: assets/pics/makara_kuning.png  used on input line 15.
@@ -1438,9 +1438,18 @@ LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 \openout4 = `thesis.ist'.
 
 
-{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc} <./assets/pics/makara_kuning.png>]
+{/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc} <./assets/pics/makara_kuning.png>])
 
-[2])
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.40 \ifodd\thechapterpagecount\forceclearchapter
+                                                 \fi [1
+
+
+
+]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 57.
@@ -1456,11 +1465,18 @@ Package pdftex.def Info: assets/pics/makara_kuning.png  used on input line 14.
 
 [1
 
+])
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.57 }
+       [1
+
 
 
 ]
-
-[2])
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 69.
@@ -1470,6 +1486,11 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (./src/00-frontMatter/pernyataanOrisinalitas.tex
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 12.0pt on input line 9.
+<assets/pics/ttd-yan.png, id=676, 1072.005pt x 443.6575pt>
+File: assets/pics/ttd-yan.png Graphic file (type png)
+<use assets/pics/ttd-yan.png>
+Package pdftex.def Info: assets/pics/ttd-yan.png  used on input line 14.
+(pdftex.def)             Requested size: 142.26378pt x 58.87572pt.
 LaTeX Font Info:    Trying to load font information for OT1+ptmcm on input line 26.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1ptmcm.fd
 File: ot1ptmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ptmcm.
@@ -1564,19 +1585,17 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
 Missing character: There is no ¹ in font zpzccmry!
 
 
-[3
+[2
 
 
+ <./assets/pics/ttd-yan.png>])
 
 
-])
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.iii}) has been already used, duplicate ignored
+pdfTeX warning (ext4): destination with the same identifier (name{page.ii}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.69 }}
-        [3
+        [2
 
 
 
@@ -1599,12 +1618,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 53--72
 
 
 
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.iii}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.81 \newpage
-              [3
+[3
 
 
 ])
@@ -1629,7 +1643,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 \openout2 = `src/00-frontMatter/kataPengantar.aux'.
 
-(./src/00-frontMatter/kataPengantar.tex)
+(./src/00-frontMatter/kataPengantar.tex
+File: assets/pics/ttd-yan.png Graphic file (type png)
+<use assets/pics/ttd-yan.png>
+Package pdftex.def Info: assets/pics/ttd-yan.png  used on input line 19.
+(pdftex.def)             Requested size: 142.26378pt x 58.87572pt.
+)
 
 [4
 
@@ -1662,6 +1681,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 51--57
 
  []
 
+File: assets/pics/ttd-yan.png Graphic file (type png)
+<use assets/pics/ttd-yan.png>
+Package pdftex.def Info: assets/pics/ttd-yan.png  used on input line 64.
+(pdftex.def)             Requested size: 113.81102pt x 47.09651pt.
 
 
 [5
@@ -1788,24 +1811,16 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 
 
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 179.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\uppercase' on input line 179.
-
-
-
 [14
 
-] (./thesis.lox)
-\tf@lox=\write11
-\openout11 = `thesis.lox'.
+]
 
 
-
-[15
+pdfTeX warning (ext4): destination with the same identifier (name{page.xiv}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.184 ...agecount\clearpage\else\forceclearchapter
+                                                  \fi [14
 
 ]
 \openout2 = `src/01-body/bab1.aux'.
@@ -1828,7 +1843,6 @@ l.19
       [1
 
 
-
 ]
 
 
@@ -1838,12 +1852,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                You might also make \topmargin smaller:
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.32 
-      [2]
+[2]
 
 
 Package fancyhdr Warning: \headheight is too small (0.0pt): 
@@ -2016,14 +2025,14 @@ BAB 3.
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\MakeUppercase   ' on input line 2.
 
-<newfigures/research_methodology_stages.pdf, id=1345, 860.01299pt x 572.9pt>
+<newfigures/research_methodology_stages.pdf, id=1328, 860.01299pt x 572.9pt>
 File: newfigures/research_methodology_stages.pdf Graphic file (type pdf)
 <use newfigures/research_methodology_stages.pdf>
 Package pdftex.def Info: newfigures/research_methodology_stages.pdf  used on input line 9.
 (pdftex.def)             Requested size: 405.45047pt x 270.09349pt.
 LaTeX Font Info:    Font shape `OT1/ntxtlf/b/n' will be
 (Font)              scaled to size 10.0pt on input line 10.
-<newfigures/technical_pipeline_flow_final.pdf, id=1347, 1449.81653pt x 1016.19652pt>
+<newfigures/technical_pipeline_flow_final.pdf, id=1330, 1449.81653pt x 1016.19652pt>
 File: newfigures/technical_pipeline_flow_final.pdf Graphic file (type pdf)
 <use newfigures/technical_pipeline_flow_final.pdf>
 Package pdftex.def Info: newfigures/technical_pipeline_flow_final.pdf  used on input line 18.
@@ -2134,7 +2143,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [28]
-<figures/data_flow_diagram.pdf, id=1580, 597.23125pt x 845.1575pt>
+<figures/data_flow_diagram.pdf, id=1563, 597.23125pt x 845.1575pt>
 File: figures/data_flow_diagram.pdf Graphic file (type pdf)
 <use figures/data_flow_diagram.pdf>
 Package pdftex.def Info: figures/data_flow_diagram.pdf  used on input line 274.
@@ -2286,7 +2295,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [42]
-<figures/feature_engineering_process.pdf, id=1642, 845.1575pt x 597.23125pt>
+<figures/feature_engineering_process.pdf, id=1625, 845.1575pt x 597.23125pt>
 File: figures/feature_engineering_process.pdf Graphic file (type pdf)
 <use figures/feature_engineering_process.pdf>
 Package pdftex.def Info: figures/feature_engineering_process.pdf  used on input line 588.
@@ -2361,7 +2370,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [48]
-<figures/ensemble_architecture.pdf, id=1676, 856.71747pt x 712.47173pt>
+<figures/ensemble_architecture.pdf, id=1659, 856.71747pt x 712.47173pt>
 File: figures/ensemble_architecture.pdf Graphic file (type pdf)
 <use figures/ensemble_architecture.pdf>
 Package pdftex.def Info: figures/ensemble_architecture.pdf  used on input line 751.
@@ -2611,7 +2620,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [68]
-<figures/confusion_matrix_Random Forest.png, id=1861, 578.16pt x 433.62pt>
+<figures/confusion_matrix_Random Forest.png, id=1844, 578.16pt x 433.62pt>
 File: figures/confusion_matrix_Random Forest.png Graphic file (type png)
 <use figures/confusion_matrix_Random Forest.png>
 Package pdftex.def Info: figures/confusion_matrix_Random Forest.png  used on input line 111.
@@ -2626,17 +2635,17 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [69 <./figures/confusion_matrix_Random Forest.png>]
-<figures/curves_Random Forest.png, id=1867, 1156.32pt x 433.62pt>
+<figures/curves_Random Forest.png, id=1850, 1156.32pt x 433.62pt>
 File: figures/curves_Random Forest.png Graphic file (type png)
 <use figures/curves_Random Forest.png>
 Package pdftex.def Info: figures/curves_Random Forest.png  used on input line 131.
 (pdftex.def)             Requested size: 298.75264pt x 112.03056pt.
-<figures/model_performance_comparison.pdf, id=1868, 859.83795pt x 570.77817pt>
+<figures/model_performance_comparison.pdf, id=1851, 859.83795pt x 570.77817pt>
 File: figures/model_performance_comparison.pdf Graphic file (type pdf)
 <use figures/model_performance_comparison.pdf>
 Package pdftex.def Info: figures/model_performance_comparison.pdf  used on input line 143.
 (pdftex.def)             Requested size: 341.43437pt x 226.65244pt.
-<figures/feature_importance_Random Forest.png, id=1869, 722.7pt x 433.62pt>
+<figures/feature_importance_Random Forest.png, id=1852, 722.7pt x 433.62pt>
 File: figures/feature_importance_Random Forest.png Graphic file (type png)
 <use figures/feature_importance_Random Forest.png>
 Package pdftex.def Info: figures/feature_importance_Random Forest.png  used on input line 169.
@@ -2677,7 +2686,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [72]
-<figures/feature_correlation_heatmap.pdf, id=1947, 626.29858pt x 570.75423pt>
+<figures/feature_correlation_heatmap.pdf, id=1930, 626.29858pt x 570.75423pt>
 File: figures/feature_correlation_heatmap.pdf Graphic file (type pdf)
 <use figures/feature_correlation_heatmap.pdf>
 Package pdftex.def Info: figures/feature_correlation_heatmap.pdf  used on input line 211.
@@ -2692,7 +2701,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [73 <./figures/feature_correlation_heatmap.pdf>]
-<figures/probability_distribution_analysis.pdf, id=2000, 1004.43002pt x 426.12701pt>
+<figures/probability_distribution_analysis.pdf, id=1983, 1004.43002pt x 426.12701pt>
 File: figures/probability_distribution_analysis.pdf Graphic file (type pdf)
 <use figures/probability_distribution_analysis.pdf>
 Package pdftex.def Info: figures/probability_distribution_analysis.pdf  used on input line 249.
@@ -2707,7 +2716,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [74 <./figures/probability_distribution_analysis.pdf>]
-<figures/repeat_offender_analysis.pdf, id=2055, 1004.32405pt x 425.88297pt>
+<figures/repeat_offender_analysis.pdf, id=2038, 1004.32405pt x 425.88297pt>
 File: figures/repeat_offender_analysis.pdf Graphic file (type pdf)
 <use figures/repeat_offender_analysis.pdf>
 Package pdftex.def Info: figures/repeat_offender_analysis.pdf  used on input line 314.
@@ -2722,7 +2731,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [75]
-<figures/quiz_analysis.pdf, id=2060, 860.04625pt x 715.138pt>
+<figures/quiz_analysis.pdf, id=2043, 860.04625pt x 715.138pt>
 File: figures/quiz_analysis.pdf Graphic file (type pdf)
 <use figures/quiz_analysis.pdf>
 Package pdftex.def Info: figures/quiz_analysis.pdf  used on input line 334.
@@ -2764,7 +2773,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [79]
-<newfigures/individual_case_1_user_4426.0_quiz_3144.0.png, id=2174, 1437.4503pt x 852.0633pt>
+<newfigures/individual_case_1_user_4426.0_quiz_3144.0.png, id=2157, 1437.4503pt x 852.0633pt>
 File: newfigures/individual_case_1_user_4426.0_quiz_3144.0.png Graphic file (type png)
 <use newfigures/individual_case_1_user_4426.0_quiz_3144.0.png>
 Package pdftex.def Info: newfigures/individual_case_1_user_4426.0_quiz_3144.0.png  used on input line 488.
@@ -2781,7 +2790,7 @@ Package fancyhdr Warning: \headheight is too small (0.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
 
 [80]
-<newfigures/individual_case_2_user_7486.0_quiz_8158.0.png, id=2179, 1436.0049pt x 852.0633pt>
+<newfigures/individual_case_2_user_7486.0_quiz_8158.0.png, id=2162, 1436.0049pt x 852.0633pt>
 File: newfigures/individual_case_2_user_7486.0_quiz_8158.0.png Graphic file (type png)
 <use newfigures/individual_case_2_user_7486.0_quiz_8158.0.png>
 Package pdftex.def Info: newfigures/individual_case_2_user_7486.0_quiz_8158.0.png  used on input line 495.
@@ -2921,81 +2930,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\uppercase' on input line 233.
 
-(./thesis.gls)
-\c@pagetemp=\count422
-\openout2 = `_internals/markLampiran.aux'.
-
- (./_internals/markLampiran.tex
-LaTeX Font Info:    Font shape `OT1/ntxtlf/m/n' will be
-(Font)              scaled to size 24.88pt on input line 11.
-
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.12 \end{titlepage}
-                     [1
-
-
-
-
-
-])
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{page.89}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.245 	\clearchapter
-                     [89
-
-
-
-]
-\openout2 = `src/99-backMatter/lampiran.aux'.
-
- (./src/99-backMatter/lampiran.tex
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[90
-
-]
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[91]
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[92])
-
-
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller:
-(fancyhdr)                \addtolength{\topmargin}{-14.49998pt}.
-
-[93
-
-] (./thesis.aux (./_internals/sampul.aux) (./_internals/judul_dalam.aux) (./src/00-frontMatter/pernyataanOrisinalitas.aux) (./src/00-frontMatter/pengesahanSidang.aux) (./src/00-frontMatter/kataPengantar.aux) (./src/00-frontMatter/persetujuanPublikasi.aux) (./src/00-frontMatter/abstrak.aux) (./src/00-frontMatter/abstract.aux) (./src/01-body/bab1.aux) (./src/01-body/bab2.aux) (./src/01-body/bab3.aux) (./src/01-body/bab4.aux) (./src/01-body/kesimpulan.aux) (./_internals/pustaka.aux) (./_internals/markLampiran.aux) (./src/99-backMatter/lampiran.aux))
+(./thesis.gls) (./thesis.aux (./_internals/sampul.aux) (./_internals/judul_dalam.aux) (./src/00-frontMatter/pernyataanOrisinalitas.aux) (./src/00-frontMatter/pengesahanSidang.aux) (./src/00-frontMatter/kataPengantar.aux) (./src/00-frontMatter/persetujuanPublikasi.aux) (./src/00-frontMatter/abstrak.aux) (./src/00-frontMatter/abstract.aux) (./src/01-body/bab1.aux) (./src/01-body/bab2.aux) (./src/01-body/bab3.aux) (./src/01-body/bab4.aux) (./src/01-body/kesimpulan.aux) (./_internals/pustaka.aux))
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2020/03/25>
@@ -3005,21 +2940,21 @@ L3 programming layer <2020/03/25>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 8251ADDA4E758CA816B7BD443BC3573F;43817.
+(rerunfilecheck)             Checksum: 2591BEFEA07F4104514204A203EB2E15;43572.
  ) 
 Here is how much of TeX's memory you used:
- 42625 strings out of 473190
- 795009 string characters out of 5715801
- 1343189 words of memory out of 5000000
- 64498 multiletter control sequences out of 15000+600000
- 611464 words of font info for 138 fonts, out of 8000000 for 9000
+ 42617 strings out of 473190
+ 794573 string characters out of 5715801
+ 1341901 words of memory out of 5000000
+ 64520 multiletter control sequences out of 15000+600000
+ 609591 words of font info for 135 fonts, out of 8000000 for 9000
  1283 hyphenation exceptions out of 8191
- 114i,12n,115p,18437b,871s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 114i,12n,115p,18437b,716s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmb.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmbi.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmr.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/newtx/ztmri.pfb>
-Output written on thesis.pdf (120 pages, 9144820 bytes).
+Output written on thesis.pdf (114 pages, 9146039 bytes).
 PDF statistics:
- 2404 PDF objects out of 2487 (max. 8388607)
- 1789 compressed objects within 18 object streams
- 395 named destinations out of 1000 (max. 500000)
- 1397 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2357 PDF objects out of 2487 (max. 8388607)
+ 1746 compressed objects within 18 object streams
+ 385 named destinations out of 1000 (max. 500000)
+ 1386 words of extra memory for PDF output out of 10000 (max. 10000000)
 

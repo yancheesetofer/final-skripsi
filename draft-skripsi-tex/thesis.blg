@@ -16,12 +16,10 @@ A level-1 auxiliary file: src/01-body/bab3.aux
 A level-1 auxiliary file: src/01-body/bab4.aux
 A level-1 auxiliary file: src/01-body/kesimpulan.aux
 A level-1 auxiliary file: _internals/pustaka.aux
-A level-1 auxiliary file: _internals/markLampiran.aux
-A level-1 auxiliary file: src/99-backMatter/lampiran.aux
 Database file #1: config/references.bib
 You've used 18 entries,
             1935 wiz_defined-function locations,
-            619 strings with 7955 characters,
+            617 strings with 7898 characters,
 and the built_in function-call counts, 7839 in all, are:
 = -- 769
 > -- 327
