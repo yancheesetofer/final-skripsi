@@ -2,7 +2,7 @@
 \chapter{\babTiga}
 \label{bab:3}
 %-----------------------------------------------------------------------------%
-Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem deteksi kecurangan akademik berbasis kecerdasan buatan pada platform Moodle. Metodologi penelitian dirancang melalui pendekatan sistematis yang dimulai dari pemahaman masalah, perancangan solusi, hingga implementasi dan evaluasi. Pembahasan mencakup enam fase utama: (1) analisis kebutuhan dan studi literatur, (2) akuisisi dan persiapan data, (3) perancangan data artifisial dengan ground truth terkontrol, (4) pengembangan \textit{pipeline} preprocessing dan ekstraksi fitur, (5) pelatihan model ensemble machine learning, dan (6) evaluasi komprehensif pada data riil dan artifisial.
+Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem deteksi kecurangan akademik berbasis kecerdasan buatan pada platform Moodle. Metodologi penelitian dirancang melalui pendekatan sistematis yang dimulai dari pemahaman masalah, perancangan solusi, hingga implementasi dan evaluasi. Pembahasan mencakup enam fase utama: (1) analisis kebutuhan dan studi literatur, (2) akuisisi dan persiapan data, (3) perancangan data artifisial dengan \textit{ground truth} terkontrol, (4) pengembangan \textit{pipeline preprocessing} dan ekstraksi fitur, (5) pelatihan model \textit{ensemble machine learning}, dan (6) evaluasi komprehensif pada data riil dan artifisial.
 
 \begin{figure}[htbp]
     \centering
@@ -11,7 +11,7 @@ Bab ini memaparkan metode penelitian yang digunakan untuk mengembangkan sistem d
     \label{fig:research_stages}
 \end{figure}
 
-Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang terdiri dari enam fase utama yang saling berkaitan. Setiap fase dirancang secara spesifik untuk menjawab pertanyaan penelitian yang telah dirumuskan pada Bab 1. Fase 1 mengidentifikasi pola-pola kecurangan akademik melalui studi literatur. Fase 2 dan 3 mempersiapkan data pelatihan dengan \textit{ground truth} yang terkontrol. Fase 4 mentransformasi data mentah menjadi fitur-fitur bermakna. Fase 5 mengembangkan model deteksi menggunakan pendekatan ensemble. Fase 6 mengevaluasi efektivitas model pada skala operasional.
+Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang terdiri dari enam fase utama yang saling berkaitan. Setiap fase dirancang secara spesifik untuk menjawab pertanyaan penelitian yang telah dirumuskan pada Bab 1. Fase 1 mengidentifikasi pola-pola kecurangan akademik melalui studi literatur. Fase 2 dan 3 mempersiapkan data pelatihan dengan \textit{ground truth} yang terkontrol. Fase 4 mentransformasi data mentah menjadi fitur-fitur bermakna. Fase 5 mengembangkan model deteksi menggunakan pendekatan \textit{ensemble}. Fase 6 mengevaluasi efektivitas model pada skala operasional.
 
 \begin{figure}[htbp]
     \centering
@@ -20,38 +20,38 @@ Gambar \ref{fig:research_stages} menunjukkan kerangka metodologi penelitian yang
     \label{fig:technical_pipeline}
 \end{figure}
 
-Gambar \ref{fig:technical_pipeline} menerjemahkan kerangka metodologi konseptual menjadi implementasi teknis yang detail. \textit{Pipeline} dimulai dari dua sumber data yang berbeda karakteristiknya: \textbf{Data Riil ITF} yang berisi 446,720 events dari aktivitas nyata mahasiswa Fasilkom UI, dan \textbf{Data Artifisial} dengan 800 sampel terkontrol yang dilengkapi \textit{ground truth} untuk pelatihan model. 
+Gambar \ref{fig:technical_pipeline} menerjemahkan kerangka metodologi konseptual menjadi implementasi teknis yang detail. \textit{Pipeline} dimulai dari dua sumber data yang berbeda karakteristiknya: \textbf{Data Riil ITF} yang berisi 446.720 \textit{events} dari aktivitas nyata mahasiswa Fasilkom UI, dan \textbf{Data Artifisial} dengan 800 sampel terkontrol yang dilengkapi \textit{ground truth} untuk pelatihan model. 
 
-Perbedaan krusial terletak pada strategi pemrosesan: data artifisial diproses dalam \textit{Training Mode} untuk membangun dan menyimpan \textit{artifacts} pembelajaran (scaler, feature selector, imputer), sementara data riil menggunakan \textit{Detection Mode} yang memanfaatkan \textit{artifacts} tersebut untuk konsistensi transformasi. \textit{Pipeline} berhasil mereduksi kompleksitas dari 35 fitur awal menjadi 8 fitur stabil melalui analisis Variance Inflation Factor (VIF), menghasilkan model ensemble yang mendeteksi 131,479 percobaan ujian mencurigakan (29.43\% dari total).
+Perbedaan krusial terletak pada strategi pemrosesan: data artifisial diproses dalam \textit{Training Mode} untuk membangun dan menyimpan \textit{artifacts} pembelajaran (\textit{scaler}, \textit{feature selector}, \textit{imputer}), sementara data riil menggunakan \textit{Detection Mode} yang memanfaatkan \textit{artifacts} tersebut untuk konsistensi transformasi. \textit{Pipeline} berhasil mereduksi kompleksitas dari 35 fitur awal menjadi 8 fitur stabil melalui analisis \textit{Variance Inflation Factor} (VIF), menghasilkan model \textit{ensemble} yang mendeteksi 131.479 percobaan ujian mencurigakan (29,43\% dari total).
 
-Kombinasi kedua diagram memberikan pemahaman menyeluruh: Gambar \ref{fig:research_stages} menyediakan peta konseptual untuk memandu pembaca melalui logika penelitian, sedangkan Gambar \ref{fig:technical_pipeline} memberikan blueprint teknis untuk reproduksi penelitian. Integrasi pendekatan top-down (konseptual) dan bottom-up (teknis) ini memastikan transparansi metodologi yang dapat dipertanggungjawabkan secara ilmiah.
+Kombinasi kedua diagram memberikan pemahaman menyeluruh: Gambar \ref{fig:research_stages} menyediakan peta konseptual untuk memandu pembaca melalui logika penelitian, sedangkan Gambar \ref{fig:technical_pipeline} memberikan \textit{blueprint} teknis untuk reproduksi penelitian. Integrasi pendekatan \textit{top-down} (konseptual) dan \textit{bottom-up} (teknis) ini memastikan transparansi metodologi yang dapat dipertanggungjawabkan secara ilmiah.
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
 \section{Desain Penelitian dan Hipotesis}
 \label{sec:desainPenelitian}
 %-----------------------------------------------------------------------------%
-Penelitian ini mengadopsi pendekatan eksperimental dengan kombinasi data artifisial dan riil untuk mengembangkan sistem deteksi kecurangan yang \textit{robust} (kokoh) dan dapat diimplementasikan dalam skala institusional. Desain penelitian dirancang secara sistematis untuk menjawab pertanyaan penelitian utama: bagaimana mengembangkan sistem deteksi kecurangan otomatis yang akurat untuk platform Moodle menggunakan pendekatan machine learning?
+Penelitian ini mengadopsi pendekatan eksperimental dengan kombinasi data artifisial dan riil untuk mengembangkan sistem deteksi kecurangan yang \textit{robust} (kokoh) dan dapat diimplementasikan dalam skala institusional. Desain penelitian dirancang secara sistematis untuk menjawab pertanyaan penelitian utama: bagaimana mengembangkan sistem deteksi kecurangan otomatis yang akurat untuk platform Moodle menggunakan pendekatan \textit{machine learning}?
 
 \subsection{Alur Tahapan Penelitian}
 \label{subsec:alurTahapanPenelitian}
 Penelitian dilakukan melalui enam tahapan sistematis yang saling terkait:
 
 \begin{enumerate}
-    \item \textbf{Fase 1 - Analisis Kebutuhan dan Studi Literatur:} Mengidentifikasi pola-pola kecurangan akademik dalam pembelajaran daring melalui review sistematis literatur. Fase ini menghasilkan pemahaman mendalam tentang karakteristik perilaku curang dan metode deteksi yang telah ada.
+    \item \textbf{Fase 1 - Analisis Kebutuhan dan Studi Literatur:} Mengidentifikasi pola-pola kecurangan akademik dalam pembelajaran daring melalui \textit{review} sistematis literatur. Fase ini menghasilkan pemahaman mendalam tentang karakteristik perilaku curang dan metode deteksi yang telah ada.
     
-    \item \textbf{Fase 2 - Akuisisi Data Log Moodle:} Mengumpulkan data log aktivitas dari platform Moodle Fasilkom UI dengan total 446,720 events. Data melalui proses anonimisasi untuk menjaga privasi pengguna.
+    \item \textbf{Fase 2 - Akuisisi Data Log Moodle:} Mengumpulkan data log aktivitas dari platform Moodle Fasilkom UI dengan total 446.720 \textit{events}. Data melalui proses anonimisasi untuk menjaga privasi pengguna.
     
     \item \textbf{Fase 3 - Perancangan Data Artifisial:} Mengembangkan generator data artifisial yang mensimulasikan 800 skenario ujian dengan parameter kecurangan terkontrol. Setiap skenario dilengkapi \textit{ground truth} untuk validasi model.
     
     \item \textbf{Fase 4 - Pengembangan \textit{Pipeline Preprocessing}:} Mengimplementasikan sistem ekstraksi dan transformasi fitur yang menghasilkan 35 fitur awal, kemudian direduksi menjadi 8 fitur stabil melalui analisis VIF.
     
-    \item \textbf{Fase 5 - Pelatihan Model Ensemble:} Melatih kombinasi algoritma Random Forest, SVM, Neural Network, dan Gradient Boosting dengan optimasi hyperparameter sistematis.
+    \item \textbf{Fase 5 - Pelatihan Model \textit{Ensemble}:} Melatih kombinasi algoritma \textit{Random Forest}, SVM, \textit{Neural Network}, dan \textit{Gradient Boosting} dengan optimasi \textit{hyperparameter} sistematis.
     
     \item \textbf{Fase 6 - Evaluasi Multi-Aspek:} Menguji model pada data artifisial (evaluasi kuantitatif) dan mengaplikasikan pada data riil (evaluasi kualitatif) untuk memvalidasi efektivitas deteksi.
 \end{enumerate}
 
-Setiap fase dirancang dengan output yang jelas dan terukur, memungkinkan evaluasi progres penelitian secara objektif. Pendekatan iteratif diterapkan dimana hasil evaluasi dapat memicu perbaikan pada fase-fase sebelumnya.
+Setiap fase dirancang dengan \textit{output} yang jelas dan terukur, memungkinkan evaluasi progres penelitian secara objektif. Pendekatan iteratif diterapkan di mana hasil evaluasi dapat memicu perbaikan pada fase-fase sebelumnya.
 
 \subsection{Hipotesis Penelitian}
 \label{subsec:hipotesisPenelitian}
@@ -61,7 +61,7 @@ Berdasarkan studi literatur dan analisis awal, penelitian ini menguji empat hipo
 Kolaborasi kecurangan akan menghasilkan pola similaritas yang dapat dideteksi dalam tiga dimensi: navigasi (urutan pengerjaan soal), \textit{timing} (pola waktu), dan jawaban (kesamaan respons). Hipotesis ini memprediksi tingkat akurasi deteksi $>90\%$ untuk kasus dengan koordinasi tinggi.
 
 \textbf{H2: Superioritas Model Gabungan}\\
-Model ensemble (model gabungan) yang mengintegrasikan beberapa algoritma akan memberikan performa superior (peningkatan F1-score minimal 5\%) dibandingkan model tunggal dalam mendeteksi berbagai strategi kecurangan yang heterogen.
+Model \textit{ensemble} (model gabungan) yang mengintegrasikan beberapa algoritma akan memberikan performa superior (peningkatan \textit{F1-score} minimal 5\%) dibandingkan model tunggal dalam mendeteksi berbagai strategi kecurangan yang heterogen.
 
 \textbf{H3: \textit{Threshold} Ukuran Dataset}\\
 Dataset dengan minimal 500-1000 sampel diperlukan untuk mencapai performa deteksi yang optimal (akurasi $>95\%$). Peningkatan ukuran dataset akan menghasilkan peningkatan performa yang signifikan hingga mencapai titik saturasi.
@@ -76,55 +76,55 @@ Keempat hipotesis ini akan diuji secara empiris melalui eksperimen yang dirancan
 \section{Strategi Akuisisi dan Persiapan Data}
 \label{sec:strategiAkuisisiData}
 %-----------------------------------------------------------------------------%
-Penelitian ini mengimplementasikan strategi dual-data yang menggabungkan kekuatan data riil (validitas eksternal) dan data artifisial (kontrol internal) untuk mengoptimalkan pengembangan model deteksi kecurangan. Strategi ini memungkinkan pelatihan model dengan \textit{ground truth} yang terkontrol sambil mempertahankan kemampuan generalisasi pada kondisi operasional nyata.
+Penelitian ini mengimplementasikan strategi \textit{dual-data} yang menggabungkan kekuatan data riil (validitas eksternal) dan data artifisial (kontrol internal) untuk mengoptimalkan pengembangan model deteksi kecurangan. Strategi ini memungkinkan pelatihan model dengan \textit{ground truth} yang terkontrol sambil mempertahankan kemampuan generalisasi pada kondisi operasional nyata.
 
 %-----------------------------------------------------------------------------%
 \section{Arsitektur Pipeline Preprocessing: Dari Log Mentah ke Fitur Terstruktur}
 \label{sec:pipelinePreprocessing}
 %-----------------------------------------------------------------------------%
-Pipeline preprocessing data merupakan komponen krusial yang mentransformasi log mentah Moodle menjadi representasi fitur yang siap untuk machine learning. Sesuai dengan Fase 4 pada Gambar \ref{fig:research_stages}, pipeline ini memproses kedua jenis data (riil dan artifisial) melalui empat modul terintegrasi dengan strategi dual-mode yang memastikan konsistensi transformasi.
+\textit{Pipeline preprocessing} data merupakan komponen krusial yang mentransformasi log mentah Moodle menjadi representasi fitur yang siap untuk \textit{machine learning}. Sesuai dengan Fase 4 pada Gambar \ref{fig:research_stages}, \textit{pipeline} ini memproses kedua jenis data (riil dan artifisial) melalui empat modul terintegrasi dengan strategi \textit{dual-mode} yang memastikan konsistensi transformasi.
 
 \subsection{Komponen dan Alur Kerja Pipeline}
 \label{sec:komponenPipeline}
 
-Pipeline preprocessing dirancang dengan arsitektur modular yang terdiri dari empat komponen utama:
+\textit{Pipeline preprocessing} dirancang dengan arsitektur modular yang terdiri dari empat komponen utama:
 
-\textbf{Modul I - Data Loading dan Validasi:} \\
-Modul pertama bertanggung jawab memuat data dari berbagai tabel Moodle dengan validasi komprehensif. Tabel-tabel utama yang diproses meliputi mdl\_quiz\_attempts (percobaan ujian), mdl\_question\_attempt\_steps (langkah pengerjaan), dan mdl\_question\_attempt\_step\_data (detail jawaban). Validasi mencakup pemeriksaan tipe data, konsistensi referensial antar tabel, dan penanganan nilai yang hilang atau corrupt. Output modul ini adalah dataset terintegrasi yang siap untuk preprocessing lanjutan.
+\textbf{Modul I - \textit{Data Loading} dan Validasi:} \\
+Modul pertama bertanggung jawab memuat data dari berbagai tabel Moodle dengan validasi komprehensif. Tabel-tabel utama yang diproses meliputi mdl\_quiz\_attempts (percobaan ujian), mdl\_question\_attempt\_steps (langkah pengerjaan), dan mdl\_question\_attempt\_step\_data (detail jawaban). Validasi mencakup pemeriksaan tipe data, konsistensi referensial antar tabel, dan penanganan nilai yang hilang atau \textit{corrupt}. \textit{Output} modul ini adalah dataset terintegrasi yang siap untuk \textit{preprocessing} lanjutan.
 
-\textbf{Modul II - Core Preprocessing dan Normalisasi:} \\
-Modul kedua melakukan pembersihan dan normalisasi fundamental. Proses utama meliputi: (1) unifikasi timestamp ke format POSIX untuk konsistensi temporal, (2) penggabungan tabel-tabel terkait melalui foreign key untuk membentuk event log komprehensif, (3) filtering data berdasarkan kriteria penelitian seperti status quiz completion, dan (4) penghapusan duplikasi dan anomali data. Modul ini menghasilkan clean dataset dengan struktur yang konsisten.
+\textbf{Modul II - \textit{Core Preprocessing} dan Normalisasi:} \\
+Modul kedua melakukan pembersihan dan normalisasi fundamental. Proses utama meliputi: (1) unifikasi \textit{timestamp} ke format POSIX untuk konsistensi temporal, (2) penggabungan tabel-tabel terkait melalui \textit{foreign key} untuk membentuk \textit{event log} komprehensif, (3) \textit{filtering} data berdasarkan kriteria penelitian seperti status \textit{quiz completion}, dan (4) penghapusan duplikasi dan anomali data. Modul ini menghasilkan \textit{clean dataset} dengan struktur yang konsisten.
 
 \textbf{Modul III - \textit{Feature Engineering} Multi-Dimensi:} \\
-Modul ketiga mengekstraksi fitur-fitur behavioral dari event log yang telah dibersihkan. Ekstraksi fitur dilakukan dalam empat kategori:
+Modul ketiga mengekstraksi fitur-fitur \textit{behavioral} dari \textit{event log} yang telah dibersihkan. Ekstraksi fitur dilakukan dalam empat kategori:
 \begin{itemize}
-    \item \textbf{Intra-Attempt Features:} Mengukur karakteristik dalam satu percobaan ujian seperti total duration, number of actions, dan step duration statistics
-    \item \textbf{Sequential Features:} Menangkap pola urutan seperti navigation patterns, revisit counts, linearity measures, dan entropy navigasi
-    \item \textbf{Similarity Features:} Menghitung kemiripan antar pengguna menggunakan Levenshtein distance untuk navigasi dan korelasi statistik untuk timing patterns
-    \item \textbf{Comparative Features:} Menormalkan perilaku individual terhadap populasi menggunakan z-score transformation
+    \item \textbf{\textit{Intra-Attempt Features}:} Mengukur karakteristik dalam satu percobaan ujian seperti \textit{total duration}, \textit{number of actions}, dan \textit{step duration statistics}
+    \item \textbf{\textit{Sequential Features}:} Menangkap pola urutan seperti \textit{navigation patterns}, \textit{revisit counts}, \textit{linearity measures}, dan entropi navigasi
+    \item \textbf{\textit{Similarity Features}:} Menghitung kemiripan antar pengguna menggunakan \textit{Levenshtein distance} untuk navigasi dan korelasi statistik untuk \textit{timing patterns}
+    \item \textbf{\textit{Comparative Features}:} Menormalkan perilaku individual terhadap populasi menggunakan transformasi \textit{z-score}
 \end{itemize}
 
 \textbf{Modul IV - \textit{Feature Selection} dan \textit{Optimization}:} \\
 Modul terakhir melakukan optimasi fitur melalui beberapa tahap:
 \begin{itemize}
-    \item \textbf{Missing Value Imputation:} Menggunakan SimpleImputer dengan strategi mean untuk fitur numerik
-    \item \textbf{Multicollinearity Analysis:} Menghitung Variance Inflation Factor (VIF) dan mengeliminasi fitur dengan VIF $> 10$
-    \item \textbf{Variance Filtering:} Menghilangkan fitur dengan variance $< 0.01$ yang tidak informatif
-    \item \textbf{Standardization:} Menerapkan StandardScaler untuk normalisasi distribusi fitur
+    \item \textbf{\textit{Missing Value Imputation}:} Menggunakan \textit{SimpleImputer} dengan strategi \textit{mean} untuk fitur numerik
+    \item \textbf{\textit{Multicollinearity Analysis}:} Menghitung \textit{Variance Inflation Factor} (VIF) dan mengeliminasi fitur dengan VIF $>10$
+    \item \textbf{\textit{Variance Filtering}:} Menghilangkan fitur dengan \textit{variance} $<0,01$ yang tidak informatif
+    \item \textbf{\textit{Standardization}:} Menerapkan \textit{StandardScaler} untuk normalisasi distribusi fitur
 \end{itemize}
 
 \subsection{Strategi \textit{Dual-Mode Processing}}
 \label{sec:dualModeStrategy}
 
-Inovasi kunci dalam pipeline adalah implementasi dual-mode processing yang membedakan pemrosesan data training dan detection:
+Inovasi kunci dalam \textit{pipeline} adalah implementasi \textit{dual-mode processing} yang membedakan pemrosesan data \textit{training} dan \textit{detection}:
 
-\textbf{Training Mode untuk Data Artifisial:} \\
-Dalam mode training, pipeline melakukan fitting terhadap data artifisial dan menyimpan semua transformation \textit{artifacts} ke direktori preprocessing/\textit{artifacts}/. \textit{Artifacts} yang disimpan meliputi: (1) fitted imputer untuk menangani \textit{missing value}, (2) fitted scaler dengan parameter mean dan standard deviation, (3) feature selector dengan daftar fitur terpilih, dan (4) metadata transformasi untuk reproducibility. Mode ini memungkinkan eksplorasi parameter preprocessing optimal melalui eksperimen terkontrol.
+\textbf{\textit{Training Mode} untuk Data Artifisial:} \\
+Dalam \textit{mode training}, \textit{pipeline} melakukan \textit{fitting} terhadap data artifisial dan menyimpan semua \textit{transformation artifacts} ke direktori preprocessing/\textit{artifacts}/. \textit{Artifacts} yang disimpan meliputi: (1) \textit{fitted imputer} untuk menangani \textit{missing value}, (2) \textit{fitted scaler} dengan parameter \textit{mean} dan \textit{standard deviation}, (3) \textit{feature selector} dengan daftar fitur terpilih, dan (4) \textit{metadata} transformasi untuk \textit{reproducibility}. Mode ini memungkinkan eksplorasi parameter \textit{preprocessing} optimal melalui eksperimen terkontrol.
 
-\textbf{Detection Mode untuk Data Riil:} \\
-Dalam mode detection, pipeline memuat \textit{artifacts} yang telah disimpan dan menerapkannya pada data riil tanpa melakukan fitting ulang. Pendekatan ini memastikan: (1) konsistensi transformasi antara training dan detection, (2) pencegahan data leakage dari test set, (3) efisiensi komputasi dengan menghindari re-fitting, dan (4) reproducibility hasil deteksi. Pipeline secara otomatis mendeteksi keberadaan \textit{artifacts} dan switch ke mode yang sesuai.
+\textbf{\textit{Detection Mode} untuk Data Riil:} \\
+Dalam \textit{mode detection}, \textit{pipeline} memuat \textit{artifacts} yang telah disimpan dan menerapkannya pada data riil tanpa melakukan \textit{fitting} ulang. Pendekatan ini memastikan: (1) konsistensi transformasi antara \textit{training} dan \textit{detection}, (2) pencegahan \textit{data leakage} dari \textit{test set}, (3) efisiensi komputasi dengan menghindari \textit{re-fitting}, dan (4) \textit{reproducibility} hasil deteksi. \textit{Pipeline} secara otomatis mendeteksi keberadaan \textit{artifacts} dan beralih ke mode yang sesuai.
 
-Strategi dual-mode ini merupakan best practice dalam machine learning yang memastikan validitas metodologis sambil mempertahankan efisiensi operasional. Transparansi penuh dalam proses transformasi memungkinkan audit dan verifikasi ilmiah terhadap setiap tahap preprocessing.
+Strategi \textit{dual-mode} ini merupakan \textit{best practice} dalam \textit{machine learning} yang memastikan validitas metodologis sambil mempertahankan efisiensi operasional. Transparansi penuh dalam proses transformasi memungkinkan audit dan verifikasi ilmiah terhadap setiap tahap \textit{preprocessing}.
 
 \textbf{Data Riil Moodle:} \\
 Data log \textit{Moodle} diperoleh langsung dari sistem yang dikelola oleh tim ITF Fasilkom UI dan telah melalui proses anonimisasi untuk menjaga privasi pengguna. Data ini digunakan untuk validasi model dalam konteks operasional nyata.
@@ -156,7 +156,7 @@ Mencatat tiap langkah (\textit{step}) dalam upaya pengerjaan soal, termasuk stat
 \textbf{mdl\_quiz\_attempts} \\
 Kolom: \textit{attempt\_id}, \textit{quiz\_id}, \textit{user\_id}, \textit{question\_usage\_id}, \textit{timestart}, \textit{timefinish}, \textit{state}, \textit{sumgrades} \\
 Menggambarkan detail setiap upaya pengerjaan kuis, termasuk waktu mulai, waktu selesai, status, dan jumlah nilai yang diperoleh. \\
-Catatan: Terdapat anomali pada \textit{timefinish} (misalnya timestamp 1970-01-01) yang kemungkinan menunjukkan upaya kuis yang belum selesai atau default nilai dari Unix epoch.
+Catatan: Terdapat anomali pada \textit{timefinish} (misalnya \textit{timestamp} 1970-01-01) yang kemungkinan menunjukkan upaya kuis yang belum selesai atau nilai \textit{default} dari \textit{Unix epoch}.
 
 \textbf{mdl\_question\_answers} \\
 Kolom: \textit{question\_answers\_id}, \textit{questionid}, \textit{answer\_text}, \textit{fraction} \\
@@ -185,8 +185,8 @@ Durasi: sekitar 3.565 hari
 
 \textbf{mdl\_quiz\_attempts:} \\
 Rentang waktu untuk \textit{timestart}: 31 Juli 2015--22 Februari 2025 \\
-Rentang waktu untuk \textit{timefinish}: (dengan catatan anomali timestamp 1970 sebagai default) hingga 22 Februari 2025 \\
-Durasi: sekitar 3.594 hari (mengabaikan nilai default 1970)
+Rentang waktu untuk \textit{timefinish}: (dengan catatan anomali \textit{timestamp} 1970 sebagai \textit{default}) hingga 22 Februari 2025 \\
+Durasi: sekitar 3.594 hari (mengabaikan nilai \textit{default} 1970)
 
 \textbf{mdl\_sessions:} \\
 Rentang waktu: 17 Maret 2020--22 Februari 2025 \\
@@ -233,7 +233,7 @@ Data log \textit{Moodle} diakuisisi secara langsung dari sistem \textit{Moodle} 
 Data diekstraksi dari server \textit{Moodle} dengan menggunakan prosedur logging yang telah ditetapkan, memastikan setiap aktivitas terekam secara lengkap.
 
 \textbf{Pengiriman dan Penyimpanan:} \\
-Data dikirim dan disimpan secara terpusat di Lumbung Storage Cloud yang merupakan repository internal Fasilkom UI, menjamin keamanan dan integritas data.
+Data dikirim dan disimpan secara terpusat di Lumbung Storage Cloud yang merupakan \textit{repository} internal Fasilkom UI, menjamin keamanan dan integritas data.
 
 \textbf{Anonimisasi:} \\
 Untuk melindungi privasi pengguna, data telah diproses sehingga informasi identitas pribadi (username, nama lengkap, dan data sensitif lainnya) dihilangkan. Hanya \textit{user\_id} yang tetap dipertahankan untuk keperluan analisis. Hal ini sesuai dengan standar etika penelitian dan kebijakan perlindungan data yang berlaku.
@@ -267,31 +267,31 @@ Dengan demikian, penggunaan data artifisial dalam penelitian ini memberikan keun
 \section{Preprocessing Pipeline dan Feature Engineering}
 \label{sec:preprocessingPipelineFeatureEngineering}
 %-----------------------------------------------------------------------------%
-Tahap feature engineering dan analisis VIF merupakan komponen kritis dalam pipeline penelitian ini. Proses ini mencakup transformasi data mentah menjadi representasi fitur yang bermakna, analisis multikolinearitas, dan seleksi fitur optimal untuk model machine learning. 
+Tahap \textit{feature engineering} dan analisis VIF merupakan komponen kritis dalam \textit{pipeline} penelitian ini. Proses ini mencakup transformasi data mentah menjadi representasi fitur yang bermakna, analisis multikolinearitas, dan seleksi fitur optimal untuk model \textit{machine learning}. 
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.95\textwidth]{figures/data_flow_diagram.pdf}
-    \caption{Alur Data dalam Pipeline Deteksi Kecurangan}
+    \caption{Alur Data dalam \textit{Pipeline} Deteksi Kecurangan}
     \label{fig:data_flow}
 \end{figure}
 
-Gambar \ref{fig:data_flow} menunjukkan alur transformasi data dari raw logs hingga detection output. Reduksi dramatis dari 446,720 events menjadi 800 training samples (faktor 560x) dilakukan melalui agregasi per user-quiz attempt. Feature extraction menghasilkan 35 fitur awal yang kemudian direduksi menjadi 8 fitur stabil melalui VIF analysis. Data dibagi dengan proporsi 70/15/15 untuk training, validation, dan test untuk memastikan evaluasi yang fair dan mencegah overfitting.
+Gambar \ref{fig:data_flow} menunjukkan alur transformasi data dari \textit{raw logs} hingga \textit{detection output}. Reduksi dramatis dari 446.720 \textit{events} menjadi 800 \textit{training samples} (faktor 560x) dilakukan melalui agregasi per \textit{user-quiz attempt}. \textit{Feature extraction} menghasilkan 35 fitur awal yang kemudian direduksi menjadi 8 fitur stabil melalui \textit{VIF analysis}. Data dibagi dengan proporsi 70/15/15 untuk \textit{training}, \textit{validation}, dan \textit{test} untuk memastikan evaluasi yang adil dan mencegah \textit{overfitting}.
 
-Proses pra-pemrosesan tidak hanya bertujuan untuk mengurangi noise dan inkonsistensi, tetapi juga untuk memastikan bahwa fitur-fitur yang dihasilkan mencerminkan karakteristik perilaku pengguna secara akurat. Langkah-langkah berikut diambil dengan dasar metodologis yang defendable secara ilmiah:
+Proses pra-pemrosesan tidak hanya bertujuan untuk mengurangi gangguan dan inkonsistensi, tetapi juga untuk memastikan bahwa fitur-fitur yang dihasilkan mencerminkan karakteristik perilaku pengguna secara akurat. Langkah-langkah berikut diambil dengan dasar metodologis yang dapat dipertahankan secara ilmiah:
 
 %-----------------------------------------------------------------------------%
 \subsection{Pembersihan Data (Data Cleaning)}
 \label{sec:pembersihanData}
 %-----------------------------------------------------------------------------%
-\textbf{Penanganan Missing Values:} \\
-Data log sering kali mengandung nilai yang hilang (\textit{missing values}) karena ketidakteraturan dalam pencatatan event atau error saat pengambilan data. Dalam pipeline, nilai yang tidak terisi diimputasi dengan metode penggantian menggunakan nilai default (misalnya, 0) atau perhitungan statistik (rata-rata/median) ketika relevan. Misalnya, dalam skrip \texttt{preprocess\_features.py}, setelah ekstraksi fitur, seluruh nilai NaN diisi dengan nol untuk memastikan tidak ada celah data yang dapat mengganggu analisis model.
+\textbf{Penanganan \textit{Missing Values}:} \\
+Data log sering kali mengandung nilai yang hilang (\textit{missing values}) karena ketidakteraturan dalam pencatatan \textit{event} atau \textit{error} saat pengambilan data. Dalam \textit{pipeline}, nilai yang tidak terisi diimputasi dengan metode penggantian menggunakan nilai \textit{default} (misalnya, 0) atau perhitungan statistik (rata-rata/median) ketika relevan. Misalnya, dalam skrip \texttt{preprocess\_features.py}, setelah ekstraksi fitur, seluruh nilai NaN diisi dengan nol untuk memastikan tidak ada celah data yang dapat mengganggu analisis model.
 
-\textbf{Filtering Data yang Tidak Relevan:} \\
-Dalam konteks deteksi kecurangan, tidak seluruh event log memiliki nilai informasi yang sama. Oleh karena itu, dilakukan penyaringan untuk:
+\textbf{\textit{Filtering} Data yang Tidak Relevan:} \\
+Dalam konteks deteksi kecurangan, tidak seluruh \textit{event log} memiliki nilai informasi yang sama. Oleh karena itu, dilakukan penyaringan untuk:
 \begin{itemize}
-    \item Mengabaikan event dengan atribut tertentu (misalnya, field \textit{contextlevel} yang bernilai 'system') karena event ini tidak mewakili aktivitas pengguna pada kuis.
-    \item Menghapus entri dengan \textit{user\_id} yang null, mengingat identifikasi pengguna merupakan variabel kunci dalam analisis pola perilaku.
+    \item Mengabaikan \textit{event} dengan atribut tertentu (misalnya, \textit{field} \textit{contextlevel} yang bernilai '\textit{system}') karena \textit{event} ini tidak mewakili aktivitas pengguna pada kuis.
+    \item Menghapus entri dengan \textit{user\_id} yang \textit{null}, mengingat identifikasi pengguna merupakan variabel kunci dalam analisis pola perilaku.
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -299,37 +299,37 @@ Dalam konteks deteksi kecurangan, tidak seluruh event log memiliki nilai informa
 \label{sec:transformasiNormalisasiData}
 %-----------------------------------------------------------------------------%
 \textbf{Unifikasi Format Waktu dan Normalisasi Zona Waktu:} \\
-Data log mengandung timestamp yang berasal dari sumber atau zona waktu yang berbeda. Untuk memastikan keseragaman, seluruh timestamp dikonversi ke dalam format numerik, seperti Unix timestamp (atau ISO 8601 jika diperlukan), melalui fungsi konversi di \texttt{preprocess\_features.py}. Proses ini juga melibatkan normalisasi zona waktu agar seluruh event log dapat dibandingkan secara akurat dalam kerangka waktu yang sama.
+Data log mengandung \textit{timestamp} yang berasal dari sumber atau zona waktu yang berbeda. Untuk memastikan keseragaman, seluruh \textit{timestamp} dikonversi ke dalam format numerik, seperti \textit{Unix timestamp} (atau ISO 8601 jika diperlukan), melalui fungsi konversi di \texttt{preprocess\_features.py}. Proses ini juga melibatkan normalisasi zona waktu agar seluruh \textit{event log} dapat dibandingkan secara akurat dalam kerangka waktu yang sama.
 
-\textbf{Parsing Nested Fields:} \\
-Banyak kolom dalam data log disimpan dalam bentuk string yang merepresentasikan array atau dictionary (misalnya, sequence navigasi atau transition times). Menggunakan fungsi seperti \texttt{ast.literal\_eval}, skrip melakukan parsing terhadap string tersebut sehingga struktur data yang tersusun (list atau dictionary) dapat diekstraksi. Proses ini memungkinkan perhitungan fitur statistik seperti panjang sequence, entropi, dan jumlah revisits, yang esensial untuk mendeteksi pola aktivitas pengguna.
+\textbf{\textit{Parsing Nested Fields}:} \\
+Banyak kolom dalam data log disimpan dalam bentuk \textit{string} yang merepresentasikan \textit{array} atau \textit{dictionary} (misalnya, \textit{sequence} navigasi atau \textit{transition times}). Menggunakan fungsi seperti \texttt{ast.literal\_eval}, skrip melakukan \textit{parsing} terhadap \textit{string} tersebut sehingga struktur data yang tersusun (\textit{list} atau \textit{dictionary}) dapat diekstraksi. Proses ini memungkinkan perhitungan fitur statistik seperti panjang \textit{sequence}, entropi, dan jumlah \textit{revisits}, yang esensial untuk mendeteksi pola aktivitas pengguna.
 
 %-----------------------------------------------------------------------------%
 \subsection{Ekstraksi Fitur dan Deteksi Outlier}
 \label{sec:ekstraksiFiturDeteksiOutlier}
 %-----------------------------------------------------------------------------%
-Setelah data dibersihkan dan ditransformasikan, tahap selanjutnya adalah ekstraksi fitur, di mana fitur-fitur dasar dan lanjutan dihasilkan untuk mendukung proses pelatihan model deteksi kecurangan. Dalam pipeline, ekstraksi fitur dilakukan melalui modul \texttt{feature\_eng.py} dan \texttt{fixed\_extraction.py}, dengan beberapa langkah sebagai berikut:
+Setelah data dibersihkan dan ditransformasikan, tahap selanjutnya adalah ekstraksi fitur, di mana fitur-fitur dasar dan lanjutan dihasilkan untuk mendukung proses pelatihan model deteksi kecurangan. Dalam \textit{pipeline}, ekstraksi fitur dilakukan melalui modul \texttt{feature\_eng.py} dan \texttt{fixed\_extraction.py}, dengan beberapa langkah sebagai berikut:
 
 \textbf{Fitur Dasar:} \\
-Fitur seperti jumlah percobaan kuis, rata-rata waktu pengerjaan, total waktu, serta statistik minimum dan maksimum dihitung dari data log kuis. Contoh implementasi terdapat pada fungsi \texttt{extract\_basic\_statistics()} di \texttt{feature\_eng.py}, yang juga menyertakan agregasi data per pasangan user-kuis.
+Fitur seperti jumlah percobaan kuis, rata-rata waktu pengerjaan, total waktu, serta statistik minimum dan maksimum dihitung dari data log kuis. Contoh implementasi terdapat pada fungsi \texttt{extract\_basic\_statistics()} di \texttt{feature\_eng.py}, yang juga menyertakan agregasi data per pasangan \textit{user}-kuis.
 
-\textbf{Fitur Sequence:} \\
+\textbf{Fitur \textit{Sequence}:} \\
 Dari data navigasi dan jawaban, diekstraksi fitur-fitur seperti:
 \begin{itemize}
-    \item Panjang sequence dan jumlah pertanyaan unik: Mengukur seberapa panjang dan bervariasinya aktivitas navigasi pengguna.
-    \item Linearity: Menghitung seberapa berurutan langkah-langkah yang diambil, menggunakan perhitungan rasio antara pertanyaan unik dan total langkah.
-    \item Revisits: Penghitungan jumlah revisits atau langkah yang diulang, sebagai indikasi pola abnormal.
+    \item Panjang \textit{sequence} dan jumlah pertanyaan unik: Mengukur seberapa panjang dan bervariasinya aktivitas navigasi pengguna.
+    \item \textit{Linearity}: Menghitung seberapa berurutan langkah-langkah yang diambil, menggunakan perhitungan rasio antara pertanyaan unik dan total langkah.
+    \item \textit{Revisits}: Penghitungan jumlah \textit{revisits} atau langkah yang diulang, sebagai indikasi pola abnormal.
 \end{itemize}
-Fungsi \texttt{extract\_navigation\_features()} dalam \texttt{fixed\_extraction.py} mengilustrasikan bagaimana fitur-fitur tersebut dihitung dengan memanfaatkan evaluasi list dari sequence.
+Fungsi \texttt{extract\_navigation\_features()} dalam \texttt{fixed\_extraction.py} mengilustrasikan bagaimana fitur-fitur tersebut dihitung dengan memanfaatkan evaluasi \textit{list} dari \textit{sequence}.
 
-\textbf{Deteksi Outlier pada Fitur Waktu:} \\
-Pada ekstraksi fitur waktu, dilakukan perhitungan statistik seperti rata-rata, standar deviasi, nilai minimum dan maksimum dari durasi pengerjaan soal. Selain itu, skrip juga menghitung jumlah event dengan durasi sangat pendek (misalnya, < 5 detik) dan sangat panjang (misalnya, > 600 detik).
+\textbf{Deteksi \textit{Outlier} pada Fitur Waktu:} \\
+Pada ekstraksi fitur waktu, dilakukan perhitungan statistik seperti rata-rata, standar deviasi, nilai minimum dan maksimum dari durasi pengerjaan soal. Selain itu, skrip juga menghitung jumlah \textit{event} dengan durasi sangat pendek (misalnya, $< 5$ detik) dan sangat panjang (misalnya, $> 600$ detik).
 
-Berikut adalah cuplikan kode dari fungsi \texttt{extract\_timing\_features()} yang digunakan untuk mendeteksi pola waktu yang abnormal, yang dapat dijadikan indikator outlier:
+Berikut adalah cuplikan kode dari fungsi \texttt{extract\_timing\_features()} yang digunakan untuk mendeteksi pola waktu yang abnormal, yang dapat dijadikan indikator \textit{outlier}:
 
 \begin{verbatim}
 def extract_timing_features(time_seq):
-    """Extract features from timing sequence."""
+    """Ekstraksi fitur dari sequence waktu."""
     features = {}
     
     try:
@@ -342,7 +342,7 @@ def extract_timing_features(time_seq):
         features['min_time'] = float(np.min(time_seq))
         features['max_time'] = float(np.max(time_seq))
         
-        # Suspicious timing patterns sebagai indikator outlier
+        # Pola waktu mencurigakan sebagai indikator outlier
         features['quick_answers'] = int(sum(1 for t in time_seq if t < 5))
         features['very_long_answers'] = int(sum(1 for t in time_seq if t > 600))
     except Exception as e:
@@ -359,44 +359,44 @@ def extract_timing_features(time_seq):
 
 Nilai \texttt{quick\_answers} dan \texttt{very\_long\_answers} ini memberikan gambaran tentang berapa kali pengguna menyelesaikan bagian tertentu dengan durasi yang sangat tidak wajar, yang kemudian dapat diintegrasikan sebagai fitur untuk mendeteksi perilaku kecurangan.
 
-\textbf{Penghitungan Similarity Features:} \\
-Untuk mendeteksi kolaborasi kecurangan, pipeline menghitung matriks kemiripan (\textit{similarity matrix}) berdasarkan pola navigasi, waktu, dan jawaban antar pengguna. Fungsi \texttt{calculate\_similarity\_matrices()} di \texttt{feature\_eng.py} menghitung kemiripan menggunakan metode seperti Levenshtein distance untuk sequence navigasi dan korelasi untuk sequence waktu, kemudian hasilnya digunakan untuk menambahkan fitur agregat seperti rata-rata dan maksimum similarity antar pengguna.
+\textbf{Penghitungan \textit{Similarity Features}:} \\
+Untuk mendeteksi kolaborasi kecurangan, \textit{pipeline} menghitung matriks kemiripan (\textit{similarity matrix}) berdasarkan pola navigasi, waktu, dan jawaban antar pengguna. Fungsi \texttt{calculate\_similarity\_matrices()} di \texttt{feature\_eng.py} menghitung kemiripan menggunakan metode seperti \textit{Levenshtein distance} untuk \textit{sequence} navigasi dan korelasi untuk \textit{sequence} waktu, kemudian hasilnya digunakan untuk menambahkan fitur agregat seperti rata-rata dan maksimum \textit{similarity} antar pengguna.
 
 
 
 %-----------------------------------------------------------------------------%
 
 %-----------------------------------------------------------------------------%
-\subsection{Checklist Pra-pemrosesan}
+\subsection{\textit{Checklist} Pra-pemrosesan}
 \label{sec:checklistPraPemrosesan}
 %-----------------------------------------------------------------------------%
-Untuk memastikan bahwa seluruh proses pra-pemrosesan dapat diulangi dan diverifikasi, disusunlah checklist sebagai berikut:
+Untuk memastikan bahwa seluruh proses pra-pemrosesan dapat diulangi dan diverifikasi, disusunlah \textit{checklist} sebagai berikut:
 \begin{itemize}
-    \item Konversi seluruh timestamp ke format standar (Unix timestamp atau ISO 8601).
-    \item Penghapusan event dengan atribut \textit{contextlevel} bernilai 'system'.
-    \item Penyaringan entri dengan \textit{user\_id} null.
-    \item Parsing kolom yang berisi string representasi array/dict untuk ekstraksi fitur.
+    \item Konversi seluruh \textit{timestamp} ke format standar (\textit{Unix timestamp} atau ISO 8601).
+    \item Penghapusan \textit{event} dengan atribut \textit{contextlevel} bernilai '\textit{system}'.
+    \item Penyaringan entri dengan \textit{user\_id} \textit{null}.
+    \item \textit{Parsing} kolom yang berisi \textit{string} representasi \textit{array}/\textit{dict} untuk ekstraksi fitur.
     \item Normalisasi zona waktu untuk keseragaman data.
-    \item Perhitungan statistik fitur dasar dan sequence (termasuk deteksi pola outlier pada waktu).
+    \item Perhitungan statistik fitur dasar dan \textit{sequence} (termasuk deteksi pola \textit{outlier} pada waktu).
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
 \subsection{Justifikasi Ilmiah}
 \label{sec:justifikasiIlmiah}
 %-----------------------------------------------------------------------------%
-Pendekatan pra-pemrosesan yang diterapkan dalam penelitian ini didasarkan pada prinsip-prinsip \textit{data cleaning} dan \textit{feature engineering} yang telah terbukti secara empiris meningkatkan kualitas dataset dan kinerja model \textit{machine learning}.
+Pendekatan pra-pemrosesan yang diterapkan dalam penelitian ini didasarkan pada prinsip-prinsip \textit{data cleaning} dan \textit{feature engineering} yang telah terbukti secara empiris meningkatkan kualitas \textit{dataset} dan kinerja model \textit{machine learning}.
 
 \textbf{Pembersihan dan Transformasi:} \\
-Dengan memastikan bahwa data dalam format yang konsisten dan bebas dari \textit{missing values}, variabilitas yang tidak relevan dapat diminimalkan, sehingga model tidak terdistorsi oleh noise data.
+Dengan memastikan bahwa data dalam format yang konsisten dan bebas dari \textit{missing values}, variabilitas yang tidak relevan dapat diminimalkan, sehingga model tidak terdistorsi oleh gangguan data.
 
 \textbf{Ekstraksi Fitur:} \\
-Fitur-fitur yang diekstraksi, seperti linearity dan revisits pada sequence, memberikan representasi numerik yang dapat menggambarkan perilaku pengguna secara mendalam.
+Fitur-fitur yang diekstraksi, seperti \textit{linearity} dan \textit{revisits} pada \textit{sequence}, memberikan representasi numerik yang dapat menggambarkan perilaku pengguna secara mendalam.
 
-\textbf{Deteksi Outlier:} \\
-Dengan mengidentifikasi event dengan durasi yang sangat singkat atau sangat panjang, pipeline mampu memberikan sinyal peringatan terhadap kemungkinan aktivitas yang tidak wajar, yang secara langsung berkontribusi pada identifikasi kecurangan.
+\textbf{Deteksi \textit{Outlier}:} \\
+Dengan mengidentifikasi \textit{event} dengan durasi yang sangat singkat atau sangat panjang, \textit{pipeline} mampu memberikan sinyal peringatan terhadap kemungkinan aktivitas yang tidak wajar, yang secara langsung berkontribusi pada identifikasi kecurangan.
 
-\textbf{Reproducibility:} \\
-Checklist dan struktur modular pada skrip memastikan bahwa seluruh proses dapat direplikasi dan diaudit, sehingga mendukung validitas dan reproducibility dari penelitian.
+\textbf{\textit{Reproducibility}:} \\
+\textit{Checklist} dan struktur modular pada skrip memastikan bahwa seluruh proses dapat direplikasi dan diaudit, sehingga mendukung validitas dan \textit{reproducibility} dari penelitian.
 
 Melalui serangkaian proses yang sistematis dan berbasis algoritma yang telah teruji, tahap pra-pemrosesan ini memberikan dasar yang kuat untuk langkah-langkah selanjutnya dalam pipeline, yaitu ekstraksi fitur lanjutan, pelatihan model, dan akhirnya evaluasi deteksi kecurangan.
 
@@ -491,7 +491,7 @@ Untuk menghindari keteraturan yang sempurna dan menambahkan tingkat realisme, pr
 Parameter dasar seperti \texttt{base\_date}, \texttt{timelimit}, serta distribusi waktu pengerjaan diadaptasi dari analisis data log \textit{Moodle} riil. Pendekatan ini memastikan bahwa data artifisial tidak hanya bersifat syntetik, tetapi juga memiliki kemiripan statistik dengan data riil. Dengan demikian, model yang dikembangkan dapat diuji dan divalidasi secara lebih representatif terhadap kondisi operasional di lingkungan nyata.
 
 \textbf{Penerapan Mekanisme Leader-Follower:} \\
-Untuk mengantisipasi skenario kecurangan dengan tingkat koordinasi yang tinggi, algoritma juga mengimplementasikan pola leader-follower. Dalam mekanisme ini, satu anggota (\textit{leader}) menyelesaikan kuis terlebih dahulu dengan pola waktu yang stabil, sementara anggota lain (\textit{follower}) mengikuti dengan delay konsisten yang telah disimulasi. Penghitungan korelasi waktu antar anggota yang tinggi (misalnya, nilai > 0.8) menjadi indikator kuat atas adanya koordinasi, sehingga pola ini diintegrasikan dalam parameter simulasi.
+Untuk mengantisipasi skenario kecurangan dengan tingkat koordinasi yang tinggi, algoritma juga mengimplementasikan pola leader-follower. Dalam mekanisme ini, satu anggota (\textit{leader}) menyelesaikan kuis terlebih dahulu dengan pola waktu yang stabil, sementara anggota lain (\textit{follower}) mengikuti dengan delay konsisten yang telah disimulasi. Penghitungan korelasi waktu antar anggota yang tinggi (misalnya, nilai $>0.8$) menjadi indikator kuat atas adanya koordinasi, sehingga pola ini diintegrasikan dalam parameter simulasi.
 
 \textbf{Parameter Simulasi dan Konfigurasi:} \\
 Seluruh proses generasi data dikonfigurasi melalui file konfigurasi (misalnya, file JSON) yang menetapkan parameter-parameter penting, seperti:
@@ -590,7 +590,7 @@ Ekstraksi dan seleksi fitur merupakan proses transformasi data log menjadi repre
     \label{fig:feature_engineering_process}
 \end{figure}
 
-Gambar \ref{fig:feature_engineering_process} mengilustrasikan proses transformasi dari raw log data menjadi 8 fitur stabil yang digunakan dalam model. Proses dimulai dengan ekstraksi 35 fitur awal dari tiga kategori utama: basic features (statistik waktu dan jumlah percobaan), sequence features (pola navigasi dan revisits), dan similarity features (kesamaan antar pengguna). Melalui analisis VIF (Variance Inflation Factor), fitur-fitur dengan multikolinearitas tinggi dieliminasi, menghasilkan 8 fitur stabil yang memiliki VIF rendah (<10) dan importance tinggi. Reduksi dari 35 menjadi 8 fitur ini tidak hanya meningkatkan efisiensi komputasi tetapi juga meningkatkan stabilitas dan interpretabilitas model.
+Gambar \ref{fig:feature_engineering_process} mengilustrasikan proses transformasi dari raw log data menjadi 8 fitur stabil yang digunakan dalam model. Proses dimulai dengan ekstraksi 35 fitur awal dari tiga kategori utama: basic features (statistik waktu dan jumlah percobaan), sequence features (pola navigasi dan revisits), dan similarity features (kesamaan antar pengguna). Melalui analisis VIF (Variance Inflation Factor), fitur-fitur dengan multikolinearitas tinggi dieliminasi, menghasilkan 8 fitur stabil yang memiliki VIF rendah ($<10$) dan importance tinggi. Reduksi dari 35 menjadi 8 fitur ini tidak hanya meningkatkan efisiensi komputasi tetapi juga meningkatkan stabilitas dan interpretabilitas model.
 
 %-----------------------------------------------------------------------------%
 \subsection{Ekstraksi Fitur Dasar}
@@ -647,15 +647,15 @@ Selain menghitung metrik individual, nilai rata-rata dan maksimum similarity ant
 \label{sec:pemeriksaanMultikolinearitas}
 %-----------------------------------------------------------------------------%
 
-Analisis multikolinearitas menggunakan Variance Inflation Factor (VIF) merupakan langkah krusial dalam memastikan stabilitas dan interpretabilitas model. VIF mengukur seberapa besar varians koefisien regresi meningkat akibat kolinearitas antar fitur. Nilai VIF yang tinggi (>10) mengindikasikan bahwa fitur tersebut dapat diprediksi dengan akurasi tinggi dari fitur-fitur lain, sehingga kontribusinya menjadi redundan.
+Analisis multikolinearitas menggunakan Variance Inflation Factor (VIF) merupakan langkah krusial dalam memastikan stabilitas dan interpretabilitas model. VIF mengukur seberapa besar varians koefisien regresi meningkat akibat kolinearitas antar fitur. Nilai VIF yang tinggi ($>10$) mengindikasikan bahwa fitur tersebut dapat diprediksi dengan akurasi tinggi dari fitur-fitur lain, sehingga kontribusinya menjadi redundan.
 
 \subsubsection{Proses Seleksi Fitur}
 Dari 35 fitur awal yang diekstraksi, analisis VIF dilakukan secara iteratif:
 \begin{enumerate}
-    \item \textbf{Iterasi Pertama:} Identifikasi fitur dengan VIF tertinggi (>50).
+    \item \textbf{Iterasi Pertama:} Identifikasi fitur dengan VIF tertinggi ($>50$).
     \item \textbf{Eliminasi Bertahap:} Fitur dengan VIF tertinggi dieliminasi satu per satu.
     \item \textbf{Re-kalkulasi VIF:} Setelah setiap eliminasi, VIF dihitung ulang untuk fitur yang tersisa.
-    \item \textbf{Konvergensi:} Proses berlanjut hingga semua fitur memiliki VIF < 10.
+    \item \textbf{Konvergensi:} Proses berlanjut hingga semua fitur memiliki VIF $<10$.
 \end{enumerate}
 
 \subsubsection{Delapan Fitur Stabil Terpilih}
@@ -691,7 +691,7 @@ Setelah proses seleksi, 8 fitur dengan VIF rendah dan importance tinggi berhasil
 \textbf{Justifikasi Pemilihan:}
 \begin{itemize}
     \item \textbf{Representasi Komprehensif:} Kedelapan fitur mencakup semua aspek penting: timing (fitur 1, 4, 7), navigation (fitur 2, 6), answer patterns (fitur 3, 5), dan agregasi (fitur 8).
-    \item \textbf{Non-redundansi:} Dengan VIF < 10, setiap fitur memberikan informasi unik yang tidak dapat sepenuhnya dijelaskan oleh fitur lain.
+    \item \textbf{Non-redundansi:} Dengan VIF $<10$, setiap fitur memberikan informasi unik yang tidak dapat sepenuhnya dijelaskan oleh fitur lain.
     \item \textbf{Interpretabilitas:} Setiap fitur memiliki makna yang jelas dalam konteks deteksi kecurangan, memudahkan interpretasi hasil model.
     \item \textbf{Stabilitas Model:} Pengurangan dari 35 menjadi 8 fitur mengurangi risiko overfitting dan meningkatkan generalisasi model.
 \end{itemize}
@@ -1069,8 +1069,8 @@ Dataset riil mencakup aktivitas pembelajaran daring yang sangat komprehensif den
 \begin{itemize}
     \item Jumlah mahasiswa unik: 5,562 pengguna
     \item Jumlah ujian/kuis unik: 6,304 quiz instances
-    \item Jumlah mata kuliah: >140 courses dengan variasi ukuran kelas
-    \item Distribusi ukuran kelas: dari <10 hingga >450 mahasiswa per mata kuliah
+    \item Jumlah mata kuliah: $>140$ courses dengan variasi ukuran kelas
+    \item Distribusi ukuran kelas: dari $<10$ hingga $>450$ mahasiswa per mata kuliah
 \end{itemize}
 
 \textbf{Struktur Data Log:}
@@ -1156,7 +1156,7 @@ Strategi data artifisial dipilih berdasarkan pertimbangan metodologis:
     Data artifisial memungkinkan pengaturan presisi parameter kecurangan seperti tingkat similarity (50\%-95\%), timing correlation (0.3-0.95), dan wrong answer bias (40\%-85\%). Kontrol ini tidak mungkin dilakukan pada data riil.
     
     \item \textbf{Eksplorasi Skenario Ekstrem:} \\
-    Simulasi dapat menciptakan kasus edge yang jarang terjadi namun penting untuk \textit{robustness} model, seperti koordinasi sempurna (similarity 100\%) atau kecurangan subtle (similarity <60\%).
+    Simulasi dapat menciptakan kasus edge yang jarang terjadi namun penting untuk \textit{robustness} model, seperti koordinasi sempurna (similarity 100\%) atau kecurangan subtle (similarity $<60\%$).
     
     \item \textbf{\textit{Ground Truth} Objektif:} \\
     Setiap instance dalam data artifisial memiliki label kecurangan yang pasti, memungkinkan evaluasi akurasi model secara objektif dan perhitungan metrik performa yang valid.
@@ -1380,7 +1380,7 @@ Proses eliminasi iteratif:
     \item Ulangi hingga semua VIF $< 10$
 \end{enumerate}
 
-Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan VIF < 10 yang memberikan informasi unik.
+Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan VIF $<10$ yang memberikan informasi unik.
 
 \subsubsection{Delapan Fitur Final untuk Model}
 \label{sec:fiturFinal}
