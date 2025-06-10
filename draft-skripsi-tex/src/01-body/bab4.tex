@@ -12,7 +12,7 @@ Bab ini menyajikan hasil eksperimen dan analisis komprehensif terhadap sistem de
 \subsection{Dataset Sintesis untuk Pelatihan Model}
 \label{subsec:datasetSintesis}
 
-Dataset pelatihan model deteksi kecurangan dalam penelitian ini menggunakan data sintesis yang dihasilkan melalui simulasi berbasis konfigurasi yang terkontrol. Pendekatan ini dipilih untuk memastikan ketersediaan ground truth yang akurat dan untuk mengontrol berbagai parameter kecurangan dalam lingkungan yang terstruktur.
+Dataset pelatihan model deteksi kecurangan dalam penelitian ini menggunakan data sintesis yang dihasilkan melalui simulasi berbasis konfigurasi yang terkontrol. Pendekatan ini dipilih untuk memastikan ketersediaan \textit{ground truth} yang akurat dan untuk mengontrol berbagai parameter kecurangan dalam lingkungan yang terstruktur.
 
 Dataset sintesis terdiri dari 800 sampel percobaan ujian yang disimulasikan dari 200 mahasiswa yang mengerjakan 4 kuis, dengan setiap kuis terdiri dari 20 soal. Konfigurasi ini menghasilkan total 800 percobaan ujian (200 mahasiswa $\times$ 4 kuis = 800 percobaan ujian) dengan distribusi kelas sebagai berikut:
 \begin{itemize}
@@ -20,11 +20,11 @@ Dataset sintesis terdiri dari 800 sampel percobaan ujian yang disimulasikan dari
     \item 200 percobaan ujian dengan indikasi kecurangan (25\%)
 \end{itemize}
 
-Rasio 25\% kasus kecurangan dipilih berdasarkan estimasi realistis prevalensi kecurangan dalam ujian daring, sebagaimana dilaporkan dalam literatur penelitian terdahulu. Dataset dibagi menggunakan stratified sampling dengan proporsi 70\% untuk training (560 sampel), 15\% untuk validation (120 sampel), dan 15\% untuk testing (120 sampel).
+Rasio 25\% kasus kecurangan dipilih berdasarkan estimasi realistis prevalensi kecurangan dalam ujian daring, sebagaimana dilaporkan dalam literatur penelitian terdahulu. \textit{Dataset} dibagi menggunakan \textit{stratified sampling} dengan proporsi 70\% untuk \textit{training} (560 sampel), 15\% untuk \textit{validation} (120 sampel), dan 15\% untuk \textit{testing} (120 sampel).
 
 \subsubsection{Parameter Simulasi Kecurangan}
 
-Simulasi kecurangan dirancang dengan tiga tingkat severity yang berbeda untuk menciptakan variasi pola yang realistis. Tabel \ref{tabel:parameterSimulasi} menunjukkan konfigurasi parameter untuk setiap tingkat kecurangan.
+Simulasi kecurangan dirancang dengan tiga tingkat \textit{severity} yang berbeda untuk menciptakan variasi pola yang realistis. Tabel \ref{tabel:parameterSimulasi} menunjukkan konfigurasi parameter untuk setiap tingkat kecurangan.
 
 \begin{table}[htbp]
 \centering
@@ -32,40 +32,40 @@ Simulasi kecurangan dirancang dengan tiga tingkat severity yang berbeda untuk me
 \label{tabel:parameterSimulasi}
 \begin{tabular}{|l|c|c|c|}
 \hline
-\textbf{Parameter} & \textbf{High Severity} & \textbf{Medium Severity} & \textbf{Low Severity} \\
+\textbf{Parameter} & \textbf{\textit{High Severity}} & \textbf{\textit{Medium Severity}} & \textbf{\textit{Low Severity}} \\
 \hline
 Jumlah kelompok & 2 & 3 & 3 \\
 \hline
 Ukuran kelompok & 4 & 6 & 8 \\
 \hline
-Navigation similarity & 0.92 & 0.75 & 0.55 \\
+\textit{Navigation similarity} & 0,92 & 0,75 & 0,55 \\
 \hline
-Navigation noise & 0.08 & 0.25 & 0.35 \\
+\textit{Navigation noise} & 0,08 & 0,25 & 0,35 \\
 \hline
-Answer similarity & 0.90 & 0.70 & 0.50 \\
+\textit{Answer similarity} & 0,90 & 0,70 & 0,50 \\
 \hline
-Wrong answer bias & 0.85 & 0.60 & 0.40 \\
+\textit{Wrong answer bias} & 0,85 & 0,60 & 0,40 \\
 \hline
-Timing start delay (menit) & 2 & 5 & 10 \\
+\textit{Timing start delay} (menit) & 2 & 5 & 10 \\
 \hline
-Timing variance (detik) & 5 & 20 & 40 \\
+\textit{Timing variance} (detik) & 5 & 20 & 40 \\
 \hline
 \end{tabular}
 \end{table}
 
-Parameter-parameter ini dirancang berdasarkan observasi empiris dari pola kecurangan yang dilaporkan dalam literatur. Navigation similarity mengukur tingkat kesamaan pola navigasi antar anggota kelompok, sementara wrong answer bias mengukur kecenderungan untuk membuat kesalahan yang identik, yang merupakan indikator kuat adanya kolaborasi tidak sah.
+Parameter-parameter ini dirancang berdasarkan observasi empiris dari pola kecurangan yang dilaporkan dalam literatur. \textit{Navigation similarity} mengukur tingkat kesamaan pola navigasi antar anggota kelompok, sementara \textit{wrong answer bias} mengukur kecenderungan untuk membuat kesalahan yang identik, yang merupakan indikator kuat adanya kolaborasi tidak sah.
 
 \subsection{Dataset Riil untuk Validasi}
 \label{subsec:datasetRiil}
 
-Untuk menguji kemampuan generalisasi model, sistem deteksi diaplikasikan pada dataset riil yang terdiri dari 446.720 percobaan ujian dari sistem Moodle institusi pendidikan. Dataset riil ini tidak memiliki \textit{ground truth label} kecurangan, sehingga hasil deteksi dievaluasi berdasarkan \textit{confidence score} dan konsistensi pola yang terdeteksi.
+Untuk menguji kemampuan generalisasi model, sistem deteksi diaplikasikan pada \textit{dataset} riil yang terdiri dari 446.720 percobaan ujian dari sistem \textit{Moodle} institusi pendidikan. \textit{Dataset} riil ini tidak memiliki \textit{ground truth label} kecurangan, sehingga hasil deteksi dievaluasi berdasarkan \textit{confidence score} dan konsistensi pola yang terdeteksi.
 
-Dataset riil mencakup log aktivitas dari berbagai mata kuliah dengan karakteristik sebagai berikut:
+\textit{Dataset} riil mencakup \textit{log} aktivitas dari berbagai mata kuliah dengan karakteristik sebagai berikut:
 \begin{itemize}
     \item Periode data: Semester akademik 2023-2024
     \item Jumlah percobaan ujian: 446.720
     \item Rentang jumlah soal per ujian: 10-50 soal
-    \item Modus ujian: Multiple choice dan essay
+    \item Modus ujian: \textit{Multiple choice} dan \textit{essay}
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -76,7 +76,7 @@ Dataset riil mencakup log aktivitas dari berbagai mata kuliah dengan karakterist
 \subsection{Kinerja Model pada Data Testing}
 \label{subsec:kinerjaModelTesting}
 
-Enam model \textit{machine learning} yang berbeda dilatih dan dievaluasi pada dataset sintesis. Tabel \ref{tabel:kinerjaModel} menyajikan metrik kinerja setiap model pada data \textit{testing}.
+Enam model \textit{machine learning} yang berbeda dilatih dan dievaluasi pada \textit{dataset} sintesis. Tabel \ref{tabel:kinerjaModel} menyajikan metrik kinerja setiap model pada data \textit{testing}.
 
 \begin{table}[htbp]
 \centering
@@ -84,24 +84,24 @@ Enam model \textit{machine learning} yang berbeda dilatih dan dievaluasi pada da
 \label{tabel:kinerjaModel}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-\textbf{Model} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1-Score} \\
+\textbf{Model} & \textbf{\textit{Accuracy}} & \textbf{\textit{Precision}} & \textbf{\textit{Recall}} & \textbf{\textit{F1-Score}} \\
 \hline
-Random Forest & 0.98 & 1.00 & 0.93 & 0.97 \\
+\textit{Random Forest} & 0,98 & 1,00 & 0,93 & 0,97 \\
 \hline
-SVM & 0.98 & 1.00 & 0.93 & 0.97 \\
+SVM & 0,98 & 1,00 & 0,93 & 0,97 \\
 \hline
-Neural Network & 0.97 & 1.00 & 0.90 & 0.95 \\
+\textit{Neural Network} & 0,97 & 1,00 & 0,90 & 0,95 \\
 \hline
-Ensemble (Voting) & 0.97 & 0.97 & 0.97 & 0.97 \\
+\textit{Ensemble} (\textit{Voting}) & 0,97 & 0,97 & 0,97 & 0,97 \\
 \hline
-XGBoost & 0.96 & 0.96 & 0.93 & 0.94 \\
+\textit{XGBoost} & 0,96 & 0,96 & 0,93 & 0,94 \\
 \hline
-Gradient Boosting & 0.95 & 0.95 & 0.90 & 0.92 \\
+\textit{Gradient Boosting} & 0,95 & 0,95 & 0,90 & 0,92 \\
 \hline
 \end{tabular}
 \end{table}
 
-Hasil evaluasi menunjukkan bahwa model Random Forest dan SVM mencapai kinerja terbaik dengan \textit{accuracy} 98\%, \textit{precision} 1,00, dan \textit{recall} 0,93. Nilai \textit{precision} sempurna (1,00) menunjukkan bahwa kedua model tidak menghasilkan satupun \textit{false positive}, yang sangat penting dalam konteks deteksi kecurangan akademik di mana tuduhan yang salah dapat memiliki konsekuensi serius bagi mahasiswa.
+Hasil evaluasi menunjukkan bahwa model \textit{Random Forest} dan SVM mencapai kinerja terbaik dengan \textit{accuracy} 98\%, \textit{precision} 1,00, dan \textit{recall} 0,93. Nilai \textit{precision} sempurna (1,00) menunjukkan bahwa kedua model tidak menghasilkan satupun \textit{false positive}, yang sangat penting dalam konteks deteksi kecurangan akademik di mana tuduhan yang salah dapat memiliki konsekuensi serius bagi mahasiswa.
 
 \subsubsection{Analisis Confusion Matrix}
 
@@ -109,16 +109,16 @@ Hasil evaluasi menunjukkan bahwa model Random Forest dan SVM mencapai kinerja te
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/confusion_matrix_Random Forest.png}
-    \caption{Confusion Matrix Model Random Forest}
+    \caption{\textit{Confusion Matrix} Model \textit{Random Forest}}
     \label{fig:confusionMatrix}
 \end{figure}
 
-Dari confusion matrix terlihat bahwa:
+Dari \textit{confusion matrix} terlihat bahwa:
 \begin{itemize}
-    \item True Negatives: 90 (pengguna normal yang teridentifikasi benar)
-    \item True Positives: 28 (pengguna curang yang teridentifikasi benar)
-    \item False Positives: 0 (tidak ada pengguna normal yang salah diklasifikasi)
-    \item False Negatives: 2 (pengguna curang yang terlewat)
+    \item \textit{True Negatives}: 90 (pengguna normal yang teridentifikasi benar)
+    \item \textit{True Positives}: 28 (pengguna curang yang teridentifikasi benar)
+    \item \textit{False Positives}: 0 (tidak ada pengguna normal yang salah diklasifikasi)
+    \item \textit{False Negatives}: 2 (pengguna curang yang terlewat)
 \end{itemize}
 
 Tidak adanya \textit{false positive} (FP=0) merupakan hasil yang luar biasa karena menunjukkan bahwa model tidak menghasilkan tuduhan kecurangan yang salah. Dari 30 kasus kecurangan, hanya 2 yang terlewat (6,67\% \textit{false negative rate}), memberikan \textit{recall} sebesar 93,33\%.
@@ -129,11 +129,11 @@ Tidak adanya \textit{false positive} (FP=0) merupakan hasil yang luar biasa kare
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/curves_Random Forest.png}
-    \caption{Kurva ROC dan Precision-Recall Model Random Forest}
+    \caption{Kurva ROC dan \textit{Precision-Recall} Model \textit{Random Forest}}
     \label{fig:rocPRCurves}
 \end{figure}
 
-Area Under Curve (AUC) sebesar 0.99 untuk kurva ROC menunjukkan kemampuan diskriminatif model yang sangat baik. Kurva Precision-Recall yang mendekati nilai maksimal mengkonfirmasi bahwa model dapat mempertahankan precision tinggi pada berbagai tingkat recall.
+\textit{Area Under Curve} (AUC) sebesar 0,99 untuk kurva ROC menunjukkan kemampuan diskriminatif model yang sangat baik. Kurva \textit{Precision-Recall} yang mendekati nilai maksimal mengkonfirmasi bahwa model dapat mempertahankan \textit{precision} tinggi pada berbagai tingkat \textit{recall}.
 
 \subsubsection{Perbandingan Kinerja Antar Model}
 
@@ -141,16 +141,16 @@ Area Under Curve (AUC) sebesar 0.99 untuk kurva ROC menunjukkan kemampuan diskri
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/model_performance_comparison.pdf}
-    \caption{Perbandingan Kinerja Model Machine Learning}
+    \caption{Perbandingan Kinerja Model \textit{Machine Learning}}
     \label{fig:modelComparison}
 \end{figure}
 
 Visualisasi menunjukkan bahwa:
 \begin{itemize}
-    \item Random Forest dan SVM konsisten unggul di semua metrik, dengan keunggulan khusus pada precision (1.00)
-    \item Ensemble model memberikan balance yang baik dengan recall tertinggi (0.97) namun precision sedikit lebih rendah (0.97)
-    \item Neural Network, meskipun memiliki accuracy tinggi (0.97), menunjukkan recall yang lebih rendah (0.90)
-    \item Model berbasis boosting (Gradient Boosting dan XGBoost) memberikan kinerja yang solid namun tidak sebaik Random Forest
+    \item \textit{Random Forest} dan SVM konsisten unggul di semua metrik, dengan keunggulan khusus pada \textit{precision} (1,00)
+    \item Model \textit{Ensemble} memberikan keseimbangan yang baik dengan \textit{recall} tertinggi (0,97) namun \textit{precision} sedikit lebih rendah (0,97)
+    \item \textit{Neural Network}, meskipun memiliki \textit{accuracy} tinggi (0,97), menunjukkan \textit{recall} yang lebih rendah (0,90)
+    \item Model berbasis \textit{boosting} (\textit{Gradient Boosting} dan \textit{XGBoost}) memberikan kinerja yang solid namun tidak sebaik \textit{Random Forest}
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -161,27 +161,27 @@ Visualisasi menunjukkan bahwa:
 \subsection{Fitur-Fitur yang Paling Berpengaruh}
 \label{subsec:fiturPalingBerpengaruh}
 
-Analisis feature importance menggunakan model Random Forest mengidentifikasi fitur-fitur yang paling berkontribusi dalam proses deteksi kecurangan.
+Analisis \textit{feature importance} menggunakan model \textit{Random Forest} mengidentifikasi fitur-fitur yang paling berkontribusi dalam proses deteksi kecurangan.
 
 % OPTIMIZED: Smaller figure size
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{figures/feature_importance_Random Forest.png}
-    \caption{Feature Importance Analysis Model Random Forest}
+    \caption{Analisis \textit{Feature Importance} Model \textit{Random Forest}}
     \label{fig:featureImportance}
 \end{figure}
 
-Berdasarkan analisis feature importance, delapan fitur utama yang berkontribusi dalam deteksi kecurangan adalah:
+Berdasarkan analisis \textit{feature importance}, delapan fitur utama yang berkontribusi dalam deteksi kecurangan adalah:
 
 \begin{enumerate}
-    \item \textbf{max\_nav\_similarity\_zscore} (0.245): Z-score maksimum kesamaan navigasi dengan pengguna lain
-    \item \textbf{mean\_nav\_similarity\_zscore} (0.218): Z-score rata-rata kesamaan navigasi
-    \item \textbf{median\_step\_duration} (0.156): Median durasi langkah navigasi
-    \item \textbf{std\_nav\_similarity\_zscore} (0.142): Standar deviasi z-score kesamaan navigasi
-    \item \textbf{std\_step\_duration} (0.098): Standar deviasi durasi langkah
-    \item \textbf{nav\_revisits\_count} (0.076): Jumlah kunjungan ulang ke halaman
-    \item \textbf{quick\_actions\_count} (0.045): Jumlah aksi yang dilakukan dengan cepat
-    \item \textbf{sumgrades} (0.020): Total nilai yang diperoleh
+    \item \textbf{max\_nav\_similarity\_zscore} (0,245): \textit{Z-score} maksimum kesamaan navigasi dengan pengguna lain
+    \item \textbf{mean\_nav\_similarity\_zscore} (0,218): \textit{Z-score} rata-rata kesamaan navigasi
+    \item \textbf{median\_step\_duration} (0,156): Median durasi langkah navigasi
+    \item \textbf{std\_nav\_similarity\_zscore} (0,142): Standar deviasi \textit{z-score} kesamaan navigasi
+    \item \textbf{std\_step\_duration} (0,098): Standar deviasi durasi langkah
+    \item \textbf{nav\_revisits\_count} (0,076): Jumlah kunjungan ulang ke halaman
+    \item \textbf{quick\_actions\_count} (0,045): Jumlah aksi yang dilakukan dengan cepat
+    \item \textbf{sumgrades} (0,020): Total nilai yang diperoleh
 \end{enumerate}
 
 \subsection{Interpretasi Fitur Berdasarkan Kategori}
@@ -189,18 +189,18 @@ Berdasarkan analisis feature importance, delapan fitur utama yang berkontribusi 
 
 Fitur-fitur dapat dikelompokkan ke dalam tiga kategori utama:
 
-\subsubsection{Fitur Kesamaan Navigasi (60.5\%)}
-Fitur berbasis z-score kesamaan navigasi mendominasi dengan kontribusi total 60.5\%. Tingginya kontribusi fitur ini mengkonfirmasi bahwa pola navigasi yang sangat mirip antar mahasiswa merupakan indikator terkuat dari kolaborasi tidak sah. Z-score digunakan untuk menormalkan kesamaan terhadap distribusi populasi, sehingga nilai yang ekstrem menunjukkan penyimpangan statistik yang signifikan.
+\subsubsection{Fitur Kesamaan Navigasi (60,5\%)}
+Fitur berbasis \textit{z-score} kesamaan navigasi mendominasi dengan kontribusi total 60,5\%. Tingginya kontribusi fitur ini mengkonfirmasi bahwa pola navigasi yang sangat mirip antar mahasiswa merupakan indikator terkuat dari kolaborasi tidak sah. \textit{Z-score} digunakan untuk menormalkan kesamaan terhadap distribusi populasi, sehingga nilai yang ekstrem menunjukkan penyimpangan statistik yang signifikan.
 
-Secara matematis, jika pola navigasi mahasiswa mengikuti distribusi normal, maka z-score > 2.5 hanya terjadi pada 0.62\% populasi. Ketika beberapa mahasiswa menunjukkan pola serupa secara simultan, probabilitas kejadian acak menjadi:
-\[P(\text{kebetulan}) = 0.0062^n\]
-dimana n adalah jumlah mahasiswa dengan pola serupa. Untuk n=3, probabilitas ini menjadi 2.38 $\times$ 10$^{-7}$, yang secara praktis mustahil terjadi tanpa koordinasi.
+Secara matematis, jika pola navigasi mahasiswa mengikuti distribusi normal, maka \textit{z-score} > 2,5 hanya terjadi pada 0,62\% populasi. Ketika beberapa mahasiswa menunjukkan pola serupa secara simultan, probabilitas kejadian acak menjadi:
+\[P(\text{kebetulan}) = 0,0062^n\]
+dimana n adalah jumlah mahasiswa dengan pola serupa. Untuk n=3, probabilitas ini menjadi 2,38 $\times$ 10$^{-7}$, yang secara praktis mustahil terjadi tanpa koordinasi.
 
-\subsubsection{Fitur Temporal (25.4\%)}
-Fitur yang berkaitan dengan pola waktu seperti median dan standar deviasi durasi langkah berkontribusi 25.4\%. Fitur-fitur ini menangkap pola temporal yang tidak natural, seperti kecepatan pengerjaan yang terlalu seragam atau perubahan kecepatan yang mendadak.
+\subsubsection{Fitur Temporal (25,4\%)}
+Fitur yang berkaitan dengan pola waktu seperti median dan standar deviasi durasi langkah berkontribusi 25,4\%. Fitur-fitur ini menangkap pola temporal yang tidak \textit{natural}, seperti kecepatan pengerjaan yang terlalu seragam atau perubahan kecepatan yang mendadak.
 
-\subsubsection{Fitur Perilaku Pengerjaan (14.1\%)}
-Fitur yang berkaitan dengan perilaku pengerjaan ujian seperti jumlah kunjungan ulang dan aksi cepat berkontribusi 14.1\%. Meskipun kontribusinya lebih kecil, fitur-fitur ini tetap penting untuk mendeteksi pola perilaku yang mencurigakan.
+\subsubsection{Fitur Perilaku Pengerjaan (14,1\%)}
+Fitur yang berkaitan dengan perilaku pengerjaan ujian seperti jumlah kunjungan ulang dan aksi cepat berkontribusi 14,1\%. Meskipun kontribusinya lebih kecil, fitur-fitur ini tetap penting untuk mendeteksi pola perilaku yang mencurigakan.
 
 \subsection{Analisis Korelasi Antar Fitur}
 \label{subsec:analisisKorelasi}
@@ -215,12 +215,12 @@ Fitur yang berkaitan dengan perilaku pengerjaan ujian seperti jumlah kunjungan u
 
 Beberapa temuan penting dari analisis korelasi:
 \begin{itemize}
-    \item Fitur-fitur z-score kesamaan navigasi (max, mean, std) memiliki korelasi tinggi satu sama lain (0.7-0.9), yang diharapkan karena mengukur aspek yang sama dari perilaku.
-    \item Fitur temporal (median\_step\_duration dan std\_step\_duration) berkorelasi moderat (0.45), menunjukkan mereka menangkap aspek berbeda dari pola waktu.
-    \item sumgrades memiliki korelasi rendah dengan semua fitur lain (<0.3), mengindikasikan bahwa performa akademik merupakan dimensi independen dari pola perilaku ujian.
+    \item Fitur-fitur \textit{z-score} kesamaan navigasi (\textit{max}, \textit{mean}, \textit{std}) memiliki korelasi tinggi satu sama lain (0,7-0,9), yang diharapkan karena mengukur aspek yang sama dari perilaku.
+    \item Fitur temporal (\textit{median\_step\_duration} dan \textit{std\_step\_duration}) berkorelasi moderat (0,45), menunjukkan mereka menangkap aspek berbeda dari pola waktu.
+    \item \textit{sumgrades} memiliki korelasi rendah dengan semua fitur lain (<0,3), mengindikasikan bahwa performa akademik merupakan dimensi independen dari pola perilaku ujian.
 \end{itemize}
 
-Meskipun terdapat korelasi tinggi antar beberapa fitur, model Random Forest dan ensemble methods dapat menangani multikolinearitas dengan baik melalui mekanisme bagging dan feature subsampling.
+Meskipun terdapat korelasi tinggi antar beberapa fitur, model \textit{Random Forest} dan \textit{ensemble methods} dapat menangani multikolinearitas dengan baik melalui mekanisme \textit{bagging} dan \textit{feature subsampling}.
 
 %-----------------------------------------------------------------------------%
 \section{Hasil Deteksi pada Data Riil}
@@ -230,15 +230,15 @@ Meskipun terdapat korelasi tinggi antar beberapa fitur, model Random Forest dan 
 \subsection{Statistik Deteksi Keseluruhan}
 \label{subsec:statistikDeteksiKeseluruhan}
 
-Model terbaik (Random Forest) diaplikasikan pada 446,720 percobaan ujian riil dengan hasil sebagai berikut:
+Model terbaik (\textit{Random Forest}) diaplikasikan pada 446.720 percobaan ujian riil dengan hasil sebagai berikut:
 
 \begin{itemize}
-    \item \textbf{Total deteksi dengan confidence tinggi ($\geq$80\%):} 131,479 percobaan (29.43\%)
-    \item \textbf{Total deteksi dengan confidence medium (60-79\%):} 89,344 percobaan (20.0\%)
-    \item \textbf{Total deteksi dengan confidence rendah ($<60\%$):} 225,897 percobaan (50.57\%)
+    \item \textbf{Total deteksi dengan \textit{confidence} tinggi ($\geq$80\%):} 131.479 percobaan (29,43\%)
+    \item \textbf{Total deteksi dengan \textit{confidence} medium (60-79\%):} 89.344 percobaan (20,0\%)
+    \item \textbf{Total deteksi dengan \textit{confidence} rendah ($<60\%$):} 225.897 percobaan (50,57\%)
 \end{itemize}
 
-Tingkat deteksi 29.43\% dengan confidence tinggi konsisten dengan estimasi prevalensi kecurangan dalam ujian daring yang dilaporkan dalam literatur penelitian, yang berkisar antara 20-40\%.
+Tingkat deteksi 29,43\% dengan \textit{confidence} tinggi konsisten dengan estimasi prevalensi kecurangan dalam ujian daring yang dilaporkan dalam literatur penelitian, yang berkisar antara 20-40\%.
 
 \subsection{Analisis Distribusi Probabilitas Kecurangan}
 \label{subsec:analisisDistribusiProbabilitas}
@@ -251,26 +251,26 @@ Tingkat deteksi 29.43\% dengan confidence tinggi konsisten dengan estimasi preva
     \label{fig:probabilityDistribution}
 \end{figure}
 
-Distribusi probabilitas menunjukkan pola bimodal yang jelas dengan dua puncak:
+Distribusi probabilitas menunjukkan pola \textit{bimodal} yang jelas dengan dua puncak:
 \begin{itemize}
-    \item Puncak pertama pada rentang 0.0-0.2 (mayoritas percobaan normal)
-    \item Puncak kedua pada rentang 0.8-1.0 (percobaan dengan indikasi kuat kecurangan)
+    \item Puncak pertama pada rentang 0,0-0,2 (mayoritas percobaan normal)
+    \item Puncak kedua pada rentang 0,8-1,0 (percobaan dengan indikasi kuat kecurangan)
 \end{itemize}
 
-Pola bimodal ini merupakan indikator positif bahwa model dapat membedakan dengan jelas antara perilaku normal dan mencurigakan. Zona abu-abu (probabilitas 0.3-0.7) memiliki frekuensi rendah, menunjukkan model memiliki confidence tinggi dalam klasifikasinya.
+Pola \textit{bimodal} ini merupakan indikator positif bahwa model dapat membedakan dengan jelas antara perilaku normal dan mencurigakan. Zona abu-abu (probabilitas 0,3-0,7) memiliki frekuensi rendah, menunjukkan model memiliki \textit{confidence} tinggi dalam klasifikasinya.
 
 Statistik distribusi probabilitas:
 \begin{itemize}
-    \item Mean: 0.493 (mendekati 0.5 karena distribusi bimodal)
-    \item Standar deviasi: 0.292 (tinggi karena polarisasi distribusi)
-    \item Median: 0.302 (lebih rendah dari mean, menunjukkan mayoritas kasus normal)
-    \item Min: 0.002, Max: 0.999 (rentang penuh probabilitas)
+    \item \textit{Mean}: 0,493 (mendekati 0,5 karena distribusi \textit{bimodal})
+    \item Standar deviasi: 0,292 (tinggi karena polarisasi distribusi)
+    \item \textit{Median}: 0,302 (lebih rendah dari \textit{mean}, menunjukkan mayoritas kasus normal)
+    \item Min: 0,002, Max: 0,999 (rentang penuh probabilitas)
 \end{itemize}
 
-\subsection{Identifikasi Repeat Offenders}
+\subsection{Identifikasi \textit{Repeat Offenders}}
 \label{subsec:identifikasiRepeatOffenders}
 
-Analisis lebih lanjut mengidentifikasi pengguna yang terdeteksi melakukan kecurangan secara berulang. Dari total deteksi, teridentifikasi 4,093 pengguna unik yang memiliki lebih dari satu percobaan dengan indikasi kecurangan tinggi.
+Analisis lebih lanjut mengidentifikasi pengguna yang terdeteksi melakukan kecurangan secara berulang. Dari total deteksi, teridentifikasi 4.093 pengguna unik yang memiliki lebih dari satu percobaan dengan indikasi kecurangan tinggi.
 
 \begin{table}[htbp]
 \centering
@@ -278,17 +278,17 @@ Analisis lebih lanjut mengidentifikasi pengguna yang terdeteksi melakukan kecura
 \label{tabel:topOffenders}
 \begin{tabular}{|c|c|c|}
 \hline
-\textbf{User ID} & \textbf{Jumlah Deteksi} & \textbf{Rata-rata Confidence} \\
+\textbf{\textit{User ID}} & \textbf{Jumlah Deteksi} & \textbf{Rata-rata \textit{Confidence}} \\
 \hline
-5252 & 138 & 91.2\% \\
+5252 & 138 & 91,2\% \\
 \hline
-4095 & 135 & 89.7\% \\
+4095 & 135 & 89,7\% \\
 \hline
-6023 & 132 & 90.3\% \\
+6023 & 132 & 90,3\% \\
 \hline
-6039 & 123 & 88.9\% \\
+6039 & 123 & 88,9\% \\
 \hline
-5268 & 121 & 91.5\% \\
+5268 & 121 & 91,5\% \\
 \hline
 \end{tabular}
 \end{table}
@@ -299,28 +299,28 @@ Untuk memberikan pemahaman yang lebih mendalam tentang pola perilaku pengguna ya
 
 Analisis profil detail menunjukkan pola perilaku yang konsisten mencurigakan:
 \begin{itemize}
-    \item Distribusi z-score kesamaan navigasi yang sangat tinggi ($>2.5$ SD)
-    \item Pola temporal yang tidak natural dengan clustering pada nilai-nilai ekstrem
+    \item Distribusi \textit{z-score} kesamaan navigasi yang sangat tinggi ($>2,5$ SD)
+    \item Pola temporal yang tidak \textit{natural} dengan \textit{clustering} pada nilai-nilai ekstrem
     \item Konsistensi tinggi dalam perilaku yang mengindikasikan koordinasi dengan pengguna lain
 \end{itemize}
 
-\subsubsection{Distribusi dan Karakteristik Repeat Offenders}
+\subsubsection{Distribusi dan Karakteristik \textit{Repeat Offenders}}
 
-Analisis lebih lanjut terhadap 4,093 repeat offenders mengungkapkan pola distribusi yang menarik.
+Analisis lebih lanjut terhadap 4.093 \textit{repeat offenders} mengungkapkan pola distribusi yang menarik.
 
 % UPDATED: Now uses PDF instead of PNG
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.8\textwidth]{figures/repeat_offender_analysis.pdf}
-    \caption{Analisis Distribusi Repeat Offenders}
+    \caption{Analisis Distribusi \textit{Repeat Offenders}}
     \label{fig:repeatOffenderAnalysis}
 \end{figure}
 
-Distribusi repeat offenders menunjukkan pola power-law dimana:
+Distribusi \textit{repeat offenders} menunjukkan pola \textit{power-law} dimana:
 \begin{itemize}
-    \item Mayoritas repeat offenders (2,847 pengguna, 69.6\%) memiliki 2-5 deteksi
-    \item 891 pengguna (21.8\%) memiliki 6-20 deteksi
-    \item 355 pengguna (8.7\%) memiliki lebih dari 20 deteksi, mengindikasikan pola kecurangan sistematis
+    \item Mayoritas \textit{repeat offenders} (2.847 pengguna, 69,6\%) memiliki 2-5 deteksi
+    \item 891 pengguna (21,8\%) memiliki 6-20 deteksi
+    \item 355 pengguna (8,7\%) memiliki lebih dari 20 deteksi, mengindikasikan pola kecurangan sistematis
 \end{itemize}
 
 Keberadaan pengguna dengan deteksi sangat tinggi ($>100$ kali) menunjukkan adanya kelompok kecil mahasiswa yang secara konsisten melakukan kecurangan di berbagai ujian. Temuan ini memberikan prioritas yang jelas untuk intervensi institusional.
@@ -361,26 +361,26 @@ Salah satu temuan penting dalam penelitian ini adalah dampak signifikan ukuran d
 \label{tabel:perbandingan90vs800}
 \begin{tabular}{|l|c|c|c|}
 \hline
-\textbf{Model} & \textbf{Accuracy (90)} & \textbf{Accuracy (800)} & \textbf{Peningkatan} \\
+\textbf{Model} & \textbf{\textit{Accuracy} (90)} & \textbf{\textit{Accuracy} (800)} & \textbf{Peningkatan} \\
 \hline
-Random Forest & 85.71\% & 98.33\% & +12.62\% \\
+\textit{Random Forest} & 85,71\% & 98,33\% & +12,62\% \\
 \hline
-SVM & 78.57\% & 98.33\% & +19.76\% \\
+SVM & 78,57\% & 98,33\% & +19,76\% \\
 \hline
-Neural Network & 71.43\% & 97.50\% & +26.07\% \\
+\textit{Neural Network} & 71,43\% & 97,50\% & +26,07\% \\
 \hline
-Gradient Boosting & 78.57\% & 95.00\% & +16.43\% \\
+\textit{Gradient Boosting} & 78,57\% & 95,00\% & +16,43\% \\
 \hline
-XGBoost & 78.57\% & 95.83\% & +17.26\% \\
+\textit{XGBoost} & 78,57\% & 95,83\% & +17,26\% \\
 \hline
-Ensemble & 85.71\% & 96.67\% & +10.96\% \\
+\textit{Ensemble} & 85,71\% & 96,67\% & +10,96\% \\
 \hline
-\textbf{Rata-rata} & \textbf{79.76\%} & \textbf{96.61\%} & \textbf{+16.85\%} \\
+\textbf{Rata-rata} & \textbf{79,76\%} & \textbf{96,61\%} & \textbf{+16,85\%} \\
 \hline
 \end{tabular}
 \end{table}
 
-Peningkatan kinerja yang signifikan (rata-rata 16.85\%) menunjukkan pentingnya ukuran dataset yang memadai untuk pelatihan model deteksi kecurangan. Neural Network menunjukkan peningkatan terbesar (26.07\%), mengindikasikan sensitivitasnya yang tinggi terhadap ukuran dataset.
+Peningkatan kinerja yang signifikan (rata-rata 16,85\%) menunjukkan pentingnya ukuran \textit{dataset} yang memadai untuk pelatihan model deteksi kecurangan. \textit{Neural Network} menunjukkan peningkatan terbesar (26,07\%), mengindikasikan sensitivitasnya yang tinggi terhadap ukuran \textit{dataset}.
 
 \textbf{Analisis Detail Peningkatan Performa:}
 \begin{itemize}
