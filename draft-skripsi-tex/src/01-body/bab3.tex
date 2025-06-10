@@ -491,7 +491,7 @@ Untuk menghindari keteraturan yang sempurna dan menambahkan tingkat realisme, pr
 Parameter dasar seperti \texttt{base\_date}, \texttt{timelimit}, serta distribusi waktu pengerjaan diadaptasi dari analisis data log \textit{Moodle} riil. Pendekatan ini memastikan bahwa data artifisial tidak hanya bersifat sintetik, tetapi juga memiliki kemiripan statistik dengan data riil. Dengan demikian, model yang dikembangkan dapat diuji dan divalidasi secara lebih representatif terhadap kondisi operasional di lingkungan nyata.
 
 \textbf{Penerapan Mekanisme \textit{Leader-Follower}:} \\
-Untuk mengantisipasi skenario kecurangan dengan tingkat koordinasi yang tinggi, algoritma juga mengimplementasikan pola \textit{leader-follower}. Dalam mekanisme ini, satu anggota (\textit{leader}) menyelesaikan kuis terlebih dahulu dengan pola waktu yang stabil, sementara anggota lain (\textit{follower}) mengikuti dengan \textit{delay} konsisten yang telah disimulasi. Penghitungan korelasi waktu antar anggota yang tinggi (misalnya, nilai > 0,8) menjadi indikator kuat atas adanya koordinasi, sehingga pola ini diintegrasikan dalam parameter simulasi.
+Untuk mengantisipasi skenario kecurangan dengan tingkat koordinasi yang tinggi, algoritma juga mengimplementasikan pola \textit{leader-follower}. Dalam mekanisme ini, satu anggota (\textit{leader}) menyelesaikan kuis terlebih dahulu dengan pola waktu yang stabil, sementara anggota lain (\textit{follower}) mengikuti dengan \textit{delay} konsisten yang telah disimulasi. Penghitungan korelasi waktu antar anggota yang tinggi (misalnya, nilai $> 0,8$) menjadi indikator kuat atas adanya koordinasi, sehingga pola ini diintegrasikan dalam parameter simulasi.
 
 \textbf{Parameter Simulasi dan Konfigurasi:} \\
 Seluruh proses generasi data dikonfigurasi melalui \textit{file} konfigurasi (misalnya, \textit{file} JSON) yang menetapkan parameter-parameter penting, seperti:
@@ -562,7 +562,7 @@ Untuk mendukung analisis statistik, data artifisial divisualisasikan secara komp
     \item \textbf{\textit{Quiz Attempt Visualization}:} Menampilkan urutan navigasi setiap pengguna. Kelompok \textit{non-compliance} ditandai dengan urutan yang sangat seragam, menunjukkan koordinasi dalam pengulangan pertanyaan.
     \item \textbf{Analisis Pola Jawaban:} Visualisasi pola jawaban (benar/salah) yang identik atau sangat mirip antar anggota kelompok \textit{non-compliance}, sehingga mengindikasikan kolusi.
     \item \textbf{\textit{Timing Patterns} dan \textit{Variance Analysis}:} Diagram dan tabel yang menunjukkan waktu mulai, total durasi, dan rata-rata waktu per pertanyaan. Pelaku kecurangan cenderung menunjukkan laju yang konsisten (misalnya, penyelesaian kuis dengan \textit{delay} yang seragam) dibandingkan dengan variabilitas yang lebih tinggi pada pengguna normal.
-    \item \textbf{\textit{Transition Time Correlation Analysis}:} Tabel yang menampilkan korelasi waktu transisi antar pertanyaan pada kelompok \textit{non-compliance}. Nilai korelasi tinggi (misalnya, >0,95) memberikan bukti kuat atas adanya koordinasi.
+    \item \textbf{\textit{Transition Time Correlation Analysis}:} Tabel yang menampilkan korelasi waktu transisi antar pertanyaan pada kelompok \textit{non-compliance}. Nilai korelasi tinggi (misalnya, $> 0,95$) memberikan bukti kuat atas adanya koordinasi.
 \end{itemize}
 
 \textbf{Validasi Kualitatif:} \\
@@ -590,7 +590,7 @@ Ekstraksi dan seleksi fitur merupakan proses transformasi data log menjadi repre
     \label{fig:feature_engineering_process}
 \end{figure}
 
-Gambar \ref{fig:feature_engineering_process} mengilustrasikan proses transformasi dari \textit{raw log data} menjadi 8 fitur stabil yang digunakan dalam model. Proses dimulai dengan ekstraksi 35 fitur awal dari tiga kategori utama: \textit{basic features} (statistik waktu dan jumlah percobaan), \textit{sequence features} (pola navigasi dan \textit{revisits}), dan \textit{similarity features} (kesamaan antar pengguna). Melalui analisis VIF (\textit{Variance Inflation Factor}), fitur-fitur dengan multikolinearitas tinggi dieliminasi, menghasilkan 8 fitur stabil yang memiliki VIF rendah (<10) dan \textit{importance} tinggi. Reduksi dari 35 menjadi 8 fitur ini tidak hanya meningkatkan efisiensi komputasi tetapi juga meningkatkan stabilitas dan interpretabilitas model.
+Gambar \ref{fig:feature_engineering_process} mengilustrasikan proses transformasi dari \textit{raw log data} menjadi 8 fitur stabil yang digunakan dalam model. Proses dimulai dengan ekstraksi 35 fitur awal dari tiga kategori utama: \textit{basic features} (statistik waktu dan jumlah percobaan), \textit{sequence features} (pola navigasi dan \textit{revisits}), dan \textit{similarity features} (kesamaan antar pengguna). Melalui analisis VIF (\textit{Variance Inflation Factor}), fitur-fitur dengan multikolinearitas tinggi dieliminasi, menghasilkan 8 fitur stabil yang memiliki VIF rendah ($<10$) dan \textit{importance} tinggi. Reduksi dari 35 menjadi 8 fitur ini tidak hanya meningkatkan efisiensi komputasi tetapi juga meningkatkan stabilitas dan interpretabilitas model.
 
 %-----------------------------------------------------------------------------%
 \subsection{Ekstraksi Fitur Dasar}
@@ -647,15 +647,15 @@ Selain menghitung metrik individual, nilai rata-rata dan maksimum \textit{simila
 \label{sec:pemeriksaanMultikolinearitas}
 %-----------------------------------------------------------------------------%
 
-Analisis multikolinearitas menggunakan \textit{Variance Inflation Factor} (VIF) merupakan langkah krusial dalam memastikan stabilitas dan interpretabilitas model. VIF mengukur seberapa besar varians koefisien regresi meningkat akibat kolinearitas antar fitur. Nilai VIF yang tinggi (>10) mengindikasikan bahwa fitur tersebut dapat diprediksi dengan akurasi tinggi dari fitur-fitur lain, sehingga kontribusinya menjadi redundan.
+Analisis multikolinearitas menggunakan \textit{Variance Inflation Factor} (VIF) merupakan langkah krusial dalam memastikan stabilitas dan interpretabilitas model. VIF mengukur seberapa besar varians koefisien regresi meningkat akibat kolinearitas antar fitur. Nilai VIF yang tinggi ($>10$) mengindikasikan bahwa fitur tersebut dapat diprediksi dengan akurasi tinggi dari fitur-fitur lain, sehingga kontribusinya menjadi redundan.
 
 \subsubsection{Proses Seleksi Fitur}
 Dari 35 fitur awal yang diekstraksi, analisis VIF dilakukan secara iteratif:
 \begin{enumerate}
-    \item \textbf{Iterasi Pertama:} Identifikasi fitur dengan VIF tertinggi (>50).
+    \item \textbf{Iterasi Pertama:} Identifikasi fitur dengan VIF tertinggi ($>50$).
     \item \textbf{Eliminasi Bertahap:} Fitur dengan VIF tertinggi dieliminasi satu per satu.
     \item \textbf{Re-kalkulasi VIF:} Setelah setiap eliminasi, VIF dihitung ulang untuk fitur yang tersisa.
-    \item \textbf{Konvergensi:} Proses berlanjut hingga semua fitur memiliki VIF < 10.
+    \item \textbf{Konvergensi:} Proses berlanjut hingga semua fitur memiliki VIF $< 10$.
 \end{enumerate}
 
 \subsubsection{Delapan Fitur Stabil Terpilih}
@@ -691,7 +691,7 @@ Setelah proses seleksi, 8 fitur dengan VIF rendah dan \textit{importance} tinggi
 \textbf{Justifikasi Pemilihan:}
 \begin{itemize}
     \item \textbf{Representasi Komprehensif:} Kedelapan fitur mencakup semua aspek penting: \textit{timing} (fitur 1, 4, 7), \textit{navigation} (fitur 2, 6), \textit{answer patterns} (fitur 3, 5), dan agregasi (fitur 8).
-    \item \textbf{Non-redundansi:} Dengan VIF < 10, setiap fitur memberikan informasi unik yang tidak dapat sepenuhnya dijelaskan oleh fitur lain.
+    \item \textbf{Non-redundansi:} Dengan VIF $< 10$, setiap fitur memberikan informasi unik yang tidak dapat sepenuhnya dijelaskan oleh fitur lain.
     \item \textbf{Interpretabilitas:} Setiap fitur memiliki makna yang jelas dalam konteks deteksi kecurangan, memudahkan interpretasi hasil model.
     \item \textbf{Stabilitas Model:} Pengurangan dari 35 menjadi 8 fitur mengurangi risiko \textit{overfitting} dan meningkatkan generalisasi model.
 \end{itemize}
@@ -794,7 +794,7 @@ Komponen unik dalam arsitektur adalah integrasi analisis graf yang memvisualisas
 \textbf{Konstruksi Graf:}
 \begin{itemize}
     \item \textit{Nodes}: Merepresentasikan mahasiswa/percobaan ujian
-    \item \textit{Edges}: Dibentuk jika skor \textit{similarity} > \textit{threshold} (0,8)
+    \item \textit{Edges}: Dibentuk jika skor \textit{similarity} $> \textit{threshold}$ (0,8)
     \item \textit{Edge weights}: Nilai \textit{similarity} (navigasi, waktu, pola jawaban)
 \end{itemize}
 
@@ -1069,8 +1069,8 @@ Dataset riil mencakup aktivitas pembelajaran daring yang sangat komprehensif den
 \begin{itemize}
     \item Jumlah mahasiswa unik: 5.562 pengguna
     \item Jumlah ujian/kuis unik: 6.304 \textit{quiz instances}
-    \item Jumlah mata kuliah: >140 \textit{courses} dengan variasi ukuran kelas
-    \item Distribusi ukuran kelas: dari <10 hingga >450 mahasiswa per mata kuliah
+    \item Jumlah mata kuliah:$>140$ \textit{courses} dengan variasi ukuran kelas
+    \item Distribusi ukuran kelas: dari $<10$ hingga $>450$ mahasiswa per mata kuliah
 \end{itemize}
 
 \textbf{Struktur Data Log:}
@@ -1156,7 +1156,7 @@ Strategi data artifisial dipilih berdasarkan pertimbangan metodologis:
     Data artifisial memungkinkan pengaturan presisi parameter kecurangan seperti tingkat kemiripan (50\%-95\%), korelasi waktu (0,3-0,95), dan bias jawaban salah (40\%-85\%). Kontrol ini tidak mungkin dilakukan pada data riil.
     
     \item \textbf{Eksplorasi Skenario Ekstrem:} \\
-    Simulasi dapat menciptakan kasus \textit{edge} yang jarang terjadi namun penting untuk ketahanan model, seperti koordinasi sempurna (kemiripan 100\%) atau kecurangan halus (kemiripan <60\%).
+    Simulasi dapat menciptakan kasus \textit{edge} yang jarang terjadi namun penting untuk ketahanan model, seperti koordinasi sempurna (kemiripan 100\%) atau kecurangan halus (kemiripan $<60\%$).
     
     \item \textbf{\textit{Ground Truth} Objektif:} \\
     Setiap \textit{instance} dalam data artifisial memiliki label kecurangan yang pasti, memungkinkan evaluasi akurasi model secara objektif dan perhitungan metrik performa yang valid.
@@ -1380,7 +1380,7 @@ Proses eliminasi iteratif:
     \item Ulangi hingga semua VIF $< 10$
 \end{enumerate}
 
-Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan VIF < 10 yang memberikan informasi unik.
+Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan $VIF < 10$ yang memberikan informasi unik.
 
 \subsubsection{Delapan Fitur Final untuk Model}
 \label{sec:fiturFinal}
