@@ -398,7 +398,7 @@ Dengan mengidentifikasi \textit{event} dengan durasi yang sangat singkat atau sa
 \textbf{\textit{Reproducibility}:} \\
 \textit{Checklist} dan struktur modular pada skrip memastikan bahwa seluruh proses dapat direplikasi dan diaudit, sehingga mendukung validitas dan \textit{reproducibility} dari penelitian.
 
-Melalui serangkaian proses yang sistematis dan berbasis algoritma yang telah teruji, tahap pra-pemrosesan ini memberikan dasar yang kuat untuk langkah-langkah selanjutnya dalam pipeline, yaitu ekstraksi fitur lanjutan, pelatihan model, dan akhirnya evaluasi deteksi kecurangan.
+Melalui serangkaian proses yang sistematis dan berbasis algoritma yang telah teruji, tahap pra-pemrosesan ini memberikan dasar yang kuat untuk langkah-langkah selanjutnya dalam \textit{pipeline}, yaitu ekstraksi fitur lanjutan, pelatihan model, dan akhirnya evaluasi deteksi kecurangan.
 
 %-----------------------------------------------------------------------------%
 \subsection{Perancangan dan Generasi Data Artifisial}
@@ -416,20 +416,20 @@ Skenario Perilaku Sintetik didefinisikan sebagai rangkaian aturan dan mekanisme 
 Pada skenario perilaku normal, aktivitas pengguna dirancang untuk mencerminkan dinamika berpikir yang alami, yang ditandai dengan:
 \begin{itemize}
     \item Variasi Urutan Navigasi: Pengguna normal menunjukkan urutan akses pertanyaan yang bervariasi, dengan kemungkinan revisi jawaban yang berbeda-beda antar sesi. Hal ini menggambarkan proses evaluasi internal yang dinamis.
-    \item Variasi Pola Jawaban: Pola jawaban mencerminkan respon acak yang wajar, dengan proporsi jawaban benar dan salah yang bervariasi secara natural.
+    \item Variasi Pola Jawaban: Pola jawaban mencerminkan respon acak yang wajar, dengan proporsi jawaban benar dan salah yang bervariasi secara alami.
     \item Waktu Pengerjaan yang Variatif: Interval waktu antar pertanyaan bervariasi, mencerminkan kecepatan berpikir dan penyesuaian terhadap tingkat kesulitan pertanyaan. Distribusi waktu pengerjaan ini umumnya menunjukkan standar deviasi yang wajar.
 \end{itemize}
 
-\textbf{Perilaku Non-Compliance (Kecurangan):} \\
+\textbf{Perilaku \textit{Non-Compliance} (Kecurangan):} \\
 Pada skenario \textit{non-compliance}, pola aktivitas sengaja diatur untuk menciptakan indikasi kecurangan, dengan karakteristik sebagai berikut:
 \begin{itemize}
     \item Kesamaan Navigasi: Urutan pertanyaan yang diakses oleh pengguna dalam kelompok kecurangan sangat mirip, termasuk adanya revisi yang identik antar anggota kelompok.
     \item Konsistensi Jawaban: Pola jawaban menunjukkan tingkat keseragaman yang tinggi. Misalnya, terdapat kecenderungan anggota kelompok secara bersama-sama memberikan jawaban salah pada pertanyaan-pertanyaan sulit.
-    \item Sinkronisasi Waktu yang Tidak Wajar: Interval waktu antar pertanyaan hampir seragam antar pengguna. Dalam beberapa kasus, terdapat kelompok yang menyelesaikan kuis secara bersamaan dalam waktu kurang dari 15 detik, dengan standar deviasi yang rendah, mengindikasikan adanya pola sinkronisasi yang sulit terjadi secara natural.
-    \item Mekanisme Leader-Follower: Terdapat pola di mana satu anggota (leader) menyelesaikan kuis terlebih dahulu, sedangkan anggota lainnya (follower) mengikuti dengan delay yang konsisten. Pola ini menciptakan korelasi tinggi dalam waktu pengerjaan antar anggota, yang menjadi indikator kuat adanya koordinasi.
+    \item Sinkronisasi Waktu yang Tidak Wajar: Interval waktu antar pertanyaan hampir seragam antar pengguna. Dalam beberapa kasus, terdapat kelompok yang menyelesaikan kuis secara bersamaan dalam waktu kurang dari 15 detik, dengan standar deviasi yang rendah, mengindikasikan adanya pola sinkronisasi yang sulit terjadi secara alami.
+    \item Mekanisme \textit{Leader-Follower}: Terdapat pola di mana satu anggota (\textit{leader}) menyelesaikan kuis terlebih dahulu, sedangkan anggota lainnya (\textit{follower}) mengikuti dengan \textit{delay} yang konsisten. Pola ini menciptakan korelasi tinggi dalam waktu pengerjaan antar anggota, yang menjadi indikator kuat adanya koordinasi.
 \end{itemize}
 
-Definisi operasional ini menjadi dasar untuk memformulasikan parameter simulasi. Parameter-parameter tersebut, seperti tingkat kemiripan navigasi, delay waktu, dan distribusi jawaban, kemudian diintegrasikan dalam algoritma generasi data log artifisial. Setiap skenario diberikan label \textit{ground truth}, yang memungkinkan validasi dan evaluasi model deteksi kecurangan secara kuantitatif dan kualitatif.
+Definisi operasional ini menjadi dasar untuk memformulasikan parameter simulasi. Parameter-parameter tersebut, seperti tingkat kemiripan navigasi, \textit{delay} waktu, dan distribusi jawaban, kemudian diintegrasikan dalam algoritma generasi data log artifisial. Setiap skenario diberikan label \textit{ground truth}, yang memungkinkan validasi dan evaluasi model deteksi kecurangan secara kuantitatif dan kualitatif.
 
 %-----------------------------------------------------------------------------%
 \subsection{Desain \textit{Ground Truth} Artifisial}
@@ -450,27 +450,27 @@ Dalam proses generasi data log artifisial, setiap entitas---baik pada level sesi
     \item \textbf{Pencatatan Parameter Simulasi dan Contoh Kasus:} \\
     Parameter-parameter yang mendasari penetapan label \textit{ground truth} direkam secara detail, mencakup:
     \begin{itemize}
-        \item Navigation Similarity: Persentase kesamaan urutan navigasi antar anggota kelompok (contoh: 96\%).
-        \item Answer Pattern Similarity: Persentase kesamaan pola jawaban (contoh: 94\%).
-        \item Timing Correlation: Koefisien korelasi waktu antar pertanyaan (contoh: 0.95).
-        \item Standard Deviation (Avg): Rata-rata standar deviasi waktu pengerjaan per pertanyaan (contoh: 12 detik).
-        \item Wrong Answer Bias: Probabilitas kesalahan terkoordinasi (contoh: 87\%).
+        \item \textit{Navigation Similarity}: Persentase kesamaan urutan navigasi antar anggota kelompok (contoh: 96\%).
+        \item \textit{Answer Pattern Similarity}: Persentase kesamaan pola jawaban (contoh: 94\%).
+        \item \textit{Timing Correlation}: Koefisien korelasi waktu antar pertanyaan (contoh: 0,95).
+        \item \textit{Standard Deviation} (Rata-rata): Rata-rata standar deviasi waktu pengerjaan per pertanyaan (contoh: 12 detik).
+        \item \textit{Wrong Answer Bias}: Probabilitas kesalahan terkoordinasi (contoh: 87\%).
     \end{itemize}
 \end{itemize}
 
-Nilai-nilai di atas disajikan sebagai contoh dalam file \texttt{cheating\_ground\_truth.md}. Penting untuk dicatat bahwa angka-angka tersebut merupakan representasi sample yang dapat dikonfigurasi ulang sesuai kebutuhan eksperimen, dan bukan merupakan nilai final yang harus diterapkan secara universal.
+Nilai-nilai di atas disajikan sebagai contoh dalam \textit{file} \texttt{cheating\_ground\_truth.md}. Penting untuk dicatat bahwa angka-angka tersebut merupakan representasi sampel yang dapat dikonfigurasi ulang sesuai kebutuhan eksperimen, dan bukan merupakan nilai final yang harus diterapkan secara universal.
 
-\textbf{Dokumentasi Melalui \textit{File Cheating} \textit{Ground Truth}:} \\
-File \texttt{cheating\_ground\_truth.md} menyajikan tabel ringkasan statistik kelompok kecurangan beserta parameter-parameter yang telah diukur secara simulatif. Contoh tabel tersebut mencakup:
+\textbf{Dokumentasi Melalui \textit{File Cheating Ground Truth}:} \\
+\textit{File} \texttt{cheating\_ground\_truth.md} menyajikan tabel ringkasan statistik kelompok kecurangan beserta parameter-parameter yang telah diukur secara simulatif. Contoh tabel tersebut mencakup:
 \begin{itemize}
-    \item Kelompok Kecurangan dengan Severity Tinggi: Menunjukkan kesamaan navigasi, pola jawaban, dan korelasi waktu yang sangat tinggi, serta standar deviasi dan wrong answer bias yang rendah.
-    \item Kelompok Kecurangan dengan Severity Sedang: Menunjukkan nilai yang lebih moderat, dengan delay waktu dan variansi yang lebih besar.
+    \item Kelompok Kecurangan dengan \textit{Severity} Tinggi: Menunjukkan kesamaan navigasi, pola jawaban, dan korelasi waktu yang sangat tinggi, serta standar deviasi dan \textit{wrong answer bias} yang rendah.
+    \item Kelompok Kecurangan dengan \textit{Severity} Sedang: Menunjukkan nilai yang lebih moderat, dengan \textit{delay} waktu dan variansi yang lebih besar.
 \end{itemize}
 
 Dokumentasi ini menyediakan bukti empiris dan justifikasi statistik bahwa skenario \textit{non-compliance} yang disimulasikan memiliki karakteristik yang berbeda secara signifikan dari aktivitas normal. Informasi ini sangat penting untuk validasi model, karena memungkinkan perbandingan langsung antara prediksi model dengan \textit{ground truth}.
 
-\textbf{Integrasi dan Reproducibility:} \\
-\textit{Ground truth} artifisial yang terdokumentasi secara rinci ini diintegrasikan langsung ke dalam dataset log artifisial. Pendekatan ini memastikan bahwa evaluasi model dapat dilakukan secara objektif menggunakan metrik seperti precision, recall, F1-score, dan akurasi. Selain itu, pencatatan parameter simulasi dan contoh kasus dalam file \texttt{cheating\_ground\_truth.md} mendukung \textit{reproducibility} penelitian, karena eksperimen dapat diulang dengan menggunakan seed dan konfigurasi yang sama.
+\textbf{Integrasi dan \textit{Reproducibility}:} \\
+\textit{Ground truth} artifisial yang terdokumentasi secara rinci ini diintegrasikan langsung ke dalam dataset log artifisial. Pendekatan ini memastikan bahwa evaluasi model dapat dilakukan secara objektif menggunakan metrik seperti \textit{precision}, \textit{recall}, \textit{F1-score}, dan akurasi. Selain itu, pencatatan parameter simulasi dan contoh kasus dalam \textit{file} \texttt{cheating\_ground\_truth.md} mendukung \textit{reproducibility} penelitian, karena eksperimen dapat diulang dengan menggunakan \textit{seed} dan konfigurasi yang sama.
 
 Dengan demikian, desain \textit{ground truth} artifisial ini tidak hanya menyediakan label yang diperlukan untuk evaluasi model, tetapi juga memberikan kerangka kerja untuk analisis sensitivitas dan validasi statistik, yang secara bersama-sama mendukung pendekatan \textit{Skenario Perilaku Sintetik} yang digunakan dalam penelitian ini.
 %-----------------------------------------------------------------------------%
@@ -488,18 +488,18 @@ Algoritma simulasi menetapkan seperangkat aturan untuk menentukan urutan navigas
 Untuk menghindari keteraturan yang sempurna dan menambahkan tingkat realisme, proses stokastik diterapkan dalam penentuan waktu pengerjaan, revisi jawaban, dan urutan pertanyaan. Penggunaan fungsi \texttt{random} dengan seed yang telah ditentukan memungkinkan variasi terkontrol, sehingga setiap simulasi menghasilkan distribusi waktu dan pola yang mendekati kondisi riil, namun masih mempertahankan karakteristik khas dari skenario \textit{non-compliance}.
 
 \textbf{Modifikasi Berdasarkan Data Riil:} \\
-Parameter dasar seperti \texttt{base\_date}, \texttt{timelimit}, serta distribusi waktu pengerjaan diadaptasi dari analisis data log \textit{Moodle} riil. Pendekatan ini memastikan bahwa data artifisial tidak hanya bersifat syntetik, tetapi juga memiliki kemiripan statistik dengan data riil. Dengan demikian, model yang dikembangkan dapat diuji dan divalidasi secara lebih representatif terhadap kondisi operasional di lingkungan nyata.
+Parameter dasar seperti \texttt{base\_date}, \texttt{timelimit}, serta distribusi waktu pengerjaan diadaptasi dari analisis data log \textit{Moodle} riil. Pendekatan ini memastikan bahwa data artifisial tidak hanya bersifat sintetik, tetapi juga memiliki kemiripan statistik dengan data riil. Dengan demikian, model yang dikembangkan dapat diuji dan divalidasi secara lebih representatif terhadap kondisi operasional di lingkungan nyata.
 
-\textbf{Penerapan Mekanisme Leader-Follower:} \\
-Untuk mengantisipasi skenario kecurangan dengan tingkat koordinasi yang tinggi, algoritma juga mengimplementasikan pola leader-follower. Dalam mekanisme ini, satu anggota (\textit{leader}) menyelesaikan kuis terlebih dahulu dengan pola waktu yang stabil, sementara anggota lain (\textit{follower}) mengikuti dengan delay konsisten yang telah disimulasi. Penghitungan korelasi waktu antar anggota yang tinggi (misalnya, nilai $>0.8$) menjadi indikator kuat atas adanya koordinasi, sehingga pola ini diintegrasikan dalam parameter simulasi.
+\textbf{Penerapan Mekanisme \textit{Leader-Follower}:} \\
+Untuk mengantisipasi skenario kecurangan dengan tingkat koordinasi yang tinggi, algoritma juga mengimplementasikan pola \textit{leader-follower}. Dalam mekanisme ini, satu anggota (\textit{leader}) menyelesaikan kuis terlebih dahulu dengan pola waktu yang stabil, sementara anggota lain (\textit{follower}) mengikuti dengan \textit{delay} konsisten yang telah disimulasi. Penghitungan korelasi waktu antar anggota yang tinggi (misalnya, nilai > 0,8) menjadi indikator kuat atas adanya koordinasi, sehingga pola ini diintegrasikan dalam parameter simulasi.
 
 \textbf{Parameter Simulasi dan Konfigurasi:} \\
-Seluruh proses generasi data dikonfigurasi melalui file konfigurasi (misalnya, file JSON) yang menetapkan parameter-parameter penting, seperti:
+Seluruh proses generasi data dikonfigurasi melalui \textit{file} konfigurasi (misalnya, \textit{file} JSON) yang menetapkan parameter-parameter penting, seperti:
 \begin{itemize}
     \item Jumlah total pengguna dan kuis.
     \item Proporsi pengguna dengan perilaku \textit{non-compliance}.
     \item Batasan waktu (\texttt{timelimit}) dan \texttt{base\_date} sebagai dasar simulasi.
-    \item Nilai threshold untuk \textit{similarity} dalam pola navigasi, jawaban, dan waktu.
+    \item Nilai \textit{threshold} untuk \textit{similarity} dalam pola navigasi, jawaban, dan waktu.
 \end{itemize}
 
 Parameter-parameter ini bersifat fleksibel dan dapat disesuaikan untuk mengeksplorasi berbagai skenario, mulai dari aktivitas normal hingga skenario ekstrem yang memicu koordinasi \textit{non-compliance} secara signifikan.
@@ -512,31 +512,31 @@ Melalui kombinasi simulasi berbasis aturan dan proses stokastik, metode generasi
 %-----------------------------------------------------------------------------%
 Implementasi teknis dalam generasi data log artifisial dilakukan dengan menggunakan bahasa pemrograman Python, yang mendukung replikasi dan validitas eksperimen melalui pendekatan yang modular dan terdokumentasi dengan baik. Proses ini memastikan bahwa data artifisial yang dihasilkan memiliki struktur dan karakteristik yang konsisten dengan data log \textit{Moodle} riil. Komponen-komponen teknis utama yang digunakan adalah sebagai berikut:
 
-\textbf{Platform dan Library Utama:} \\
+\textbf{Platform dan \textit{Library} Utama:} \\
 \begin{itemize}
     \item Python: Dipilih karena fleksibilitas dan ekosistemnya yang luas dalam pengolahan data dan simulasi.
-    \item Pandas dan Numpy: Digunakan untuk manipulasi data dan komputasi numerik, dengan data log disimpan serta diproses dalam format CSV untuk memudahkan integrasi ke pipeline selanjutnya.
+    \item Pandas dan Numpy: Digunakan untuk manipulasi data dan komputasi numerik, dengan data log disimpan serta diproses dalam format CSV untuk memudahkan integrasi ke \textit{pipeline} selanjutnya.
     \item Faker: Digunakan untuk menghasilkan data pengguna yang realistis, seperti \textit{username}, nama, dan informasi identitas lain yang mendekati kondisi riil.
-    \item Random dan Modul Stokastik: Fungsi \texttt{random}, yang dijalankan dengan seed tertentu, memastikan variasi terkontrol dalam waktu pengerjaan, urutan navigasi, dan pola jawaban. Hal ini memungkinkan simulasi yang konsisten dan dapat direproduksi.
-    \item JSON dan CSV: File konfigurasi, \textit{ground truth}, dan output data disimpan dalam format JSON dan CSV sehingga mendukung dokumentasi dan analisis statistik.
+    \item \textit{Random} dan Modul Stokastik: Fungsi \texttt{random}, yang dijalankan dengan \textit{seed} tertentu, memastikan variasi terkontrol dalam waktu pengerjaan, urutan navigasi, dan pola jawaban. Hal ini memungkinkan simulasi yang konsisten dan dapat direproduksi.
+    \item JSON dan CSV: \textit{File} konfigurasi, \textit{ground truth}, dan \textit{output} data disimpan dalam format JSON dan CSV sehingga mendukung dokumentasi dan analisis statistik.
 \end{itemize}
 
 \textbf{Modularitas Kode:} \\
-Implementasi dibangun secara modular untuk mendukung pemeliharaan dan pengembangan lebih lanjut. Modul utama yang terintegrasi dalam pipeline meliputi:
+Implementasi dibangun secara modular untuk mendukung pemeliharaan dan pengembangan lebih lanjut. Modul utama yang terintegrasi dalam \textit{pipeline} meliputi:
 \begin{itemize}
     \item \texttt{generate\_case.py}: Modul inti yang menghasilkan data log artifisial berdasarkan parameter yang telah ditetapkan. Modul ini mengintegrasikan simulasi berbasis aturan dan proses stokastik untuk menciptakan \textit{Skenario Perilaku Sintetik}.
     \item \texttt{fixed\_extraction.py} dan \texttt{preprocess\_features.py}: Walaupun proses ekstraksi dan pembersihan fitur secara detail akan dibahas pada subbab 3.6, modul ini digunakan untuk memastikan bahwa data artifisial dapat diproses dengan standar yang sama seperti data log riil, sehingga mendukung integrasi ke tahap evaluasi model.
 \end{itemize}
 
-\textbf{Reproducibility dan Konfigurasi:} \\
-Penggunaan Seed Random: Seluruh fungsi random dijalankan dengan seed yang telah ditentukan, sehingga eksperimen dapat diulang dengan hasil yang konsisten. \\
-File Konfigurasi: Parameter simulasi---seperti jumlah pengguna, proporsi \textit{non-compliance}, \texttt{timelimit}, dan \texttt{base\_date}---disimpan dalam file JSON. Pendekatan ini memungkinkan penyesuaian parameter secara transparan dan mendokumentasikan setiap eksperimen. \\
-Output Terstruktur: Data log artifisial yang dihasilkan beserta \textit{ground truth} disimpan dalam format CSV dan JSON, memudahkan integrasi ke tahap evaluasi model serta analisis statistik.
+\textbf{\textit{Reproducibility} dan Konfigurasi:} \\
+Penggunaan \textit{Seed Random}: Seluruh fungsi \textit{random} dijalankan dengan \textit{seed} yang telah ditentukan, sehingga eksperimen dapat diulang dengan hasil yang konsisten. \\
+\textit{File} Konfigurasi: Parameter simulasi---seperti jumlah pengguna, proporsi \textit{non-compliance}, \texttt{timelimit}, dan \texttt{base\_date}---disimpan dalam \textit{file} JSON. Pendekatan ini memungkinkan penyesuaian parameter secara transparan dan mendokumentasikan setiap eksperimen. \\
+\textit{Output} Terstruktur: Data log artifisial yang dihasilkan beserta \textit{ground truth} disimpan dalam format CSV dan JSON, memudahkan integrasi ke tahap evaluasi model serta analisis statistik.
 
-\textbf{Integrasi dengan Pipeline Deteksi Kecurangan:} \\
-Data log artifisial yang dihasilkan menjadi komponen integral dalam pipeline deteksi kecurangan. Output simulasi ini digunakan untuk:
+\textbf{Integrasi dengan \textit{Pipeline} Deteksi Kecurangan:} \\
+Data log artifisial yang dihasilkan menjadi komponen integral dalam \textit{pipeline} deteksi kecurangan. \textit{Output} simulasi ini digunakan untuk:
 \begin{itemize}
-    \item Melatih model deteksi kecurangan dengan dataset yang mencakup skenario perilaku normal dan \textit{non-compliance}.
+    \item Melatih model deteksi kecurangan dengan \textit{dataset} yang mencakup skenario perilaku normal dan \textit{non-compliance}.
     \item Menjadi dasar evaluasi model dengan membandingkan prediksi model dengan label \textit{ground truth} yang telah didokumentasikan.
 \end{itemize}
 
@@ -551,29 +551,29 @@ Validasi data log artifisial merupakan langkah krusial untuk memastikan bahwa si
 \textbf{Analisis Statistik Deskriptif:} \\
 Validasi kuantitatif dilakukan dengan menghitung dan membandingkan statistik utama dari fitur-fitur yang dihasilkan, antara lain:
 \begin{itemize}
-    \item \textbf{Distribusi Waktu dan Navigasi:} Histogram distribusi timestamp, total durasi, dan rata-rata waktu per pertanyaan digunakan untuk mengidentifikasi pola waktu pengerjaan. Data artifisial diharapkan menampilkan standar deviasi yang rendah untuk kelompok \textit{non-compliance}, menandakan konsistensi yang tidak wajar.
-    \item \textbf{Pengukuran Similarity dan Korelasi:} Matriks kemiripan (\textit{similarity matrices}) untuk urutan navigasi, pola jawaban, dan interval waktu dihitung, serta koefisien korelasi (misalnya, Pearson) antar waktu transisi antar anggota kelompok \textit{non-compliance}. Nilai korelasi yang mendekati 1 menunjukkan adanya koordinasi yang kuat.
-    \item \textbf{Perbandingan dengan Data Riil:} Meskipun data riil tidak selalu tersedia secara lengkap, validasi dilakukan dengan membandingkan distribusi dan variabilitas fitur-fitur kunci antara data artifisial dan subset data log \textit{Moodle} riil jika memungkinkan. Tabel perbandingan skenario vs pola (misalnya, aksi pengguna, indikasi \textit{non-compliance}) disusun untuk mendokumentasikan perbedaan signifikan antara perilaku normal dan \textit{non-compliance}.
+    \item \textbf{Distribusi Waktu dan Navigasi:} Histogram distribusi \textit{timestamp}, total durasi, dan rata-rata waktu per pertanyaan digunakan untuk mengidentifikasi pola waktu pengerjaan. Data artifisial diharapkan menampilkan standar deviasi yang rendah untuk kelompok \textit{non-compliance}, menandakan konsistensi yang tidak wajar.
+    \item \textbf{Pengukuran \textit{Similarity} dan Korelasi:} Matriks kemiripan (\textit{similarity matrices}) untuk urutan navigasi, pola jawaban, dan interval waktu dihitung, serta koefisien korelasi (misalnya, Pearson) antar waktu transisi antar anggota kelompok \textit{non-compliance}. Nilai korelasi yang mendekati 1 menunjukkan adanya koordinasi yang kuat.
+    \item \textbf{Perbandingan dengan Data Riil:} Meskipun data riil tidak selalu tersedia secara lengkap, validasi dilakukan dengan membandingkan distribusi dan variabilitas fitur-fitur kunci antara data artifisial dan \textit{subset} data log \textit{Moodle} riil jika memungkinkan. Tabel perbandingan skenario vs pola (misalnya, aksi pengguna, indikasi \textit{non-compliance}) disusun untuk mendokumentasikan perbedaan signifikan antara perilaku normal dan \textit{non-compliance}.
 \end{itemize}
 
 \textbf{Visualisasi Data:} \\
-Untuk mendukung analisis statistik, data artifisial divisualisasikan secara komprehensif, seperti yang ditampilkan dalam contoh file \texttt{cheating\_visualization.md}. Beberapa visualisasi yang digunakan meliputi:
+Untuk mendukung analisis statistik, data artifisial divisualisasikan secara komprehensif, seperti yang ditampilkan dalam contoh \textit{file} \texttt{cheating\_visualization.md}. Beberapa visualisasi yang digunakan meliputi:
 \begin{itemize}
-    \item \textbf{Quiz Attempt Visualization:} Menampilkan urutan navigasi setiap pengguna. Kelompok \textit{non-compliance} ditandai dengan urutan yang sangat seragam, menunjukkan koordinasi dalam pengulangan pertanyaan.
+    \item \textbf{\textit{Quiz Attempt Visualization}:} Menampilkan urutan navigasi setiap pengguna. Kelompok \textit{non-compliance} ditandai dengan urutan yang sangat seragam, menunjukkan koordinasi dalam pengulangan pertanyaan.
     \item \textbf{Analisis Pola Jawaban:} Visualisasi pola jawaban (benar/salah) yang identik atau sangat mirip antar anggota kelompok \textit{non-compliance}, sehingga mengindikasikan kolusi.
-    \item \textbf{Timing Patterns dan Variance Analysis:} Diagram dan tabel yang menunjukkan waktu mulai, total durasi, dan rata-rata waktu per pertanyaan. \textit{Cheater} cenderung menunjukkan pace yang konsisten (misalnya, penyelesaian kuis dengan delay yang seragam) dibandingkan dengan variabilitas yang lebih tinggi pada pengguna normal.
-    \item \textbf{Transition Time Correlation Analysis:} Tabel yang menampilkan korelasi waktu transisi antar pertanyaan pada kelompok \textit{non-compliance}. Nilai korelasi tinggi (misalnya, $>0.95$) memberikan bukti kuat atas adanya koordinasi.
+    \item \textbf{\textit{Timing Patterns} dan \textit{Variance Analysis}:} Diagram dan tabel yang menunjukkan waktu mulai, total durasi, dan rata-rata waktu per pertanyaan. Pelaku kecurangan cenderung menunjukkan laju yang konsisten (misalnya, penyelesaian kuis dengan \textit{delay} yang seragam) dibandingkan dengan variabilitas yang lebih tinggi pada pengguna normal.
+    \item \textbf{\textit{Transition Time Correlation Analysis}:} Tabel yang menampilkan korelasi waktu transisi antar pertanyaan pada kelompok \textit{non-compliance}. Nilai korelasi tinggi (misalnya, >0,95) memberikan bukti kuat atas adanya koordinasi.
 \end{itemize}
 
 \textbf{Validasi Kualitatif:} \\
-Selain analisis numerik, validasi kualitatif dilakukan melalui review visualisasi oleh para ahli:
+Selain analisis numerik, validasi kualitatif dilakukan melalui \textit{review} visualisasi oleh para ahli:
 \begin{itemize}
     \item Pemeriksaan Pola Navigasi dan Jawaban: Visualisasi memungkinkan peneliti untuk memverifikasi apakah pola yang muncul (seperti urutan pertanyaan yang identik atau hampir identik) dapat dianggap sebagai indikasi \textit{non-compliance}.
     \item Evaluasi Realisme Data Sintetik: Perbandingan visual antara data artifisial dan data log riil memastikan bahwa skenario yang disimulasikan masuk akal secara operasional. Misalnya, pola waktu dan transisi yang dihasilkan harus mencerminkan kemungkinan terjadinya koordinasi dalam situasi nyata, tanpa menghasilkan data yang terlalu "ideal" atau tidak realistis.
 \end{itemize}
 
 \textbf{Integrasi \textit{Ground Truth} untuk Evaluasi Model:} \\
-Data artifisial yang telah divalidasi ini dilengkapi dengan label \textit{ground truth} yang tercatat dalam file \texttt{cheating\_ground\_truth.md} dan digunakan sebagai acuan dalam pelatihan serta evaluasi model deteksi kecurangan. Validasi statistik dan visualisasi mendukung keandalan label tersebut dan memberikan dasar yang kuat untuk pengukuran metrik seperti precision, recall, F1-score, dan akurasi pada tahap evaluasi model.
+Data artifisial yang telah divalidasi ini dilengkapi dengan label \textit{ground truth} yang tercatat dalam \textit{file} \texttt{cheating\_ground\_truth.md} dan digunakan sebagai acuan dalam pelatihan serta evaluasi model deteksi kecurangan. Validasi statistik dan visualisasi mendukung keandalan label tersebut dan memberikan dasar yang kuat untuk pengukuran metrik seperti \textit{precision}, \textit{recall}, \textit{F1-score}, dan akurasi pada tahap evaluasi model.
 
 Melalui serangkaian proses validasi yang komprehensif ini, data log artifisial tidak hanya diverifikasi secara statistik tetapi juga diuji secara kualitatif, sehingga memberikan keyakinan bahwa skenario perilaku sintetik yang dihasilkan dapat dijadikan basis yang valid dan \textit{reproducible} untuk pengembangan model deteksi \textit{non-compliance}.
 
@@ -581,16 +581,16 @@ Melalui serangkaian proses validasi yang komprehensif ini, data log artifisial t
 \subsection{Ekstraksi dan Seleksi Fitur}
 \label{sec:featureEngineering}
 %-----------------------------------------------------------------------------%
-Ekstraksi dan seleksi fitur merupakan proses transformasi data log menjadi representasi numerik yang optimal untuk model machine learning. Proses ini menggabungkan ekstraksi fitur multidimensional dengan analisis VIF untuk menghasilkan set fitur yang stabil dan interpretable. 
+Ekstraksi dan seleksi fitur merupakan proses transformasi data log menjadi representasi numerik yang optimal untuk model \textit{machine learning}. Proses ini menggabungkan ekstraksi fitur multidimensional dengan analisis VIF untuk menghasilkan \textit{set} fitur yang stabil dan dapat diinterpretasi. 
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/feature_engineering_process.pdf}
-    \caption{Proses Feature Engineering dari Raw Data hingga 8 Fitur Stabil}
+    \caption{Proses \textit{Feature Engineering} dari \textit{Raw Data} hingga 8 Fitur Stabil}
     \label{fig:feature_engineering_process}
 \end{figure}
 
-Gambar \ref{fig:feature_engineering_process} mengilustrasikan proses transformasi dari raw log data menjadi 8 fitur stabil yang digunakan dalam model. Proses dimulai dengan ekstraksi 35 fitur awal dari tiga kategori utama: basic features (statistik waktu dan jumlah percobaan), sequence features (pola navigasi dan revisits), dan similarity features (kesamaan antar pengguna). Melalui analisis VIF (Variance Inflation Factor), fitur-fitur dengan multikolinearitas tinggi dieliminasi, menghasilkan 8 fitur stabil yang memiliki VIF rendah ($<10$) dan importance tinggi. Reduksi dari 35 menjadi 8 fitur ini tidak hanya meningkatkan efisiensi komputasi tetapi juga meningkatkan stabilitas dan interpretabilitas model.
+Gambar \ref{fig:feature_engineering_process} mengilustrasikan proses transformasi dari \textit{raw log data} menjadi 8 fitur stabil yang digunakan dalam model. Proses dimulai dengan ekstraksi 35 fitur awal dari tiga kategori utama: \textit{basic features} (statistik waktu dan jumlah percobaan), \textit{sequence features} (pola navigasi dan \textit{revisits}), dan \textit{similarity features} (kesamaan antar pengguna). Melalui analisis VIF (\textit{Variance Inflation Factor}), fitur-fitur dengan multikolinearitas tinggi dieliminasi, menghasilkan 8 fitur stabil yang memiliki VIF rendah (<10) dan \textit{importance} tinggi. Reduksi dari 35 menjadi 8 fitur ini tidak hanya meningkatkan efisiensi komputasi tetapi juga meningkatkan stabilitas dan interpretabilitas model.
 
 %-----------------------------------------------------------------------------%
 \subsection{Ekstraksi Fitur Dasar}
@@ -602,44 +602,44 @@ Pengukuran waktu merupakan indikator penting dalam menganalisis kecepatan dan ke
     \item Rata-rata waktu pengerjaan (\textit{mean}), yang menggambarkan kecepatan umum pengerjaan.
     \item Total durasi, serta nilai minimum dan maksimum waktu yang dicatat untuk mendeteksi ekstremitas (misalnya, pengerjaan yang sangat cepat atau sangat lambat).
 \end{itemize}
-\textbf{Justifikasi:} Penggunaan statistik ini membantu mengidentifikasi outlier serta mendeteksi pola abnormal, karena pengerjaan kuis dengan durasi yang sangat singkat atau panjang dapat menjadi indikator adanya perilaku \textit{non-compliance}.
+\textbf{Justifikasi:} Penggunaan statistik ini membantu mengidentifikasi \textit{outlier} serta mendeteksi pola abnormal, karena pengerjaan kuis dengan durasi yang sangat singkat atau panjang dapat menjadi indikator adanya perilaku \textit{non-compliance}.
 
 \textbf{Jumlah Percobaan (\textit{Attempt Count}):} \\
 Menghitung berapa kali pengguna mencoba menyelesaikan kuis memberikan gambaran tentang ketekunan serta kemungkinan adanya upaya manipulasi melalui pengulangan.
 \textbf{Justifikasi:} Pengulangan yang berlebihan bisa jadi merupakan sinyal dari upaya kecurangan atau strategi pengulangan untuk memperoleh jawaban yang lebih baik. Fitur ini penting untuk membedakan antara perilaku belajar normal dan aktivitas mencurigakan.
 
 %-----------------------------------------------------------------------------%
-\subsection{Ekstraksi Fitur Sequence (\textit{Urutan Aktivitas})}
+\subsection{Ekstraksi Fitur \textit{Sequence} (Urutan Aktivitas)}
 \label{sec:ekstraksiFiturSequence}
 %-----------------------------------------------------------------------------%
-\textbf{Panjang Sequence dan Jumlah Pertanyaan Unik:} \\
+\textbf{Panjang \textit{Sequence} dan Jumlah Pertanyaan Unik:} \\
 Ekstraksi informasi mengenai jumlah langkah yang dilakukan serta variasi pertanyaan yang diakses (\textit{unique questions}) mencerminkan seberapa terstruktur atau acaknya pola navigasi pengguna.
 \textbf{Justifikasi:} Pola navigasi yang sangat seragam, dengan jumlah pertanyaan unik yang rendah dibandingkan total langkah, bisa mengindikasikan adanya koordinasi \textit{non-compliance}. Sebaliknya, variabilitas yang tinggi umumnya mengindikasikan aktivitas normal.
 
-\textbf{Linearity dan Revisits:} \\
-Linearitas dihitung dengan membandingkan urutan yang ideal (berurutan) dengan urutan aktual yang diambil. Jumlah revisits (pertanyaan yang diakses berulang kali) juga dihitung.
+\textbf{\textit{Linearity} dan \textit{Revisits}:} \\
+Linearitas dihitung dengan membandingkan urutan yang ideal (berurutan) dengan urutan aktual yang diambil. Jumlah \textit{revisits} (pertanyaan yang diakses berulang kali) juga dihitung.
 \textbf{Justifikasi:} Pengulangan yang konsisten dan pola linear yang tinggi (atau sebaliknya, pola yang tidak wajar) dapat menjadi indikator bahwa pengguna mencoba memanipulasi proses pengerjaan, misalnya dengan melihat kembali jawaban atau mengulangi pola tertentu untuk menyembunyikan kecurangan.
 
 %-----------------------------------------------------------------------------%
-\subsection{Perhitungan Similarity Features}
+\subsection{Perhitungan \textit{Similarity Features}}
 \label{sec:perhitunganSimilarityFeatures}
 %-----------------------------------------------------------------------------%
-Untuk mendeteksi potensi kolusi antar pengguna, pipeline mengimplementasikan beberapa metrik kemiripan:
+Untuk mendeteksi potensi kolusi antar pengguna, \textit{pipeline} mengimplementasikan beberapa metrik kemiripan:
 
-\textbf{Navigation Similarity:} \\
-Menggunakan Levenshtein distance, fitur ini mengukur seberapa mirip urutan navigasi antar pengguna.
-\textbf{Justifikasi:} Levenshtein distance efektif dalam mengukur perbedaan antara dua urutan simbol (dalam hal ini, nomor pertanyaan), sehingga kesamaan yang tinggi menunjukkan pola koordinasi yang tidak mungkin terjadi secara acak.
+\textbf{\textit{Navigation Similarity}:} \\
+Menggunakan \textit{Levenshtein distance}, fitur ini mengukur seberapa mirip urutan navigasi antar pengguna.
+\textbf{Justifikasi:} \textit{Levenshtein distance} efektif dalam mengukur perbedaan antara dua urutan simbol (dalam hal ini, nomor pertanyaan), sehingga kesamaan yang tinggi menunjukkan pola koordinasi yang tidak mungkin terjadi secara acak.
 
-\textbf{Timing Similarity:} \\
-Korelasi (misalnya, Pearson correlation) digunakan untuk mengukur kesamaan pola waktu antar pengguna.
+\textbf{\textit{Timing Similarity}:} \\
+Korelasi (misalnya, \textit{Pearson correlation}) digunakan untuk mengukur kesamaan pola waktu antar pengguna.
 \textbf{Justifikasi:} Jika dua pengguna memiliki korelasi waktu yang sangat tinggi, hal ini menunjukkan mereka menjalani kuis dengan interval waktu yang sangat konsisten, sebuah sinyal kuat koordinasi yang jarang terjadi secara alami.
 
-\textbf{Answer Similarity:} \\
+\textbf{\textit{Answer Similarity}:} \\
 Fitur ini mengukur persentase kesamaan pola jawaban (benar/salah) antar pengguna, di mana nilai yang tinggi menunjukkan adanya kemungkinan kolusi dalam memberikan jawaban.
 \textbf{Justifikasi:} Dalam situasi \textit{non-compliance}, anggota kelompok sering kali menghasilkan pola jawaban yang identik atau sangat mirip, sehingga fitur ini sangat relevan untuk mendeteksi koordinasi.
 
-\textbf{Agregasi Similarity Features:} \\
-Selain menghitung metrik individual, nilai rata-rata dan maksimum similarity antar pengguna dalam kuis yang sama juga dihitung.
+\textbf{Agregasi \textit{Similarity Features}:} \\
+Selain menghitung metrik individual, nilai rata-rata dan maksimum \textit{similarity} antar pengguna dalam kuis yang sama juga dihitung.
 \textbf{Justifikasi:} Agregasi ini memberikan gambaran umum tentang seberapa homogen suatu kelompok dalam hal perilaku, yang kemudian dapat digunakan sebagai indikator \textit{non-compliance} pada level pengguna maupun kelompok.
 
 %-----------------------------------------------------------------------------%
@@ -647,19 +647,19 @@ Selain menghitung metrik individual, nilai rata-rata dan maksimum similarity ant
 \label{sec:pemeriksaanMultikolinearitas}
 %-----------------------------------------------------------------------------%
 
-Analisis multikolinearitas menggunakan Variance Inflation Factor (VIF) merupakan langkah krusial dalam memastikan stabilitas dan interpretabilitas model. VIF mengukur seberapa besar varians koefisien regresi meningkat akibat kolinearitas antar fitur. Nilai VIF yang tinggi ($>10$) mengindikasikan bahwa fitur tersebut dapat diprediksi dengan akurasi tinggi dari fitur-fitur lain, sehingga kontribusinya menjadi redundan.
+Analisis multikolinearitas menggunakan \textit{Variance Inflation Factor} (VIF) merupakan langkah krusial dalam memastikan stabilitas dan interpretabilitas model. VIF mengukur seberapa besar varians koefisien regresi meningkat akibat kolinearitas antar fitur. Nilai VIF yang tinggi (>10) mengindikasikan bahwa fitur tersebut dapat diprediksi dengan akurasi tinggi dari fitur-fitur lain, sehingga kontribusinya menjadi redundan.
 
 \subsubsection{Proses Seleksi Fitur}
 Dari 35 fitur awal yang diekstraksi, analisis VIF dilakukan secara iteratif:
 \begin{enumerate}
-    \item \textbf{Iterasi Pertama:} Identifikasi fitur dengan VIF tertinggi ($>50$).
+    \item \textbf{Iterasi Pertama:} Identifikasi fitur dengan VIF tertinggi (>50).
     \item \textbf{Eliminasi Bertahap:} Fitur dengan VIF tertinggi dieliminasi satu per satu.
     \item \textbf{Re-kalkulasi VIF:} Setelah setiap eliminasi, VIF dihitung ulang untuk fitur yang tersisa.
-    \item \textbf{Konvergensi:} Proses berlanjut hingga semua fitur memiliki VIF $<10$.
+    \item \textbf{Konvergensi:} Proses berlanjut hingga semua fitur memiliki VIF < 10.
 \end{enumerate}
 
 \subsubsection{Delapan Fitur Stabil Terpilih}
-Setelah proses seleksi, 8 fitur dengan VIF rendah dan importance tinggi berhasil diidentifikasi:
+Setelah proses seleksi, 8 fitur dengan VIF rendah dan \textit{importance} tinggi berhasil diidentifikasi:
 
 \begin{table}[htbp]
 \centering
@@ -669,31 +669,31 @@ Setelah proses seleksi, 8 fitur dengan VIF rendah dan importance tinggi berhasil
 \hline
 \textbf{No} & \textbf{Nama Fitur} & \textbf{VIF} & \textbf{Deskripsi} \\
 \hline
-1 & \texttt{mean\_time\_per\_question} & 3.24 & Rata-rata waktu pengerjaan per soal \\
+1 & \texttt{mean\_time\_per\_question} & 3,24 & Rata-rata waktu pengerjaan per soal \\
 \hline
-2 & \texttt{navigation\_similarity\_max} & 4.87 & Similaritas navigasi maksimum dengan pengguna lain \\
+2 & \texttt{navigation\_similarity\_max} & 4,87 & Similaritas navigasi maksimum dengan pengguna lain \\
 \hline
-3 & \texttt{answer\_pattern\_similarity} & 5.12 & Kesamaan pola jawaban dengan pengguna lain \\
+3 & \texttt{answer\_pattern\_similarity} & 5,12 & Kesamaan pola jawaban dengan pengguna lain \\
 \hline
-4 & \texttt{timing\_correlation\_avg} & 3.98 & Rata-rata korelasi waktu dengan pengguna lain \\
+4 & \texttt{timing\_correlation\_avg} & 3,98 & Rata-rata korelasi waktu dengan pengguna lain \\
 \hline
-5 & \texttt{wrong\_answer\_similarity} & 6.23 & Kesamaan jawaban salah dengan pengguna lain \\
+5 & \texttt{wrong\_answer\_similarity} & 6,23 & Kesamaan jawaban salah dengan pengguna lain \\
 \hline
-6 & \texttt{revisit\_pattern\_score} & 2.56 & Skor pola pengulangan kunjungan soal \\
+6 & \texttt{revisit\_pattern\_score} & 2,56 & Skor pola pengulangan kunjungan soal \\
 \hline
-7 & \texttt{submission\_time\_std} & 3.41 & Standar deviasi waktu submission \\
+7 & \texttt{submission\_time\_std} & 3,41 & Standar deviasi waktu \textit{submission} \\
 \hline
-8 & \texttt{collaborative\_score} & 7.89 & Skor agregat indikasi kolaborasi \\
+8 & \texttt{collaborative\_score} & 7,89 & Skor agregat indikasi kolaborasi \\
 \hline
 \end{tabular}
 \end{table}
 
 \textbf{Justifikasi Pemilihan:}
 \begin{itemize}
-    \item \textbf{Representasi Komprehensif:} Kedelapan fitur mencakup semua aspek penting: timing (fitur 1, 4, 7), navigation (fitur 2, 6), answer patterns (fitur 3, 5), dan agregasi (fitur 8).
-    \item \textbf{Non-redundansi:} Dengan VIF $<10$, setiap fitur memberikan informasi unik yang tidak dapat sepenuhnya dijelaskan oleh fitur lain.
+    \item \textbf{Representasi Komprehensif:} Kedelapan fitur mencakup semua aspek penting: \textit{timing} (fitur 1, 4, 7), \textit{navigation} (fitur 2, 6), \textit{answer patterns} (fitur 3, 5), dan agregasi (fitur 8).
+    \item \textbf{Non-redundansi:} Dengan VIF < 10, setiap fitur memberikan informasi unik yang tidak dapat sepenuhnya dijelaskan oleh fitur lain.
     \item \textbf{Interpretabilitas:} Setiap fitur memiliki makna yang jelas dalam konteks deteksi kecurangan, memudahkan interpretasi hasil model.
-    \item \textbf{Stabilitas Model:} Pengurangan dari 35 menjadi 8 fitur mengurangi risiko overfitting dan meningkatkan generalisasi model.
+    \item \textbf{Stabilitas Model:} Pengurangan dari 35 menjadi 8 fitur mengurangi risiko \textit{overfitting} dan meningkatkan generalisasi model.
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -701,8 +701,8 @@ Setelah proses seleksi, 8 fitur dengan VIF rendah dan importance tinggi berhasil
 \label{sec:praPemrosesanFitur}
 %-----------------------------------------------------------------------------%
 \textbf{Konversi Representasi Data:} \\
-Banyak data log yang awalnya disimpan sebagai string representasi array atau struktur nested diubah menjadi format numerik melalui penggunaan modul seperti \texttt{ast.literal\_eval}.
-\textbf{Justifikasi:} Konversi ini esensial karena algoritma \textit{machine learning} tidak dapat mengolah data dalam bentuk string atau struktur kompleks tanpa transformasi terlebih dahulu. Dengan mengubahnya menjadi fitur statistik (seperti \textit{mean}, \textit{std}, \textit{min}, \textit{max}, \textit{count}), data menjadi siap untuk analisis lebih lanjut.
+Banyak data log yang awalnya disimpan sebagai \textit{string} representasi \textit{array} atau struktur \textit{nested} diubah menjadi format numerik melalui penggunaan modul seperti \texttt{ast.literal\_eval}.
+\textbf{Justifikasi:} Konversi ini esensial karena algoritma \textit{machine learning} tidak dapat mengolah data dalam bentuk \textit{string} atau struktur kompleks tanpa transformasi terlebih dahulu. Dengan mengubahnya menjadi fitur statistik (seperti \textit{mean}, \textit{std}, \textit{min}, \textit{max}, \textit{count}), data menjadi siap untuk analisis lebih lanjut.
 
 \textbf{Normalisasi dan Pengisian Nilai Hilang:} \\
 Seluruh data kemudian dinormalisasi dan nilai NaN diisi (misalnya, dengan 0) agar tidak terjadi gangguan pada model.
@@ -712,90 +712,90 @@ Seluruh data kemudian dinormalisasi dan nilai NaN diisi (misalnya, dengan 0) aga
 \subsection{Visualisasi dan Interpretasi Fitur}
 \label{sec:visualisasiInterpretasiFitur}
 %-----------------------------------------------------------------------------%
-\textbf{Boxplot, Heatmap, dan Scatter Plot:} \\
-Visualisasi digunakan untuk menilai distribusi fitur, mengidentifikasi outlier, dan melihat hubungan antar fitur.
-\textbf{Justifikasi:} Visualisasi memberikan insight yang penting untuk memahami struktur data dan untuk validasi kualitas fitur. Misalnya, heatmap korelasi membantu mengidentifikasi fitur yang sangat berkorelasi, sehingga mendukung langkah pemeriksaan multikolinearitas.
+\textbf{\textit{Boxplot}, \textit{Heatmap}, dan \textit{Scatter Plot}:} \\
+Visualisasi digunakan untuk menilai distribusi fitur, mengidentifikasi \textit{outlier}, dan melihat hubungan antar fitur.
+\textbf{Justifikasi:} Visualisasi memberikan wawasan yang penting untuk memahami struktur data dan untuk validasi kualitas fitur. Misalnya, \textit{heatmap} korelasi membantu mengidentifikasi fitur yang sangat berkorelasi, sehingga mendukung langkah pemeriksaan multikolinearitas.
 
 %-----------------------------------------------------------------------------%
-\subsection{Reproducibility dan Dokumentasi}
+\subsection{\textit{Reproducibility} dan Dokumentasi}
 \label{sec:reproducibilityDokumentasi}
 %-----------------------------------------------------------------------------%
-\textbf{Modularitas dan Penggunaan Seed Random:} \\
-Setiap modul dalam pipeline \textit{feature engineering} dirancang secara modular dan menggunakan seed tertentu untuk fungsi random.
+\textbf{Modularitas dan Penggunaan \textit{Seed Random}:} \\
+Setiap modul dalam \textit{pipeline feature engineering} dirancang secara modular dan menggunakan \textit{seed} tertentu untuk fungsi \textit{random}.
 \textbf{Justifikasi:} Hal ini memastikan bahwa seluruh proses dapat diulangi secara konsisten, yang merupakan syarat penting untuk validitas ilmiah dan \textit{reproducibility} penelitian.
 
-\textbf{Penyimpanan Output Terstruktur:} \\
+\textbf{Penyimpanan \textit{Output} Terstruktur:} \\
 Fitur yang dihasilkan disimpan dalam format CSV dan JSON, dengan dokumentasi yang mendetail mengenai proses ekstraksi dan transformasi yang telah dilakukan.
 \textbf{Justifikasi:} Dokumentasi yang baik mendukung transparansi dan memungkinkan peneliti lain untuk memahami serta mengaudit seluruh proses \textit{feature engineering}.
 
-Secara keseluruhan, pendekatan \textit{feature engineering} dalam penelitian ini dirancang untuk mengoptimalkan informasi yang terdapat dalam data log, mengurangi noise, dan menghasilkan representasi numerik yang mendukung model deteksi \textit{non-compliance} secara efektif. Setiap pilihan---dari ekstraksi statistik waktu hingga penggunaan metrik similarity---dipilih berdasarkan dasar metodologis yang kuat dan didukung oleh literatur yang relevan, sehingga memberikan dasar yang valid dan \textit{reproducible} untuk pengembangan model \textit{machine learning}.
+Secara keseluruhan, pendekatan \textit{feature engineering} dalam penelitian ini dirancang untuk mengoptimalkan informasi yang terdapat dalam data log, mengurangi gangguan, dan menghasilkan representasi numerik yang mendukung model deteksi \textit{non-compliance} secara efektif. Setiap pilihan---dari ekstraksi statistik waktu hingga penggunaan metrik \textit{similarity}---dipilih berdasarkan dasar metodologis yang kuat dan didukung oleh literatur yang relevan, sehingga memberikan dasar yang valid dan \textit{reproducible} untuk pengembangan model \textit{machine learning}.
 
 %-----------------------------------------------------------------------------%
 
 %-----------------------------------------------------------------------------%
-\section{Arsitektur Model Ensemble untuk Deteksi Kecurangan}
+\section{Arsitektur Model \textit{Ensemble} untuk Deteksi Kecurangan}
 \label{sec:arsitekturModelEnsemble}
 %-----------------------------------------------------------------------------%
 
-Pengembangan model deteksi kecurangan mengadopsi pendekatan ensemble yang mengintegrasikan kekuatan berbagai algoritma machine learning. Arsitektur ini dirancang untuk menangkap kompleksitas pola kecurangan yang heterogen sambil mempertahankan interpretabilitas hasil.
+Pengembangan model deteksi kecurangan mengadopsi pendekatan \textit{ensemble} yang mengintegrasikan kekuatan berbagai algoritma \textit{machine learning}. Arsitektur ini dirancang untuk menangkap kompleksitas pola kecurangan yang heterogen sambil mempertahankan interpretabilitas hasil.
 
 %-----------------------------------------------------------------------------%
-\subsection{Desain Arsitektur Multi-Model}
+\subsection{Desain Arsitektur \textit{Multi-Model}}
 \label{subsec:desainArsitektur}
 %-----------------------------------------------------------------------------%
 
-Arsitektur ensemble mengintegrasikan empat algoritma komplementer dengan analisis graph network untuk deteksi komprehensif:
+Arsitektur \textit{ensemble} mengintegrasikan empat algoritma komplementer dengan analisis \textit{graph network} untuk deteksi komprehensif:
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figures/ensemble_architecture.pdf}
-    \caption{Arsitektur Ensemble: Integrasi Multi-Model dengan Graph Analysis untuk Deteksi Kecurangan Komprehensif}
+    \caption{Arsitektur \textit{Ensemble}: Integrasi \textit{Multi-Model} dengan \textit{Graph Analysis} untuk Deteksi Kecurangan Komprehensif}
     \label{fig:ensemble_architecture_detail}
 \end{figure}
 
-\subsubsection{Komponen Model Base dan Perannya}
+\subsubsection{Komponen Model \textit{Base} dan Perannya}
 \label{sec:komponenModelBase}
 
-Setiap model dalam ensemble dipilih berdasarkan kekuatan spesifik dalam mendeteksi aspek berbeda dari kecurangan:
+Setiap model dalam \textit{ensemble} dipilih berdasarkan kekuatan spesifik dalam mendeteksi aspek berbeda dari kecurangan:
 
-\textbf{Random Forest (Tree-based Ensemble):}
+\textbf{\textit{Random Forest} (\textit{Tree-based Ensemble}):}
 \begin{itemize}
-    \item \textbf{Kekuatan:} Kokoh terhadap outliers dan noise, memberikan feature importance ranking
-    \item \textbf{Konfigurasi:} 100 trees, max depth adaptive, min samples split = 2
-    \item \textbf{Peran:} Mendeteksi non-linear patterns dan interaction effects antar fitur
+    \item \textbf{Kekuatan:} Kokoh terhadap \textit{outliers} dan gangguan, memberikan peringkat \textit{feature importance}
+    \item \textbf{Konfigurasi:} 100 \textit{trees}, \textit{max depth adaptive}, \textit{min samples split} = 2
+    \item \textbf{Peran:} Mendeteksi pola non-linear dan efek interaksi antar fitur
 \end{itemize}
 
-\textbf{Support Vector Machine (Kernel-based):}
+\textbf{\textit{Support Vector Machine} (\textit{Kernel-based}):}
 \begin{itemize}
-    \item \textbf{Kekuatan:} Efektif dalam high-dimensional space, optimal margin classification
-    \item \textbf{Konfigurasi:} RBF kernel, C=10, gamma=0.01 (optimized via grid search)
-    \item \textbf{Peran:} Memisahkan kasus borderline dengan decision boundary yang kompleks
+    \item \textbf{Kekuatan:} Efektif dalam ruang berdimensi tinggi, klasifikasi dengan \textit{optimal margin}
+    \item \textbf{Konfigurasi:} \textit{RBF kernel}, C=10, gamma=0,01 (dioptimasi melalui \textit{grid search})
+    \item \textbf{Peran:} Memisahkan kasus \textit{borderline} dengan \textit{decision boundary} yang kompleks
 \end{itemize}
 
-\textbf{Neural Network (Deep Learning):}
+\textbf{\textit{Neural Network} (\textit{Deep Learning}):}
 \begin{itemize}
-    \item \textbf{Kekuatan:} Menangkap hubungan non-linear kompleks dan hidden patterns
-    \item \textbf{Konfigurasi:} 3 hidden layers (128-64-32 neurons), ReLU activation, dropout 0.5
+    \item \textbf{Kekuatan:} Menangkap hubungan non-linear kompleks dan pola tersembunyi
+    \item \textbf{Konfigurasi:} 3 \textit{hidden layers} (128-64-32 neuron), aktivasi ReLU, \textit{dropout} 0,5
     \item \textbf{Peran:} Pembelajaran representasi otomatis dari kombinasi fitur
 \end{itemize}
 
-\textbf{Gradient Boosting (Sequential Ensemble):}
+\textbf{\textit{Gradient Boosting} (\textit{Sequential Ensemble}):}
 \begin{itemize}
-    \item \textbf{Kekuatan:} Iterative error correction, high predictive accuracy
-    \item \textbf{Konfigurasi:} 100 estimators, learning rate 0.1, max depth 3
-    \item \textbf{Peran:} Fine-tuning prediksi dengan fokus pada hard-to-classify cases
+    \item \textbf{Kekuatan:} Koreksi kesalahan iteratif, akurasi prediktif tinggi
+    \item \textbf{Konfigurasi:} 100 \textit{estimators}, \textit{learning rate} 0,1, \textit{max depth} 3
+    \item \textbf{Peran:} \textit{Fine-tuning} prediksi dengan fokus pada kasus yang sulit diklasifikasi
 \end{itemize}
 
-\subsubsection{Analisis Graph Network untuk Deteksi Kelompok}
+\subsubsection{Analisis \textit{Graph Network} untuk Deteksi Kelompok}
 \label{sec:graphNetworkAnalysis}
 
-Komponen unik dalam arsitektur adalah integrasi graph analysis yang memvisualisasikan dan mendeteksi kelompok kecurangan:
+Komponen unik dalam arsitektur adalah integrasi analisis graf yang memvisualisasikan dan mendeteksi kelompok kecurangan:
 
-\textbf{Konstruksi Graph:}
+\textbf{Konstruksi Graf:}
 \begin{itemize}
-    \item Nodes: Merepresentasikan mahasiswa/percobaan ujian
-    \item Edges: Dibentuk jika similarity score > threshold (0.8)
-    \item Edge weights: Nilai similarity (navigation, timing, answer patterns)
+    \item \textit{Nodes}: Merepresentasikan mahasiswa/percobaan ujian
+    \item \textit{Edges}: Dibentuk jika skor \textit{similarity} > \textit{threshold} (0,8)
+    \item \textit{Edge weights}: Nilai \textit{similarity} (navigasi, waktu, pola jawaban)
 \end{itemize}
 
 \textbf{Community Detection:}
