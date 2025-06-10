@@ -1,21 +1,21 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Kerangka Metodologi Penelitian Deteksi Kecurangan}}{18}{figure.caption.13}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Arsitektur Pipeline Teknis: Alur Pemrosesan Data dari Log Mentah hingga Deteksi Kecurangan dengan Dual-Mode Processing}}{19}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Alur Data dalam Pipeline Deteksi Kecurangan}}{30}{figure.caption.15}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Proses Feature Engineering dari Raw Data hingga 8 Fitur Stabil}}{44}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Arsitektur Ensemble: Integrasi Multi-Model dengan Graph Analysis untuk Deteksi Kecurangan Komprehensif}}{50}{figure.caption.18}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Proses Reduksi Fitur: Dari 35 Fitur Awal menjadi 8 Fitur Stabil melalui Analisis VIF}}{65}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Kerangka Metodologi Penelitian Deteksi Kecurangan}}{16}{figure.caption.13}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Arsitektur Pipeline Teknis: Alur Pemrosesan Data dari Log Mentah hingga Deteksi Kecurangan dengan Dual-Mode Processing}}{17}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Alur Data dalam \textit {Pipeline} Deteksi Kecurangan}}{27}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Proses \textit {Feature Engineering} dari \textit {Raw Data} hingga 8 Fitur Stabil}}{40}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Arsitektur \textit {Ensemble}: Integrasi \textit {Multi-Model} dengan \textit {Graph Analysis} untuk Deteksi Kecurangan Komprehensif}}{45}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Proses Reduksi Fitur: Dari 35 Fitur Awal menjadi 8 Fitur Stabil melalui Analisis VIF}}{57}{figure.caption.19}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Confusion Matrix Model Random Forest}}{69}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Kurva ROC dan Precision-Recall Model Random Forest}}{70}{figure.caption.24}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Kinerja Model Machine Learning}}{71}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Feature Importance Analysis Model Random Forest}}{71}{figure.caption.26}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Matriks Korelasi Antar Fitur Deteksi}}{73}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Distribusi Probabilitas Kecurangan pada Data Riil}}{74}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Analisis Distribusi Repeat Offenders}}{76}{figure.caption.30}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Analisis Ujian dengan Tingkat Kecurangan Tinggi}}{76}{figure.caption.31}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Contoh Kasus Kecurangan: User 4426 pada Quiz 3144. Gambar menunjukkan kesamaan pola navigasi, waktu pengerjaan, dan kesamaan jawaban (termasuk kesalahan identik) dengan \textit {partner} kecurangan yang ditampilkan di bagian kanan atas}}{81}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Contoh Kasus Kecurangan: User 7486 pada Quiz 8158. Terlihat kesamaan 95\% dalam pola jawaban, termasuk kesalahan identik pada soal nomor 7, 12, dan 15 dengan \textit {partner} kecurangan (ditunjukkan di bagian kanan atas)}}{81}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces \textit {Confusion Matrix} Model \textit {Random Forest}}}{61}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Kurva ROC dan \textit {Precision-Recall} Model \textit {Random Forest}}}{61}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Perbandingan Kinerja Model \textit {Machine Learning}}}{62}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Analisis \textit {Feature Importance} Model \textit {Random Forest}}}{63}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Matriks Korelasi Antar Fitur Deteksi}}{64}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Distribusi Probabilitas Kecurangan pada Data Riil}}{65}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Analisis Distribusi \textit {Repeat Offenders}}}{66}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Analisis Ujian dengan Tingkat Kecurangan Tinggi}}{67}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Contoh Kasus Kecurangan: User 4426 pada Quiz 3144. Gambar menunjukkan kesamaan pola navigasi, waktu pengerjaan, dan kesamaan jawaban (termasuk kesalahan identik) dengan \textit {partner} kecurangan yang ditampilkan di bagian kanan atas}}{71}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Contoh Kasus Kecurangan: User 7486 pada Quiz 8158. Terlihat kesamaan 95\% dalam pola jawaban, termasuk kesalahan identik pada soal nomor 7, 12, dan 15 dengan \textit {partner} kecurangan (ditunjukkan di bagian kanan atas)}}{72}{figure.caption.35}%
 \addvspace {10\p@ }
