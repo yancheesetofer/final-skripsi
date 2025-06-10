@@ -1,10 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[Aggarwal, 2017]{Aggarwal2017}
-Aggarwal, C.~C. (2017).
-\newblock {\em Outlier Analysis}.
-\newblock Springer, Cham, Switzerland, 2nd edition.
-
 \bibitem[Alexandron et~al., 2019]{Alexandron2019}
 Alexandron, G., Ruipérez-Valiente, J.~A., and Pritchard, D.~E. (2019).
 \newblock Towards a general purpose anomaly detection method to identify cheaters in massive open online courses.
@@ -34,16 +29,6 @@ Chang, S.-C. and Chang, K.~L. (2023).
 Chirumamilla, A., Sindre, G., and Nguyen-Duc, A. (2020).
 \newblock Cheating in e-exams and paper exams: the perceptions of engineering students and teachers in norway.
 \newblock {\em Assessment \& Evaluation in Higher Education}, 45(7):940--957.
-
-\bibitem[Ferguson, 2012]{Ferguson2012}
-Ferguson, R. (2012).
-\newblock Learning analytics: drivers, developments and challenges.
-\newblock {\em International Journal of Technology Enhanced Learning}, 4(5/6):304--317.
-
-\bibitem[Gašević et~al., 2015]{Gasevic2015}
-Gašević, D., Dawson, S., and Siemens, G. (2015).
-\newblock Let's not forget: Learning analytics are about learning.
-\newblock {\em TechTrends}, 59(1):64--71.
 
 \bibitem[Huda et~al., 2020]{article:rule_based_limitations}
 Huda, M., Jasmi, K.~A., Zakaria, G.~N., and et~al. (2020).
@@ -85,20 +70,15 @@ Niu, K., Zhang, J., Wang, Y., Wang, J., and Zhang, X. (2025).
 \newblock Effective machine learning methodology for medical prediction: a systematic review.
 \newblock {\em BMC Medical Informatics and Decision Making}, 25(1):15.
 
-\bibitem[Romero and Ventura, 2020]{Romero2020}
-Romero, C. and Ventura, S. (2020).
-\newblock Educational data mining and learning analytics: An updated survey.
-\newblock {\em Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery}, 10(3):e1355.
+\bibitem[Ranger et~al., 2020]{Ranger2020}
+Ranger, J., Schmidt, N., and Wolgast, A. (2020).
+\newblock The detection of cheating on e-exams in higher education—the performance of several old and some new indicators.
+\newblock {\em Frontiers in Psychology}, 11:2097.
 
 \bibitem[Shatnawi et~al., 2024]{Shatnawi2024}
 Shatnawi, A., Al-Zoubi, A.~Y., Faris, H., Eshtay, M., and Hassonah, M.~A. (2024).
 \newblock E-exam cheating detection system for moodle lms.
 \newblock {\em Applied Sciences}, 14(1):397.
-
-\bibitem[Siemens and Long, 2011]{Siemens2011}
-Siemens, G. and Long, P. (2011).
-\newblock Penetrating the fog: Analytics in learning and education.
-\newblock {\em EDUCAUSE Review}, 46(5):30--32.
 
 \bibitem[Yulita et~al., 2023]{Yulita2023}
 Yulita, I.~N., Hariz, F.~A., Suryana, I., and Prabuwono, A.~S. (2023).
@@ -109,10 +89,5 @@ Yulita, I.~N., Hariz, F.~A., Suryana, I., and Prabuwono, A.~S. (2023).
 Zhou, T. and Jiao, H. (2022).
 \newblock Data augmentation in machine learning for cheating detection in large-scale assessment.
 \newblock {\em Psychological Test and Assessment Modeling}, 64(4):425--444.
-
-\bibitem[Zhou, 2012]{Zhou2012}
-Zhou, Z.-H. (2012).
-\newblock {\em Ensemble Methods: Foundations and Algorithms}.
-\newblock CRC Press, Boca Raton, FL.
 
 \end{thebibliography}

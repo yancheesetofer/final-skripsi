@@ -1,9 +1,8 @@
-
 \chapter{\babEmpat}
 \label{bab:4}
 %-----------------------------------------------------------------------------%
 
-Bab ini menyajikan hasil eksperimen dan analisis komprehensif terhadap sistem deteksi kecurangan akademik yang telah dikembangkan. Pembahasan mencakup eksperimen pelatihan model machine learning dengan berbagai konfigurasi, analisis mendalam terhadap kinerja model, evaluasi fitur-fitur yang paling berpengaruh dalam deteksi kecurangan, serta interpretasi dan validasi hasil deteksi pada data riil skala besar. Seluruh eksperimen dirancang untuk menguji hipotesis penelitian dan memberikan bukti empiris tentang efektivitas pendekatan yang diusulkan.
+Bab ini menyajikan hasil eksperimen dan analisis komprehensif terhadap sistem deteksi kecurangan akademik yang telah dikembangkan. Pembahasan mencakup eksperimen pelatihan model \textit{machine learning} dengan berbagai konfigurasi, analisis mendalam terhadap kinerja model, evaluasi fitur-fitur yang paling berpengaruh dalam deteksi kecurangan, serta interpretasi dan validasi hasil deteksi pada data riil skala besar. Seluruh eksperimen dirancang untuk menguji hipotesis penelitian dan memberikan bukti empiris tentang efektivitas pendekatan yang diusulkan.
 
 %-----------------------------------------------------------------------------%
 \section{Dataset dan Konfigurasi Eksperimen}
@@ -15,7 +14,7 @@ Bab ini menyajikan hasil eksperimen dan analisis komprehensif terhadap sistem de
 
 Dataset pelatihan model deteksi kecurangan dalam penelitian ini menggunakan data sintesis yang dihasilkan melalui simulasi berbasis konfigurasi yang terkontrol. Pendekatan ini dipilih untuk memastikan ketersediaan ground truth yang akurat dan untuk mengontrol berbagai parameter kecurangan dalam lingkungan yang terstruktur.
 
-Dataset sintesis terdiri dari 800 sampel percobaan ujian yang disimulasikan dari 200 mahasiswa yang mengerjakan 4 kuis, dengan setiap kuis terdiri dari 20 soal. Konfigurasi ini menghasilkan total 800 percobaan ujian (200 mahasiswa $\times$ 4 kuis = 800 attempts) dengan distribusi kelas sebagai berikut:
+Dataset sintesis terdiri dari 800 sampel percobaan ujian yang disimulasikan dari 200 mahasiswa yang mengerjakan 4 kuis, dengan setiap kuis terdiri dari 20 soal. Konfigurasi ini menghasilkan total 800 percobaan ujian (200 mahasiswa $\times$ 4 kuis = 800 percobaan ujian) dengan distribusi kelas sebagai berikut:
 \begin{itemize}
     \item 600 percobaan ujian normal (75\%)
     \item 200 percobaan ujian dengan indikasi kecurangan (25\%)
@@ -59,12 +58,12 @@ Parameter-parameter ini dirancang berdasarkan observasi empiris dari pola kecura
 \subsection{Dataset Riil untuk Validasi}
 \label{subsec:datasetRiil}
 
-Untuk menguji kemampuan generalisasi model, sistem deteksi diaplikasikan pada dataset riil yang terdiri dari 446,720 percobaan ujian dari sistem Moodle institusi pendidikan. Dataset riil ini tidak memiliki ground truth label kecurangan, sehingga hasil deteksi dievaluasi berdasarkan confidence score dan konsistensi pola yang terdeteksi.
+Untuk menguji kemampuan generalisasi model, sistem deteksi diaplikasikan pada dataset riil yang terdiri dari 446.720 percobaan ujian dari sistem Moodle institusi pendidikan. Dataset riil ini tidak memiliki \textit{ground truth label} kecurangan, sehingga hasil deteksi dievaluasi berdasarkan \textit{confidence score} dan konsistensi pola yang terdeteksi.
 
 Dataset riil mencakup log aktivitas dari berbagai mata kuliah dengan karakteristik sebagai berikut:
 \begin{itemize}
     \item Periode data: Semester akademik 2023-2024
-    \item Jumlah percobaan ujian: 446,720
+    \item Jumlah percobaan ujian: 446.720
     \item Rentang jumlah soal per ujian: 10-50 soal
     \item Modus ujian: Multiple choice dan essay
 \end{itemize}
@@ -77,7 +76,7 @@ Dataset riil mencakup log aktivitas dari berbagai mata kuliah dengan karakterist
 \subsection{Kinerja Model pada Data Testing}
 \label{subsec:kinerjaModelTesting}
 
-Enam model machine learning yang berbeda dilatih dan dievaluasi pada dataset sintesis. Tabel \ref{tabel:kinerjaModel} menyajikan metrik kinerja setiap model pada data testing.
+Enam model \textit{machine learning} yang berbeda dilatih dan dievaluasi pada dataset sintesis. Tabel \ref{tabel:kinerjaModel} menyajikan metrik kinerja setiap model pada data \textit{testing}.
 
 \begin{table}[htbp]
 \centering
@@ -102,7 +101,7 @@ Gradient Boosting & 0.95 & 0.95 & 0.90 & 0.92 \\
 \end{tabular}
 \end{table}
 
-Hasil evaluasi menunjukkan bahwa model Random Forest dan SVM mencapai kinerja terbaik dengan accuracy 98\%, precision 1.00, dan recall 0.93. Nilai precision sempurna (1.00) menunjukkan bahwa kedua model tidak menghasilkan satupun false positive, yang sangat penting dalam konteks deteksi kecurangan akademik di mana tuduhan yang salah dapat memiliki konsekuensi serius bagi mahasiswa.
+Hasil evaluasi menunjukkan bahwa model Random Forest dan SVM mencapai kinerja terbaik dengan \textit{accuracy} 98\%, \textit{precision} 1,00, dan \textit{recall} 0,93. Nilai \textit{precision} sempurna (1,00) menunjukkan bahwa kedua model tidak menghasilkan satupun \textit{false positive}, yang sangat penting dalam konteks deteksi kecurangan akademik di mana tuduhan yang salah dapat memiliki konsekuensi serius bagi mahasiswa.
 
 \subsubsection{Analisis Confusion Matrix}
 
@@ -122,7 +121,7 @@ Dari confusion matrix terlihat bahwa:
     \item False Negatives: 2 (pengguna curang yang terlewat)
 \end{itemize}
 
-Tidak adanya false positive (FP=0) merupakan hasil yang luar biasa karena menunjukkan bahwa model tidak menghasilkan tuduhan kecurangan yang salah. Dari 30 kasus kecurangan, hanya 2 yang terlewat (6.67\% false negative rate), memberikan recall sebesar 93.33\%.
+Tidak adanya \textit{false positive} (FP=0) merupakan hasil yang luar biasa karena menunjukkan bahwa model tidak menghasilkan tuduhan kecurangan yang salah. Dari 30 kasus kecurangan, hanya 2 yang terlewat (6,67\% \textit{false negative rate}), memberikan \textit{recall} sebesar 93,33\%.
 
 \subsubsection{Kurva ROC dan Precision-Recall}
 
@@ -460,63 +459,116 @@ Penelitian ini mencapai akurasi tertinggi (98.33\%) dibandingkan penelitian terd
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
-\section{Kesimpulan Bab}
-\label{sec:kesimpulanBab4}
+\section{Diskusi Hasil Deteksi pada Data Riil dan Implikasi Praktis}
+\label{sec:diskusiDeteksiRiil}
 %-----------------------------------------------------------------------------%
 
-Hasil eksperimen dan analisis yang telah dilakukan menunjukkan beberapa temuan kunci yang memvalidasi efektivitas pendekatan yang diusulkan:
+Subbab ini membahas secara mendalam hasil deteksi pada data riil dengan menganalisis implikasi praktis, keterbatasan, serta saran dan \textit{insight} yang dapat diambil dari temuan pada tiga subbab sebelumnya (4.4 Statistik Deteksi Keseluruhan, 4.5 Identifikasi \textit{Repeat Offenders}, dan 4.6 Analisis Ujian dengan Tingkat Kecurangan Tinggi). Diskusi ini juga diperkuat dengan analisis kasus individual berbasis visualisasi pola navigasi, waktu, dan jawaban untuk memberikan bukti empiris yang konkret.
 
-\textbf{1. Performa Model yang Exceptional}
+\subsection{Implikasi Praktis Deteksi pada Data Riil}
+\label{subsec:implikasiPraktisRiil}
+
+Hasil deteksi pada 446.720 percobaan ujian riil menunjukkan bahwa 29,43\% percobaan terindikasi kecurangan dengan \textit{confidence} tinggi ($\geq$80\%). Tingkat deteksi ini konsisten dengan estimasi prevalensi kecurangan daring dalam literatur (20--40\%), sehingga dapat dikatakan model memiliki validitas eksternal yang baik. Namun, perlu ditekankan bahwa seluruh deteksi bersifat \textit{retrospective} dan tidak dapat dijadikan bukti tunggal tanpa validasi institusional lebih lanjut.
+
+Berdasarkan temuan pada subbab 4.4, distribusi bimodal probabilitas kecurangan mengindikasikan bahwa model berhasil membedakan secara tegas antara perilaku normal dan mencurigakan. Dari sisi praktikalitas, hasil deteksi ini memberikan implikasi sebagai berikut:
+
 \begin{itemize}
-    \item Model Random Forest dan SVM mencapai kinerja terbaik dengan akurasi 98.33\%, precision sempurna 1.00, dan recall 0.93
-    \item Tidak ada false positive (FP=0) yang menunjukkan model tidak menghasilkan tuduhan kecurangan yang salah
-    \item AUC score 0.99 mengindikasikan kemampuan diskriminatif yang sangat baik
+    \item \textbf{Prioritas Intervensi:} Institusi dapat memfokuskan audit manual pada 29,43\% kasus dengan \textit{confidence} tertinggi, sehingga sumber daya dapat digunakan lebih efisien. Hal ini praktis mengingat keterbatasan sumber daya untuk melakukan audit menyeluruh terhadap 446.720 percobaan ujian.
+    \item \textbf{Identifikasi Pola Sistemik:} Seperti yang ditunjukkan pada subbab 4.5, identifikasi 4.093 \textit{repeat offenders} memberikan \textit{insight} untuk perbaikan rancangan \textit{assessment} dan kebijakan pengawasan. Keberadaan 355 pengguna dengan lebih dari 20 deteksi menunjukkan urgensi intervensi sistemik dalam konteks ini tim akademik.
+    \item \textbf{\textit{Early Warning}:} Meskipun sistem ini bersifat \textit{offline}, hasil deteksi dapat diintegrasikan ke dalam sistem peringatan dini untuk semester berikutnya. Temuan pada subbab 4.6 mengenai ujian-ujian dengan tingkat kecurangan tinggi (hingga 68,2\%) dapat menjadi basis untuk prioritas pemantauan ujian dengan kondisi yang mirip.
 \end{itemize}
 
-\textbf{2. Dampak Signifikan Ukuran Dataset}
+\subsection{Analisis Kasus Individual: Pola Navigasi, Waktu, dan Jawaban}
+\label{subsec:analisisKasusIndividual}
+
+Untuk memperkuat interpretasi hasil deteksi, dilakukan analisis visual terhadap dua kasus pengguna dengan \textit{confidence} kecurangan tertinggi ($>$95\%). Gambar \ref{fig:case1} dan \ref{fig:case2} menampilkan visualisasi komprehensif yang mencakup pola navigasi, distribusi waktu pengerjaan, serta matriks kesamaan jawaban untuk dua kasus berbeda.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{newfigures/individual_case_1_user_4426.0_quiz_3144.0.png}
+    \caption{Contoh Kasus Kecurangan: User 4426 pada Quiz 3144. Gambar menunjukkan kesamaan pola navigasi, waktu pengerjaan, dan kesamaan jawaban (termasuk kesalahan identik) dengan \textit{partner} kecurangan yang ditampilkan di bagian kanan atas}
+    \label{fig:case1}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{newfigures/individual_case_2_user_7486.0_quiz_8158.0.png}
+    \caption{Contoh Kasus Kecurangan: User 7486 pada Quiz 8158. Terlihat kesamaan 95\% dalam pola jawaban, termasuk kesalahan identik pada soal nomor 7, 12, dan 15 dengan \textit{partner} kecurangan (ditunjukkan di bagian kanan atas)}
+    \label{fig:case2}
+\end{figure}
+
+Untuk memahami bagaimana sistem mendeteksi kecurangan, mari kita lihat dua contoh kasus nyata yang terdeteksi dengan \textit{confidence} sangat tinggi (di atas 95\%). Analisis menunjukkan tiga pola mencurigakan utama yang hampir mustahil terjadi secara kebetulan:
+
+\textbf{Pola 1: Kesamaan Cara Mengerjakan Ujian (\textit{Navigasi})}
+
+Pada kasus pertama (User 4426), sistem menemukan bahwa cara mahasiswa ini mengerjakan ujian sangat mirip dengan mahasiswa lain (salah satunya user 7531). Bayangkan jika dalam ujian 20 soal, dua orang mengerjakan soal dengan urutan yang hampir sama persis—mulai dari soal mana, melompat ke soal mana, dan kembali ke soal mana. Dari 20 soal, mereka menggunakan urutan yang identik pada 18 soal. Secara statistik, ini seperti melempar koin dan mendapat hasil yang sama 18 kali dari 20 lemparan—kemungkinannya hanya 0,07\% atau kurang dari 1 dari 1000 orang.
+
+\textbf{Pola 2: Kesamaan Waktu Pengerjaan}
+
+Yang lebih mencurigakan lagi, kedua mahasiswa ini tidak hanya mengerjakan dengan urutan yang sama, tetapi juga menghabiskan waktu yang sangat mirip di setiap soal. Jika mahasiswa A menghabiskan 2 menit di soal nomor 5, maka mahasiswa B juga menghabiskan waktu sekitar 2 menit. Pola ini cukup konsisten.
+
+\textbf{Pola 3: Kesamaan Jawaban, Terutama Jawaban yang Salah (Temuan Krusial)}
+
+Temuan penting lain adalah pada analisis jawaban. Dalam kasus kedua (User 7486), sistem menemukan bahwa beberapa mahasiswa memiliki kesamaan jawaban 95\%—artinya dari 20 soal, 19 jawaban mereka identik. Yang paling mencurigakan adalah mereka tidak hanya memiliki jawaban benar yang sama, tetapi juga \textbf{memiliki kesalahan yang identik pada soal-soal tertentu}.
+
+Sebagai contoh, pada soal nomor 7, 12, dan 15, kedua mahasiswa memilih opsi jawaban yang salah yang sama persis. Dalam ujian pilihan ganda dengan 4 opsi (A, B, C, D), jika dua orang salah menjawab soal yang sama dan memilih opsi salah yang sama, kemungkinan ini terjadi secara kebetulan hanya 25\%. Tetapi ketika hal ini terjadi pada 3 soal sekaligus, kemungkinannya menjadi hanya 1,56\%.
+
+\textbf{Interpretasi Sederhana:}
+
+Bayangkan Anda dan teman Anda mengerjakan ujian yang sama. Jika kalian berdua pintar dan belajar dengan baik, wajar jika jawaban benar kalian sama. Tetapi jika kalian berdua \textit{salah menjawab soal yang sama dengan kesalahan yang sama}, ini perlu dicurugai. 
+
+Mengapa temuan ini begitu penting? Karena ketika seseorang tidak tahu jawaban yang benar, mereka biasanya akan menebak secara acak dan cenderung memilih opsi yang berbeda-beda. Faktanya, dalam kedua kasus yang dianalisis, pola kesalahan yang identik ini menjadi \textbf{bukti terkuat} adanya kolaborasi, karena:
+
 \begin{itemize}
-    \item Peningkatan ukuran dataset dari 90 ke 800 sampel menghasilkan peningkatan kinerja rata-rata 16.85\%
-    \item Neural Network menunjukkan sensitivitas tertinggi (peningkatan 26.07\%)
-    \item Peningkatan deteksi pada data riil sebesar 419\%, dari 25,309 menjadi 131,479 kasus
-    \item Threshold optimal 500-1000 sampel untuk mencapai performa optimal
+    \item Mahasiswa yang jujur dan tidak tahu jawaban akan memilih opsi yang berbeda secara acak
+    \item Mahasiswa yang bekerja sama akan cenderung memiliki kesalahan yang sama karena mereka \textit{menyalin} atau \textit{berdiskusi} tentang jawaban
+    \item Pola ini lebih sulit dideteksi secara manual dibandingkan kesamaan jawaban benar, sehingga pelaku mungkin tidak menyadari bahwa mereka meninggalkan "jejak digital" yang kuat
 \end{itemize}
 
-\textbf{3. Dominasi Fitur Kesamaan Navigasi}
+Temuan ini sejalan dengan penelitian psikologi pendidikan yang menunjukkan bahwa dalam situasi kecurangan, pelaku sering fokus pada mendapatkan jawaban benar tanpa menyadari bahwa pola kesalahan mereka juga akan identik \citep{Ranger2020}.
+
+Visualisasi pada gambar menunjukkan bahwa pada bagian kiri atas terdapat informasi tentang \textit{partner} kecurangan yang teridentifikasi oleh sistem. Kedua kasus juga menunjukkan bahwa mahasiswa dalam kelompok yang sama memulai ujian dalam rentang waktu yang sangat dekat (hanya selisih 2 menit) dan menyelesaikan ujian dalam rentang waktu yang juga sangat dekat (selisih 5 menit), mengindikasikan kemungkinan koordinasi waktu pengerjaan.
+
+\subsection{Saran dan Insight untuk Implementasi Institusional}
+\label{subsec:saranInsightRiil}
+
+Berdasarkan analisis komprehensif terhadap hasil deteksi dan implikasinya, beberapa saran strategis dan \textit{insight} untuk implementasi institusional dapat dirumuskan sebagai berikut:
+
 \begin{itemize}
-    \item Fitur berbasis z-score kesamaan navigasi berkontribusi 60.5\% dalam deteksi
-    \item max\_nav\_similarity\_zscore menjadi fitur paling penting (24.5\%)
-    \item Validasi statistik menunjukkan probabilitas kejadian acak $< 2.38 \times 10^{-7}$ untuk pola serupa
+    \item \textbf{Strategi Audit Bertingkat:} Mengingat volume data yang besar (446.720 percobaan), institusi disarankan menerapkan strategi audit bertingkat. Prioritas tertinggi diberikan pada: (1) 355 pengguna dengan lebih dari 20 deteksi kecurangan, (2) ujian dengan tingkat kecurangan $>$50\% seperti Quiz 1773, dan (3) kasus dengan \textit{confidence} $>$95\%. Pendekatan ini memaksimalkan efisiensi sumber daya sambil menjaga efektivitas deteksi.
+    
+    \item \textbf{Redesain Sistem Ujian:} Temuan pada subbab 4.6 mengindikasikan bahwa ujian tertentu memiliki kerentanan struktural. Rekomendasi spesifik meliputi: (1) implementasi \textit{question pooling} dengan minimal 5x jumlah soal yang ditampilkan, (2) randomisasi urutan soal dan opsi jawaban, (3) pembatasan waktu yang lebih ketat berdasarkan analisis median durasi pengerjaan normal, dan (4) implementasi jeda waktu antar soal untuk mencegah koordinasi \textit{real-time}.
+    
+    \item \textbf{Pengembangan Sistem Deteksi Lebih Lanjut:} Mengakui keterbatasan sistem saat ini yang bersifat \textit{retrospective} dan dilatih dengan data sintesis, pengembangan selanjutnya harus fokus pada: (1) pengumpulan data riil berlabel melalui kolaborasi dengan tim pengawas ujian, (2) implementasi arsitektur \textit{streaming} untuk deteksi \textit{real-time}, (3) integrasi dengan sistem \textit{proctoring} untuk validasi silang, dan (4) pengembangan modul \textit{adaptive learning} yang dapat menyesuaikan parameter deteksi berdasarkan karakteristik mata kuliah.
+    
+    \item \textbf{Framework Etika dan Tata Kelola:} Implementasi sistem deteksi otomatis memerlukan \textit{framework} etika yang komprehensif, mencakup: (1) protokol transparansi yang menginformasikan mahasiswa tentang adanya sistem pemantauan, (2) mekanisme banding untuk kasus \textit{false positive}, (3) perlindungan data pribadi sesuai regulasi yang berlaku, dan (4) keterlibatan komite etik dalam evaluasi berkala sistem.
+    
+    \item \textbf{Pendekatan Preventif Berbasis \textit{Insight}:} Daripada hanya fokus pada deteksi, institusi dapat memanfaatkan \textit{insight} dari analisis untuk pencegahan proaktif: (1) edukasi mahasiswa tentang pola perilaku yang terdeteksi sistem, (2) pelatihan dosen dalam mendesain ujian yang \textit{cheat-resistant}, (3) implementasi \textit{honor code} digital yang terintegrasi dengan LMS, dan (4) pengembangan budaya integritas akademik melalui kampanye berkelanjutan.
 \end{itemize}
 
-\textbf{4. Validitas Aplikasi Real-World}
-\begin{itemize}
-    \item Deteksi 131,479 kasus kecurangan dari 446,720 percobaan (29.43\%) konsisten dengan literatur
-    \item Identifikasi 4,093 repeat offenders dengan pola sistematis
-    \item User ID 5252 terdeteksi dalam 138 percobaan berbeda dengan confidence rata-rata 91.2\%
-    \item Distribusi bimodal probabilitas menunjukkan kemampuan diskriminasi yang jelas
-\end{itemize}
+Penting untuk dicatat bahwa meskipun sistem menunjukkan kinerja yang sangat baik pada data uji (akurasi 98,33\%), aplikasi pada konteks riil memerlukan validasi berkelanjutan. Keterbatasan utama terletak pada sifat \textit{retrospective} deteksi dan ketergantungan pada data pelatihan sintesis. Namun demikian, sistem ini telah membuktikan nilainya sebagai alat bantu yang efektif untuk mengidentifikasi pola mencurigakan dalam skala besar, memberikan landasan yang kuat untuk pengembangan sistem deteksi kecurangan akademik yang lebih canggih di masa depan.
 
-\textbf{5. Superioritas terhadap State-of-the-Art}
-\begin{itemize}
-    \item Akurasi 98.33\% melampaui penelitian terdahulu (tertinggi sebelumnya 91\%)
-    \item Peningkatan +11.33\% dibandingkan Wolff et al. (2019)
-    \item Efisiensi dataset: performa superior dengan 800 vs 1000 sampel
-\end{itemize}
+%-----------------------------------------------------------------------------%
+\section{Kesimpulan}
+\label{sec:kesimpulan_bab4}
+%-----------------------------------------------------------------------------%
 
-\textbf{6. Kontribusi Metodologis}
-\begin{itemize}
-    \item Feature engineering berbasis z-score terbukti efektif
-    \item VIF analysis berhasil mereduksi 35$\rightarrow$8 fitur tanpa degradasi performa
-    \item Ensemble architecture memberikan robustness tinggi
-    \item Artificial data strategy memungkinkan controlled training
-\end{itemize}
+Penelitian ini telah berhasil menjawab permasalahan utama yang dirumuskan pada Bab 1, yaitu bagaimana mengembangkan sistem pemantauan kepatuhan akademik yang efektif melalui analisis log Moodle berbasis kecerdasan buatan. Berdasarkan keseluruhan proses penelitian yang telah dilakukan, dapat ditarik kesimpulan sebagai berikut:
 
-\textbf{7. Implikasi Praktis dan Implementasi}
-\begin{itemize}
-    \item Model dapat diimplementasikan dalam skala institusional
-    \item Identifikasi ujian bermasalah memberikan insight untuk perbaikan desain
-    \item Deteksi repeat offenders memungkinkan intervensi yang lebih terarah
-    \item Confidence scoring memfasilitasi review manual untuk kasus borderline
-\end{itemize}
+\begin{enumerate}
+    \item \textbf{Keberhasilan Pengembangan Sistem Deteksi Berbasis AI:} Menjawab pertanyaan penelitian pertama, penelitian ini berhasil mengembangkan pendekatan pembelajaran mesin yang efektif dengan merancang \textit{pipeline} komprehensif yang mengintegrasikan: (a) ekstraksi fitur multi-dimensi dari log Moodle, (b) seleksi fitur berbasis VIF yang mereduksi 35 fitur menjadi 8 fitur stabil, dan (c) arsitektur \textit{ensemble} yang menggabungkan kekuatan Random Forest, SVM, Neural Network, dan Gradient Boosting. Pendekatan ini mencapai akurasi 98,33\% dan presisi sempurna (1,00) pada data uji, melampaui penelitian terdahulu.
+    
+    \item \textbf{Efektivitas Integrasi Analisis dari Beberapa Teknik:} Menjawab pertanyaan penelitian kedua, integrasi berbagai teknik analisis terbukti meningkatkan reliabilitas deteksi secara signifikan. Kombinasi fitur kesamaan navigasi berbasis \textit{z-score} (kontribusi 60,5\%), fitur temporal (25,4\%), dan perilaku pengerjaan (14,1\%) menghasilkan model yang robust. Pendekatan \textit{ensemble} mengurangi variance dan bias individual model, menghasilkan AUC ROC 0,99 yang mengindikasikan kemampuan diskriminatif sangat tinggi.
+    
+    \item \textbf{Wawasan Praktis dari Pola Perilaku Terdeteksi:} Menjawab pertanyaan penelitian ketiga, analisis terhadap 446.720 percobaan ujian riil menghasilkan wawasan berharga: (a) 29,43\% percobaan terindikasi kecurangan dengan \textit{confidence} tinggi, konsisten dengan literatur; (b) identifikasi 4.093 \textit{repeat offenders} dengan 355 pengguna menunjukkan pola sistematis; (c) deteksi ujian-ujian dengan kerentanan struktural (hingga 68,2\% tingkat kecurangan); dan (d) bukti visual pola kolaborasi melalui analisis kasus individual. Wawasan ini memberikan basis empiris untuk intervensi institusional yang terarah.
+    
+    \item \textbf{Signifikansi Kualitas Data Pelatihan:} Temuan krusial menunjukkan bahwa peningkatan dataset dari 90 menjadi 800 sampel sintesis meningkatkan akurasi rata-rata 16,85\% dan kemampuan deteksi pada data riil sebesar 419\%. Hal ini menegaskan pentingnya investasi dalam pengembangan dataset berkualitas untuk sistem AI dalam konteks pendidikan.
+    
+    \item \textbf{Validasi Pendekatan Metodologis:} Penelitian ini memvalidasi efektivitas: (a) penggunaan data sintesis dengan \textit{ground truth} terkontrol untuk mengatasi keterbatasan data riil berlabel; (b) normalisasi fitur berbasis distribusi populasi (\textit{z-score}) untuk deteksi anomali; dan (c) analisis berbasis graf untuk identifikasi kelompok kecurangan. Metodologi ini dapat diadaptasi untuk konteks deteksi kecurangan akademik lainnya.
+    
+    \item \textbf{Kontribusi terhadap Integritas Akademik Era Digital:} Sistem yang dikembangkan memberikan kontribusi konkret dalam menjaga integritas akademik di era pembelajaran daring pasca-pandemi. Dengan tidak adanya \textit{false positive} (FP=0), sistem meminimalkan risiko tuduhan salah sambil tetap mendeteksi 93,33\% kasus kecurangan aktual, menciptakan keseimbangan optimal antara keadilan dan efektivitas.
+\end{enumerate}
 
-Temuan-temuan ini memberikan landasan empiris yang kuat untuk implementasi sistem deteksi kecurangan otomatis dalam lingkungan pembelajaran daring. Validitas ilmiah yang didukung oleh konsistensi hasil antar berbagai algoritma ML, koherensi dengan teori statistik, dan superioritas terhadap state-of-the-art menunjukkan bahwa pendekatan yang diusulkan siap untuk aplikasi praktis, dengan catatan perlunya pertimbangan etis dan validasi berkelanjutan dalam konteks implementasi riil. 
+Pencapaian penelitian ini tidak terlepas dari beberapa keterbatasan yang telah diidentifikasi, terutama sifat \textit{retrospective} deteksi dan ketergantungan pada data pelatihan sintesis. Namun demikian, sebagai penelitian perintis dalam konteks Moodle di Institusi Indonesia, hasil ini memberikan fondasi yang kuat untuk pengembangan sistem deteksi kecurangan akademik yang lebih canggih. Implementasi saran-saran yang telah dirumuskan, termasuk pengembangan deteksi \textit{real-time} dan integrasi dengan sistem \textit{proctoring}, akan membawa sistem ini menuju sistem yang lebih matang sebagai solusi komprehensif untuk pemantauan integritas akademik.
+
+Akhirnya, penelitian ini menegaskan bahwa teknologi kecerdasan buatan, ketika dirancang dan diimplementasikan dengan cermat, dapat menjadi mitra yang efektif dalam menjaga standar akademik tanpa mengorbankan kepercayaan dan keadilan dalam ekosistem pendidikan. Keberhasilan sistem ini membuka jalan bagi adopsi yang lebih luas dan pengembangan berkelanjutan dalam upaya kolektif menjaga integritas akademik di era digital. 

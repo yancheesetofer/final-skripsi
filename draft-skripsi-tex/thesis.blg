@@ -14,50 +14,49 @@ A level-1 auxiliary file: src/01-body/bab1.aux
 A level-1 auxiliary file: src/01-body/bab2.aux
 A level-1 auxiliary file: src/01-body/bab3.aux
 A level-1 auxiliary file: src/01-body/bab4.aux
-A level-1 auxiliary file: src/01-body/bab5.aux
 A level-1 auxiliary file: src/01-body/kesimpulan.aux
 A level-1 auxiliary file: _internals/pustaka.aux
 A level-1 auxiliary file: _internals/markLampiran.aux
 A level-1 auxiliary file: src/99-backMatter/lampiran.aux
 Database file #1: config/references.bib
-You've used 23 entries,
+You've used 18 entries,
             1935 wiz_defined-function locations,
-            657 strings with 8539 characters,
-and the built_in function-call counts, 9550 in all, are:
-= -- 942
-> -- 374
-< -- 17
-+ -- 126
-- -- 124
-* -- 818
-:= -- 1632
-add.period$ -- 70
-call.type$ -- 23
-change.case$ -- 176
-chr.to.int$ -- 23
-cite$ -- 23
-duplicate$ -- 373
-empty$ -- 684
-format.name$ -- 161
-if$ -- 1892
+            619 strings with 7955 characters,
+and the built_in function-call counts, 7839 in all, are:
+= -- 769
+> -- 327
+< -- 12
++ -- 114
+- -- 110
+* -- 675
+:= -- 1332
+add.period$ -- 55
+call.type$ -- 18
+change.case$ -- 145
+chr.to.int$ -- 18
+cite$ -- 18
+duplicate$ -- 303
+empty$ -- 550
+format.name$ -- 138
+if$ -- 1556
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 25
-newline$ -- 118
-num.names$ -- 69
-pop$ -- 150
+missing$ -- 18
+newline$ -- 93
+num.names$ -- 54
+pop$ -- 126
 preamble$ -- 1
-purify$ -- 177
+purify$ -- 145
 quote$ -- 0
-skip$ -- 285
+skip$ -- 232
 stack$ -- 0
-substring$ -- 681
-swap$ -- 60
+substring$ -- 557
+swap$ -- 55
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 134
+type$ -- 108
 warning$ -- 0
-while$ -- 81
+while$ -- 65
 width$ -- 0
-write$ -- 305
+write$ -- 239

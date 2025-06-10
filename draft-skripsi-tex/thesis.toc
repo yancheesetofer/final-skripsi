@@ -166,13 +166,12 @@
 \contentsline {section}{\numberline {4.6}Perbandingan dengan Penelitian Terdahulu}{79}{section.4.6}%
 \contentsline {subsection}{\numberline {4.6.1}Komparasi Performa dengan State-of-the-Art}{79}{subsection.4.6.1}%
 \contentsline {subsection}{\numberline {4.6.2}Analisis Keunggulan Pendekatan}{79}{subsection.4.6.2}%
-\contentsline {section}{\numberline {4.7}Kesimpulan Bab}{79}{section.4.7}%
-\contentsline {chapter}{\numberline {5}\MakeUppercase []{Kesimpulan}}{82}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Kesimpulan}{82}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Keterkaitan dengan Tujuan dan Pertanyaan Penelitian}{85}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Keterbatasan Penelitian}{86}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Saran}{88}{section.5.4}%
-\contentsline {chapter}{\numberline {6}\MakeUppercase []{Penutup}}{90}{chapter.6}%
-\contentsline {chapter}{\uppercase {Daftar Referensi}}{91}{section*.35}%
+\contentsline {section}{\numberline {4.7}Diskusi Hasil Deteksi pada Data Riil dan Implikasi Praktis}{79}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Implikasi Praktis Deteksi pada Data Riil}{80}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Analisis Kasus Individual: Pola Navigasi, Waktu, dan Jawaban}{80}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Saran dan Insight untuk Implementasi Institusional}{83}{subsection.4.7.3}%
+\contentsline {section}{\numberline {4.8}Kesimpulan}{85}{section.4.8}%
+\contentsline {chapter}{\numberline {5}\MakeUppercase []{Penutup}}{87}{chapter.5}%
+\contentsline {chapter}{\uppercase {Daftar Referensi}}{88}{section*.37}%
 \addvspace {-1em}
-\contentsline {chapter}{\uppercase {\uppercase {Daftar Istilah}}}{1}{section*.36}%
+\contentsline {chapter}{\uppercase {\uppercase {Daftar Istilah}}}{1}{section*.38}%
