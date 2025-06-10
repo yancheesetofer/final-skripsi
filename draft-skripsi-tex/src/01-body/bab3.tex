@@ -798,29 +798,29 @@ Komponen unik dalam arsitektur adalah integrasi analisis graf yang memvisualisas
     \item \textit{Edge weights}: Nilai \textit{similarity} (navigasi, waktu, pola jawaban)
 \end{itemize}
 
-\textbf{Community Detection:}
+\textbf{\textit{Community Detection}:}
 \begin{itemize}
-    \item Algoritma: Louvain method untuk modularity optimization
-    \item Output: Cluster mahasiswa dengan pola koordinasi tinggi
-    \item Validasi: Cross-reference dengan temporal proximity dan course enrollment
+    \item Algoritma: \textit{Louvain method} untuk \textit{modularity optimization}
+    \item \textit{Output}: \textit{Cluster} mahasiswa dengan pola koordinasi tinggi
+    \item Validasi: \textit{Cross-reference} dengan \textit{temporal proximity} dan \textit{course enrollment}
 \end{itemize}
 
-\subsubsection{Mekanisme Ensemble Integration}
+\subsubsection{Mekanisme \textit{Ensemble Integration}}
 \label{sec:mekanismeIntegrasi}
 
-Prediksi dari model-model base dikombinasikan melalui weighted voting:
+Prediksi dari model-model \textit{base} dikombinasikan melalui \textit{weighted voting}:
 
 \begin{equation}
 P_{ensemble} = \sum_{i=1}^{n} w_i \cdot P_i
 \end{equation}
 
-dimana $w_i$ adalah bobot model $i$ berdasarkan validation performance, dan $P_i$ adalah probabilitas prediksi model $i$.
+dimana $w_i$ adalah bobot model $i$ berdasarkan \textit{validation performance}, dan $P_i$ adalah probabilitas prediksi model $i$.
 
 Bobot optimal ditentukan melalui:
 \begin{itemize}
-    \item Cross-validation performance pada validation set
-    \item Diversity measurement antar model predictions
-    \item Calibration quality dari probability estimates
+    \item \textit{Cross-validation performance} pada \textit{validation set}
+    \item \textit{Diversity measurement} antar \textit{model predictions}
+    \item \textit{Calibration quality} dari \textit{probability estimates}
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -828,69 +828,69 @@ Bobot optimal ditentukan melalui:
 \label{subsec:konfigurasiOptimasi}
 %-----------------------------------------------------------------------------%
 
-\subsubsection{Strategi Hyperparameter Tuning}
+\subsubsection{Strategi \textit{Hyperparameter Tuning}}
 \label{sec:hyperparameterTuning}
 
-Optimasi hyperparameter dilakukan secara sistematis untuk setiap model:
+Optimasi \textit{hyperparameter} dilakukan secara sistematis untuk setiap model:
 
-\textbf{Grid Search dengan Cross-Validation:}
+\textbf{\textit{Grid Search} dengan \textit{Cross-Validation}:}
 \begin{itemize}
-    \item Definisi search space untuk setiap hyperparameter
-    \item 5-fold stratified cross-validation untuk evaluasi
-    \item Metrik optimasi: F1-score (balance precision-recall)
+    \item Definisi \textit{search space} untuk setiap \textit{hyperparameter}
+    \item 5-\textit{fold stratified cross-validation} untuk evaluasi
+    \item Metrik optimasi: \textit{F1-score} (\textit{balance precision-recall})
 \end{itemize}
 
-\textbf{Parameter Space yang Dieksplorasi:}
+\textbf{\textit{Parameter Space} yang Dieksplorasi:}
 \begin{itemize}
-    \item Random Forest: n\_estimators [50, 100, 200], max\_depth [None, 10, 20, 30]
-    \item SVM: C [0.1, 1, 10, 100], gamma [0.001, 0.01, 0.1, 1]
-    \item Neural Network: learning\_rate [0.001, 0.01, 0.1], batch\_size [16, 32, 64]
-    \item Gradient Boosting: n\_estimators [50, 100, 150], learning\_rate [0.01, 0.1, 0.3]
+    \item \textit{Random Forest}: n\_estimators [50, 100, 200], max\_depth [None, 10, 20, 30]
+    \item SVM: C [0,1, 1, 10, 100], gamma [0,001, 0,01, 0,1, 1]
+    \item \textit{Neural Network}: learning\_rate [0,001, 0,01, 0,1], batch\_size [16, 32, 64]
+    \item \textit{Gradient Boosting}: n\_estimators [50, 100, 150], learning\_rate [0,01, 0,1, 0,3]
 \end{itemize}
 
-\subsubsection{Regularisasi dan Pencegahan Overfitting}
+\subsubsection{Regularisasi dan Pencegahan \textit{Overfitting}}
 \label{sec:regularisasi}
 
 Berbagai teknik diterapkan untuk memastikan generalisasi model:
 
-\textbf{Neural Network Regularization:}
+\textbf{\textit{Neural Network Regularization}:}
 \begin{itemize}
-    \item L2 regularization dengan lambda = 0.001
-    \item Dropout layers dengan rate 0.5
-    \item Early stopping dengan patience = 10 epochs
-    \item Batch normalization antar layers
+    \item \textit{L2 regularization} dengan lambda = 0,001
+    \item \textit{Dropout layers} dengan \textit{rate} 0,5
+    \item \textit{Early stopping} dengan \textit{patience} = 10 \textit{epochs}
+    \item \textit{Batch normalization} antar \textit{layers}
 \end{itemize}
 
-\textbf{Tree-based Model Constraints:}
+\textbf{\textit{Tree-based Model Constraints}:}
 \begin{itemize}
-    \item Maximum depth limitation
-    \item Minimum samples untuk split dan leaf nodes
-    \item Feature subsampling (max\_features = sqrt)
+    \item \textit{Maximum depth limitation}
+    \item \textit{Minimum samples} untuk \textit{split} dan \textit{leaf nodes}
+    \item \textit{Feature subsampling} (max\_features = sqrt)
 \end{itemize}
 
-\subsubsection{Training Protocol dan Resource Management}
+\subsubsection{\textit{Training Protocol} dan \textit{Resource Management}}
 \label{sec:trainingProtocol}
 
-Protokol training dirancang untuk efisiensi dan reproducibility:
+Protokol \textit{training} dirancang untuk efisiensi dan \textit{reproducibility}:
 
-\textbf{Data Splitting Strategy:}
+\textbf{\textit{Data Splitting Strategy}:}
 \begin{itemize}
-    \item Training: 70\% (560 samples)
-    \item Validation: 15\% (120 samples) untuk hyperparameter tuning
-    \item Test: 15\% (120 samples) untuk final evaluation
-    \item Stratified sampling untuk maintain class distribution
+    \item \textit{Training}: 70\% (560 sampel)
+    \item \textit{Validation}: 15\% (120 sampel) untuk \textit{hyperparameter tuning}
+    \item \textit{Test}: 15\% (120 sampel) untuk \textit{final evaluation}
+    \item \textit{Stratified sampling} untuk mempertahankan \textit{class distribution}
 \end{itemize}
 
-\textbf{Computational Optimization:}
+\textbf{\textit{Computational Optimization}:}
 \begin{itemize}
-    \item Parallel training untuk Random Forest dan Grid Search
-    \item GPU acceleration untuk Neural Network training
-    \item Incremental learning untuk Gradient Boosting
-    \item Memory-efficient data loading dengan chunking
+    \item \textit{Parallel training} untuk \textit{Random Forest} dan \textit{Grid Search}
+    \item \textit{GPU acceleration} untuk \textit{Neural Network training}
+    \item \textit{Incremental learning} untuk \textit{Gradient Boosting}
+    \item \textit{Memory-efficient data loading} dengan \textit{chunking}
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
-\section{Framework Evaluasi Komprehensif}
+\section{\textit{Framework} Evaluasi Komprehensif}
 \label{sec:frameworkEvaluasi}
 %-----------------------------------------------------------------------------%
 
@@ -901,56 +901,56 @@ Evaluasi model dirancang untuk menilai performa dari berbagai perspektif, memast
 \label{sec:evaluasiKuantitatif}
 %-----------------------------------------------------------------------------%
 
-\subsubsection{Metrik Evaluasi untuk Klasifikasi Imbalanced}
+\subsubsection{Metrik Evaluasi untuk Klasifikasi \textit{Imbalanced}}
 \label{sec:metrikEvaluasi}
 
-Mengingat distribusi kelas yang tidak seimbang (25\% cheating, 75\% normal), metrik evaluasi dipilih secara hati-hati:
+Mengingat distribusi kelas yang tidak seimbang (25\% \textit{cheating}, 75\% normal), metrik evaluasi dipilih secara hati-hati:
 
-\textbf{Primary Metrics:}
+\textbf{\textit{Primary Metrics}:}
 \begin{itemize}
-    \item \textbf{Precision:} $\frac{TP}{TP + FP}$ - Proporsi deteksi positif yang benar
-    \item \textbf{Recall:} $\frac{TP}{TP + FN}$ - Proporsi kasus kecurangan yang terdeteksi
-    \item \textbf{F1-Score:} $2 \times \frac{Precision \times Recall}{Precision + Recall}$ - Harmonic mean untuk balance
-    \item \textbf{AUC-ROC:} Area under ROC curve - Kemampuan diskriminasi keseluruhan
+    \item \textbf{\textit{Precision}:} $\frac{TP}{TP + FP}$ - Proporsi deteksi positif yang benar
+    \item \textbf{\textit{Recall}:} $\frac{TP}{TP + FN}$ - Proporsi kasus kecurangan yang terdeteksi
+    \item \textbf{\textit{F1-Score}:} $2 \times \frac{Precision \times Recall}{Precision + Recall}$ - \textit{Harmonic mean} untuk \textit{balance}
+    \item \textbf{AUC-ROC:} \textit{Area under ROC curve} - Kemampuan diskriminasi keseluruhan
 \end{itemize}
 
-\textbf{Secondary Metrics:}
+\textbf{\textit{Secondary Metrics}:}
 \begin{itemize}
-    \item \textbf{Specificity:} $\frac{TN}{TN + FP}$ - True negative rate
-    \item \textbf{Matthews Correlation Coefficient:} Correlation antara predicted dan actual
-    \item \textbf{Precision-Recall AUC:} Fokus pada minority class performance
+    \item \textbf{\textit{Specificity}:} $\frac{TN}{TN + FP}$ - \textit{True negative rate}
+    \item \textbf{\textit{Matthews Correlation Coefficient}:} Korelasi antara prediksi dan aktual
+    \item \textbf{\textit{Precision-Recall} AUC:} Fokus pada \textit{minority class performance}
 \end{itemize}
 
-\subsubsection{Protokol Cross-Validation}
+\subsubsection{Protokol \textit{Cross-Validation}}
 \label{sec:protokolCV}
 
-Stratified k-fold cross-validation memastikan evaluasi yang kokoh:
+\textit{Stratified k-fold cross-validation} memastikan evaluasi yang kokoh:
 
 \begin{enumerate}
-    \item Dataset dibagi menjadi 5 folds dengan proporsi kelas yang sama
-    \item Setiap fold bergantian menjadi test set
-    \item Model ditraining pada 4 folds, dievaluasi pada 1 fold
-    \item Metrik dirata-ratakan dengan confidence intervals
-    \item Variance antar folds dianalisis untuk stability assessment
+    \item \textit{Dataset} dibagi menjadi 5 \textit{folds} dengan proporsi kelas yang sama
+    \item Setiap \textit{fold} bergantian menjadi \textit{test set}
+    \item Model di-\textit{training} pada 4 \textit{folds}, dievaluasi pada 1 \textit{fold}
+    \item Metrik dirata-ratakan dengan \textit{confidence intervals}
+    \item \textit{Variance} antar \textit{folds} dianalisis untuk \textit{stability assessment}
 \end{enumerate}
 
-\subsubsection{Analisis Confusion Matrix dan Error Types}
+\subsubsection{Analisis \textit{Confusion Matrix} dan \textit{Error Types}}
 \label{sec:confusionMatrixAnalysis}
 
 Analisis mendalam terhadap tipe kesalahan klasifikasi:
 
-\textbf{False Positives (Type I Error):}
+\textbf{\textit{False Positives} (\textit{Type I Error}):}
 \begin{itemize}
     \item Implikasi: Tuduhan kecurangan yang salah
-    \item Target: Minimize untuk fairness (precision $> 0.95$)
-    \item Analisis: Pattern dari FP cases untuk improvement
+    \item Target: Meminimalkan untuk keadilan (\textit{precision} $> 0,95$)
+    \item Analisis: Pola dari kasus FP untuk perbaikan
 \end{itemize}
 
-\textbf{False Negatives (Type II Error):}
+\textbf{\textit{False Negatives} (\textit{Type II Error}):}
 \begin{itemize}
     \item Implikasi: Kecurangan yang terlewat
-    \item Target: Balance dengan FP (recall $> 0.90$)
-    \item Analisis: Characteristics dari undetected cheating
+    \item Target: Keseimbangan dengan FP (\textit{recall} $> 0,90$)
+    \item Analisis: Karakteristik dari kecurangan yang tidak terdeteksi
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -961,13 +961,13 @@ Analisis mendalam terhadap tipe kesalahan klasifikasi:
 \subsubsection{Metodologi Aplikasi pada Skala Besar}
 \label{sec:aplikasiSkalaBesar}
 
-Aplikasi model pada 446,720 percobaan ujian riil mengikuti protokol:
+Aplikasi model pada 446.720 percobaan ujian riil mengikuti protokol:
 
 \begin{enumerate}
-    \item \textbf{Preprocessing Consistency:} Gunakan saved \textit{artifacts} dari training
-    \item \textbf{Batch Processing:} Process data dalam chunks untuk efisiensi
-    \item \textbf{Confidence Scoring:} Assign probability scores untuk setiap detection
-    \item \textbf{Threshold Optimization:} Adjust detection threshold berdasarkan use case
+    \item \textbf{\textit{Preprocessing Consistency}:} Gunakan \textit{artifacts} tersimpan dari \textit{training}
+    \item \textbf{\textit{Batch Processing}:} Memproses data dalam \textit{chunks} untuk efisiensi
+    \item \textbf{\textit{Confidence Scoring}:} Memberikan \textit{probability scores} untuk setiap deteksi
+    \item \textbf{\textit{Threshold Optimization}:} Menyesuaikan \textit{detection threshold} berdasarkan kasus penggunaan
 \end{enumerate}
 
 \subsubsection{Analisis Pola dan Validasi Domain}
@@ -975,18 +975,18 @@ Aplikasi model pada 446,720 percobaan ujian riil mengikuti protokol:
 
 Validasi kualitatif melibatkan:
 
-\textbf{Pattern Analysis:}
+\textbf{Analisis Pola:}
 \begin{itemize}
-    \item Clustering detected cases berdasarkan similarity
-    \item Temporal analysis untuk coordinated attempts
-    \item Course-level aggregation untuk systemic issues
+    \item \textit{Clustering} kasus terdeteksi berdasarkan kemiripan
+    \item Analisis temporal untuk percobaan terkoordinasi
+    \item Agregasi tingkat mata kuliah untuk isu sistemik
 \end{itemize}
 
-\textbf{Domain Expert Review:}
+\textbf{Tinjauan Ahli Domain:}
 \begin{itemize}
-    \item Sample review oleh teaching staff
-    \item Validation terhadap known suspicious cases
-    \item Feedback untuk model refinement
+    \item Tinjauan sampel oleh staf pengajar
+    \item Validasi terhadap kasus mencurigakan yang diketahui
+    \item \textit{Feedback} untuk penyempurnaan model
 \end{itemize}
 
 \subsubsection{Visualisasi untuk Interpretasi}
@@ -995,10 +995,10 @@ Validasi kualitatif melibatkan:
 Berbagai visualisasi mendukung interpretasi hasil:
 
 \begin{itemize}
-    \item \textbf{Network Graphs:} Menunjukkan kelompok kecurangan
-    \item \textbf{Heatmaps:} Similarity matrices antar pengguna
-    \item \textbf{Time Series:} Pola temporal dari detected cases
-    \item \textbf{Distribution Plots:} Probability scores dan thresholds
+    \item \textbf{\textit{Network Graphs}:} Menunjukkan kelompok kecurangan
+    \item \textbf{\textit{Heatmaps}:} Matriks kemiripan antar pengguna
+    \item \textbf{\textit{Time Series}:} Pola temporal dari kasus terdeteksi
+    \item \textbf{\textit{Distribution Plots}:} \textit{Probability scores} dan \textit{thresholds}
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -1006,44 +1006,44 @@ Berbagai visualisasi mendukung interpretasi hasil:
 \label{sec:kesimpulanBab3}
 %-----------------------------------------------------------------------------%
 
-Metodologi yang telah dipaparkan dalam bab ini menyediakan framework komprehensif untuk pengembangan sistem deteksi kecurangan akademik berbasis AI. Beberapa keputusan metodologis kunci yang berkontribusi terhadap keberhasilan penelitian:
+Metodologi yang telah dipaparkan dalam bab ini menyediakan \textit{framework} komprehensif untuk pengembangan sistem deteksi kecurangan akademik berbasis AI. Beberapa keputusan metodologis kunci yang berkontribusi terhadap keberhasilan penelitian:
 
 \textbf{1. Strategi Data \textit{Dual-Mode}}
 \begin{itemize}
     \item Kombinasi data artifisial (dengan \textit{ground truth}) dan data riil (skala besar)
-    \item Training mode vs detection mode untuk konsistensi transformasi
-    \item 800 sampel artifisial terbukti optimal untuk training
+    \item \textit{Training mode} vs \textit{detection mode} untuk konsistensi transformasi
+    \item 800 sampel artifisial terbukti optimal untuk \textit{training}
 \end{itemize}
 
-\textbf{2. Pipeline Preprocessing Terintegrasi}
+\textbf{2. \textit{Pipeline Preprocessing} Terintegrasi}
 \begin{itemize}
-    \item Empat modul yang handle kompleksitas data Moodle
+    \item Empat modul yang menangani kompleksitas data \textit{Moodle}
     \item \textit{Artifact saving} untuk \textit{reproducibility}
-    \item Kontrol kualitas yang ketat (12.3\% \textit{data filtering})
+    \item Kontrol kualitas yang ketat (12,3\% \textit{data filtering})
 \end{itemize}
 
 \textbf{3. \textit{Feature Engineering} Berbasis Domain}
 \begin{itemize}
-    \item 35 fitur awal dari empat kategori behavioral
+    \item 35 fitur awal dari empat kategori \textit{behavioral}
     \item Reduksi ke 8 fitur stabil melalui analisis VIF
-    \item Normalisasi Z-score untuk \textit{similarity features}
+    \item Normalisasi \textit{Z-score} untuk \textit{similarity features}
 \end{itemize}
 
-\textbf{4. Arsitektur Ensemble dengan \textit{Graph Analysis}}
+\textbf{4. Arsitektur \textit{Ensemble} dengan \textit{Graph Analysis}}
 \begin{itemize}
     \item Integrasi 4 algoritma ML komplementer
-    \item Graph network untuk deteksi kelompok
+    \item \textit{Graph network} untuk deteksi kelompok
     \item \textit{Weighted voting} berdasarkan \textit{validation performance}
 \end{itemize}
 
-\textbf{5. Framework Evaluasi Multi-Perspektif}
+\textbf{5. \textit{Framework} Evaluasi Multi-Perspektif}
 \begin{itemize}
     \item Kuantitatif: Metrik komprehensif dengan \textit{cross-validation}
-    \item Kualitatif: \textit{Pattern analysis} dan \textit{domain validation}
-    \item Fokus pada \textit{minimizing false positives} (fairness)
+    \item Kualitatif: Analisis pola dan validasi domain
+    \item Fokus pada meminimalkan \textit{false positives} (keadilan)
 \end{itemize}
 
-Metodologi ini telah diimplementasikan dan divalidasi, dengan hasil eksperimen detail yang akan dipaparkan pada Bab 4. Pendekatan sistematis yang diterapkan memastikan bahwa sistem deteksi tidak hanya akurat secara statistik, tetapi juga applicable dan interpretable dalam konteks operasional institusi pendidikan.
+Metodologi ini telah diimplementasikan dan divalidasi, dengan hasil eksperimen detail yang akan dipaparkan pada Bab 4. Pendekatan sistematis yang diterapkan memastikan bahwa sistem deteksi tidak hanya akurat secara statistik, tetapi juga dapat diterapkan dan diinterpretasikan dalam konteks operasional institusi pendidikan.
 
 %-----------------------------------------------------------------------------%
 \subsection{Data Riil Moodle: Karakteristik dan Akuisisi}
@@ -1060,17 +1060,17 @@ Dataset riil mencakup aktivitas pembelajaran daring yang sangat komprehensif den
 \textbf{Cakupan Temporal:}
 \begin{itemize}
     \item Periode data: 31 Juli 2015 hingga 22 Februari 2025 (hampir 10 tahun)
-    \item Total percobaan ujian: 446,720 attempts
-    \item Total langkah pertanyaan: 22,192,809 question steps
-    \item Rentang aktivitas: 3,594 hari operasional
+    \item Total percobaan ujian: 446.720 \textit{attempts}
+    \item Total langkah pertanyaan: 22.192.809 \textit{question steps}
+    \item Rentang aktivitas: 3.594 hari operasional
 \end{itemize}
 
 \textbf{Skala Pengguna dan Mata Kuliah:}
 \begin{itemize}
-    \item Jumlah mahasiswa unik: 5,562 pengguna
-    \item Jumlah ujian/kuis unik: 6,304 quiz instances
-    \item Jumlah mata kuliah: $>140$ courses dengan variasi ukuran kelas
-    \item Distribusi ukuran kelas: dari $<10$ hingga $>450$ mahasiswa per mata kuliah
+    \item Jumlah mahasiswa unik: 5.562 pengguna
+    \item Jumlah ujian/kuis unik: 6.304 \textit{quiz instances}
+    \item Jumlah mata kuliah: >140 \textit{courses} dengan variasi ukuran kelas
+    \item Distribusi ukuran kelas: dari <10 hingga >450 mahasiswa per mata kuliah
 \end{itemize}
 
 \textbf{Struktur Data Log:}
@@ -1094,18 +1094,18 @@ Akuisisi data dilakukan dengan protokol ketat untuk memastikan integritas data d
 
 \textbf{Tahapan Akuisisi:}
 \begin{enumerate}
-    \item \textbf{Ekstraksi dari Server:} Data diekstraksi langsung dari database Moodle production oleh tim ITF Fasilkom UI menggunakan query SQL yang telah divalidasi
-    \item \textbf{Transfer Aman:} Data ditransfer melalui encrypted channel ke Lumbung Storage Cloud institusi
-    \item \textbf{Validasi Integritas:} Checksum verification untuk memastikan tidak ada korupsi data selama transfer
+    \item \textbf{Ekstraksi dari \textit{Server}:} Data diekstraksi langsung dari \textit{database Moodle production} oleh tim ITF Fasilkom UI menggunakan \textit{query} SQL yang telah divalidasi
+    \item \textbf{Transfer Aman:} Data ditransfer melalui \textit{encrypted channel} ke \textit{Lumbung Storage Cloud} institusi
+    \item \textbf{Validasi Integritas:} \textit{Checksum verification} untuk memastikan tidak ada korupsi data selama transfer
     \item \textbf{Anonimisasi:} Proses penghilangan informasi identitas pribadi dilakukan sebelum data diserahkan untuk penelitian
 \end{enumerate}
 
 \textbf{Protokol Anonimisasi:}
 \begin{itemize}
-    \item Penghapusan nama lengkap, username, dan email mahasiswa
-    \item Penggantian dengan user\_id numerik yang tidak dapat di-reverse
-    \item Enkripsi IP address dan informasi lokasi
-    \item Preservasi hanya data behavioral yang relevan untuk analisis
+    \item Penghapusan nama lengkap, \textit{username}, dan \textit{email} mahasiswa
+    \item Penggantian dengan user\_id numerik yang tidak dapat di-\textit{reverse}
+    \item Enkripsi \textit{IP address} dan informasi lokasi
+    \item Preservasi hanya data \textit{behavioral} yang relevan untuk analisis
 \end{itemize}
 
 \textbf{Pertimbangan Etika:}
@@ -1126,15 +1126,15 @@ Analisis eksploratori data riil mengungkap pola penggunaan yang bervariasi:
 \textbf{Pola Temporal:}
 \begin{itemize}
     \item Puncak aktivitas: Periode UTS dan UAS dengan peningkatan 300\% aktivitas
-    \item Distribusi harian: Mayoritas ujian dilakukan pukul 08:00-12:00 dan 19:00-22:00
-    \item Anomali timestamp: 2.3\% data memiliki timestamp default (1970) yang mengindikasikan incomplete attempts
+    \item Distribusi harian: Mayoritas ujian dilakukan pukul 08.00-12.00 dan 19.00-22.00
+    \item Anomali \textit{timestamp}: 2,3\% data memiliki \textit{timestamp default} (1970) yang mengindikasikan \textit{incomplete attempts}
 \end{itemize}
 
 \textbf{Pola per Mata Kuliah:}
 \begin{itemize}
-    \item Mata kuliah dengan aktivitas tertinggi: Course ID 3634 (5,902 attempts dari 442 mahasiswa)
-    \item Variasi attempt per mahasiswa: 1.99 hingga 13.35 attempts, mengindikasikan perbedaan kebijakan pengulangan
-    \item Korelasi ukuran kelas dengan attempt: r = 0.72, menunjukkan mata kuliah besar cenderung memiliki lebih banyak ujian
+    \item Mata kuliah dengan aktivitas tertinggi: \textit{Course} ID 3634 (5.902 \textit{attempts} dari 442 mahasiswa)
+    \item Variasi \textit{attempt} per mahasiswa: 1,99 hingga 13,35 \textit{attempts}, mengindikasikan perbedaan kebijakan pengulangan
+    \item Korelasi ukuran kelas dengan \textit{attempt}: r = 0,72, menunjukkan mata kuliah besar cenderung memiliki lebih banyak ujian
 \end{itemize}
 
 Data riil ini memberikan konteks operasional yang kaya untuk validasi model, mencerminkan kompleksitas dan variabilitas sistem pembelajaran daring dalam skala institusional.
@@ -1153,16 +1153,16 @@ Strategi data artifisial dipilih berdasarkan pertimbangan metodologis:
 
 \begin{enumerate}
     \item \textbf{Kontrol Parameter Kecurangan:} \\
-    Data artifisial memungkinkan pengaturan presisi parameter kecurangan seperti tingkat similarity (50\%-95\%), timing correlation (0.3-0.95), dan wrong answer bias (40\%-85\%). Kontrol ini tidak mungkin dilakukan pada data riil.
+    Data artifisial memungkinkan pengaturan presisi parameter kecurangan seperti tingkat kemiripan (50\%-95\%), korelasi waktu (0,3-0,95), dan bias jawaban salah (40\%-85\%). Kontrol ini tidak mungkin dilakukan pada data riil.
     
     \item \textbf{Eksplorasi Skenario Ekstrem:} \\
-    Simulasi dapat menciptakan kasus edge yang jarang terjadi namun penting untuk \textit{robustness} model, seperti koordinasi sempurna (similarity 100\%) atau kecurangan subtle (similarity $<60\%$).
+    Simulasi dapat menciptakan kasus \textit{edge} yang jarang terjadi namun penting untuk ketahanan model, seperti koordinasi sempurna (kemiripan 100\%) atau kecurangan halus (kemiripan <60\%).
     
     \item \textbf{\textit{Ground Truth} Objektif:} \\
-    Setiap instance dalam data artifisial memiliki label kecurangan yang pasti, memungkinkan evaluasi akurasi model secara objektif dan perhitungan metrik performa yang valid.
+    Setiap \textit{instance} dalam data artifisial memiliki label kecurangan yang pasti, memungkinkan evaluasi akurasi model secara objektif dan perhitungan metrik performa yang valid.
     
     \item \textbf{\textit{Reproducibility} Eksperimen:} \\
-    Penggunaan seed control dalam generator memastikan dataset yang sama dapat direproduksi, mendukung verifikasi ilmiah dan perbandingan fair antar algoritma.
+    Penggunaan \textit{seed control} dalam \textit{generator} memastikan \textit{dataset} yang sama dapat direproduksi, mendukung verifikasi ilmiah dan perbandingan adil antar algoritma.
 \end{enumerate}
 
 \subsubsection{Arsitektur Generator Data Artifisial}
@@ -1170,20 +1170,20 @@ Strategi data artifisial dipilih berdasarkan pertimbangan metodologis:
 
 Generator data artifisial dirancang dengan arsitektur modular yang mensimulasikan perilaku ujian realistis:
 
-\textbf{Komponen Generator:}
+\textbf{Komponen \textit{Generator}:}
 \begin{itemize}
-    \item \textbf{User Behavior Simulator:} Menghasilkan pola navigasi, timing, dan jawaban untuk pengguna normal
-    \item \textbf{Cheating Pattern Injector:} Memodifikasi perilaku normal menjadi pola terkoordinasi
-    \item \textbf{Noise Generator:} Menambahkan variasi stokastik untuk realisme
-    \item \textbf{Ground Truth Recorder:} Mendokumentasikan parameter kecurangan untuk setiap instance
+    \item \textbf{\textit{User Behavior Simulator}:} Menghasilkan pola navigasi, waktu, dan jawaban untuk pengguna normal
+    \item \textbf{\textit{Cheating Pattern Injector}:} Memodifikasi perilaku normal menjadi pola terkoordinasi
+    \item \textbf{\textit{Noise Generator}:} Menambahkan variasi stokastik untuk realisme
+    \item \textbf{\textit{Ground Truth Recorder}:} Mendokumentasikan parameter kecurangan untuk setiap \textit{instance}
 \end{itemize}
 
 \textbf{Parameter Simulasi Berjenjang:}
-Generator menghasilkan tiga tingkat severity kecurangan untuk menciptakan dataset yang challenging:
+\textit{Generator} menghasilkan tiga tingkat keparahan kecurangan untuk menciptakan \textit{dataset} yang menantang:
 \begin{itemize}
-    \item \textbf{High Severity:} Navigation similarity $>90\%$, timing correlation $>0.9$, wrong answer bias $>80\%$
-    \item \textbf{Medium Severity:} Navigation similarity 70-89\%, timing correlation 0.6-0.89, wrong answer bias 50-79\%
-    \item \textbf{Low Severity:} Navigation similarity 50-69\%, timing correlation 0.3-0.59, wrong answer bias 30-49\%
+    \item \textbf{Keparahan Tinggi:} Kemiripan navigasi $>90\%$, korelasi waktu $>0,9$, bias jawaban salah $>80\%$
+    \item \textbf{Keparahan Sedang:} Kemiripan navigasi 70-89\%, korelasi waktu 0,6-0,89, bias jawaban salah 50-79\%
+    \item \textbf{Keparahan Rendah:} Kemiripan navigasi 50-69\%, korelasi waktu 0,3-0,59, bias jawaban salah 30-49\%
 \end{itemize}
 
 \subsubsection{Validasi Realisme Data Artifisial}
@@ -1193,22 +1193,22 @@ Untuk memastikan data artifisial representatif, dilakukan validasi multi-aspek:
 
 \textbf{Validasi Statistik:}
 \begin{itemize}
-    \item Distribusi durasi pengerjaan: Kolmogorov-Smirnov test menunjukkan $p>0.05$ (tidak berbeda signifikan dengan data riil)
-    \item Pola navigasi: Entropy dan revisit patterns konsisten dengan observed behavior
-    \item Answer distribution: Proporsi correct/incorrect answers mengikuti kurva normal pembelajaran
+    \item Distribusi durasi pengerjaan: \textit{Kolmogorov-Smirnov test} menunjukkan $p>0,05$ (tidak berbeda signifikan dengan data riil)
+    \item Pola navigasi: \textit{Entropy} dan \textit{revisit patterns} konsisten dengan perilaku yang diamati
+    \item Distribusi jawaban: Proporsi jawaban benar/salah mengikuti kurva normal pembelajaran
 \end{itemize}
 
 \textbf{Validasi Visual:}
 \begin{itemize}
-    \item Heatmap similarity matrices menunjukkan clustering yang jelas untuk cheating groups
-    \item Time series plots memperlihatkan synchronization patterns yang realistis
-    \item Navigation sequence diagrams mengkonfirmasi pola koordinasi yang logis
+    \item \textit{Heatmap similarity matrices} menunjukkan \textit{clustering} yang jelas untuk kelompok kecurangan
+    \item \textit{Time series plots} memperlihatkan pola sinkronisasi yang realistis
+    \item Diagram sekuens navigasi mengkonfirmasi pola koordinasi yang logis
 \end{itemize}
 
-\textbf{Validasi Domain Expert:}
-Tim pengajar meninjau sample data dan mengkonfirmasi pola kecurangan yang disimulasikan mencerminkan modus operandi yang diamati dalam praktik.
+\textbf{Validasi Ahli Domain:}
+Tim pengajar meninjau sampel data dan mengkonfirmasi pola kecurangan yang disimulasikan mencerminkan \textit{modus operandi} yang diamati dalam praktik.
 
-Dataset artifisial final terdiri dari 800 sampel (600 normal, 200 cheating) yang memberikan balance optimal antara kelas untuk pelatihan model yang efektif.
+\textit{Dataset} artifisial final terdiri dari 800 sampel (600 normal, 200 kecurangan) yang memberikan keseimbangan optimal antara kelas untuk pelatihan model yang efektif.
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
@@ -1216,67 +1216,67 @@ Dataset artifisial final terdiri dari 800 sampel (600 normal, 200 cheating) yang
 \label{sec:transformasiData}
 %-----------------------------------------------------------------------------%
 
-Transformasi data merupakan jembatan kritis antara raw log events dan model machine learning. Bagian ini menjelaskan proses sistematis untuk mengubah jutaan event log menjadi representasi fitur yang bermakna dan siap untuk deteksi kecurangan.
+Transformasi data merupakan jembatan kritis antara \textit{raw log events} dan model \textit{machine learning}. Bagian ini menjelaskan proses sistematis untuk mengubah jutaan \textit{event log} menjadi representasi fitur yang bermakna dan siap untuk deteksi kecurangan.
 
 %-----------------------------------------------------------------------------%
 \subsection{Tahapan Pembersihan dan Normalisasi Data}
 \label{sec:pembersihanNormalisasi}
 %-----------------------------------------------------------------------------%
 
-Proses pembersihan data dirancang untuk mengatasi inkonsistensi dan anomali yang umum terjadi dalam sistem log skala besar:
+Proses pembersihan data dirancang untuk mengatasi inkonsistensi dan anomali yang umum terjadi dalam sistem \textit{log} skala besar:
 
-\textbf{Identifikasi dan Penanganan Missing Values:} \\
-Analisis awal mengidentifikasi tiga kategori missing values dalam dataset:
+\textbf{Identifikasi dan Penanganan \textit{Missing Values}:} \\
+Analisis awal mengidentifikasi tiga kategori \textit{missing values} dalam \textit{dataset}:
 \begin{itemize}
-    \item \textbf{Struktural Missing:} Nilai yang absent by design, seperti step\_data untuk langkah navigasi tanpa jawaban (15\% dari total records)
-    \item \textbf{Random Missing:} Nilai yang hilang karena error logging atau network issues (3\% dari total records)
-    \item \textbf{Systematic Missing:} Pola missing yang berkorelasi dengan versi Moodle tertentu atau browser specific (2\% dari total records)
+    \item \textbf{\textit{Struktural Missing}:} Nilai yang tidak ada secara desain, seperti step\_data untuk langkah navigasi tanpa jawaban (15\% dari total \textit{records})
+    \item \textbf{\textit{Random Missing}:} Nilai yang hilang karena kesalahan pencatatan atau masalah jaringan (3\% dari total \textit{records})
+    \item \textbf{\textit{Systematic Missing}:} Pola ketiadaan yang berkorelasi dengan versi \textit{Moodle} tertentu atau spesifik \textit{browser} (2\% dari total \textit{records})
 \end{itemize}
 
-Strategi penanganan disesuaikan per kategori: struktural missing dibiarkan sebagai null, random missing diimputasi dengan mean/mode, systematic missing ditandai dengan flag khusus untuk analisis downstream.
+Strategi penanganan disesuaikan per kategori: \textit{struktural missing} dibiarkan sebagai \textit{null}, \textit{random missing} diimputasi dengan \textit{mean/mode}, \textit{systematic missing} ditandai dengan \textit{flag} khusus untuk analisis \textit{downstream}.
 
 \textbf{Normalisasi Temporal dan Zona Waktu:} \\
-Timestamp normalization merupakan proses krusial mengingat data berasal dari periode 10 tahun dengan berbagai format:
+Normalisasi \textit{timestamp} merupakan proses krusial mengingat data berasal dari periode 10 tahun dengan berbagai format:
 \begin{itemize}
-    \item Konversi seluruh timestamp ke POSIX format (seconds since epoch)
-    \item Adjustment untuk daylight saving time changes
-    \item Handling anomali timestamp (nilai 1970 atau future dates) dengan business logic validation
-    \item Preservasi timezone information untuk analisis pola temporal
+    \item Konversi seluruh \textit{timestamp} ke format POSIX (\textit{seconds since epoch})
+    \item Penyesuaian untuk perubahan \textit{daylight saving time}
+    \item Penanganan anomali \textit{timestamp} (nilai 1970 atau tanggal masa depan) dengan validasi logika bisnis
+    \item Preservasi informasi zona waktu untuk analisis pola temporal
 \end{itemize}
 
-\textbf{Data Filtering dan Quality Control:} \\
-Kriteria filtering diterapkan untuk memastikan kualitas data:
+\textbf{\textit{Data Filtering} dan Kontrol Kualitas:} \\
+Kriteria penyaringan diterapkan untuk memastikan kualitas data:
 \begin{itemize}
-    \item Exclusion: Event dengan contextlevel='system' (bukan aktivitas pengguna)
-    \item Exclusion: Attempt dengan state='inprogress' atau 'abandoned'
-    \item Inclusion: Hanya quiz attempts dengan minimal 5 question steps
-    \item Validation: Cross-check referential integrity antar tabel
+    \item Eksklusi: \textit{Event} dengan contextlevel='system' (bukan aktivitas pengguna)
+    \item Eksklusi: \textit{Attempt} dengan state='inprogress' atau 'abandoned'
+    \item Inklusi: Hanya \textit{quiz attempts} dengan minimal 5 \textit{question steps}
+    \item Validasi: \textit{Cross-check} integritas referensial antar tabel
 \end{itemize}
 
-Total 12.3\% records dieksklusi melalui quality control, menghasilkan clean dataset dengan 446,720 valid attempts.
+Total 12,3\% \textit{records} dieksklusi melalui kontrol kualitas, menghasilkan \textit{dataset} bersih dengan 446.720 \textit{attempts} yang valid.
 
 %-----------------------------------------------------------------------------%
 \subsection{Ekstraksi Fitur Multi-Dimensi}
 \label{sec:ekstraksiFiturMultiDimensi}
 %-----------------------------------------------------------------------------%
 
-Feature engineering dirancang untuk menangkap berbagai aspek perilaku ujian yang dapat mengindikasikan kecurangan. Proses ekstraksi menghasilkan 35 fitur awal yang dikelompokkan dalam empat kategori:
+\textit{Feature engineering} dirancang untuk menangkap berbagai aspek perilaku ujian yang dapat mengindikasikan kecurangan. Proses ekstraksi menghasilkan 35 fitur awal yang dikelompokkan dalam empat kategori:
 
-\subsubsection{Fitur Statistik Dasar (Basic Statistics)}
+\subsubsection{Fitur Statistik Dasar (\textit{Basic Statistics})}
 \label{sec:fiturStatistikDasar}
 
 Fitur-fitur fundamental yang mengukur karakteristik umum percobaan ujian:
 
 \begin{itemize}
-    \item \textbf{Temporal Features:}
+    \item \textbf{Fitur Temporal:}
     \begin{itemize}
-        \item \texttt{total\_duration}: Total waktu pengerjaan ujian (seconds)
+        \item \texttt{total\_duration}: Total waktu pengerjaan ujian (\textit{seconds})
         \item \texttt{mean\_step\_duration}: Rata-rata waktu per langkah
-        \item \texttt{median\_step\_duration}: Median waktu per langkah (kokoh terhadap outliers)
+        \item \texttt{median\_step\_duration}: Median waktu per langkah (kokoh terhadap \textit{outliers})
         \item \texttt{std\_step\_duration}: Variabilitas waktu pengerjaan
     \end{itemize}
     
-    \item \textbf{Activity Features:}
+    \item \textbf{Fitur Aktivitas:}
     \begin{itemize}
         \item \texttt{total\_steps}: Jumlah total langkah/aksi dalam ujian
         \item \texttt{unique\_questions}: Jumlah soal unik yang dikunjungi
@@ -1285,21 +1285,21 @@ Fitur-fitur fundamental yang mengukur karakteristik umum percobaan ujian:
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Fitur Pola Navigasi (Navigation Patterns)}
+\subsubsection{Fitur Pola Navigasi (\textit{Navigation Patterns})}
 \label{sec:fiturPolaNavigasi}
 
 Fitur yang menangkap bagaimana mahasiswa bernavigasi melalui soal-soal ujian:
 
 \begin{itemize}
-    \item \textbf{Sequence Characteristics:}
+    \item \textbf{Karakteristik Sekuens:}
     \begin{itemize}
-        \item \texttt{nav\_sequence\_length}: Panjang total sequence navigasi
+        \item \texttt{nav\_sequence\_length}: Panjang total \textit{sequence} navigasi
         \item \texttt{nav\_linearity}: Rasio pengerjaan berurutan vs acak (0-1)
-        \item \texttt{nav\_entropy}: Entropy dari pola navigasi (mengukur randomness)
+        \item \texttt{nav\_entropy}: \textit{Entropy} dari pola navigasi (mengukur keacakan)
         \item \texttt{nav\_revisits\_count}: Jumlah kunjungan ulang ke soal yang sama
     \end{itemize}
     
-    \item \textbf{Behavioral Indicators:}
+    \item \textbf{Indikator Perilaku:}
     \begin{itemize}
         \item \texttt{backward\_navigation\_ratio}: Proporsi navigasi mundur
         \item \texttt{jump\_distance\_mean}: Rata-rata "lompatan" antar soal
@@ -1307,35 +1307,35 @@ Fitur yang menangkap bagaimana mahasiswa bernavigasi melalui soal-soal ujian:
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Fitur Kemiripan Antar-Pengguna (Similarity Features)}
+\subsubsection{Fitur Kemiripan Antar-Pengguna (\textit{Similarity Features})}
 \label{sec:fiturKemiripan}
 
 Fitur kritis untuk mendeteksi kolaborasi tidak sah:
 
 \begin{itemize}
-    \item \textbf{Navigation Similarity:}
+    \item \textbf{Kemiripan Navigasi:}
     \begin{itemize}
         \item \texttt{max\_nav\_similarity}: Kemiripan navigasi maksimum dengan pengguna lain
         \item \texttt{mean\_nav\_similarity}: Rata-rata kemiripan navigasi
-        \item \texttt{nav\_similarity\_zscore}: Z-score dari kemiripan (normalized)
+        \item \texttt{nav\_similarity\_zscore}: \textit{Z-score} dari kemiripan (ternormalisasi)
     \end{itemize}
     
-    \item \textbf{Timing Similarity:}
+    \item \textbf{Kemiripan Waktu:}
     \begin{itemize}
-        \item \texttt{max\_timing\_correlation}: Korelasi timing maksimum
+        \item \texttt{max\_timing\_correlation}: Korelasi waktu maksimum
         \item \texttt{timing\_sync\_score}: Skor sinkronisasi waktu mulai/selesai
         \item \texttt{pace\_similarity}: Kemiripan kecepatan pengerjaan
     \end{itemize}
     
-    \item \textbf{Answer Pattern Similarity:}
+    \item \textbf{Kemiripan Pola Jawaban:}
     \begin{itemize}
         \item \texttt{answer\_similarity\_max}: Kemiripan pola jawaban maksimum
-        \item \texttt{wrong\_answer\_overlap}: Overlap jawaban salah yang identik
+        \item \texttt{wrong\_answer\_overlap}: \textit{Overlap} jawaban salah yang identik
         \item \texttt{suspicious\_pattern\_score}: Skor agregat pola mencurigakan
     \end{itemize}
 \end{itemize}
 
-\subsubsection{Fitur Anomali dan Outlier (Anomaly Features)}
+\subsubsection{Fitur Anomali dan \textit{Outlier} (\textit{Anomaly Features})}
 \label{sec:fiturAnomali}
 
 Fitur yang mendeteksi perilaku ekstrem atau tidak wajar:
@@ -1344,7 +1344,7 @@ Fitur yang mendeteksi perilaku ekstrem atau tidak wajar:
     \item \texttt{quick\_actions\_count}: Jumlah aksi sangat cepat ($<3$ detik)
     \item \texttt{long\_pause\_count}: Jumlah jeda sangat lama ($>10$ menit)
     \item \texttt{speed\_variation\_coefficient}: Koefisien variasi kecepatan
-    \item \texttt{abnormal\_pattern\_flags}: Binary flags untuk pola abnormal
+    \item \texttt{abnormal\_pattern\_flags}: \textit{Binary flags} untuk pola abnormal
 \end{itemize}
 
 %-----------------------------------------------------------------------------%
@@ -1352,7 +1352,7 @@ Fitur yang mendeteksi perilaku ekstrem atau tidak wajar:
 \label{sec:analisisReduksiFitur}
 %-----------------------------------------------------------------------------%
 
-Dari 35 fitur yang diekstraksi, dilakukan analisis sistematis untuk mengidentifikasi subset optimal:
+Dari 35 fitur yang diekstraksi, dilakukan analisis sistematis untuk mengidentifikasi \textit{subset} optimal:
 
 \begin{figure}[htbp]
     \centering
@@ -1364,13 +1364,13 @@ Dari 35 fitur yang diekstraksi, dilakukan analisis sistematis untuk mengidentifi
 \subsubsection{Analisis Multikolinearitas dengan VIF}
 \label{sec:analisisVIF}
 
-Variance Inflation Factor (VIF) digunakan untuk mengidentifikasi redundansi antar fitur:
+\textit{Variance Inflation Factor} (VIF) digunakan untuk mengidentifikasi redundansi antar fitur:
 
 \begin{equation}
 VIF_i = \frac{1}{1-R_i^2}
 \end{equation}
 
-dimana $R_i^2$ adalah coefficient of determination dari regresi fitur $i$ terhadap semua fitur lainnya.
+dimana $R_i^2$ adalah \textit{coefficient of determination} dari regresi fitur $i$ terhadap semua fitur lainnya.
 
 Proses eliminasi iteratif:
 \begin{enumerate}
@@ -1380,38 +1380,38 @@ Proses eliminasi iteratif:
     \item Ulangi hingga semua VIF $< 10$
 \end{enumerate}
 
-Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan VIF $<10$ yang memberikan informasi unik.
+Hasil analisis mengeliminasi 27 fitur redundan, menyisakan 8 fitur dengan VIF < 10 yang memberikan informasi unik.
 
 \subsubsection{Delapan Fitur Final untuk Model}
 \label{sec:fiturFinal}
 
-Setelah proses seleksi, 8 fitur stabil dengan kontribusi informasi maksimal:
+Setelah proses seleksi, 8 fitur stabil dengan kontribusi informasi maksimal (lihat Tabel \ref{tabel:fiturFinalKarakteristik}):
 
 \begin{table}[htbp]
 \centering
 \caption{Karakteristik 8 Fitur Final Hasil Seleksi VIF}
 \label{tabel:fiturFinalKarakteristik}
-\begin{tabular}{|p{5cm}|c|c|p{5cm}|}
+\begin{tabular}{|p{7cm}|c|c|p{5cm}|}
 \hline
-\textbf{Nama Fitur} & \textbf{VIF} & \textbf{Importance} & \textbf{Interpretasi} \\
+\textbf{Nama Fitur} & \textbf{VIF} & \textbf{\textit{Importance}} & \textbf{Interpretasi} \\
 \hline
-\texttt{max\_nav\_similarity\_zscore} & 4.87 & 0.245 & Z-score kemiripan navigasi maksimum, indikator utama koordinasi \\
+\texttt{max\_nav\_similarity\_zscore} & 4,87 & 0,245 & \textit{Z-score} kemiripan navigasi maksimum, indikator utama koordinasi \\
 \hline
-\texttt{mean\_nav\_similarity\_zscore} & 3.98 & 0.218 & Rata-rata z-score kemiripan, mengukur konsistensi pola \\
+\texttt{mean\_nav\_similarity\_zscore} & 3,98 & 0,218 & Rata-rata \textit{z-score} kemiripan, mengukur konsistensi pola \\
 \hline
-\texttt{median\_step\_duration} & 3.24 & 0.156 & Median durasi langkah, \textit{robust indicator} kecepatan \\
+\texttt{median\_step\_duration} & 3,24 & 0,156 & Median durasi langkah, indikator kecepatan yang kokoh \\
 \hline
-\texttt{std\_nav\_similarity\_zscore} & 7.89 & 0.142 & Variabilitas kemiripan, mendeteksi selective cheating \\
+\texttt{std\_nav\_similarity\_zscore} & 7,89 & 0,142 & Variabilitas kemiripan, mendeteksi kecurangan selektif \\
 \hline
-\texttt{std\_step\_duration} & 3.41 & 0.098 & Konsistensi kecepatan pengerjaan \\
+\texttt{std\_step\_duration} & 3,41 & 0,098 & Konsistensi kecepatan pengerjaan \\
 \hline
-\texttt{nav\_revisits\_count} & 2.56 & 0.076 & Pola kunjungan ulang, indikator uncertainty \\
+\texttt{nav\_revisits\_count} & 2,56 & 0,076 & Pola kunjungan ulang, indikator ketidakpastian \\
 \hline
-\texttt{quick\_actions\_count} & 5.12 & 0.045 & Aksi sangat cepat, possible copy-paste indicator \\
+\texttt{quick\_actions\_count} & 5,12 & 0,045 & Aksi sangat cepat, kemungkinan indikator \textit{copy-paste} \\
 \hline
-\texttt{sumgrades} & 6.23 & 0.020 & Nilai total, context untuk interpretasi \\
+\texttt{sumgrades} & 6,23 & 0,020 & Nilai total, konteks untuk interpretasi \\
 \hline
 \end{tabular}
 \end{table}
 
-Kedelapan fitur ini mencakup semua aspek penting deteksi kecurangan: similarity (4 fitur), temporal patterns (2 fitur), navigation behavior (1 fitur), dan performance context (1 fitur). Kombinasi ini terbukti optimal dalam eksperimen dengan akurasi deteksi 98.33\%.
+Kedelapan fitur ini mencakup semua aspek penting deteksi kecurangan: kemiripan (4 fitur), pola temporal (2 fitur), perilaku navigasi (1 fitur), dan konteks performa (1 fitur). Kombinasi ini terbukti optimal dalam eksperimen dengan akurasi deteksi 98,33\%.
